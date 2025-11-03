@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="../public/css/styleTemplate.css">
-  <link rel="stylesheet" href="../public/css/styleLegales.css">
+  <link rel="stylesheet" href=".../public/public/css/styleTemplate.css">
+  <link rel="stylesheet" href=".../public/public/css/styleLegales.css">
   <title>Alizon - Acceuil</title>
 </head>
 <body>
@@ -17,8 +17,8 @@
     <div class="headerMain">
       <div class="logoNom">
 
-        <img src="./images/logoAlizonHeader.png" alt="Logo Alizon">
-        <h1><a href="./acceuil.php"><b>Alizon</b></a></h1>
+        <img src="../public/images/logoAlizonHeader.png" alt="Logo Alizon">
+        <h1><a href="../public/acceuil.php"><b>Alizon</b></a></h1>
 
       </div>
       <div class="searchBar">
@@ -32,9 +32,9 @@
 
       </div>
       <div class="icons">
-        <a href=""><img src="./images/bellLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/cartLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/burgerLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/bellLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/cartLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/burgerLightBlue.svg" alt=""></a>
       </div>
     </div>
 
@@ -216,10 +216,10 @@
       <i class="bi bi-envelope fs-2"></i>
     </div>
     <div class="footerTel">
-      <a href=""><img src="./images/homeLightBlue.svg" alt="" class="homeLightBlue"></a>
-      <a href=""><img src="./images/searchLightBlue.svg" alt="" class="searchLightBlue"></a>
-      <a href=""><img src="./images/cartLightBlue.svg" alt="" class="cartLightBlue"></a>
-      <a href=""><img src="./images/burgerLightBlue.svg" alt="" class="burgerLightBlue"></a>
+      <a href=""><img src="../public/images/homeLightBlue.svg" alt="" class="homeLightBlue"></a>
+      <a href=""><img src="../public/images/searchLightBlue.svg" alt="" class="searchLightBlue"></a>
+      <a href=""><img src="../public/images/cartLightBlue.svg" alt="" class="cartLightBlue"></a>
+      <a href=""><img src="../public/images/burgerLightBlue.svg" alt="" class="burgerLightBlue"></a>
     </div>
   </footer>
   <!-- -------------------------------------------- FIN FOOTER -------------------------------------------- -->

@@ -11,8 +11,8 @@
 </head>
 <body>
 
-    <img class="bgImgs bleu" src="./images/symboleBleu.png" alt="symboleBleu">
-    <img class="bgImgs rose" src="./images/symboleRose.png" alt="symboleRose">
+    <img class="bgImgs bleu" src="../public/images/symboleBleu.png" alt="symboleBleu">
+    <img class="bgImgs rose" src="../public/images/symboleRose.png" alt="symboleRose">
 
     <main>
 
@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <img src="./images/404.png" alt="Image d'erreur 404"><br>
+            <img src="../public/images/404.png" alt="Image d'erreur 404"><br>
         </div>
 
         <div>
@@ -41,10 +41,10 @@
         <i class="bi bi-envelope fs-2"></i>
         </div>
         <div class="footerTel">
-        <a href=""><img src="./images/homeLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/searchLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/cartLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/burgerLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/homeLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/searchLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/cartLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/burgerLightBlue.svg" alt=""></a>
         </div>
     </footer>
 

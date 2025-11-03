@@ -16,7 +16,7 @@
     <div class="headerMain">
       <div class="logoNom">
 
-        <img src="./images/logoAlizonHeader.png" alt="Logo Alizon">
+        <img src="../public/images/logoAlizonHeader.png" alt="Logo Alizon">
         <h1><a href="./acceuil.php"><b>Alizon</b></a></h1>
 
       </div>
@@ -31,9 +31,9 @@
 
       </div>
       <div class="icons">
-        <a href=""><img src="./images/bellLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/cartLightBlue.svg" alt=""></a>
-        <a href=""><img src="./images/burgerLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/bellLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/cartLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/burgerLightBlue.svg" alt=""></a>
       </div>
     </div>
 
@@ -59,10 +59,10 @@
       <i class="bi bi-envelope fs-2"></i>
     </div>
     <div class="footerTel">
-      <a href=""><img src="./images/homeLightBlue.svg" alt="" class="homeLightBlue"></a>
-      <a href=""><img src="./images/searchLightBlue.svg" alt="" class="searchLightBlue"></a>
-      <a href=""><img src="./images/cartLightBlue.svg" alt="" class="cartLightBlue"></a>
-      <a href=""><img src="./images/burgerLightBlue.svg" alt="" class="burgerLightBlue"></a>
+      <a href=""><img src="../public/images/homeLightBlue.svg" alt="" class="homeLightBlue"></a>
+      <a href=""><img src="../public/images/searchLightBlue.svg" alt="" class="searchLightBlue"></a>
+      <a href=""><img src="../public/images/cartLightBlue.svg" alt="" class="cartLightBlue"></a>
+      <a href=""><img src="../public/images/burgerLightBlue.svg" alt="" class="burgerLightBlue"></a>
     </div>
   </footer>
   <!-- -------------------------------------------- FIN FOOTER -------------------------------------------- -->
