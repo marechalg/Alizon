@@ -1,0 +1,83 @@
+.nomCategorie {
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    align-items: center;
+    margin: 40px 40px;
+}
+
+.nomCategorie h2 {
+    font-family: "Lora", serif;
+    font-size: 40px;
+    color: #273469;
+    font-weight: 100;
+}
+
+.nomCategorie hr {
+  flex-grow: 1;        /* la ligne prend tout l’espace libre */
+  height: 3px;
+  background-color: #273469;
+  border: none;
+  margin-left: 20px;   /* petit espace entre le texte et la ligne */
+}
+
+.banniere, .banniere div {
+    background-color: #E4D9FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.banniere div * {
+    margin: 0px 30px;
+}
+
+.banniere h1 {
+    color: #273469;
+    font-family: "Lora", serif;
+    font-size: 45px;
+    font-weight: bold;  
+    font-style: italic; 
+}
+
+.banniere img {
+    max-width: 340px;
+}
+
+.banniere .fleche {
+    margin: 0px 50px;
+}
+
+@media (max-width: 965px) {
+    .banniere div * {
+        margin: 0px 0px;
+    }
+    hr {
+        display: none;
+        visibility: hidden;
+    }
+    .banniere {
+        align-items: center;
+    }
+    .banniere, .banniere div {
+        display: block;
+    }
+    .banniere img {
+        max-width: 170px;
+    }
+    .banniere .fleche {
+        display: none;
+        visibility: hidden;
+    }
+    .banniere h1 {
+        font-size: 32px;
+        background-color: #E3F2FE;
+        padding: 10px;
+    }
+    .banniere div {
+        background-color: #E4D9FF;
+        display: block;
+        text-align: center;
+  
+    }
+}
