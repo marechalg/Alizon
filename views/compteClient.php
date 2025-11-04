@@ -50,7 +50,7 @@
 <link rel="stylesheet" href="../public/style/styleCompteClient.css">
 <script>
     function popUpModifierMdp(){
-        maFenetre = window.open("modifierMdp.html","popUp","width=900, height=450 screenX=350, screenY=150");
+        maFenetre = window.open("modifierMdp.html","popUp","width=900, height=450, screenX=350, screenY=150");
         maFenetre.focus();
    }
 
@@ -62,11 +62,29 @@
         if (!enModif){
             let elems = document.querySelectorAll("section p");
             for (let i = 0; i < elems.length; i++){
-                let texteActuel = elems[i].innerText;
-                let input = document.createElement("input");
-                input.type = "text";
-                input.value = texteActuel;
-                elems[i].parentNode.replaceChild(input, elems[i]);
+                if(i==10){
+                    let texteActuel = elems[i].innerText;
+                    let input = document.createElement("input");
+                    input.type = "tel";
+                    input.value = texteActuel;
+                    elems[i].parentNode.replaceChild(input, elems[i]);
+                }
+
+                else if(i==11){
+                    let texteActuel = elems[i].innerText;
+                    let input = document.createElement("input");
+                    input.type = "email";
+                    input.value = texteActuel;
+                    elems[i].parentNode.replaceChild(input, elems[i]);
+                }
+
+                else{
+                    let texteActuel = elems[i].innerText;
+                    let input = document.createElement("input");
+                    input.type = "text";
+                    input.value = texteActuel;
+                    elems[i].parentNode.replaceChild(input, elems[i]);
+                }
             }
             bnModifProfil[0].innerHTML = "Enregistrer";
             bnModifProfil[0].style.backgroundColor = "#259525";

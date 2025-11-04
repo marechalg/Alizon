@@ -47,11 +47,11 @@ article{
 article div{
     display: flex;
     flex-direction: row;
+    gap: 30px;
 }
 
 article div p, article div input{
     width: 210px;
-    margin-right: 30px;
 }
 
 article p, input {
