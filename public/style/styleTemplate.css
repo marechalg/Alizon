@@ -231,6 +231,7 @@ footer a, footer p {
 
     .footerTel img {
         width: 41px;
+        height: 41px;
     }
 
     .footerTel a:focus {
