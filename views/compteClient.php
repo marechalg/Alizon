@@ -47,7 +47,6 @@
     </main>
     <?php include 'partials/footer.php'; ?>
 </body>
-<link rel="stylesheet" href="../public/style/styleCompteClient.css">
 <script>
     function popUpModifierMdp(){
         maFenetre = window.open("modifierMdp.html","popUp","width=900, height=450, screenX=350, screenY=150");
@@ -65,7 +64,7 @@
                 if(i==10){
                     let texteActuel = elems[i].innerText;
                     let input = document.createElement("input");
-                    input.type = "tel";
+                    input.type = "email";
                     input.value = texteActuel;
                     elems[i].parentNode.replaceChild(input, elems[i]);
                 }
@@ -73,7 +72,7 @@
                 else if(i==11){
                     let texteActuel = elems[i].innerText;
                     let input = document.createElement("input");
-                    input.type = "email";
+                    input.type = "tel";
                     input.value = texteActuel;
                     elems[i].parentNode.replaceChild(input, elems[i]);
                 }
@@ -114,4 +113,5 @@
     let bnModifProfil = document.getElementsByClassName("boutonModiferProfil");
     bnModifProfil[0].addEventListener("click", modifierProfil);
 </script>
+<link rel="stylesheet" href="../public/style/styleCompteClient.css">
 </html>
