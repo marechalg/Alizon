@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="../public/style/styleTemplate.css">
+  <link rel="stylesheet" href="../public/style/styleTemplate.scss">
   <link rel="stylesheet" href="../public/style/styleAcceuil.css">
   <title>Alizon - Acceuil</title>
 </head>
 <body>
-    <?php include '../views/partials/header.php'; ?>
+    <?php include '../views/frontoffice/partials/headerConnecte.php'; ?>
 
     <section class="banniere">
         <h1>Plus de promotion à venir !</h1>
@@ -124,6 +124,6 @@
         </section>
     </main>
 
-    <?php include '../views/partials/footer.php'; ?>
+    <?php include '../views/frontoffice/partials/footerConnecte.php'; ?>
 </body>
 </html>

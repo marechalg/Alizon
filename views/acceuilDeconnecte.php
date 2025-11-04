@@ -10,7 +10,7 @@
   <title>Alizon - Acceuil</title>
 </head>
 <body>
-    <?php include '../views/partials/header.php'; ?>
+    <?php include '../views/frontoffice/partials/headerDeconnecte.php'; ?>
 
     <section class="banniere">
         <h1>Plus de promotion à venir !</h1>
@@ -124,6 +124,6 @@
         </section>
     </main>
 
-    <?php include '../views/partials/footer.php'; ?>
+    <?php include '../views/frontoffice/partials/footerDeconnecte.php'; ?>
 </body>
 </html>
