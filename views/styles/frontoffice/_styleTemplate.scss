@@ -1,35 +1,39 @@
-@import url("https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
-html, body {
+@use "../colors" as *;
+@use "../fonts" as *;
+
+html,
+body {
   margin: 0;
   padding: 0;
-  background-color: #FFFEFA;
+  background-color: $color-white;
 }
 
 /* -------------------------------------------- DEBUT HEADER -------------------------------------------- */
-header a, footer a {
+
+header a,
+footer a {
   text-decoration: none;
-  color: #E3F2FE;
+  color: $color-pastel-blue;
 }
 
-header p, footer p {
+header p,
+footer p {
   margin-bottom: 0;
 }
 
 header h1 {
-  color: #E3F2FE;
-  font-family: "Berkshire Swash", serif;
+  color: $color-pastel-blue;
+  font-family: $font-berkshire;
   font-weight: 200;
   font-style: normal;
 }
 
 header h1 a b {
-  color: #E3F2FE;
+  color: $color-pastel-blue;
 }
 
 header {
-  background-color: #273469;
+  background-color: $color-blue;
   padding: 20px 0px 20px 0px;
   position: sticky;
   top: 0;
@@ -47,7 +51,8 @@ header .logoNom {
   align-items: end;
 }
 
-header .headerMain div *, .categorie {
+header .headerMain div *,
+.categorie {
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -70,19 +75,19 @@ header img {
 .search-wrapper i {
   position: absolute;
   right: 15px;
-  color: #273469;
+  color: $color-blue;
   font-size: 1rem;
   pointer-events: none;
 }
 
-.search-wrapper input[type=search] {
+.search-wrapper input[type="search"] {
   padding: 10px 450px 10px 20px;
   border-radius: 25px;
   border: none;
   outline: none;
-  background-color: #fff;
-  color: #273469;
-  font-family: "Lora", serif;
+  background-color: $color-white;
+  color: $color-blue;
+  font-family: $font-lora;
   font-size: 20px;
   font-weight: bold;
   font-style: italic;
@@ -115,10 +120,10 @@ header img {
 header .categorie {
   flex: 0 0 5em;
   text-decoration: none;
-  background-color: #E3F2FE;
-  color: #273469;
+  background-color: $color-pastel-blue;
+  color: $color-blue;
   border-radius: 30px;
-  font-family: "Lora", serif;
+  font-family: $font-lora;
   font-optical-sizing: auto;
   font-size: 15px;
   font-weight: 700;
@@ -126,7 +131,7 @@ header .categorie {
 }
 
 @media (max-width: 1300px) {
-  .search-wrapper input[type=search] {
+  .search-wrapper input[type="search"] {
     padding: 10px 0px 10px 10px;
   }
   header .headerMain {
@@ -140,20 +145,25 @@ header .categorie {
     padding: 8px 20px;
   }
 }
+
 @media (max-width: 600px) {
   .icons {
     display: none;
     visibility: hidden;
   }
 }
+
 @media (max-width: 428px) {
   header b {
     display: none;
     visibility: hidden;
   }
 }
+
 /* -------------------------------------------- FIN HEADER -------------------------------------------- */
+
 /* -------------------------------------------- DEBUT FOOTER -------------------------------------------- */
+
 footer .footerTel {
   display: none;
   visibility: hidden;
@@ -163,25 +173,30 @@ footer {
   margin-top: 50px;
 }
 
-footer, footer div {
-  background-color: #273469;
-  color: white;
+footer,
+footer div {
+  background-color: $color-blue;
+  color: $color-white;
   font-style: italic;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
-  font-family: "Lora", serif;
+  font-family: $font-lora;
   font-size: 13px;
   font-weight: bold;
   font-style: italic;
   align-items: center;
 }
 
-footer a, footer p {
+footer a,
+footer p {
   padding: 10px 10px;
 }
 
-.homeDarkBlue, .searchDarkBlue, .cartDarkBlue, .burgerDarkBlue {
+.homeDarkBlue,
+.searchDarkBlue,
+.cartDarkBlue,
+.burgerDarkBlue {
   display: none;
   visibility: hidden;
 }
@@ -194,27 +209,34 @@ footer a, footer p {
     padding: 0;
     justify-content: space-around;
   }
+
   footer .footerPC {
     display: none;
     visibility: hidden;
   }
+
   footer .footerTel {
     display: contents;
     visibility: visible;
   }
+
   .footerTel {
     display: flex;
     justify-content: space-between;
   }
+
   .footerTel img {
     width: 41px;
   }
+
   .footerTel a:focus {
     transition: 0.2s;
-    background-color: #E3F2FE;
+    background-color: $color-pastel-blue;
   }
+
   .footerTel a {
     padding: 20px;
   }
 }
-/* -------------------------------------------- FIN FOOTER -------------------------------------------- *//*# sourceMappingURL=styleTemplate.css.map */
+
+/* -------------------------------------------- FIN FOOTER -------------------------------------------- */

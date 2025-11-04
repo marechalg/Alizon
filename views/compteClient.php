@@ -7,8 +7,8 @@
     
 </head>
 <body>
-    <?php include 'partials/header.php'; ?>
-    <main>
+    <?php include 'frontoffice/partials/headerConnecte.php'; ?>
+    <main class="mainCompteClient">
         <div id="titreCompte">
             <img src="../public/images/profil.png" alt="photoProfil"></label>
             <input type="file" id="photoProfil" style="display:none">
@@ -45,7 +45,7 @@
         </div>
         
     </main>
-    <?php include 'partials/footer.php'; ?>
+    <?php include 'frontoffice/partials/footerConnecte.php'; ?>
 </body>
 <script>
     function popUpModifierMdp(){
@@ -63,7 +63,7 @@
             tousRemplis = false;
             break;
         }
-        
+
         if(champs[].value.chaine.match("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$")){
             tousRemplis = false;
         }
@@ -145,5 +145,5 @@
     let bnModifProfil = document.getElementsByClassName("boutonModiferProfil");
     bnModifProfil[0].addEventListener("click", modifierProfil);
 </script>
-<link rel="stylesheet" href="../public/style/styleCompteClient.css">
+<link rel="stylesheet" href="../../public/style.css">
 </html>
