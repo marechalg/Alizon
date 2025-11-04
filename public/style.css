@@ -9,7 +9,7 @@
 }
 @font-face {
   font-family: "open-sans";
-  src: url(../../public/fonts/open-sans/OpenSans-VariableFont_wdth\,wght.ttf);
+  src: url(../../public/fonts/open-sans/OpenSans-VariableFont_wdthwght.ttf);
 }
 html,
 body {
@@ -22,7 +22,7 @@ body {
 header a,
 footer a {
   text-decoration: none;
-  color: #E3F2FE;
+  color: #e3f2fe;
 }
 
 header p,
@@ -31,14 +31,14 @@ footer p {
 }
 
 header h1 {
-  color: #E3F2FE;
+  color: #e3f2fe;
   font-family: "berkshire", serif;
   font-weight: 200;
   font-style: normal;
 }
 
 header h1 a b {
-  color: #E3F2FE;
+  color: #e3f2fe;
 }
 
 header {
@@ -129,7 +129,7 @@ header img {
 header .categorie {
   flex: 0 0 5em;
   text-decoration: none;
-  background-color: #E3F2FE;
+  background-color: #e3f2fe;
   color: #273469;
   border-radius: 30px;
   font-family: "lora", serif;
@@ -230,7 +230,7 @@ footer p {
   }
   .footerTel a:focus {
     transition: 0.2s;
-    background-color: #E3F2FE;
+    background-color: #e3f2fe;
   }
   .footerTel a {
     padding: 20px;
@@ -364,7 +364,7 @@ footer p {
 
 .headerBackoffice {
   display: flex;
-  background-color: #E4D9FF;
+  background-color: #e4d9ff;
   border-bottom: solid #273469 5px;
   padding: 1em;
   align-items: center;
@@ -380,7 +380,7 @@ footer p {
   display: flex;
   align-items: center;
   background-color: #273469;
-  color: #E3F2FE;
+  color: #e3f2fe;
   padding: 0.5em;
   height: 55px;
   width: 250px;
@@ -392,7 +392,7 @@ footer p {
   font-style: italic;
 }
 .headerBackoffice figure:hover {
-  background-color: #E3F2FE;
+  background-color: #e3f2fe;
   color: #273469;
   outline-width: 3px;
   outline-offset: inset;
