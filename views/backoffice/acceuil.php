@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../public/style.css">
     </head>
 
-    <body>
+    <body class="acceuiBackoffice">
         <header>
             <div>
                 <img src="../../public/images/backoffice/panier.svg" alt="icon">
