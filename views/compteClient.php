@@ -63,9 +63,9 @@
             tousRemplis = false;
             break;
         }
-        if(champs[].value.chaine.match("")){
+        // if(champs[].value.chaine.match("")){
 
-        }
+        // }
 
         bouton.disabled = !tousRemplis;
     }
