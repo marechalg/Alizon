@@ -1,9 +1,10 @@
-/* Error: Can't find stylesheet to import.
- *   ,
- * 6 | @use './backoffice/_header.css';
- *   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *   '
- *   views\styles\main.scss 6:1  root stylesheet */
+/* Error: expected "{".
+ *    ,
+ * 13 |   text-align: center;
+ *    |                     ^
+ *    '
+ *   views\styles\frontoffice\_style404.scss 13:21  @use
+ *   views\styles\main.scss 5:1                     root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a   \2577 \a 6 \2502  @use './backoffice/_header.css';\d\a   \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   views\\styles\\main.scss 6:1  root stylesheet";
+  content: 'Error: expected "{".\a    \2577 \a 13 \2502    text-align: center;\d\a    \2502                      ^\a    \2575 \a   views\\styles\\frontoffice\\_style404.scss 13:21  @use\a   views\\styles\\main.scss 5:1                     root stylesheet';
 }
