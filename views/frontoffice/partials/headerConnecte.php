@@ -9,38 +9,39 @@
     <title>header</title>
 </head>
 <body>
-    <header>
-        <div class="headerMain">
-        <div class="logoNom">
+  <header>
 
-            <img src="../public/images/logoAlizonHeader.png" alt="Logo Alizon">
-            <h1><a href="./acceuil.php"><b>Alizon</b></a></h1>
+    <div class="headerMain">
+      <div class="logoNom">
 
-        </div>
-        <div class="searchBar">
+        <img src="../public/images/logoAlizonHeader.png" alt="Logo Alizon">
+        <h1><a href="../public/acceuil.php"><b>Alizon</b></a></h1>
 
-            <div class="searchBar">
-                <div class="search-wrapper">
-                <i class="bi bi-search"></i>
-                <input type="search" name="recherche" id="searchbar" placeholder="Rechercher">
-                </div>
+      </div>
+      <div class="searchBar">
+
+          <div class="searchBar">
+            <div class="search-wrapper">
+              <i class="bi bi-search"></i>
+              <input type="search" name="recherche" id="searchbar" placeholder="Rechercher">
             </div>
+          </div>
 
-        </div>
-        <div class="icons">
-            <a href=""><img src="../public/images/bellLightBlue.svg" alt=""></a>
-            <a href=""><img src="../public/images/cartLightBlue.svg" alt=""></a>
-            <a href=""><img src="../public/images/burgerLightBlue.svg" alt=""></a>
-        </div>
-        </div>
+      </div>
+      <div class="icons">
+        <a href=""><img src="../public/images/bellLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/cartLightBlue.svg" alt=""></a>
+        <a href=""><img src="../public/images/burgerLightBlue.svg" alt=""></a>
+      </div>
+    </div>
 
-        <div class="carousel">
-        <div class="group">
-            <?php for ($i=0 ; $i < 15 ; $i++) { ?>
-                <a class="categorie">Categorie</a>
-            <?php } ?>
-        </div>
-        </div>
+    <div class="carousel">
+      <div class="group">
+        <?php for ($i=0 ; $i < 15 ; $i++) { ?>
+            <a class="categorie">Categorie</a>
+        <?php } ?>
+      </div>
+    </div>
 
   </header>
 </body>
