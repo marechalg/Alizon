@@ -13,12 +13,8 @@
     <?php include '../views/partials/header.php'; ?>
 
     <section class="banniere">
-        <img src="../public/images/leftArrowDarkBlue.svg" class="fleche" alt="Fleche vers la gauche">
-        <div>
-            <h1>Plus de promotion à venir !</h1>
+        <h1>Plus de promotion à venir !</h1>
             <img src="../public/images/defaultImageProduit.png" alt="Image de produit par défaut">
-        </div>
-        <img src="../public/images/rightArrowDarkBlue.svg" class="fleche" alt="Fleche vers la droite">
     </section>
 
     <main>
@@ -30,8 +26,20 @@
             <div class="listeArticle">
                 <?php for ($i=0 ; $i < 15 ; $i++) { ?>
                     <article>
-
+                        <img src="../public/images/defaultImageProduitCard.png" class="imgProduit" alt="Image du produit">
+                        <h2>Assortiment de rillettes de thon la compagne bretonne - 300g</h2>
+                        <div class="infoProd">
+                            <div class="prix">
+                                <h2>29.99€</h2>
+                                <h3>99.72 € / Kg</h3>
+                            </div>
+                            <div>
+                                <a href=""><img src="../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
+                            </div>
+                        </div>
                     </article>
+                <?php } if ($i==0) { ?>
+                    <h1>Aucun produit disponible pour le moment !</h1>
                 <?php } ?>
             </div>
         </section>
@@ -44,8 +52,20 @@
             <div class="listeArticle">
                 <?php for ($i=0 ; $i < 15 ; $i++) { ?>
                     <article>
-
+                        <img src="../public/images/defaultImageProduitCard.png" class="imgProduit" alt="Image du produit">
+                        <h2>Assortiment de rillettes de thon la compagne bretonne - 300g</h2>
+                        <div class="infoProd">
+                            <div class="prix">
+                                <h2>29.99€</h2>
+                                <h3>99.72 € / Kg</h3>
+                            </div>
+                            <div>
+                                <a href=""><img src="../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
+                            </div>
+                        </div>
                     </article>
+                <?php } if ($i==0) { ?>
+                    <h1>Aucun produit disponible pour le moment !</h1>
                 <?php } ?>
             </div>
         </section>
@@ -58,8 +78,20 @@
             <div class="listeArticle">
                 <?php for ($i=0 ; $i < 15 ; $i++) { ?>
                     <article>
-
+                        <img src="../public/images/defaultImageProduitCard.png" class="imgProduit" alt="Image du produit">
+                        <h2>Assortiment de rillettes de thon la compagne bretonne - 300g</h2>
+                        <div class="infoProd">
+                            <div class="prix">
+                                <h2>29.99€</h2>
+                                <h3>99.72 € / Kg</h3>
+                            </div>
+                            <div>
+                                <a href=""><img src="../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
+                            </div>
+                        </div>
                     </article>
+                <?php } if ($i==0) { ?>
+                    <h1>Aucun produit disponible pour le moment !</h1>
                 <?php } ?>
             </div>
         </section>
@@ -70,10 +102,22 @@
                 <hr>
             </div>
             <div class="listeArticle">
-                <?php for ($i=0 ; $i < 15 ; $i++) { ?>
+                <?php for ($i=0 ; $i < 0 ; $i++) { ?>
                     <article>
-
+                        <img src="../public/images/defaultImageProduitCard.png" class="imgProduit" alt="Image du produit">
+                        <h2>Assortiment de rillettes de thon la compagne bretonne - 300g</h2>
+                        <div class="infoProd">
+                            <div class="prix">
+                                <h2>29.99€</h2>
+                                <h3>99.72 € / Kg</h3>
+                            </div>
+                            <div>
+                                <a href=""><img src="../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
+                            </div>
+                        </div>
                     </article>
+                <?php } if ($i==0) { ?>
+                    <h1>Aucun produit disponible pour le moment !</h1>
                 <?php } ?>
             </div>
         </section>
@@ -84,10 +128,22 @@
                 <hr>
             </div>
             <div class="listeArticle">
-                <?php for ($i=0 ; $i < 15 ; $i++) { ?>
+                <?php for ($i=0 ; $i < 0 ; $i++) { ?>
                     <article>
-
+                        <img src="../public/images/defaultImageProduitCard.png" class="imgProduit" alt="Image du produit">
+                        <h2>Assortiment de rillettes de thon la compagne bretonne - 300g</h2>
+                        <div class="infoProd">
+                            <div class="prix">
+                                <h2>29.99€</h2>
+                                <h3>99.72 € / Kg</h3>
+                            </div>
+                            <div>
+                                <a href=""><img src="../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
+                            </div>
+                        </div>
                     </article>
+                <?php } if ($i==0) { ?>
+                    <h1>Aucun produit récemment consultés !</h1>
                 <?php } ?>
             </div>
         </section>
