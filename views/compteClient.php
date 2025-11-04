@@ -53,15 +53,44 @@
         maFenetre.focus();
    }
 
+   function verifierChamp() {
+    const bouton = document.querySelector(".boutonModiferProfil");
+    const champs = document.querySelectorAll("section input");
+    let tousRemplis = true;
+
+    for (let i = 0; i < champs.length; i++) {
+        if (i !== 5 && champs[i].value.trim() === "") {
+            tousRemplis = false;
+            break;
+        }
+        if(champs[].value.chaine.match("")){
+
+        }
+
+        bouton.disabled = !tousRemplis;
+    }
+    }
+
+    verifierChamp();
+    document.querySelector("section").addEventListener("input", verifierChamp);
+
    let enModif = false;
 
-   function modifierProfil(){;
+   function modifierProfil(){
     let bnModifier = document.getElementsByClassName("boutonModiferProfil");
 
         if (!enModif){
             let elems = document.querySelectorAll("section p");
             for (let i = 0; i < elems.length; i++){
-                if(i==10){
+                if(i==3){
+                    let texteActuel = elems[i].innerText;
+                    let input = document.createElement("input");
+                    input.type = "date";
+                    input.value = texteActuel;
+                    elems[i].parentNode.replaceChild(input, elems[i]);
+                }
+
+                else if(i==10){
                     let texteActuel = elems[i].innerText;
                     let input = document.createElement("input");
                     input.type = "email";
@@ -85,11 +114,13 @@
                     elems[i].parentNode.replaceChild(input, elems[i]);
                 }
             }
+
             bnModifProfil[0].innerHTML = "Enregistrer";
             bnModifProfil[0].style.backgroundColor = "#259525";
             bnModifProfil[0].style.color = "#FFFEFA";
             enModif = true;
         }
+
 
         else {
             let elems = document.querySelectorAll("section input");
