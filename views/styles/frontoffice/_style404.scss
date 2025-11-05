@@ -1,7 +1,10 @@
 @use "../colors" as *;
 @use "../fonts" as *;
 
-main {
+.page404 {
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
   text-align: center;
   display: flex;
   flex-direction: column;

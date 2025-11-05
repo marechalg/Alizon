@@ -76,4 +76,31 @@ body.acceuilBackoffice {
             }
         }
     }
+    }
+    
+    div {
+        display: flex;
+        align-items: center;
+        
+        img {
+            width: 50px;
+            height: 60px;
+            margin-right: 1em;
+        }
+        
+        h1 {
+            font: {
+                family: 'berkshire';
+                size: 45px;
+                weight: normal;
+            }
+            color: $color-blue;
+            
+        }
+    }
+    
+    nav {
+        display: flex;
+    }
 }
+
