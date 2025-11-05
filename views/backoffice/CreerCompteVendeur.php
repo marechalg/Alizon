@@ -108,8 +108,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <a class="connexion_lien" href="#">Déjà vendeur ? Connectez vous ici</a>
                     
                     <button type="submit" id="btn_inscription" class="btn_inscription" disabled>S'inscrire</button>
-
-                    <div class="inscriptions_autres">
+                
+                    <!--<div class="inscriptions_autres">       A METTRE PLUS TARD !
                         <p>Ou inscrivez-vous grâce à un de ces services</p>
                         <div class="logos">
                             <a href="#"><img src="../../public/images/google.svg" alt="Logo google"></a>
@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <a href="#"><img src="../../public/images/apple.svg" alt="Logo apple"></a>
                             <a href="#"><img src="../../public/images/facebook.svg" alt="Logo facebook"></a>
                         </div>
-                    </div>
+                    </div> -->
             </form>
         </div>
         <p class="text-footer">
@@ -228,5 +228,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             validatePassword(); 
         </script>
     </main>
+    <?php require_once "./partials/footer.php"; ?>
 </body>
 </html>

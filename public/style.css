@@ -658,10 +658,16 @@ footer.backoffice a {
 .CreerCompteVendeur .container .form-vendeur .inscriptions_autres .logos a img {
   padding: 5px;
 }
+.CreerCompteVendeur .container .form-vendeur #password-requirements {
+  font-style: normal;
+  font-weight: normal;
+}
 .CreerCompteVendeur .text-footer {
   max-width: 1000px;
   text-align: center;
   font-size: 0.8rem;
+  font-style: normal;
+  font-weight: normal;
   color: #6e6e6e;
   margin-top: 20px;
   margin-left: auto;

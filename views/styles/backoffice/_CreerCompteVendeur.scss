@@ -190,6 +190,12 @@
                     }
                 }
             }
+            #password-requirements{
+                font: {
+                    style: normal;
+                    weight: normal;
+                }
+            }
         }
     }
     .text-footer {
@@ -198,6 +204,8 @@
            
             font: {
                 size: 0.8rem;
+                style: normal;
+                weight: normal;
             }
 
 
