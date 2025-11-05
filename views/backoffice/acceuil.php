@@ -11,8 +11,10 @@
     <body>
         <?php require_once './partials/headerMain.php' ?>
 
+        <?php require_once './partials/aside.php' ?>
+
         <main class="acceuilBackoffice">
-            
+            <h1>oui</h1>
         </main>
 
         <?php require_once './partials/footer.php' ?>
