@@ -1,0 +1,66 @@
+@use "../colors" as *;
+@use "../fonts" as *;
+
+.pageProduit{
+    margin: 0;
+    padding: 0;
+    h1{
+    font-family: "Lora", serif;
+    }
+
+    .infoHautProduit{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .rect{
+        width:1440px;
+        height:224px;
+        background:#273469;
+    }
+
+    .rectangleProduit{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 4em 2em;
+        padding: 0 1em;
+        width: 550px;
+        height: 434px;
+        border: 1.5px inset #273469;
+        border-radius: 16px;
+    }
+
+    #imageBouteille{
+        width: 220px;
+        height: 330px;
+    }
+
+    .rectangleProduit img:nth-child(2n+1){
+        width: 35px;
+        height: 61px;
+    }
+
+    .infoPreviewProduit{
+        width: 434px;
+        height: 434px;
+    }
+    .infoPreviewProduit div{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .infoPreviewProduit div img{
+        width: 50px;
+        height: 75px;
+    }
+
+    .cercleNoir{
+        shape-outside: circle(50%);
+        clip-path: circle(6rem at 12rem 8rem);
+        color: black;
+    }
+}
+
+

@@ -495,4 +495,58 @@ header.backoffice nav figure:nth-child(4) img {
   height: 35px;
 }
 
+.pageProduit {
+  margin: 0;
+  padding: 0;
+}
+.pageProduit h1 {
+  font-family: "Lora", serif;
+}
+.pageProduit .infoHautProduit {
+  display: flex;
+  flex-direction: row;
+}
+.pageProduit .rect {
+  width: 1440px;
+  height: 224px;
+  background: #273469;
+}
+.pageProduit .rectangleProduit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4em 2em;
+  padding: 0 1em;
+  width: 550px;
+  height: 434px;
+  border: 1.5px inset #273469;
+  border-radius: 16px;
+}
+.pageProduit #imageBouteille {
+  width: 220px;
+  height: 330px;
+}
+.pageProduit .rectangleProduit img:nth-child(2n+1) {
+  width: 35px;
+  height: 61px;
+}
+.pageProduit .infoPreviewProduit {
+  width: 434px;
+  height: 434px;
+}
+.pageProduit .infoPreviewProduit div {
+  display: flex;
+  flex-direction: row;
+}
+.pageProduit .infoPreviewProduit div img {
+  width: 50px;
+  height: 75px;
+}
+.pageProduit .cercleNoir {
+  shape-outside: circle(50%);
+  clip-path: circle(6rem at 12rem 8rem);
+  color: black;
+}
+
 /*# sourceMappingURL=style.css.map */
