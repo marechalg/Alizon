@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <br />
 
           <!-- Date de naissance -->
-          <input type="text" placeholder="Date de naissance :" id="date" name="date" required/>
+          <input type="text" placeholder="Date de naissance :" id="birthdate" name="birthdate" required/>
           <br />
           
           <!-- Email -->
@@ -95,6 +95,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <script>
             // Eléments du DOM
+            const birthDateInput = document.getElementById('birthdate')
+            const phoneNumberInput = document.getElementById('telephone')
             const passwordInput = document.getElementById('mdp');
             const confirmPasswordInput = document.getElementById('cmdp');
             const submitButton = document.getElementById('submitButton');
@@ -137,6 +139,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 return isValid;
             }
 
+            //////////////////////////////////////////
+             //       Reprendre cette fonctiton     //
+            //////////////////////////////////////////
+            function validateForm(){
+                let allValid=true;
+            }
             // Valide tous les critères et met à jour le bouton d'inscription.
             function validatePassword() {
                 const password = passwordInput.value;
@@ -166,6 +174,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 submitButton.disabled = !allValid;
                 
                 return allValid;
+            }
+
+
+            function validateBirthDate() { 
+                const birthDate = birthDate.value;
+                if (!/^([0][1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}$/.test(birthDate)) {
+                    return false;
+                }
+            }
+
+            function validatePhoneNumber() { 
+                const phoneNumber = phoneNumberInput.value;
+                if (!/^0[67](\s[0-9]{2}){4}$/.test(phoneNumber)) {
+                    return false;
+                }
             }
 
             passwordInput.addEventListener('blur', () => {
