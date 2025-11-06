@@ -16,7 +16,8 @@ body {
   position: sticky;
   top: 0;
 
-  a, p {
+  a,
+  p {
     text-decoration: none;
     color: $color-pastel-blue;
   }
@@ -44,7 +45,8 @@ body {
     align-items: end;
     justify-content: space-between;
 
-    div *, .categorie {
+    div *,
+    .categorie {
       margin-left: 10px;
       margin-right: 10px;
     }
@@ -130,7 +132,6 @@ body {
     }
   }
 
-
   .categorie {
     display: inline-flex;
     align-items: center;
@@ -192,7 +193,8 @@ body {
 .footerFront {
   margin-top: 50px;
 }
-.footerFront a, .footerFront p {
+.footerFront a,
+.footerFront p {
   text-decoration: none;
   color: $color-pastel-blue;
 }
@@ -200,7 +202,8 @@ body {
   display: none;
   visibility: hidden;
 }
-.footerFront, .footerFront div {
+.footerFront,
+.footerFront div {
   background-color: $color-blue;
   color: white;
   font-style: italic;
@@ -212,7 +215,8 @@ body {
   font-weight: bold;
   align-items: center;
 }
-.footerFront a, .footerFront p {
+.footerFront a,
+.footerFront p {
   padding: 10px 10px;
 }
 .footerFront .homeDarkBlue,
