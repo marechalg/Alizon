@@ -1,10 +1,12 @@
 @use "../colors" as *;
 @use "../fonts" as *;
-// Mixin pour les transitions fluides
+
 @mixin transition($property: all, $duration: 0.3s) {
     transition: $property $duration ease-in-out;
 }
 
+.status-red { color: $color-red; }
+.status-green { color: $color-green; }
 
 .CreerCompteVendeur {
     font: {
@@ -23,7 +25,6 @@
     overflow-x: hidden;
     z-index: 1;
 
-
     h1 {
         margin: {
             top: 10px;
@@ -33,7 +34,6 @@
         text-align: left;
         font-weight: 600;
     }
-
 
     .triskiel{
         position: absolute;
@@ -45,7 +45,6 @@
         z-index: 0;
         pointer-events: none;
     }
-
 
     .haut_de_page{
         width: 100%;
@@ -61,14 +60,14 @@
         align-items: center;
     }
 
-
-    > img[alt="photo de profil"]{
+    .haut_de_page > img[alt="photo de profil"]{
         width: 150px;
         height: 150px;
         border-radius: 50%;
         margin: {
-            top: 50px;
-            bottom: 10px;
+            top: 0;
+            bottom: 0;
+            right: 20px;
         }
     }
 
@@ -76,44 +75,52 @@
     .container{
         width: 100%;
         max-width: 900px;
-        padding: 0 5px;
+        padding: 0 15px;
         margin: {
             left: auto;
             right: auto;
         }
 
-
         .form-vendeur{
             display: flex;
             flex-direction: column;
 
+            input.form-control {
+                padding: 10px 15px;
+                border: 2px solid $color-blue;
+                border-radius: 8px;
+                font-size: 1rem;
+                color: $color-blue;
+                @include transition(border-color, 0.2s); 
 
-            .form-group{
-                display: flex;
-                gap: 10px;
-                margin: {
-                    bottom: 10px;
+                &[type="date"] {
+                    line-height: normal;
                 }
 
-
-                input[type="text"],input[type="email"],input[type="password"],input[type="date"]{
-                    flex: 1;
-                    padding: 10px 15px;
-                    border: 2px solid $color-blue;
-                    border-radius: 8px;
-                    font-size: 1rem;
-                    color: $color-blue;
-                    max-width: 32%;
-
-
+                &::placeholder {
+                    color: $color-dark-gray;
+                }
+                
+                &.input-error {
+                    border-color: $color-red !important; 
+                    color: $color-red; 
+                    
                     &::placeholder {
-                        color: $color-dark-gray;
+                        color: rgba($color-red, 0.7); 
                     }
-
-
-                    input[type="password"] {
-                        border-color: $color-red;
-                    }
+                }
+            }
+            
+            #password-requirements-container {
+                padding-left: 12px;
+                
+                #password-requirements {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                #password-requirements li {
+                    margin-bottom: 5px;
                 }
             }
 
@@ -125,19 +132,17 @@
                 border-radius: 24px;
                 color: $color-blue;
                 padding: 12px 20px;
-                display: flex;
-                justify-content: center;
+                
                 border: 0;
                 cursor: pointer;
 
-
                 margin: {
-                    top: 0;
+                    top: 20px;
                     right: auto;
                     left: auto;
                 }
-                display: block;
 
+                display: block;
 
                 &:disabled {
                     opacity: 0.7;
@@ -145,15 +150,11 @@
                 }
             }
 
-
             p, .connexion_lien{
-               
                 font: {
                     weight: normal;
                     style: normal;
                 }
-
-
                 text-align: center;
                 margin: {
                     bottom: 10px;
@@ -161,14 +162,12 @@
                 }
             }
 
-
             .inscriptions_autres{
                 text-align: center;
                 color: $color-dark-gray;
                 margin: {
                     top: 15px;
                 }
-
 
                 .logos {
                     display: flex;
@@ -178,11 +177,9 @@
                         bottom: 30px;
                     }
 
-
                     a {
                         text-decoration: none;
                         display: flex;
-
 
                         img {
                             padding: 5px;
@@ -195,30 +192,44 @@
                     style: normal;
                     weight: normal;
                 }
+                margin-top: 10px;
             }
         }
     }
+    
     .text-footer {
-            max-width: 1000px;
-            text-align: center;
-           
-            font: {
-                size: 0.8rem;
-                style: normal;
-                weight: normal;
-            }
-
-
-            color: $color-dark-gray;
-
-
-            margin: {
-                top: 20px;
-                left: auto;
-                right: auto;
-            }
-
-
-            padding: 0 20px;
+        max-width: 1000px;
+        text-align: center;
+        
+        font: {
+            size: 0.8rem;
+            style: normal;
+            weight: normal;
         }
+
+        color: $color-dark-gray;
+
+        margin: {
+            top: 20px;
+            left: auto;
+            right: auto;
+        }
+
+        padding: 0 20px;
+    }
+
+    .hidden{
+        display: none !important;
+        height: 0;
+
+        padding: {
+            top: 0;
+            bottom: 0;
+        }
+
+        margin: {
+            top: 0;
+            bottom: 0;
+        }
+    }
 }

@@ -532,6 +532,14 @@ footer.backoffice a {
   color: #273469;
 }
 
+.status-red {
+  color: #f14e4e;
+}
+
+.status-green {
+  color: #259525;
+}
+
 .CreerCompteVendeur {
   font-family: "lora", "Serif";
   font-weight: bold;
@@ -575,17 +583,18 @@ footer.backoffice a {
   display: flex;
   align-items: center;
 }
-.CreerCompteVendeur > img[alt="photo de profil"] {
+.CreerCompteVendeur .haut_de_page > img[alt="photo de profil"] {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  margin-top: 50px;
-  margin-bottom: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 20px;
 }
 .CreerCompteVendeur .container {
   width: 100%;
   max-width: 900px;
-  padding: 0 5px;
+  padding: 0 15px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -593,25 +602,37 @@ footer.backoffice a {
   display: flex;
   flex-direction: column;
 }
-.CreerCompteVendeur .container .form-vendeur .form-group {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.CreerCompteVendeur .container .form-vendeur .form-group input[type=text], .CreerCompteVendeur .container .form-vendeur .form-group input[type=email], .CreerCompteVendeur .container .form-vendeur .form-group input[type=password], .CreerCompteVendeur .container .form-vendeur .form-group input[type=date] {
-  flex: 1;
+.CreerCompteVendeur .container .form-vendeur input.form-control {
   padding: 10px 15px;
   border: 2px solid #273469;
   border-radius: 8px;
   font-size: 1rem;
   color: #273469;
-  max-width: 32%;
+  transition: border-color 0.2s ease-in-out;
 }
-.CreerCompteVendeur .container .form-vendeur .form-group input[type=text]::placeholder, .CreerCompteVendeur .container .form-vendeur .form-group input[type=email]::placeholder, .CreerCompteVendeur .container .form-vendeur .form-group input[type=password]::placeholder, .CreerCompteVendeur .container .form-vendeur .form-group input[type=date]::placeholder {
+.CreerCompteVendeur .container .form-vendeur input.form-control[type=date] {
+  line-height: normal;
+}
+.CreerCompteVendeur .container .form-vendeur input.form-control::placeholder {
   color: #6e6e6e;
 }
-.CreerCompteVendeur .container .form-vendeur .form-group input[type=text] input[type=password], .CreerCompteVendeur .container .form-vendeur .form-group input[type=email] input[type=password], .CreerCompteVendeur .container .form-vendeur .form-group input[type=password] input[type=password], .CreerCompteVendeur .container .form-vendeur .form-group input[type=date] input[type=password] {
-  border-color: #f14e4e;
+.CreerCompteVendeur .container .form-vendeur input.form-control.input-error {
+  border-color: #f14e4e !important;
+  color: #f14e4e;
+}
+.CreerCompteVendeur .container .form-vendeur input.form-control.input-error::placeholder {
+  color: rgba(241, 78, 78, 0.7);
+}
+.CreerCompteVendeur .container .form-vendeur #password-requirements-container {
+  padding-left: 12px;
+}
+.CreerCompteVendeur .container .form-vendeur #password-requirements-container #password-requirements {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.CreerCompteVendeur .container .form-vendeur #password-requirements-container #password-requirements li {
+  margin-bottom: 5px;
 }
 .CreerCompteVendeur .container .form-vendeur .btn_inscription {
   background-color: #e4d9ff;
@@ -620,11 +641,9 @@ footer.backoffice a {
   border-radius: 24px;
   color: #273469;
   padding: 12px 20px;
-  display: flex;
-  justify-content: center;
   border: 0;
   cursor: pointer;
-  margin-top: 0;
+  margin-top: 20px;
   margin-right: auto;
   margin-left: auto;
   display: block;
@@ -661,6 +680,7 @@ footer.backoffice a {
 .CreerCompteVendeur .container .form-vendeur #password-requirements {
   font-style: normal;
   font-weight: normal;
+  margin-top: 10px;
 }
 .CreerCompteVendeur .text-footer {
   max-width: 1000px;
@@ -673,6 +693,14 @@ footer.backoffice a {
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
+}
+.CreerCompteVendeur .hidden {
+  display: none !important;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /*# sourceMappingURL=style.css.map */
