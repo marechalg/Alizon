@@ -73,6 +73,9 @@ body {
 .headerFront .seConnecter img {
   height: 40px;
 }
+.headerFront .seConnecter p {
+  margin: 0;
+}
 .headerFront .search-wrapper {
   position: relative;
   display: flex;

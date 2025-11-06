@@ -7,13 +7,13 @@
     <title>Page de connexion</title>
 </head>
 <body>
-    <?php include '../../views/frontoffice/partials/headerConnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/headerDeconnecte.php'; ?>
 
     <main>
 
 
     </main>
 
-    <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
 </body>
 </html>
