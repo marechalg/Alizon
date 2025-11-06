@@ -1,0 +1,56 @@
+@use "../colors" as *;
+@use "../fonts" as *;
+
+.inscription {
+  background-image: url("../../../public/images/symboleRose.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  font-family: "lora";
+  font-weight: bold;
+  font-style: italic;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font: {
+      size: 48px;
+      weight: bold;
+      style: italic;
+    }
+    text-align: center;
+    input {
+      width: 450px;
+      height: 40px;
+      padding: 10px;
+      margin-bottom: 20px;
+      color: #6e6e6e;
+      font-size: 16px;
+      border: 2px solid #273469;
+      border-radius: 8px;
+    }
+  }
+
+  h2 {
+    color: #273469;
+    font-family: "Lora", serif;
+    font-size: 48px;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    margin: 50px 0px;
+  }
+}
+
+#button {
+  width: 450px;
+  height: 48px;
+  padding: 10px;
+  margin-bottom: 45px;
+  font-size: 16px;
+  background-color: #e4d9ff;
+  border-radius: 8px;
+  border: none;
+  color: #273469;
+}
