@@ -9,7 +9,19 @@
 }
 @font-face {
   font-family: "open-sans";
-  src: url(../../public/fonts/open-sans/OpenSans-VariableFont_wdthwght.ttf);
+  src: url(../../public/fonts/open-sans/static/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: "open-sans-bold";
+  src: url(../../public/fonts/open-sans/static/OpenSans-Bold.ttf);
+}
+@font-face {
+  font-family: "open-sans-italic";
+  src: url(../../public/fonts/open-sans/static/OpenSans-Italic.ttf);
+}
+@font-face {
+  font-family: "open-sans-bold-italic";
+  src: url(../../public/fonts/open-sans/static/OpenSans-BoldItalic.ttf);
 }
 html,
 body {
@@ -34,9 +46,10 @@ body {
 }
 .headerFront h1 {
   color: #e3f2fe;
-  font-family: "Berkshire Swash", serif;
-  font-weight: 200;
-  font-style: normal;
+  font-family: "berkshire", serif !important;
+  font-weight: lighter !important;
+  font-style: normal !important;
+  font-size: 40px !important;
 }
 .headerFront h1 a b {
   color: #e3f2fe;
@@ -60,7 +73,7 @@ body {
   margin: 0;
 }
 .headerFront img {
-  width: 50px;
+  width: 40px;
 }
 .headerFront .seConnecter {
   display: flex;
@@ -71,6 +84,9 @@ body {
 }
 .headerFront .seConnecter img {
   height: 40px;
+}
+.headerFront .seConnecter p {
+  margin: 0;
 }
 .headerFront .search-wrapper {
   position: relative;
@@ -153,13 +169,13 @@ body {
     gap: 8px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 638px) {
   .headerFront .icons {
     display: none;
     visibility: hidden;
   }
 }
-@media (max-width: 428px) {
+@media (max-width: 500px) {
   .headerFront b {
     display: none;
     visibility: hidden;
@@ -175,6 +191,8 @@ body {
 .footerFront a, .footerFront p {
   text-decoration: none;
   color: #e3f2fe;
+  margin: 0;
+  margin-right: 15px;
 }
 
 .footerFront .footerTel {
@@ -182,10 +200,10 @@ body {
   visibility: hidden;
 }
 
-.footerFront, .footerFront div {
+.footerFront div {
   background-color: #273469;
   color: white;
-  font-style: italic;
+  font-style: normal;
   display: flex;
   justify-content: space-between;
   padding: 10px 20px;
