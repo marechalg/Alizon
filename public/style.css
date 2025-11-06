@@ -501,19 +501,38 @@ header.backoffice nav figure:nth-child(4) img {
   height: 35px;
 }
 
+.status-red {
+  color: #f14e4e;
+}
+
+.status-green {
+  color: #259525;
+}
+
 .inscription {
-  background-image: url("../../../public/images/symboleRose.png");
-  background-repeat: no-repeat;
-  background-size: contain;
   font-family: "lora";
   font-weight: bold;
+}
+.inscription::before {
+  content: "";
+  position: absolute;
+  left: -200px;
+  top: 50px;
+  width: 900px;
+  height: 900px;
+  background: url("../../public/images/symboleRose.png") no-repeat center center;
+  background-size: contain;
+  transform: rotate(-180deg);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
 }
 .inscription form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 48px;
+  font-size: 16px;
   font-weight: bold;
   text-align: center;
 }
@@ -521,7 +540,7 @@ header.backoffice nav figure:nth-child(4) img {
   width: 450px;
   height: 40px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 16px;
   color: #6e6e6e;
   font-size: 16px;
   border: 2px solid #273469;
@@ -536,7 +555,7 @@ header.backoffice nav figure:nth-child(4) img {
   margin: 50px 0px;
 }
 
-#button {
+#submitButton {
   width: 450px;
   height: 48px;
   padding: 10px;
@@ -546,6 +565,20 @@ header.backoffice nav figure:nth-child(4) img {
   border-radius: 8px;
   border: none;
   color: #273469;
+}
+
+#password-requirements-container {
+  padding-left: 12px;
+}
+
+#password-requirements {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#password-requirements li {
+  margin-bottom: 5px;
 }
 
 footer.backoffice {
