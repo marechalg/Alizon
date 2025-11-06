@@ -1,87 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../../public/style.css">
-    <title>Paiement de votre panier</title>
+    <title>Paiement - Alizon</title>
 </head>
 
 <body class="pagePaiement">
     <?php include '../../views/frontoffice/partials/headerConnecte.php'; ?>
 
-    <main>
-
+    <main class="container">
         <div class="parent">
-            <div class="col col-1">
-                <div class="infosLivraison">
+            <div class="col">
+                <section class="delivery">
                     <h3>1 - Informations pour la livraison :</h3>
+                    <input type="text" placeholder="Adresse de livraison" aria-label="Adresse de livraison">
+                    <div class="ligne">
+                        <input type="text" placeholder="Code postal" aria-label="Code postal">
+                        <input type="text" placeholder="Ville" aria-label="Ville">
+                    </div>
+                    <label><input type="checkbox"> Adresse de facturation différente</label>
+                </section>
 
-                    <form class="form-livraison" autocomplete="on" novalidate>
-                        <input id="adresse" name="adresse" type="text" placeholder="Adresse de livraison"
-                            class="input input--large">
-
-                        <div class="row">
-                            <input id="codepostal" name="codepostal" type="text" placeholder="Code postal"
-                                class="input input--half">
-
-                            <input id="ville" name="ville" type="text" placeholder="Ville" class="input input--half">
-                        </div>
-
-                        <label class="checkbox">
-                            <input type="checkbox" id="facturation" name="facturation">
-                            <span>Adresse de facturation différente</span>
-                        </label>
-                    </form>
-                </div>
-
-                <div class="paiement">
+                <section class="payment">
                     <h3>2 - Informations de paiement :</h3>
+                    <input type="text" placeholder="Numéro sur la carte" aria-label="Numéro sur la carte">
+                    <input type="text" placeholder="Nom sur la carte" aria-label="Nom sur la carte">
+                    <div class="ligne">
+                        <input type="text" placeholder="Date expiration" aria-label="Date expiration">
+                        <input type="text" placeholder="CVV" aria-label="CVV">
+                    </div>
 
-                    <form class="form-paiement" action="">
-                        <input id="numcarte" name="numcarte" type="text" placeholder="Numéro de carte bancaire"
-                            class="input input--large">
+                    <div class="logos">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
+                            alt="Mastercard">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+                            alt="Apple Pay">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                    </div>
 
-                        <input id="nomcarte" name="nomcarte" type="text" placeholder="Nom sur la carte bancaire"
-                            class="input input--large">
-
-                        <div class="row">
-                            <input id="dateexp" name="dateexp" type="text" placeholder="Date d'expiration (MM/AA)"
-                                class="input input--half">
-
-                            <input id="cvv" name="cvv" type="number" placeholder="CVV" class="input input--half cvv">
-                        </div>
-
-                    </form>
-                </div>
+                    <button class="payer">Payer</button>
+                </section>
             </div>
 
-            <!-- Colonne 2 : conditions générales -->
-            <div class="col col-2">
-                <div class="conditionGen">
+
+            <div class="col">
+                <section class="conditions">
                     <h3>5 - Accepter les conditions générales et mentions légales</h3>
-
-                    <label class="checkbox">
-                        <input type="checkbox" id="cgv" name="cgv">
-                        <span>J’ai lu et j’accepte les Conditions Générales de Vente et les Mentions Légales
-                            d’Alizon.</span>
+                    <label>
+                        <input type="checkbox">
+                        J’ai lu et j’accepte les
+                        <a href="#">Conditions Générales de Vente</a> et les
+                        <a href="#">Mentions Légales</a> d’Alizon.
                     </label>
-                </div>
+                </section>
             </div>
 
-            <!-- Colonne 3 : récapitulatif du panier -->
-            <div class="col col-3">
-                <div class="recapPanier">
-                    <!-- contenu du récapitulatif -->
+            <aside class="col recap">
+                <div class="produit">
+                    <img src="../../public/images/rillettes.png" alt="">
+                    <div class="infos">
+                        <p class="titre">Lot de rillettes bretonne</p>
+                        <p class="prix">29<sup>99</sup>€</p>
+                        <div class="gestQte">
+                            <div class="qte">
+                                <button>-</button>
+                                <span>1</span>
+                                <button>+</button>
+                            </div>
+                            <button class="delete">
+                                <img src="../../public/images/bin.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </aside>
         </div>
-
     </main>
 
     <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
-
 </body>
 
 </html>
