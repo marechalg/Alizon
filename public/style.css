@@ -370,7 +370,8 @@ body {
   }
 }
 
-.headerBackoffice {
+/* ---- Header ---- */
+header.backoffice {
   display: flex;
   background-color: #e4d9ff;
   border-bottom: solid #273469 5px;
@@ -378,28 +379,55 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.headerBackoffice * {
+header.backoffice * {
   margin: 0;
 }
-.headerBackoffice img, .headerBackoffice figure {
+header.backoffice img, header.backoffice figure {
   user-select: none;
 }
-.headerBackoffice figure {
+header.backoffice div {
   display: flex;
   align-items: center;
+}
+header.backoffice div img {
+  width: 50px;
+  height: 60px;
+  margin-right: 1em;
+}
+header.backoffice div h1 {
+  font-family: "berkshire";
+  font-size: 45px;
+  font-weight: normal;
+  color: #273469;
+}
+header.backoffice nav {
+  display: flex;
+}
+header.backoffice nav figure {
+  margin-left: 5em;
+  display: flex;
+  align-items: center;
+}
+header.backoffice nav figure:hover {
+  cursor: pointer;
+}
+header.backoffice nav figure:nth-child(1) {
   background-color: #273469;
   color: #e3f2fe;
-  padding: 0.5em;
-  height: 55px;
-  width: 250px;
+  height: 50px;
   border-radius: 16px;
-  justify-content: space-between;
+  justify-content: center;
+  transition: all 0.2s;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   font-family: "lora";
   font-size: 25px;
   font-weight: bold;
   font-style: italic;
 }
-.headerBackoffice figure:hover {
+header.backoffice nav figure:nth-child(1):hover {
   background-color: #e3f2fe;
   color: #273469;
   outline-width: 3px;
@@ -407,26 +435,70 @@ body {
   outline-style: solid;
   outline-color: #273469;
 }
-.headerBackoffice figure:hover img {
-  content: url(../../images/backoffice/panierPlusDark.svg);
+header.backoffice nav figure:nth-child(1):hover img {
+  content: url(../../../public/images/cartPlusDark.svg);
 }
-.headerBackoffice div {
-  display: flex;
+header.backoffice nav figure:nth-child(1) figcaption {
+  margin-right: 0.5em;
+}
+header.backoffice nav figure:nth-child(1) img {
+  height: 40px;
+}
+header.backoffice nav figure:nth-child(2) {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+header.backoffice nav figure:nth-child(2)::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../../public/images/bellDark.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.2s ease;
+  opacity: 1;
+}
+header.backoffice nav figure:nth-child(2)::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../../public/images/bellRingDark.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+header.backoffice nav figure:nth-child(2):hover::before {
+  opacity: 0;
+}
+header.backoffice nav figure:nth-child(2):hover::after {
+  opacity: 1;
+}
+header.backoffice nav figure:nth-child(3), header.backoffice nav figure:nth-child(4) {
+  flex-direction: column;
   align-items: center;
 }
-.headerBackoffice div img {
-  width: 50px;
-  height: 60px;
-  margin-right: 1em;
+header.backoffice nav figure:nth-child(3) img, header.backoffice nav figure:nth-child(4) img {
+  height: 40px;
 }
-.headerBackoffice div h1 {
-  font-family: "berkshire";
-  font-size: 45px;
-  font-weight: normal;
+header.backoffice nav figure:nth-child(3) figcaption, header.backoffice nav figure:nth-child(4) figcaption {
   color: #273469;
+  font-family: "lora";
+  font-size: 20px;
+  font-weight: bold;
+  font-style: italic;
 }
-.headerBackoffice nav {
-  display: flex;
+header.backoffice nav figure:nth-child(4) img {
+  height: 35px;
 }
 
 .pageConnexionCLient {
@@ -586,6 +658,139 @@ body {
   margin: 12px auto 0;
   font-size: 13px;
   font-family: "open-sans";
+}
+
+footer.backoffice {
+  display: flex;
+  background-color: #e4d9ff;
+  color: #273469;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  font-family: "lora";
+  font-weight: bold;
+  font-style: italic;
+  border-top-style: solid;
+  border-top-color: #273469;
+  border-top-width: 5px;
+}
+footer.backoffice img, footer.backoffice copy {
+  user-select: none;
+}
+footer.backoffice ul {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+footer.backoffice ul li {
+  margin-right: 1em;
+}
+footer.backoffice figure {
+  display: flex;
+  align-items: center;
+}
+footer.backoffice figure figcaption {
+  margin-right: 1em;
+}
+footer.backoffice a {
+  text-decoration: none;
+  color: #273469;
+}
+
+aside.backoffice {
+  background-color: #273469;
+}
+aside.backoffice ul {
+  position: sticky;
+  top: 1em;
+  padding: 0;
+  list-style: none;
+  margin-top: 1em;
+  padding-right: 1em;
+}
+aside.backoffice ul li {
+  background-color: #273469;
+  user-select: none;
+  height: 5em;
+  align-content: center;
+  border-radius: 24px;
+  margin-right: 1em;
+  transition: all 0.2s;
+}
+aside.backoffice ul li figure {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 4em;
+  width: 97%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  transition: all 0.2s;
+}
+aside.backoffice ul li figure img {
+  margin-left: 1em;
+  height: 35px;
+  filter: brightness(0) invert(1);
+  margin-right: 1em;
+  transition: all 0.2s;
+}
+aside.backoffice ul li figure figcaption {
+  color: #fffefa;
+  font-family: "lora";
+  font-weight: normal;
+  font-size: 30px;
+  transition: all 0.2s;
+}
+aside.backoffice ul li:hover {
+  cursor: pointer;
+  width: 115%;
+}
+aside.backoffice ul li:hover figure {
+  background-color: #fffefa;
+}
+aside.backoffice ul li:hover figure img {
+  filter: none;
+}
+aside.backoffice ul li:hover figure figcaption {
+  color: #273469;
+}
+aside.backoffice ul li.here {
+  cursor: pointer;
+  width: 115%;
+}
+aside.backoffice ul li.here figure {
+  background-color: #fffefa;
+}
+aside.backoffice ul li.here figure img {
+  filter: none;
+}
+aside.backoffice ul li.here figure figcaption {
+  color: #273469;
+}
+aside.backoffice ul li.here:hover {
+  cursor: default;
+}
+
+body.backoffice {
+  display: grid;
+  grid-template-areas: "header header" "aside main" "footer footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+body.backoffice header {
+  grid-area: header;
+}
+body.backoffice aside {
+  grid-area: aside;
+}
+body.backoffice main {
+  padding-left: 2em;
+  padding-right: 2em;
+  grid-area: main;
+}
+body.backoffice footer {
+  grid-area: footer;
 }
 
 /*# sourceMappingURL=style.css.map */
