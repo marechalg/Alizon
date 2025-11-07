@@ -201,6 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!/^([0][1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}$/.test(birthDate)) {
                     return false;
                 }
+                return true;
             }
 
             function validatePhoneNumber() { 
@@ -208,6 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!/^0[67](\s[0-9]{2}){4}$/.test(phoneNumber)) {
                     return false;
                 }
+                return true;
             }
 
             passwordInput.addEventListener('blur', () => {
@@ -253,12 +255,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Empêcher la soumission si la validation échoue
             document.querySelector('form').addEventListener('submit', function(e) {
                 // Vérifier si les champs sont vides au moment de la soumission
+                const isPasswordValid = validatePassword();
+                const isBirthDateValid = validateBirthDate();
+                const isPhoneValid = validatePhoneNumber();
+
+                const passwordEmpty = passwordInput.value.trim() === '';
+                const confirmEmpty = confirmPasswordInput.value.trim() === '';
+                const birthDateEmpty = birthDateInput.value.trim() === '';
+                const phoneEmpty = phoneNumberInput.value.trim() === '';
+
                 toggleErrorStyle(passwordInput);
                 toggleErrorStyle(confirmPasswordInput);
+                toggleErrorStyle(birthDateInput);
+                toggleErrorStyle(phoneNumberInput);
                 
                 // Si la validation échoue OU si l'un des champs est vide
-                if (!validatePassword() || passwordInput.value.trim() === '' || confirmPasswordInput.value.trim() === '') {
+                if (!isPasswordValid || passwordEmpty || confirmEmpty) {
                     e.preventDefault();
+                }
+                if(!isBirthDateValid || birthDateEmpty){
+                    e.preventDefault();
+                    alert("La date de naissance n'est pas au bon format, utilisez le format JJ/MM/YYYY");
+                }
+                if(!isPhoneValid || phoneEmpty){
+                    e.preventDefault();
+                    alert("Le numéro de téléphone n'est format français");
                 }
             });
 
