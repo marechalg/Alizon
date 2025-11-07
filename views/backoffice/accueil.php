@@ -14,6 +14,7 @@
         <?php require_once './partials/aside.php' ?>
 
         <main class="acceuilBackoffice">
+            <!--
             <section>
                 <h1>Derniers Bilans</h1>
                 <article>
@@ -51,8 +52,9 @@
                 </article>
                 <a href="" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
+            -->
 
-            <section>
+            <section class="stock">
                 <h1>Stocks Faible</h1>
                 <article>
                     <table>
@@ -61,9 +63,6 @@
                         </tr>
                         <tr>
                             <td colspan=2>Rillettes</td>
-                        </tr>
-                        <tr>
-                            
                         </tr>
                         <tr>
                             <td>29,99€</td>

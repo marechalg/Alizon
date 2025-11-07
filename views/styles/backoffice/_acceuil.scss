@@ -23,123 +23,65 @@ main.acceuilBackoffice {
     section {
         display: flex;
         flex-direction: column;
-        
+        color: $color-blue;
+        width: 100%;
+
         h1 {
-            font-family: 'lora';
-            color: $color-blue;
-        }
-
-        &:nth-child(1) article {
-            table {
-                width: 100%;
-                table-layout: fixed;
-                border-collapse: separate;
-                border-spacing: 0 1em;
+            user-select: none;
+            font: {
+                family: 'lora';
                 
-                thead td, tbody td {
-                    padding: 0 3em;
-                    
-                    &:first-child {
-                        padding-left: 0;
-                    }
-                    
-                    &:last-child {
-                        padding-right: 0;
-                    }
-                }
-                
-                thead {
-                    button {
-                        transition: all 0.2s;
-                        letter-spacing: 1px;
-                        font: {
-                            family: 'lora';
-                            style: italic;
-                            weight: bold;
-                            size: 15px;
-                        }
-                        border: none;
-                        border-radius: 16px;
-                        background-color: $color-blue;
-                        color: $color-white;
-                        padding: 1em;
-                        width: 100%;
-                        
-                        &:hover {
-                            @include secondary;
-                        }
-                    }
-                    button.here {
-                        @include secondary;
-                        
-                        &:hover {
-                            cursor: default;
-                        }
-                    }
-                }
-                
-                tbody {
-                    color: $color-blue;
-                    font-family: 'open-sans-bold';
-                    
-                    figure {
-                        display: flex;
-                        padding: 0;
-                        
-                        img {
-                            margin-top: 15px;
-                            align-self: flex-start;
-                        }
-                        
-                        figcaption {
-                            font-size: 40px;
-                        }
-                        figcaption.neg {
-                            color: $color-red;
-                        }
-                        figcaption.pos {
-                            color: $color-green;
-                        }
-                    }
-                }
             }
         }
 
-        &:nth-child(2) article {
-            table {
-                padding: 1em;
-                border: solid 2px $color-blue;
-                border-radius: 16px;
-                font-family: 'open-sans';
-
-                tr {
-                    &:nth-child(3) {
-                        display: flex;
-                        font-family: 'open-sans-bold';
-                        width: 100%;
-                        align-items: center;
-                        background-color: yellow;
-                        td:nth-child(2) {
-                            font-size: 20px;
-                            justify-self: right;
-                        }
-                    }
-
-                    td.epuise {
-                        color: $color-red;
-                    }
-                    td.faible {
-                        color: $color-orange;
-                    }
-                }
-            }
+        article {
+            width: 100%;
         }
         
         a {
+            margin-top: 1em;
             align-self: flex-end;
             
             img {
                 height: 25px;
+            }
+        }
+
+        &.stock article {
+            display: grid;
+            grid-template-rows: repeat(2, auto);
+            grid-template-columns: repeat(3, auto);
+            gap: 2em;
+
+            table {
+                padding: 1em;
+                border: solid 2px $color-blue;
+                border-radius: 16px;
+                justify-content: center;
+                font-family: 'open-sans';
+                font-size: 20px;
+
+                tr:nth-child(3) {
+                    font: {
+                        family: 'open-sans-bold';
+                        size: 25px;
+                    }
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+
+                    td:nth-child(2) {
+                        font-size: 40px;
+                        margin-left: auto;
+
+                        &.epuise {
+                            color: $color-red;
+                        }
+                        &.faible {
+                            color: $color-green;
+                        }
+                    }
+                }
             }
         }
     }

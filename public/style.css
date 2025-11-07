@@ -656,108 +656,53 @@ main.acceuilBackoffice img, main.acceuilBackoffice button {
 main.acceuilBackoffice section {
   display: flex;
   flex-direction: column;
+  color: #273469;
+  width: 100%;
 }
 main.acceuilBackoffice section h1 {
+  user-select: none;
   font-family: "lora";
-  color: #273469;
 }
-main.acceuilBackoffice section:nth-child(1) article table {
+main.acceuilBackoffice section article {
   width: 100%;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0 1em;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead td, main.acceuilBackoffice section:nth-child(1) article table tbody td {
-  padding: 0 3em;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead td:first-child, main.acceuilBackoffice section:nth-child(1) article table tbody td:first-child {
-  padding-left: 0;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead td:last-child, main.acceuilBackoffice section:nth-child(1) article table tbody td:last-child {
-  padding-right: 0;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead button {
-  transition: all 0.2s;
-  letter-spacing: 1px;
-  font-family: "lora";
-  font-style: italic;
-  font-weight: bold;
-  font-size: 15px;
-  border: none;
-  border-radius: 16px;
-  background-color: #273469;
-  color: #fffefa;
-  padding: 1em;
-  width: 100%;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead button:hover {
-  cursor: pointer;
-  color: #273469;
-  background-color: #e3f2fe;
-  border-style: solid;
-  border-color: #273469;
-  border-width: 2px;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead button.here {
-  cursor: pointer;
-  color: #273469;
-  background-color: #e3f2fe;
-  border-style: solid;
-  border-color: #273469;
-  border-width: 2px;
-}
-main.acceuilBackoffice section:nth-child(1) article table thead button.here:hover {
-  cursor: default;
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody {
-  color: #273469;
-  font-family: "open-sans-bold";
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody figure {
-  display: flex;
-  padding: 0;
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody figure img {
-  margin-top: 15px;
-  align-self: flex-start;
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption {
-  font-size: 40px;
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption.neg {
-  color: #f14e4e;
-}
-main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption.pos {
-  color: #259525;
-}
-main.acceuilBackoffice section:nth-child(2) article table {
-  padding: 1em;
-  border: solid 2px #273469;
-  border-radius: 16px;
-  font-family: "open-sans";
-}
-main.acceuilBackoffice section:nth-child(2) article table tr:nth-child(3) {
-  display: flex;
-  font-family: "open-sans-bold";
-  width: 100%;
-  align-items: center;
-  background-color: yellow;
-}
-main.acceuilBackoffice section:nth-child(2) article table tr:nth-child(3) td:nth-child(2) {
-  font-size: 20px;
-  justify-self: right;
-}
-main.acceuilBackoffice section:nth-child(2) article table tr td.epuise {
-  color: #f14e4e;
-}
-main.acceuilBackoffice section:nth-child(2) article table tr td.faible {
-  color: #ffc25a;
 }
 main.acceuilBackoffice section a {
+  margin-top: 1em;
   align-self: flex-end;
 }
 main.acceuilBackoffice section a img {
   height: 25px;
+}
+main.acceuilBackoffice section.stock article {
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
+  gap: 2em;
+}
+main.acceuilBackoffice section.stock article table {
+  padding: 1em;
+  border: solid 2px #273469;
+  border-radius: 16px;
+  justify-content: center;
+  font-family: "open-sans";
+  font-size: 20px;
+}
+main.acceuilBackoffice section.stock article table tr:nth-child(3) {
+  font-family: "open-sans-bold";
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+main.acceuilBackoffice section.stock article table tr:nth-child(3) td:nth-child(2) {
+  font-size: 40px;
+  margin-left: auto;
+}
+main.acceuilBackoffice section.stock article table tr:nth-child(3) td:nth-child(2).epuise {
+  color: #f14e4e;
+}
+main.acceuilBackoffice section.stock article table tr:nth-child(3) td:nth-child(2).faible {
+  color: #259525;
 }
 
 /*# sourceMappingURL=style.css.map */
