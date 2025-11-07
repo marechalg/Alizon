@@ -8,6 +8,6 @@
         $_SESSIONS[$id_session]=30;
     }
 
-    header('Location: ./legales.php');
+    header('Location: ../../frontoffice/page404.php');
     exit();
 ?>

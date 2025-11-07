@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   
 
       <main>
-        <form id="monForm" action="session_start.php" method="post" enctype="multipart/form-data">
+        <form id="monForm" action="../backoffice/partials/session_start.php" method="post" enctype="multipart/form-data">
 
           <!-- Pseudo -->
           <input type="text" placeholder="Pseudo*" id="pseudo" name="pseudo" required />
