@@ -1,107 +1,109 @@
 @use "../colors" as *;
 @use "../fonts" as *;
 
+/* Variables principales */
 $accent: #252b56;
 $bg: #fbfaf8;
 $border-width: 2px;
 $radius: 8px;
 $gap: 20px;
+$breakpoint-lg: 1200px;
+$breakpoint-md: 920px;
 $breakpoint-sm: 720px;
 
-// variables locales
 $page-padding: 32px 16px;
-$form-max-width: 420px;
-$profile-size: 120px;
-$profile-img-size: 60px;
-$input-padding: 12px 14px;
-$btn-width: 70%;
-$btn-max-width: $form-max-width;
-$btn-padding: 12px 16px;
-$btn-radius: 50px;
-$bg-right: 0px;
-$bg-top: -400px;
-$bg-size: 1000px;
-$bg-rotation: -20deg;
-$bg-opacity: 0.3;
-$content-z: 1;
-$bg-z: 0;
 
+/* Placeholder réutilisable pour les champs input */
+%input-base {
+  padding: 12px 14px;
+  border: $border-width solid $accent;
+  border-radius: $radius;
+  background: $bg;
+  font: {
+    style: italic;
+    size: 1rem;
+    family: "lora", sans-serif;
+    weight: 500;
+  }
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+/* Wrapper principal de la page de paiement */
 .pagePaiement {
+  position: relative;
+  overflow-x: hidden;
+
+  /* Décor en arrière-plan (image stylisée) */
   &::before {
     content: "";
     position: absolute;
-    right: $bg-right;
-    top: $bg-top;
-    width: $bg-size;
-    height: $bg-size;
+    right: 0;
+    top: -400px;
+    width: 1000px;
+    height: 1000px;
     background: url("../../public/images/symboleRose.png") no-repeat center
       center;
     background-size: contain;
-    transform: rotate($bg-rotation);
-    opacity: $bg-opacity;
-    z-index: $bg-z;
+    transform: rotate(-20deg);
+    opacity: 0.12;
     pointer-events: none;
+    z-index: 0;
   }
 
+  /* S'assurer que le contenu est au-dessus du décor */
   > * {
     position: relative;
-    z-index: $content-z;
+    z-index: 1;
   }
 
+  /* Conteneur centrant le contenu et limitant la largeur */
   .container {
-    padding: 0;
-    margin: 70px 5% 0 5%;
-    width: auto;
-    max-width: none;
+    max-width: 1400px;
+    margin: 70px auto 0;
+    padding: 0 5%;
     box-sizing: border-box;
+    width: 100%;
   }
 
+  /* Grille principale : 3 colonnes par défaut */
   .parent {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 200px;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    gap: clamp(12px, 2vw, 32px);
     width: 100%;
+    align-items: start;
     box-sizing: border-box;
   }
 
+  /* Colonne générique */
   .col {
     display: flex;
     flex-direction: column;
     gap: $gap;
   }
 
+  /* Titres H3 */
   h3 {
     font-family: "lora", serif;
-    font-size: 18px;
-    font-weight: 100;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    font-weight: 300;
     margin: 0 0 8px;
     color: $color-blue;
   }
 
+  /* Liens */
   a {
     color: $color-blue;
-
-    &:active {
-      color: red;
-    }
   }
 
+  /* Champ texte standard */
   input[type="text"] {
+    @extend %input-base;
     width: 100%;
-    padding: 12px 14px;
-    border: $border-width solid $accent;
-    border-radius: $radius;
-    background: $bg;
-    font: {
-      style: italic;
-      size: 16px;
-      family: "lora", sans-serif;
-      weight: 500;
-    }
-    margin-bottom: 12px;
-    box-sizing: border-box;
   }
 
+  /* Checkbox : style principal et état coché */
   input[type="checkbox"] {
     accent-color: $color-blue;
     border: 2px solid $color-blue;
@@ -112,14 +114,14 @@ $bg-z: 0;
     }
   }
 
+  /* Section paiement et bouton principal (desktop) */
   .payment {
-    margin-top: 30px;
+    margin-top: 8px;
 
     .payer {
       margin-top: 12px;
       background: #dcd1fa;
       color: $accent;
-      margin-top: 40px;
       font: {
         size: 18px;
         family: "lora", serif;
@@ -130,21 +132,47 @@ $bg-z: 0;
       padding: 12px;
       cursor: pointer;
       width: 100%;
+      box-sizing: border-box;
     }
   }
 
+  /* Ligne regroupant plusieurs champs (numéro carte, date, cvv...) */
   .ligne {
     display: flex;
     gap: 12px;
-  }
-  .ligne input[type="text"] {
-    flex: 1 1 0;
-    min-width: 0;
+    align-items: center;
+    flex-wrap: wrap;
+
+    input {
+      flex: 1 1 0;
+      min-width: 0;
+      @extend %input-base;
+    }
+
+    /* Petits champs à largeur fixe */
+    .cvv-input,
+    .carte-date,
+    .code-postal-input {
+      flex: 0 0 auto;
+      @extend %input-base;
+      min-width: 70px;
+    }
+
+    .cvv-input {
+      width: 80px;
+    }
+    .carte-date {
+      width: 90px;
+    }
+    .code-postal-input {
+      width: 110px;
+    }
   }
 
+  /* Labels alignés avec les champs */
   label {
     font: {
-      size: 16px;
+      size: 1rem;
       family: "lora", serif;
       weight: 400;
     }
@@ -153,16 +181,13 @@ $bg-z: 0;
     gap: 12px;
   }
 
+  /* Conditions générales / checkbox inline */
   .conditions {
     label {
       display: inline;
       align-items: initial;
       gap: 0;
-      font: {
-        size: 16px;
-        family: "lora", serif;
-        weight: 400;
-      }
+      line-height: 1.5;
     }
 
     input[type="checkbox"] {
@@ -171,47 +196,58 @@ $bg-z: 0;
     }
   }
 
+  /* Logos des moyens de paiement */
   .logos {
     display: flex;
     gap: 12px;
     margin-top: 6px;
+    flex-wrap: wrap;
+
     img {
       height: 28px;
     }
   }
 
+  /* Récapitulatif produit : carte produit */
   .recap .produit {
     border: $border-width solid $accent;
-    border-radius: 32px;
+    border-radius: 16px;
     display: flex;
     gap: 12px;
     padding: 10px;
     box-sizing: border-box;
+    align-items: center;
   }
+
+  /* Image du produit dans le récap */
   .recap img {
-    aspect-ratio: 1 /1;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
   }
   .recap .infos {
     display: flex;
     flex-direction: column;
+    gap: 6px;
   }
   .recap .titre {
-    font-size: 20px;
+    font-size: 1.05rem;
     font-family: "lora", serif;
     color: $color-blue;
     font-weight: 500;
   }
   .recap .prix {
-    font: {
-      size: 26px;
-      weight: 600;
-      family: "open-sans", sans-serif;
-    }
+    font-size: 1.3rem;
+    font-family: "open-sans", sans-serif;
+    font-weight: 600;
   }
+
+  /* Gestion quantité et suppression produit */
   .gestQte {
     display: flex;
     gap: 10px;
-
+    align-items: center;
     .qte {
       display: flex;
       align-items: center;
@@ -220,7 +256,6 @@ $bg-z: 0;
       border-radius: 30px;
       padding: 4px;
       width: 70px;
-
       button {
         background: none;
         border: none;
@@ -230,13 +265,11 @@ $bg-z: 0;
         padding: 0 8px;
       }
     }
-
     .delete {
       border: 2px solid $color-blue;
       border-radius: 20px;
       padding: 4px;
       width: 35px;
-      justify-content: center;
       background: none;
       cursor: pointer;
 
@@ -247,16 +280,109 @@ $bg-z: 0;
     }
   }
 
+  /* Bouton payer adapté pour mobile (masqué par défaut) */
+  .payer--mobile {
+    display: none;
+  }
+
+  /* Petit écran : cacher le bouton desktop et afficher la version mobile */
+  @media (max-width: $breakpoint-sm) {
+    /* hide original button inside .payment (kept for desktop) */
+    .payment .payer {
+      display: none !important;
+    }
+
+    .promotions {
+      margin-top: -110px;
+    }
+
+    .payer-wrapper-mobile {
+      display: block;
+      margin: 18px 0 40px;
+    }
+    .payer--mobile {
+      display: block;
+      width: 50%;
+      padding: 12px;
+      border-radius: 100px;
+      background: #dcd1fa;
+      color: $accent;
+      font: {
+        size: 18px;
+        family: "lora", serif;
+        weight: 300;
+      }
+      border: none;
+      cursor: pointer;
+      box-sizing: border-box;
+      margin: -110px auto 0;
+      align-self: center;
+      justify-self: center;
+    }
+  }
+
+  /* Tablette / petit desktop : passer à 2 colonnes et masquer le récap */
+  @media (max-width: $breakpoint-lg) {
+    .parent {
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+
+    .recap {
+      display: none;
+    }
+  }
+
+  /* Mobile layout : colonne unique, alignements et étirements */
   @media (max-width: $breakpoint-sm) {
     .parent {
       grid-template-columns: 1fr;
+      gap: 16px;
+      min-height: 100vh; /* rempli la hauteur de la fenêtre pour pouvoir aligner le bouton en bas */
     }
+
     .ligne {
       flex-direction: column;
     }
+
     input[type="text"] {
-      padding: 10px;
-      font-size: 15px;
+      font-size: 0.95rem;
+      padding: 10px 12px;
+    }
+
+    .container {
+      padding: 0 4%;
+      margin-top: 40px;
+    }
+
+    /* Étire les champs contenus dans .ligne pour occuper toute la largeur */
+    .ligne input,
+    .ligne .cvv-input,
+    .ligne .carte-date,
+    .ligne .code-postal-input {
+      flex: 1 1 auto;
+      width: 100% !important;
+      min-width: 0;
+      align-self: stretch;
+    }
+
+    /* Étire la première colonne et pousse .payment en bas de la colonne */
+    .parent > .col:first-child {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      gap: $gap;
+    }
+
+    /* Pousse la section paiement vers le bas pour que le bouton soit accessible */
+    .parent > .col:first-child .payment {
+      margin-top: auto; /* pousse cette section vers le bas de la colonne */
+      display: flex;
+      flex-direction: column;
+    }
+
+    .parent > .col:first-child .payment .payer {
+      align-self: stretch;
+      margin-top: 0;
     }
   }
 }

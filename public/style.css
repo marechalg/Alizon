@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* Font stack variables for consistent usage across SCSS files */
 @font-face {
   font-family: "lora";
@@ -646,68 +647,103 @@ body.backoffice footer {
   grid-area: footer;
 }
 
+/* Variables principales */
+/* Placeholder réutilisable pour les champs input */
+.pagePaiement .ligne .cvv-input,
+.pagePaiement .ligne .carte-date,
+.pagePaiement .ligne .code-postal-input, .pagePaiement .ligne input, .pagePaiement input[type=text] {
+  padding: 12px 14px;
+  border: 2px solid #252b56;
+  border-radius: 8px;
+  background: #fbfaf8;
+  font-style: italic;
+  font-size: 1rem;
+  font-family: "lora", sans-serif;
+  font-weight: 500;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+/* Wrapper principal de la page de paiement */
+.pagePaiement {
+  position: relative;
+  overflow-x: hidden;
+  /* Décor en arrière-plan (image stylisée) */
+}
 .pagePaiement::before {
   content: "";
   position: absolute;
-  right: 0px;
+  right: 0;
   top: -400px;
   width: 1000px;
   height: 1000px;
   background: url("../../public/images/symboleRose.png") no-repeat center center;
   background-size: contain;
   transform: rotate(-20deg);
-  opacity: 0.3;
-  z-index: 0;
+  opacity: 0.12;
   pointer-events: none;
+  z-index: 0;
+}
+.pagePaiement {
+  /* S'assurer que le contenu est au-dessus du décor */
 }
 .pagePaiement > * {
   position: relative;
   z-index: 1;
 }
+.pagePaiement {
+  /* Conteneur centrant le contenu et limitant la largeur */
+}
 .pagePaiement .container {
-  padding: 0;
-  margin: 70px 5% 0 5%;
-  width: auto;
-  max-width: none;
+  max-width: 1400px;
+  margin: 70px auto 0;
+  padding: 0 5%;
   box-sizing: border-box;
+  width: 100%;
+}
+.pagePaiement {
+  /* Grille principale : 3 colonnes par défaut */
 }
 .pagePaiement .parent {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 200px;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: clamp(12px, 2vw, 32px);
   width: 100%;
+  align-items: start;
   box-sizing: border-box;
+}
+.pagePaiement {
+  /* Colonne générique */
 }
 .pagePaiement .col {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
+.pagePaiement {
+  /* Titres H3 */
+}
 .pagePaiement h3 {
   font-family: "lora", serif;
-  font-size: 18px;
-  font-weight: 100;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 300;
   margin: 0 0 8px;
   color: #273469;
+}
+.pagePaiement {
+  /* Liens */
 }
 .pagePaiement a {
   color: #273469;
 }
-.pagePaiement a:active {
-  color: red;
+.pagePaiement {
+  /* Champ texte standard */
 }
 .pagePaiement input[type=text] {
   width: 100%;
-  padding: 12px 14px;
-  border: 2px solid #252b56;
-  border-radius: 8px;
-  background: #fbfaf8;
-  font-style: italic;
-  font-size: 16px;
-  font-family: "lora", sans-serif;
-  font-weight: 500;
-  margin-bottom: 12px;
-  box-sizing: border-box;
+}
+.pagePaiement {
+  /* Checkbox : style principal et état coché */
 }
 .pagePaiement input[type=checkbox] {
   accent-color: #273469;
@@ -717,14 +753,16 @@ body.backoffice footer {
   background: #273469;
   border-color: #273469;
 }
+.pagePaiement {
+  /* Section paiement et bouton principal (desktop) */
+}
 .pagePaiement .payment {
-  margin-top: 30px;
+  margin-top: 8px;
 }
 .pagePaiement .payment .payer {
   margin-top: 12px;
   background: #dcd1fa;
   color: #252b56;
-  margin-top: 40px;
   font-size: 18px;
   font-family: "lora", serif;
   font-weight: 300;
@@ -733,72 +771,119 @@ body.backoffice footer {
   padding: 12px;
   cursor: pointer;
   width: 100%;
+  box-sizing: border-box;
+}
+.pagePaiement {
+  /* Ligne regroupant plusieurs champs (numéro carte, date, cvv...) */
 }
 .pagePaiement .ligne {
   display: flex;
   gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
 }
-.pagePaiement .ligne input[type=text] {
+.pagePaiement .ligne input {
   flex: 1 1 0;
   min-width: 0;
 }
+.pagePaiement .ligne {
+  /* Petits champs à largeur fixe */
+}
+.pagePaiement .ligne .cvv-input,
+.pagePaiement .ligne .carte-date,
+.pagePaiement .ligne .code-postal-input {
+  flex: 0 0 auto;
+  min-width: 70px;
+}
+.pagePaiement .ligne .cvv-input {
+  width: 80px;
+}
+.pagePaiement .ligne .carte-date {
+  width: 90px;
+}
+.pagePaiement .ligne .code-postal-input {
+  width: 110px;
+}
+.pagePaiement {
+  /* Labels alignés avec les champs */
+}
 .pagePaiement label {
-  font-size: 16px;
+  font-size: 1rem;
   font-family: "lora", serif;
   font-weight: 400;
   display: flex;
   align-items: center;
   gap: 12px;
 }
+.pagePaiement {
+  /* Conditions générales / checkbox inline */
+}
 .pagePaiement .conditions label {
   display: inline;
   align-items: initial;
   gap: 0;
-  font-size: 16px;
-  font-family: "lora", serif;
-  font-weight: 400;
+  line-height: 1.5;
 }
 .pagePaiement .conditions input[type=checkbox] {
   margin-right: 8px;
   vertical-align: middle;
 }
+.pagePaiement {
+  /* Logos des moyens de paiement */
+}
 .pagePaiement .logos {
   display: flex;
   gap: 12px;
   margin-top: 6px;
+  flex-wrap: wrap;
 }
 .pagePaiement .logos img {
   height: 28px;
 }
+.pagePaiement {
+  /* Récapitulatif produit : carte produit */
+}
 .pagePaiement .recap .produit {
   border: 2px solid #252b56;
-  border-radius: 32px;
+  border-radius: 16px;
   display: flex;
   gap: 12px;
   padding: 10px;
   box-sizing: border-box;
+  align-items: center;
+}
+.pagePaiement {
+  /* Image du produit dans le récap */
 }
 .pagePaiement .recap img {
-  aspect-ratio: 1/1;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 .pagePaiement .recap .infos {
   display: flex;
   flex-direction: column;
+  gap: 6px;
 }
 .pagePaiement .recap .titre {
-  font-size: 20px;
+  font-size: 1.05rem;
   font-family: "lora", serif;
   color: #273469;
   font-weight: 500;
 }
 .pagePaiement .recap .prix {
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 1.3rem;
   font-family: "open-sans", sans-serif;
+  font-weight: 600;
+}
+.pagePaiement {
+  /* Gestion quantité et suppression produit */
 }
 .pagePaiement .gestQte {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 .pagePaiement .gestQte .qte {
   display: flex;
@@ -822,7 +907,6 @@ body.backoffice footer {
   border-radius: 20px;
   padding: 4px;
   width: 35px;
-  justify-content: center;
   background: none;
   cursor: pointer;
 }
@@ -830,16 +914,110 @@ body.backoffice footer {
   width: 20px;
   height: 20px;
 }
+.pagePaiement {
+  /* Bouton payer adapté pour mobile (masqué par défaut) */
+}
+.pagePaiement .payer--mobile {
+  display: none;
+}
+.pagePaiement {
+  /* Petit écran : cacher le bouton desktop et afficher la version mobile */
+}
+@media (max-width: 720px) {
+  .pagePaiement {
+    /* hide original button inside .payment (kept for desktop) */
+  }
+  .pagePaiement .payment .payer {
+    display: none !important;
+  }
+  .pagePaiement .promotions {
+    margin-top: -110px;
+  }
+  .pagePaiement .payer-wrapper-mobile {
+    display: block;
+    margin: 18px 0 40px;
+  }
+  .pagePaiement .payer--mobile {
+    display: block;
+    width: 50%;
+    padding: 12px;
+    border-radius: 100px;
+    background: #dcd1fa;
+    color: #252b56;
+    font-size: 18px;
+    font-family: "lora", serif;
+    font-weight: 300;
+    border: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    margin: -110px auto 0;
+    align-self: center;
+    justify-self: center;
+  }
+}
+.pagePaiement {
+  /* Tablette / petit desktop : passer à 2 colonnes et masquer le récap */
+}
+@media (max-width: 1200px) {
+  .pagePaiement .parent {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+  .pagePaiement .recap {
+    display: none;
+  }
+}
+.pagePaiement {
+  /* Mobile layout : colonne unique, alignements et étirements */
+}
 @media (max-width: 720px) {
   .pagePaiement .parent {
     grid-template-columns: 1fr;
+    gap: 16px;
+    min-height: 100vh; /* rempli la hauteur de la fenêtre pour pouvoir aligner le bouton en bas */
   }
   .pagePaiement .ligne {
     flex-direction: column;
   }
   .pagePaiement input[type=text] {
-    padding: 10px;
-    font-size: 15px;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+  .pagePaiement .container {
+    padding: 0 4%;
+    margin-top: 40px;
+  }
+  .pagePaiement {
+    /* Étire les champs contenus dans .ligne pour occuper toute la largeur */
+  }
+  .pagePaiement .ligne input,
+  .pagePaiement .ligne .cvv-input,
+  .pagePaiement .ligne .carte-date,
+  .pagePaiement .ligne .code-postal-input {
+    flex: 1 1 auto;
+    width: 100% !important;
+    min-width: 0;
+    align-self: stretch;
+  }
+  .pagePaiement {
+    /* Étire la première colonne et pousse .payment en bas de la colonne */
+  }
+  .pagePaiement .parent > .col:first-child {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: 20px;
+  }
+  .pagePaiement {
+    /* Pousse la section paiement vers le bas pour que le bouton soit accessible */
+  }
+  .pagePaiement .parent > .col:first-child .payment {
+    margin-top: auto; /* pousse cette section vers le bas de la colonne */
+    display: flex;
+    flex-direction: column;
+  }
+  .pagePaiement .parent > .col:first-child .payment .payer {
+    align-self: stretch;
+    margin-top: 0;
   }
 }
 

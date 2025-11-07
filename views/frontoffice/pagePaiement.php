@@ -18,7 +18,7 @@
                     <h3>1 - Informations pour la livraison :</h3>
                     <input type="text" placeholder="Adresse de livraison" aria-label="Adresse de livraison">
                     <div class="ligne">
-                        <input type="text" placeholder="Code postal" aria-label="Code postal">
+                        <input class="code-postal-input" type="text" placeholder="Code postal" aria-label="Code postal">
                         <input type="text" placeholder="Ville" aria-label="Ville">
                     </div>
                     <label><input type="checkbox"> Adresse de facturation différente</label>
@@ -29,17 +29,12 @@
                     <input type="text" placeholder="Numéro sur la carte" aria-label="Numéro sur la carte">
                     <input type="text" placeholder="Nom sur la carte" aria-label="Nom sur la carte">
                     <div class="ligne">
-                        <input type="text" placeholder="Date expiration" aria-label="Date expiration">
-                        <input type="text" placeholder="CVV" aria-label="CVV">
+                        <input class="carte-date" type="text" placeholder="00/00" aria-label="Date expiration">
+                        <input class="cvv-input" type=" text" placeholder="CVV" aria-label="CVV">
                     </div>
 
                     <div class="logos">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png"
-                            alt="Mastercard">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-                            alt="Apple Pay">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
                     </div>
 
                     <button class="payer">Payer</button>
@@ -48,6 +43,10 @@
 
 
             <div class="col">
+                <section class="promotions">
+                    <h3>4 - Appliquer un bon de réduction</h3>
+                    <input type="text" placeholder="Code de réduction" aria-label="Code de réduction">
+                </section>
                 <section class="conditions">
                     <h3>5 - Accepter les conditions générales et mentions légales</h3>
                     <label>
@@ -78,6 +77,10 @@
                     </div>
                 </div>
             </aside>
+        </div> <!-- .parent -->
+        <!-- bouton mobile placé après tous les blocs, visible seulement en mobile -->
+        <div class="payer-wrapper-mobile">
+            <button class="payer payer--mobile">Payer</button>
         </div>
     </main>
 
