@@ -20,9 +20,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <td><button class="here">Journalier</button></td>
-                                <td><button>Hebdomadaire</button></td>
-                                <td><button>Mensuel</button></td>
+                                <td><button class="bilan here">Journalier</button></td>
+                                <td><button class="bilan">Hebdomadaire</button></td>
+                                <td><button class="bilan">Mensuel</button></td>
                             </tr>
                         </thead>
 
@@ -54,6 +54,83 @@
 
             <section>
                 <h1>Stocks Faible</h1>
+                <article>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="epuise">0</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="epuise">0</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="epuise">0</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="faible">5</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="faible">6</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>Rillettes</td>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                            <td class="faible">12</td>
+                        </tr>
+                    </table>
+                </article>
                 <a href="" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
 

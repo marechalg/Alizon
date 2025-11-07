@@ -661,22 +661,22 @@ main.acceuilBackoffice section h1 {
   font-family: "lora";
   color: #273469;
 }
-main.acceuilBackoffice section article table {
+main.acceuilBackoffice section:nth-child(1) article table {
   width: 100%;
   table-layout: fixed;
   border-collapse: separate;
   border-spacing: 0 1em;
 }
-main.acceuilBackoffice section article table thead td, main.acceuilBackoffice section article table tbody td {
+main.acceuilBackoffice section:nth-child(1) article table thead td, main.acceuilBackoffice section:nth-child(1) article table tbody td {
   padding: 0 3em;
 }
-main.acceuilBackoffice section article table thead td:first-child, main.acceuilBackoffice section article table tbody td:first-child {
+main.acceuilBackoffice section:nth-child(1) article table thead td:first-child, main.acceuilBackoffice section:nth-child(1) article table tbody td:first-child {
   padding-left: 0;
 }
-main.acceuilBackoffice section article table thead td:last-child, main.acceuilBackoffice section article table tbody td:last-child {
+main.acceuilBackoffice section:nth-child(1) article table thead td:last-child, main.acceuilBackoffice section:nth-child(1) article table tbody td:last-child {
   padding-right: 0;
 }
-main.acceuilBackoffice section article table thead button {
+main.acceuilBackoffice section:nth-child(1) article table thead button {
   transition: all 0.2s;
   letter-spacing: 1px;
   font-family: "lora";
@@ -690,7 +690,7 @@ main.acceuilBackoffice section article table thead button {
   padding: 1em;
   width: 100%;
 }
-main.acceuilBackoffice section article table thead button:hover {
+main.acceuilBackoffice section:nth-child(1) article table thead button:hover {
   cursor: pointer;
   color: #273469;
   background-color: #e3f2fe;
@@ -698,7 +698,7 @@ main.acceuilBackoffice section article table thead button:hover {
   border-color: #273469;
   border-width: 2px;
 }
-main.acceuilBackoffice section article table thead button.here {
+main.acceuilBackoffice section:nth-child(1) article table thead button.here {
   cursor: pointer;
   color: #273469;
   background-color: #e3f2fe;
@@ -706,29 +706,52 @@ main.acceuilBackoffice section article table thead button.here {
   border-color: #273469;
   border-width: 2px;
 }
-main.acceuilBackoffice section article table thead button.here:hover {
+main.acceuilBackoffice section:nth-child(1) article table thead button.here:hover {
   cursor: default;
 }
-main.acceuilBackoffice section article table tbody {
+main.acceuilBackoffice section:nth-child(1) article table tbody {
   color: #273469;
   font-family: "open-sans-bold";
 }
-main.acceuilBackoffice section article table tbody figure {
+main.acceuilBackoffice section:nth-child(1) article table tbody figure {
   display: flex;
   padding: 0;
 }
-main.acceuilBackoffice section article table tbody figure img {
+main.acceuilBackoffice section:nth-child(1) article table tbody figure img {
   margin-top: 15px;
   align-self: flex-start;
 }
-main.acceuilBackoffice section article table tbody figure figcaption {
+main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption {
   font-size: 40px;
 }
-main.acceuilBackoffice section article table tbody figure figcaption.neg {
+main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption.neg {
   color: #f14e4e;
 }
-main.acceuilBackoffice section article table tbody figure figcaption.pos {
+main.acceuilBackoffice section:nth-child(1) article table tbody figure figcaption.pos {
   color: #259525;
+}
+main.acceuilBackoffice section:nth-child(2) article table {
+  padding: 1em;
+  border: solid 2px #273469;
+  border-radius: 16px;
+  font-family: "open-sans";
+}
+main.acceuilBackoffice section:nth-child(2) article table tr:nth-child(3) {
+  display: flex;
+  font-family: "open-sans-bold";
+  width: 100%;
+  align-items: center;
+  background-color: yellow;
+}
+main.acceuilBackoffice section:nth-child(2) article table tr:nth-child(3) td:nth-child(2) {
+  font-size: 20px;
+  justify-self: right;
+}
+main.acceuilBackoffice section:nth-child(2) article table tr td.epuise {
+  color: #f14e4e;
+}
+main.acceuilBackoffice section:nth-child(2) article table tr td.faible {
+  color: #ffc25a;
 }
 main.acceuilBackoffice section a {
   align-self: flex-end;

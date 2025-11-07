@@ -15,7 +15,7 @@
 main.acceuilBackoffice {
     display: flex;
     flex-direction: column;
-
+    
     img, button {
         user-select: none;
     }
@@ -28,8 +28,8 @@ main.acceuilBackoffice {
             font-family: 'lora';
             color: $color-blue;
         }
-        
-        article {
+
+        &:nth-child(1) article {
             table {
                 width: 100%;
                 table-layout: fixed;
@@ -85,12 +85,12 @@ main.acceuilBackoffice {
                     figure {
                         display: flex;
                         padding: 0;
-
+                        
                         img {
                             margin-top: 15px;
                             align-self: flex-start;
                         }
-
+                        
                         figcaption {
                             font-size: 40px;
                         }
@@ -104,10 +104,40 @@ main.acceuilBackoffice {
                 }
             }
         }
+
+        &:nth-child(2) article {
+            table {
+                padding: 1em;
+                border: solid 2px $color-blue;
+                border-radius: 16px;
+                font-family: 'open-sans';
+
+                tr {
+                    &:nth-child(3) {
+                        display: flex;
+                        font-family: 'open-sans-bold';
+                        width: 100%;
+                        align-items: center;
+                        background-color: yellow;
+                        td:nth-child(2) {
+                            font-size: 20px;
+                            justify-self: right;
+                        }
+                    }
+
+                    td.epuise {
+                        color: $color-red;
+                    }
+                    td.faible {
+                        color: $color-orange;
+                    }
+                }
+            }
+        }
         
         a {
             align-self: flex-end;
-
+            
             img {
                 height: 25px;
             }
