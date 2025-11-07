@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   
 
       <main>
-        <form id="monForm" action="inscription.php" method="post" enctype="multipart/form-data">
+        <form id="monForm" action="session_start.php" method="post" enctype="multipart/form-data">
 
           <!-- Pseudo -->
           <input type="text" placeholder="Pseudo*" id="pseudo" name="pseudo" required />
@@ -140,11 +140,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             //////////////////////////////////////////
-             //       Reprendre cette fonctiton     //
+            //        Reprendre cette fonctiton     //
             //////////////////////////////////////////
             function validateForm(){
-                let allValid=true;
+                let allValid = true;
+                if(!validatePassword()){
+                    allValid = false;
+                }
+                if(!validateBirthDate()){
+                    allValid = false;
+                }
+                if(!validatePhoneNumber()){
+                    allValid = false;
+                }
+                submitButton.disabled = !allValid;
+                
+                if(allValid){
+                    <?php
+                        session_start();
+                        $_SESSION["newsession"]=$value;
+
+                        print_r( $_SESSION["newsession"] );
+                    ?>
+                }
             }
+
+
             // Valide tous les critères et met à jour le bouton d'inscription.
             function validatePassword() {
                 const password = passwordInput.value;
@@ -169,23 +190,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 if (!passwordsMatch) {
                     allValid = false;
                 }
-
-                // Activation/Désactivation du bouton
                 submitButton.disabled = !allValid;
-                
+
                 return allValid;
             }
 
 
             function validateBirthDate() { 
-                const birthDate = birthDate.value;
+                const birthDate = birthDateInput.value.trim();
                 if (!/^([0][1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/[0-9]{4}$/.test(birthDate)) {
                     return false;
                 }
             }
 
             function validatePhoneNumber() { 
-                const phoneNumber = phoneNumberInput.value;
+                const phoneNumber = phoneNumberInput.value.trim();
                 if (!/^0[67](\s[0-9]{2}){4}$/.test(phoneNumber)) {
                     return false;
                 }
@@ -220,6 +239,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 confirmPasswordInput.classList.remove('input-error');
                 validatePassword(); 
             });
+
+            birthDateInput.addEventListener('focus', () =>{
+                birthDateInput.classList.remove('input-error');
+                validateBirthDate();
+            });
+
+            phoneNumberInput.addEventListener('focus', () =>{
+                phoneNumberInput.classList.remove('input-error');
+                validateBirthDate();
+            });
             
             // Empêcher la soumission si la validation échoue
             document.querySelector('form').addEventListener('submit', function(e) {
@@ -233,7 +262,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             });
 
-            validatePassword(); 
+            validateForm(); 
         </script>
       </main>
 
