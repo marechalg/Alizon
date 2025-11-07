@@ -6,13 +6,26 @@
         margin: 0;
         padding: 0;
     }
-    h1{
-        font-family: 'lora' ;
+
+    main{
+        display: flex;
+        flex-direction: column;
+        position: relative; // Add this
+    }
+
+    h1,h2,h3,h4,p{
+        font-family: $font-lora;
+        color: $color-blue;
+    }
+    .infoPreviewProduit p{
+        color: black;
     }
 
     .infoHautProduit{
         display: flex;
         flex-direction: row;
+        overflow-y: scroll;
+        position: relative; // Add this
     }
 
     .rect{
@@ -26,7 +39,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin: 4em 2em;
+        margin: 3em 2em;
         padding: 0 1em;
         width: 550px;
         height: 434px;
@@ -47,11 +60,26 @@
     .infoPreviewProduit{
         width: 434px;
         height: 434px;
+        margin-top: 3em;
     }
+
     .infoPreviewProduit div{
         display: flex;
         flex-direction: row;
         align-items: baseline;
+        gap : 1em;  
+    }
+
+    .infoPreviewProduit div h1, .infoPreviewProduit div h2, .infoPreviewProduit div h3, .infoPreviewProduit div h4, .infoPreviewProduit div p{
+        margin: 1em 0;
+    }
+
+    .infoPreviewProduit h1, .infoPreviewProduit h2,.infoPreviewProduit h3, .infoPreviewProduit h4, .infoPreviewProduit p{
+        margin: 0 0;
+    }
+
+    #prix h2{
+        margin: 0.6em 0;
     }
 
     #lesCercles{
@@ -59,12 +87,20 @@
         flex-direction: row;
         justify-content: center;
         gap: 1em;
+        margin-top: 1em;
         align-items: center;
     }
 
     .infoPreviewProduit div img{
         width: 50px;
         height: 75px;
+        margin-top: 0.5em;
+    }
+
+    .version p{
+        background-color: $color-pastel-purple;
+        padding: 0.3em 0.7em;
+        border-radius: 8px;
     }
 
     .cercleNoir{
@@ -76,13 +112,30 @@
       background: black;
     }
 
-    #prix{
-        display: flex;
-        flex-direction: row;
-        align-items: baseline;
-        gap: 2em;
+    .actionsProduit {
+        top: 14em;
+        right: 2em;
+        position:fixed;
+        width: 400px;
+        background: white;
+        z-index: 10;
+        height: fit-content;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1); // Optional: adds visual separation
+        border-radius: 8px; // Optional: matches your design
     }
 
+    .actionsProduit h2{
+        margin: 0 0;
+    }
+
+    .ligneActions{
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+    }
+
+    .informations{
+        width: 50%;
+    }
 }
-
-
