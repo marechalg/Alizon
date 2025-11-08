@@ -383,7 +383,7 @@ body {
   font-family: "lora", serif;
   color: #273469;
 }
-.pageProduit .infoPreviewProduit p {
+.pageProduit #descriptionCourte {
   color: black;
 }
 .pageProduit .infoHautProduit {
@@ -402,7 +402,7 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 3em 2em;
+  margin: 1em 2em;
   padding: 0 1em;
   width: 550px;
   height: 434px;
@@ -418,9 +418,9 @@ body {
   height: 61px;
 }
 .pageProduit .infoPreviewProduit {
-  width: 434px;
+  width: 400px;
   height: 434px;
-  margin-top: 3em;
+  margin-top: 1em;
 }
 .pageProduit .infoPreviewProduit div {
   display: flex;
@@ -433,6 +433,12 @@ body {
 }
 .pageProduit .infoPreviewProduit h1, .pageProduit .infoPreviewProduit h2, .pageProduit .infoPreviewProduit h3, .pageProduit .infoPreviewProduit h4, .pageProduit .infoPreviewProduit p {
   margin: 0 0;
+}
+.pageProduit .voirPlus {
+  text-decoration: underline;
+  float: right;
+  margin-top: 1em;
+  color: #273469;
 }
 .pageProduit #prix h2 {
   margin: 0.6em 0;
@@ -450,10 +456,17 @@ body {
   height: 75px;
   margin-top: 0.5em;
 }
+.pageProduit .version {
+  margin-top: 2em;
+}
 .pageProduit .version p {
   background-color: #e4d9ff;
   padding: 0.3em 0.7em;
   border-radius: 8px;
+}
+.pageProduit .voirPlus {
+  color: #273469;
+  text-decoration: underline;
 }
 .pageProduit .cercleNoir {
   width: 10px;
@@ -464,23 +477,77 @@ body {
   background: black;
 }
 .pageProduit .actionsProduit {
-  top: 14em;
-  right: 2em;
+  top: 12em;
+  right: 1em;
   position: fixed;
-  width: 400px;
-  background: white;
+  width: 341px;
   z-index: 10;
   height: fit-content;
   padding: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
 }
 .pageProduit .actionsProduit h2 {
   margin: 0 0;
+  padding: 0 0;
+}
+.pageProduit .underline {
+  text-decoration: underline;
+}
+.pageProduit #plusDarticles {
+  margin: 0 0;
+}
+.pageProduit .actionsProduit h1, .pageProduit h2, .pageProduit h3, .pageProduit h4 {
+  margin: 0 0;
+}
+.pageProduit .actionsProduit p, .pageProduit .ligneActions {
+  margin: 0.5em 0;
 }
 .pageProduit .ligneActions {
   display: flex;
   flex-direction: row;
+  gap: 1em;
+}
+.pageProduit .bouton {
+  width: 300px;
+  height: 60px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 0.5em;
+  border-radius: 32px;
+  border: none;
+  position: relative;
+  left: 5%;
+}
+.pageProduit .actionsProduit button:nth-child(2n+1) {
+  background-color: #e4d9ff;
+  color: #273469;
+}
+.pageProduit .actionsProduit button:nth-child(2n) {
+  background-color: #273469;
+  color: white;
+}
+.pageProduit #moins {
+  width: 16px;
+  height: 2.25px;
+}
+.pageProduit #plus {
+  width: 16px;
+  height: 16px;
+}
+.pageProduit #quantite {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  padding: 0 0;
+  background-color: white;
+  border: 2px inset #273469;
+}
+.pageProduit #quantite div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
 }
 .pageProduit .informations {

@@ -32,7 +32,7 @@
             <h3>40.99€</h3>
         </div>
         <h2>Description de l'article :</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus enim iure ratione voluptates
+        <p id="descriptionCourte">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus enim iure ratione voluptates
             eius doloremque obcaecati dignissimos ea porro exercitationem ex omnis reiciendis neque explicabo,
             libero quidem placeat, accusantium sit.</p>
         <p class="voirPlus">Voir plus sur le produit</p>
@@ -52,7 +52,7 @@
     </article>
     <article class="actionsProduit">
     <h2>Vendu par Loïc Raison</h2>
-    <p>Plus d'article de Loïc Raison</p>
+    <p class="underline" id="plusDarticles">Plus d'article de Loïc Raison</p>
     <hr>
     <div class="ligneActions">
         <img src="../../public/images/livraison-rapide3.svg" alt="">
@@ -67,21 +67,18 @@
         <p>Consulter les conditions générales de vente</p>
     </div>
     <hr>
-    <div>
-        <div>
-            <h3 class="bouton">Quantité</h3>
+        <div class="bouton" id="quantite">
+            <p>Quantité</p>
             <div>
-                <img src="moins.svg" alt="">
-                <h3>1</h3>
-                <img src="plus.svg" alt="">
+                <img src="../../public/images/moins.svg" alt="" id="moins">
+                <p>1</p>
+                <img src="../../public/images/plus.svg" alt="" id="plus">
             </div>  
         </div>
-        <button>Ajouter au panier</button>
-        <button>Acheter maintenant</button>
-    </div>
+        <button class="bouton">Ajouter au panier</button>
+        <button class="bouton">Acheter maintenant</button>
 </article>
 </section>
-
 <hr>
 <section class="informations">
     <h2>Plus d'informations sur l'article</h2>
