@@ -1,5 +1,5 @@
 <?php require_once '../../controllers/pdo.php' ;
-    print_r($pdo->query("select * from _client"))->fetchAll(PDO::FETCH_ASSOC);
+    $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +61,16 @@
 
             <section class="stock">
                 <h1>Stocks Faibles</h1>
+
+                <article>
+                    <?php
+                        foreach ($produits as $produit) {
+                            print_r($produit);
+                            //$image = ($pdo->query("select $ from _imageDeProduit where idProduit = $produit[0]"))-fetchAll(PDO::FETCH_ASSOC);
+                        }
+                    ?>
+                </article>
+                
                 <article>
                     <table>
                         <tr>
