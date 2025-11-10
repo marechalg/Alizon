@@ -175,12 +175,12 @@ $bg-z: 0;
         border: 2px solid #273469;
         border-radius: 8px;
       }
-      div{
-        display:flex;
 
-      }
       #refactor{
-        width: 135px;
+        display:flex;
+        input{
+            width: 135px;
+        } 
       }
 
     }

@@ -669,10 +669,10 @@ header.backoffice nav figure:nth-child(4) img {
     border: 2px solid #273469;
     border-radius: 8px;
   }
-  .inscription form div {
+  .inscription form #refactor {
     display: flex;
   }
-  .inscription form #refactor {
+  .inscription form #refactor input {
     width: 135px;
   }
   .inscription h2 {

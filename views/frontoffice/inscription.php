@@ -1,28 +1,32 @@
 <?php
-$message = "";
-$data = []; 
-$nom_contact = '';
-$prenom_contact = '';
-$email = '';
-$num_tel = '';
-$nom_utilisateur = '';
-$num_siren = '';
-$adresse_entreprise = '';
-$raison_sociale = '';
-$date_naissance = '';
+    if (isset($_COOKIE[session_name()])) {
+        session_start(['read_and_close' => true]);
+    }
+    $message = "";
+    $data = []; 
+    $nom_contact = '';
+    $prenom_contact = '';
+    $email = '';
+    $num_tel = '';
+    $nom_utilisateur = '';
+    $num_siren = '';
+    $adresse_entreprise = '';
+    $raison_sociale = '';
+    $date_naissance = '';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nom_contact        = htmlspecialchars(trim($_POST['nom_contact'] ?? ''));
-    $prenom_contact     = htmlspecialchars(trim($_POST['prenom_contact'] ?? ''));
-    $email              = htmlspecialchars(trim($_POST['email'] ?? ''));
-    $num_tel            = htmlspecialchars(trim($_POST['num_tel'] ?? ''));
-    $nom_utilisateur    = htmlspecialchars(trim($_POST['nom_utilisateur'] ?? ''));
-    $mdp                = $_POST['mdp'] ?? '';
-    $confimer_mdp       = $_POST['confimer_mdp'] ?? '';
-    $date_naissance     = htmlspecialchars(trim($_POST['date_naissance'] ?? ''));
-    
-    $form_is_valid = true;
-}
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $nom_contact        = htmlspecialchars(trim($_POST['nom_contact'] ?? ''));
+        $prenom_contact     = htmlspecialchars(trim($_POST['prenom_contact'] ?? ''));
+        $email              = htmlspecialchars(trim($_POST['email'] ?? ''));
+        $num_tel            = htmlspecialchars(trim($_POST['num_tel'] ?? ''));
+        $nom_utilisateur    = htmlspecialchars(trim($_POST['nom_utilisateur'] ?? ''));
+        $mdp                = $_POST['mdp'] ?? '';
+        $confimer_mdp       = $_POST['confimer_mdp'] ?? '';
+        $date_naissance     = htmlspecialchars(trim($_POST['date_naissance'] ?? ''));
+        
+        $form_is_valid = true;
+    }
+
 ?>
 
 
@@ -39,34 +43,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body class="inscription">
 
-  <?php include '../../views/frontoffice/partials/headerConnecte.php'; ?>
+  <?php include './partials/header.php'; ?>
 
     <h2>Inscription</h2>
   
 
       <main>
-        <form id="monForm" action="../backoffice/partials/session_start.php" method="post" enctype="multipart/form-data">
+        <form id="monForm" action="../backend/session_start.php" method="post" enctype="multipart/form-data">
 
           <!-- Pseudo -->
           <input type="text" placeholder="Pseudo*" id="pseudo" name="pseudo" required />
           <br />
-        <div>
+        <div id="refactor">
           <!-- Nom -->
-          <input id="refactor" type="text" placeholder="Nom*" id="nom" name="nom" required />
+          <input type="text" placeholder="Nom*" id="nom" name="nom" required />
           <br />
 
           <!-- Prénom -->
-          <input id="refactor" type="text" placeholder="Prénom*" id="prenom" name="prenom" required />
+          <input type="text" placeholder="Prénom*" id="prenom" name="prenom" required />
           <br />
         </div>
-        <div>
-          <!-- Date de naissance -->
-          <input id="refactor" type="text" placeholder="Date de naissance*" id="birthdate" name="birthdate" required/>
-          <br />
+        <div id="refactor">
+            <!-- Date de naissance -->
+            <input type="text" placeholder="Date de naissance*" id="birthdate" name="birthdate" required/>
+            <br />
 
-          <!-- Téléphone -->
-          <input id="refactor" type="tel" placeholder="Téléphone*" id="telephone" name="telephone" required/>
-          <br />
+            <!-- Téléphone -->
+            <input type="tel" placeholder="Téléphone*" id="telephone" name="telephone" required/>
+            <br />
         </div>
            <!-- Email -->
           <input type="email" placeholder="Email*" id="email*" name="email" required/>
@@ -93,11 +97,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <!-- Bouton de soumission -->
           <input id="submitButton" type="submit" value="S'inscrire"/>
         </form> 
-
         <script>
             // Eléments du DOM
-            const birthDateInput = document.getElementById('birthdate')
-            const phoneNumberInput = document.getElementById('telephone')
+            const birthDateInput = document.getElementById('birthdate');
+            const phoneNumberInput = document.getElementById('telephone');
             const passwordInput = document.getElementById('mdp');
             const confirmPasswordInput = document.getElementById('cmdp');
             const submitButton = document.getElementById('submitButton');
@@ -119,6 +122,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 number: { element: reqNumber, regex: /[0-9]/, message: 'Un chiffre (0-9)' },
                 special: { element: reqSpecial, regex: /[^a-zA-Z0-9]/, message: 'Un caractère spécial (@, !, #, ...)' }
             };
+
+            passwordInput.addEventListener('blur', () => {
+                // Masquer les critères si le champ est vide
+                if (passwordInput.value.length === 0) {
+                    passwordRequirementsContainer.classList.add('hidden');
+                }
+                toggleErrorStyle(passwordInput);
+            });
+            
+            confirmPasswordInput.addEventListener('blur', () => {
+                // Gérer l'état vide/erreur du champ Confirmer MDP
+                toggleErrorStyle(confirmPasswordInput);
+            });
+
+
+            passwordInput.addEventListener('focus', () => {
+                passwordRequirementsContainer.classList.remove('hidden');
+                passwordInput.classList.remove('input-error'); // Enlève l'erreur quand l'utilisateur revient
+                validatePassword(); 
+            });
+
+            passwordInput.addEventListener('input', () => {
+                passwordInput.classList.remove('input-error');
+                validatePassword(); 
+            });
+            
+            confirmPasswordInput.addEventListener('input', () => {
+                confirmPasswordInput.classList.remove('input-error');
+                validatePassword(); 
+            });
+
+            birthDateInput.addEventListener('focus', () =>{
+                birthDateInput.classList.remove('input-error');
+                validateBirthDate();
+            });
+
+            phoneNumberInput.addEventListener('focus', () =>{
+                phoneNumberInput.classList.remove('input-error');
+                validatePhoneNumber();
+            });
+
+            birthDateInput.addEventListener('input', () => {
+                birthDateInput.classList.remove('input-error');
+            });
+
+            phoneNumberInput.addEventListener('input', () => {
+                phoneNumberInput.classList.remove('input-error');
+            });
 
             //////////////////////////////////////////////////////////////////
             //                                                              //
@@ -223,56 +274,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 return isValid;
             }
 
-            
-
-            passwordInput.addEventListener('blur', () => {
-                // Masquer les critères si le champ est vide
-                if (passwordInput.value.length === 0) {
-                    passwordRequirementsContainer.classList.add('hidden');
-                }
-                toggleErrorStyle(passwordInput);
-            });
-            
-            confirmPasswordInput.addEventListener('blur', () => {
-                // Gérer l'état vide/erreur du champ Confirmer MDP
-                toggleErrorStyle(confirmPasswordInput);
-            });
-
-
-            passwordInput.addEventListener('focus', () => {
-                passwordRequirementsContainer.classList.remove('hidden');
-                passwordInput.classList.remove('input-error'); // Enlève l'erreur quand l'utilisateur revient
-                validatePassword(); 
-            });
-
-            passwordInput.addEventListener('input', () => {
-                passwordInput.classList.remove('input-error');
-                validatePassword(); 
-            });
-            
-            confirmPasswordInput.addEventListener('input', () => {
-                confirmPasswordInput.classList.remove('input-error');
-                validatePassword(); 
-            });
-
-            birthDateInput.addEventListener('focus', () =>{
-                birthDateInput.classList.remove('input-error');
-                validateBirthDate();
-            });
-
-            phoneNumberInput.addEventListener('focus', () =>{
-                phoneNumberInput.classList.remove('input-error');
-                validateBirthDate();
-            });
-
-            birthDateInput.addEventListener('input', () => {
-                birthDateInput.classList.remove('input-error');
-            });
-
-            phoneNumberInput.addEventListener('input', () => {
-                phoneNumberInput.classList.remove('input-error');
-            });
-
             //////////////////////////////////////////////////////////////////
             //                                                              //
             //    Bloquage de la validation du formulaire si les champs     //
@@ -316,8 +317,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </script>
       </main>
 
-
-  <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
 
 </body>
 </html>
