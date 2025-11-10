@@ -64,8 +64,8 @@
 
                 <article>
                     <?php
-                        foreach ($produits as $produit) {
-                            print_r($produit);
+                        foreach ($produits as $produit => $atr) {
+                            print_r($produit['atr']);
                             //$image = ($pdo->query("select $ from _imageDeProduit where idProduit = $produit[0]"))-fetchAll(PDO::FETCH_ASSOC);
                         }
                     ?>
