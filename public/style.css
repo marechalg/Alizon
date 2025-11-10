@@ -402,10 +402,10 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1em 2em;
+  margin: 3em 2em;
   padding: 0 1em;
   width: 550px;
-  height: 434px;
+  height: 450px;
   border: 1.5px inset #273469;
   border-radius: 16px;
 }
@@ -420,7 +420,7 @@ body {
 .pageProduit .infoPreviewProduit {
   width: 400px;
   height: 434px;
-  margin-top: 1em;
+  margin-top: 3.5em;
 }
 .pageProduit .infoPreviewProduit div {
   display: flex;
@@ -428,7 +428,7 @@ body {
   align-items: baseline;
   gap: 1em;
 }
-.pageProduit .infoPreviewProduit div h1, .pageProduit .infoPreviewProduit div h2, .pageProduit .infoPreviewProduit div h3, .pageProduit .infoPreviewProduit div h4, .pageProduit .infoPreviewProduit div p {
+.pageProduit .infoPreviewProduit div h1, .pageProduit .infoPreviewProduit div h2, .pageProduit .infoPreviewProduit div h4 {
   margin: 1em 0;
 }
 .pageProduit .infoPreviewProduit h1, .pageProduit .infoPreviewProduit h2, .pageProduit .infoPreviewProduit h3, .pageProduit .infoPreviewProduit h4, .pageProduit .infoPreviewProduit p {
@@ -437,11 +437,14 @@ body {
 .pageProduit .voirPlus {
   text-decoration: underline;
   float: right;
-  margin-top: 1em;
   color: #273469;
 }
-.pageProduit #prix h2 {
-  margin: 0.6em 0;
+.pageProduit #prix h1, .pageProduit #prix h3 {
+  margin: 0.2em 0;
+  font-weight: 300;
+}
+.pageProduit #prix {
+  gap: 0.5em;
 }
 .pageProduit #lesCercles {
   display: flex;
@@ -457,12 +460,17 @@ body {
   margin-top: 0.5em;
 }
 .pageProduit .version {
-  margin-top: 2em;
+  margin-top: 1.6em;
+  padding: 0 0;
 }
 .pageProduit .version p {
   background-color: #e4d9ff;
   padding: 0.3em 0.7em;
   border-radius: 8px;
+  margin: 0 0;
+}
+.pageProduit .version h3, .pageProduit .version p {
+  margin: 0.2em 0;
 }
 .pageProduit .voirPlus {
   color: #273469;
@@ -477,7 +485,7 @@ body {
   background: black;
 }
 .pageProduit .actionsProduit {
-  top: 12em;
+  top: 15em;
   right: 1em;
   position: fixed;
   width: 341px;
@@ -500,11 +508,18 @@ body {
 }
 .pageProduit .actionsProduit p, .pageProduit .ligneActions {
   margin: 0.5em 0;
+  color: black;
 }
 .pageProduit .ligneActions {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
+}
+.pageProduit .ligneActions img {
+  width: 40px;
+  height: 40px;
 }
 .pageProduit .bouton {
   width: 300px;
@@ -550,8 +565,46 @@ body {
   align-items: center;
   gap: 1em;
 }
-.pageProduit .informations {
+.pageProduit .conteneurTexte {
   width: 50%;
+  max-height: 600px;
+  margin-left: 2.5em;
+  color: #273469;
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+.pageProduit .conteneurTexte h2 {
+  margin-bottom: 1em;
+}
+.pageProduit #activeVoirPlus:checked ~ .conteneurTexte {
+  max-height: 1000px;
+  mask-image: none;
+}
+.pageProduit .voirPlus::after {
+  content: "Voir plus";
+}
+.pageProduit #activeVoirPlus:checked ~ .voirPlus::after {
+  content: "Voir moins";
+}
+.pageProduit #activeVoirPlus {
+  display: none;
+}
+.pageProduit .informations label {
+  display: inline-block;
+  position: relative;
+  right: 60%;
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+}
+.pageProduit .informations ul, .pageProduit .informations h3, .pageProduit .informations h4, .pageProduit .informations p {
+  font-size: 18px;
+}
+.pageProduit .informations ul li p {
+  margin: 0 0;
+  padding: 0 0;
+}
+.pageProduit .informations h4 {
+  font-weight: 300;
 }
 
 /* ---- Header ---- */

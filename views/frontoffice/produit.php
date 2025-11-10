@@ -26,9 +26,9 @@
         <img src="../../public/images/flecheDroite.svg" alt="">
     </article>
     <article class="infoPreviewProduit">
-        <h1>Cidre coco d'issé</h1>
+        <h1>Cidre coco d'issé swdxqs wdcqswx df dfdf</h1>
         <div id="prix">
-            <h2>29.99€</h2>
+            <h1>29.99€</h1>
             <h3>40.99€</h3>
         </div>
         <h2>Description de l'article :</h2>
@@ -52,21 +52,23 @@
     </article>
     <article class="actionsProduit">
     <h2>Vendu par Loïc Raison</h2>
-    <p class="underline" id="plusDarticles">Plus d'article de Loïc Raison</p>
+    <p class="underline" id="plusDarticles"><a href="">Plus d'article de Loïc Raison</a></p>
+    <br>
     <hr>
     <div class="ligneActions">
-        <img src="../../public/images/livraison-rapide3.svg" alt="">
-        <p>Livraison GRATUITE - Expédié par mondial relais. Arrivée entre le mar. 21 septembre - ven. 24 septembre</p>
+        <img src="../../public/images/camion.png" alt="">
+        <p>Livraison <b>GRATUITE</b> - Expédié par <b>mondial relais</b>. Arrivée entre le <b>mar. 21 septembre - ven. 24 septembre</b></p>
     </div>
     <div class="ligneActions">
-        <img src="../../public/images/emplacement1.svg" alt="">
-        <p>Livré a Clermont-ferrand 63000, 10 place saint-michel</p>   
+        <img src="../../public/images/emplacement.png" alt="">
+        <p>Livré a <u><b>Clermont-ferrand 63000</b>, 10 place saint-michel</u></p>   
     </div>
     <div class="ligneActions">
-        <img src="../../public/images/termes-et-conditions1.svg" alt="">
-        <p>Consulter les conditions générales de vente</p>
+        <img src="../../public/images/tec.png" alt="">
+        <p>Consulter les <b><u>conditions générales de vente</u></b></p>
     </div>
     <hr>
+    <br>
         <div class="bouton" id="quantite">
             <p>Quantité</p>
             <div>
@@ -81,56 +83,69 @@
 </section>
 <hr>
 <section class="informations">
-    <h2>Plus d'informations sur l'article</h2>
-    <article>
-        <h3>📌 Titre du produit</h3>
-        <p>Cidre brut artisanal – 75 cl – Fermentation naturelle</p>
-    </article>
-    <article>
-        <h3>📝 Description courte</h3>
-        <p>Cidre brut traditionnel, issu de pommes récoltées en Bretagne, fermenté naturellement, goût fruité et légèrement acidulé.</p>
-    </article>
-    <article>
-        <h3>📂 Rubriques de la fiche produit</h3>
-        <div>
-            <h4>Caractéristiques principales :</h4>
-            <ul>
-                <li>Type : Cidre brut</li>
-                <li>Contenance : 75 cl</li>
-                <li>Alcool : 5 % vol.</li>
-                <li>Origine : Bretagne, France</li>
-                <li>Fabrication : fermentation naturelle, sans additif chimique</li>
-            </ul>
-        </div>
-        <div>
-            <h4>Notes de dégustation :</h4>    
-            <ul>
-                <li>Robe dorée et pétillante</li>
-                <li>Arômes fruités de pomme fraîche</li>
-                <li>Légère acidité équilibrée par une pointe de douceur</li>
-                <li>Fines bulles, rafraîchissant en bouche</li>
-            </ul>  
-        </div>
-        <div>
-            <h4>Accords mets & boissons :</h4>
-            <ul>
-                <li>Type : Cidre brut</li>
-                <li>Contenance : 75 cl</li>
-                <li>Alcool : 5 % vol.</li>
-                <li>Origine : Bretagne, France</li>
-                <li>Fabrication : fermentation naturelle, sans additif chimique</li>
-            </ul> 
-        </div>
-        <div>
-            <h4>Informations logistiques :</h4> 
-            <ul>
-                <li>Idéal avec crêpes, galettes de sarrasin, fromages affinés</li>
-                <li>Se consomme frais, entre 8 et 10 °C</li>
-            </ul> 
-        </div>
-    </article>
+    <input type="checkbox" id="activeVoirPlus">
+    <div class="conteneurTexte">
+        <h2>Plus d'informations sur l'article</h2>
+        <article>
+            <h3>📌 Titre du produit</h3>
+            <p>Cidre brut artisanal – 75 cl – Fermentation naturelle</p>
+        </article>
+        <article>
+            <h3>📝 Description courte</h3>
+            <p>Cidre brut traditionnel, issu de pommes récoltées en Bretagne, fermenté naturellement, goût fruité et légèrement acidulé.</p>
+        </article>
+        <article>
+            <h3>📂 Rubriques de la fiche produit</h3>
+            <div>
+                <h4>Caractéristiques principales :</h4>
+                <ul>
+                    <li><p>Type : Cidre brut</p></li>
+                    <li><p>Contenance : 75 cl</p></li>
+                    <li><p>Alcool : 5 % vol.</p></li>
+                    <li><p>Origine : Bretagne, France</p></li>
+                    <li><p>Fabrication : fermentation naturelle, sans additif chimique</p></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Notes de dégustation :</h4>    
+                <ul>
+                    <li>Robe dorée et pétillante</li>
+                    <li>Arômes fruités de pomme fraîche</li>
+                    <li>Légère acidité équilibrée par une pointe de douceur</li>
+                    <li>Fines bulles, rafraîchissant en bouche</li>
+                </ul>  
+            </div>
+            <div>
+                <h4>Notes de dégustation :</h4>    
+                <ul>
+                    <li>Robe dorée et pétillante</li>
+                    <li>Arômes fruités de pomme fraîche</li>
+                    <li>Légère acidité équilibrée par une pointe de douceur</li>
+                    <li>Fines bulles, rafraîchissant en bouche</li>
+                </ul>  
+            </div>
+            <div>
+                <h4>Notes de dégustation :</h4>    
+                <ul>
+                    <li>Robe dorée et pétillante</li>
+                    <li>Arômes fruités de pomme fraîche</li>
+                    <li>Légère acidité équilibrée par une pointe de douceur</li>
+                    <li>Fines bulles, rafraîchissant en bouche</li>
+                </ul>  
+            </div>
+            <div>
+                <h4>Notes de dégustation :</h4>    
+                <ul>
+                    <li>Robe dorée et pétillante</li>
+                    <li>Arômes fruités de pomme fraîche</li>
+                    <li>Légère acidité équilibrée par une pointe de douceur</li>
+                    <li>Fines bulles, rafraîchissant en bouche</li>
+                </ul>  
+            </div>
+        </article>
+    </div> 
+    <label for="activeVoirPlus" class="voirPlus"> </label> 
 </section>
-<h3 class="VoirPlus" >Voir plus sur le produit</h3>
 <hr>
 </main>
 <footer>
