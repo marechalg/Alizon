@@ -55,38 +55,72 @@ main.acceuilBackoffice {
         
         &.stock article {
             display: grid;
-            grid-template-rows: repeat(2, auto);
-            grid-template-columns: repeat(3, auto);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2em;
             
             table {
                 padding: 1em;
                 border: solid 2px $color-blue;
                 border-radius: 16px;
-                justify-content: center;
                 font-family: 'open-sans';
                 font-size: 20px;
                 
                 tr:nth-child(3) {
                     font: {
                         family: 'open-sans-bold';
-                        size: 25px;
                     }
                     display: flex;
                     align-items: center;
                     width: 100%;
                     
                     td:nth-child(2) {
-                        font-size: 40px;
                         margin-left: auto;
+                        font-size: 30px;
                         
                         &.epuise {
                             color: $color-red;
                         }
                         &.faible {
-                            color: $color-green;
+                            color: $color-orange;
                         }
                     }
+                }
+            }
+        }
+
+        &.commandes article {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2em;
+
+            table {
+                padding: 1em;
+                border: {
+                    style: solid;
+                    width: 2px;
+                    radius: 16px;
+                    color: $color-blue;
+                }
+
+                img {
+                    height: 100px;
+                    width: 100px;
+                    object-fit: cover;
+                }
+
+                th {
+                    font-size: 20px;
+                }
+
+                tr:first-child th {
+                    text-align: left;
+                    line-height: 0.25em;
+                }
+                tr:nth-child(2) td {
+                    vertical-align: top;
+                }
+                tr:last-child th {
+                    text-align: right;
                 }
             }
         }
@@ -201,6 +235,31 @@ main.acceuilBackoffice {
                     white-space: nowrap;
                     box-sizing: border-box;
                     min-width: fit-content;
+                }
+            }
+        }
+
+        &.produits article {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2em;
+            font-size: 20px;
+
+            table {
+                padding: 1em;
+                border: {
+                    style: solid;
+                    width: 2px;
+                    color: $color-blue;
+                    radius: 16px;
+                }
+
+                th {
+                    text-align: left;
+                }
+
+                tr:last-child td {
+                    text-align: right;
                 }
             }
         }

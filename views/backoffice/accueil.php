@@ -134,8 +134,115 @@
                 <a href="./stock.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
 
-            <section>
+            <section class="commandes">
                 <h1>Dernières Commandes</h1>
+                <article>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>1
+                                4/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
+                            <th>Rillettes</th>
+                        </tr>
+                        <tr>
+                            <td>29,99€</td>
+                        </tr>
+                        <tr>
+                            <td>14/11/2025</td>
+                            <th>3</th>
+                        </tr>
+                    </table>
+                </article>
                 <a href="./commandes.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
 
@@ -205,8 +312,64 @@
                 <a href="./avis.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
 
-            <section>
+            <section class="produits">
                 <h1>Produits en Vente</h1>
+                <article>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
+                        </tr>
+                        <tr>
+                            <th>Rillettes</th>
+                            <td>29,99€</td>
+                        </tr>
+                    </table>
+                </article>
                 <a href="./produits.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
         </main>
