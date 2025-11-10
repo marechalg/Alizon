@@ -50,27 +50,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <!-- Pseudo -->
           <input type="text" placeholder="Pseudo*" id="pseudo" name="pseudo" required />
           <br />
-
+        <div>
           <!-- Nom -->
-          <input type="text" placeholder="Nom*" id="nom" name="nom" required />
+          <input id="refactor" type="text" placeholder="Nom*" id="nom" name="nom" required />
           <br />
 
           <!-- Prénom -->
-          <input type="text" placeholder="Prénom*" id="prenom" name="prenom" required />
+          <input id="refactor" type="text" placeholder="Prénom*" id="prenom" name="prenom" required />
           <br />
-
+        </div>
+        <div>
           <!-- Date de naissance -->
-          <input type="text" placeholder="Date de naissance :" id="birthdate" name="birthdate" required/>
-          <br />
-          
-          <!-- Email -->
-          <input type="email" placeholder="Email*" id="email" name="email" required/>
+          <input id="refactor" type="text" placeholder="Date de naissance*" id="birthdate" name="birthdate" required/>
           <br />
 
           <!-- Téléphone -->
-          <input type="tel" placeholder="Numéro de téléphone" id="telephone" name="telephone" />
+          <input id="refactor" type="tel" placeholder="Téléphone*" id="telephone" name="telephone" required/>
           <br />
-
+        </div>
+           <!-- Email -->
+          <input type="email" placeholder="Email*" id="email*" name="email" required/>
+          <br />
           <!-- Mot de passe -->
           <input type="password" placeholder="Mot de passe*" id="mdp" name="motdepasse" required />
           <br />
