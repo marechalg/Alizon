@@ -49,26 +49,32 @@
     article div{
         display: flex;
         flex-direction: row;
-        gap: 30px;
+        gap: 29px;
     }
 
     article div p, article div input{
-        width: 210px;
+        width: 185px;
     }
 
     article p, input {
-        width: 450px;
-        height: 48px;
+        margin-top: 0;
+        display: flex;
+        align-items: center;
+        width: 420px;
+        height: 45px;
         padding: 10px;
         margin-bottom: 45px;
         color: #6E6E6E;
-        font-size: 16px;
         border: 2px solid $color-blue;
         border-radius: 8px ;
+        font-size: 16px;
+        font-family: 'lora';
+        font-weight: bold;
+        font-style: italic;
     }
 
     #buttonsCompte{
-        padding-top: 30px;
+        padding-top: 32px;
         padding-right: 20px;
         display: flex;
         flex-direction: row;
@@ -83,15 +89,29 @@
         padding: 10px;
         border: none;
         border-radius: 32px ;
+        font-family: 'lora';
+        cursor: pointer;
     }
 
     .boutonModifierMdp{
         width: 250px;
-        height: auto;
+        height: 55px;
     }
 
     .boutonModiferProfil{
         width: 200px;
-        height: auto;
+        height: 55px;
     }
+
+    
 }
+
+.overlayPopUpCompteClient{
+        position: fixed;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        z-index: 1000;
+    }
