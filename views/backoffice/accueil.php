@@ -1,3 +1,7 @@
+<?php require_once '../../contollers/pdo.php' ;
+    print_r($pdo->query("select * from _client"))->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
