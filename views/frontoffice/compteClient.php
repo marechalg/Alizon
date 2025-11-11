@@ -94,25 +94,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <section>
                 <article>
-                    <p><?php echo htmlspecialchars($pseudo); ?></p>
-                    <p><?php echo htmlspecialchars($prenom); ?></p>
-                    <p><?php echo htmlspecialchars($nom); ?></p>
-                    <p><?php echo htmlspecialchars($dateNaissance); ?></p>
+                    <p><?php echo htmlspecialchars($pseudo ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($prenom ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($nom ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($adresse1); ?></p>
+                    <p><?php echo htmlspecialchars($adresse1 ?? ''); ?></p>
                     <p><?php echo htmlspecialchars(" "); ?></p>
                     <div>
-                        <p><?php echo htmlspecialchars($codePostal); ?></p>
-                        <p><?php echo htmlspecialchars($ville); ?></p>
+                        <p><?php echo htmlspecialchars($codePostal ?? ''); ?></p>
+                        <p><?php echo htmlspecialchars($ville ?? ''); ?></p>
                     </div>
-                    <p><?php echo htmlspecialchars($pays); ?></p>
+                    <p><?php echo htmlspecialchars($pays ?? ''); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($noTelephone); ?></p>
-                    <p><?php echo htmlspecialchars($email); ?></p>
+                    <p><?php echo htmlspecialchars($noTelephone ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($email ?? ''); ?></p>
                 </article> 
             </section>
 
