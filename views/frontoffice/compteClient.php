@@ -4,6 +4,7 @@ require_once '../../controllers/pdo.php' ;
 session_start();
 
 $id_client = 1; //$_SESSION['id_client'];
+$idAdresse = 1; //$_SESSION['id_adresse'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $noTelephone = $client['telephone'];
 
     //on recupère les infos d'adresse du user pour les afficher
-    $stmt = $pdo->query("SELECT * FROM _adresse WHERE idClient = '$id_client'");
+    $stmt = $pdo->query("SELECT * FROM _adresse WHERE idAdresse = '$idAdresse'");
     $adresse = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $pays = $adresse['pays'];
