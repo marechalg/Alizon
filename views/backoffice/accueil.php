@@ -76,17 +76,22 @@ $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
             <tr>
                 <td>" . $atr['nom'] . "</td>
             </tr>
-            <tr>
-                <td>" . $atr['prix'] . "</td>";
+            <tr>";
+                $prix = "" . $atr['prix']; 
+                if (split(',', $prix)[1]) {
+                    if (strlen(split(',', $prix)[1]) == 1) {
+                        $prix .= "0";
+                    }
+                }
+                $html .= "<td>" . $prix . "</td>";
                 $stock = $atr['stock'];
-                $seuil;
+                $seuil = "";
                 if ($stock == 0) {
                     $seuil = "epuise";
                 } else if ($stock <= $atr['seuilAlerte']) {
                     $seuill = "faible";
                 }
-                $html .= "
-                <td class=\"$seuil\">$stock</td>
+                $html .= "<td class=\"$seuil\">$stock</td>
             </tr>
         </table>
         ";
