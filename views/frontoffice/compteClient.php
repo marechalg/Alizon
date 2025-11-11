@@ -1,51 +1,68 @@
 <?php
-
-
+require_once '../../controllers/pdo.php' ;
+    
 session_start();
 
-if (!isset($_SESSION['user_data'])) {
-    $_SESSION['user_data'] = [
-        'pseudo' => 'nlehebel',
-        'prenom' => 'Nathan',
-        'nom' => 'Lehebel',
-        'dateNaissance' => '2006-09-22', 
-        'adresse1' => '12 Rue des Fleurs',
-        'adresse2' => 'Bâtiment B, Appartement 34',
-        'codePostal' => '75015',
-        'ville' => 'Paris',
-        'pays' => 'France',
-        'telephone' => '0612345678',
-        'email' => 'nathann.lehebel@gmail.com'
-    ];
-}
+$id_client = 1; //$_SESSION['id_client'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     //update la BDD avec les nouvelles infos du user
+    $pseudo = $_POST['pseudo'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $email = $_POST['email'];
+    $telephone = $_POST['telephone'];
+    $codePostal = $_POST['codePostal'];
+    $adresse1 = $_POST['adresse1'];
+    $pays = $_POST['pays'];
+    $ville = $_POST['ville'];
+    $region = $_POST['region'];
 
+    $stmt = $pdo->query(
+    "UPDATE _client 
+    SET pseudo = $pseudo, 
+    nom = $nom, 
+    prenom = $prenom, 
+    email =  $email, 
+    noTelephone = $telephone, 
+    WHERE id_client = $id_client;");
 
+    $stmt = $pdo->query(
+    "UPDATE _adresse 
+    SET adresse = $_POST[adresse1],
+    pays = $_POST[pays],
+    ville = $_POST[ville], 
+    code_postal = $_POST[codePostal],
+    region = $_POST[region]
+    WHERE id_client = $id_client;");
 
-    $_SESSION['user_data'] = [
-        'pseudo' => $_POST['pseudo'] ?? '',
-        'prenom' => $_POST['prenom'] ?? '',
-        'nom' => $_POST['nom'] ?? '',
-        'dateNaissance' => $_POST['dateNaissance'] ?? '',
-        'adresse1' => $_POST['adresse1'] ?? '',
-        'adresse2' => $_POST['adresse2'] ?? '',
-        'codePostal' => $_POST['codePostal'] ?? '',
-        'ville' => $_POST['ville'] ?? '',
-        'pays' => $_POST['pays'] ?? '',
-        'telephone' => $_POST['telephone'] ?? '',
-        'email' => $_POST['email'] ?? ''
-    ];
-    
+    //on recupère les infos du user pour les afficher
+    $stmt = $pdo->query("SELECT * FROM _client WHERE id_client = $id_client");
+    $client = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $pseudo = $client['pseudo'];
+    $prenom = $client['prenom'];
+    $nom = $client['nom'];
+    $dateNaissance = $client['dateNaissance'];
+    $email = $client['email'];
+    $noTelephone = $client['telephone'];
+
+    //on recupère les infos d'adresse du user pour les afficher
+    $stmt = $pdo->query("SELECT * FROM _adresse WHERE id_client = $id_client");
+    $adresse = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $pays = $adresse['pays'];
+    $ville = $adresse['ville'];
+    $codePostal = $adresse['code_postal'];
+    $adresse1 = $adresse['adresse'];
+
+    //verification et upload de la nouvelle photo de profil
     if (isset($_FILES['photoProfil']) && $_FILES['photoProfil']['tmp_name'] != '') {
-        $id = 1;
-        move_uploaded_file($_FILES['photoProfil']['tmp_name'], '../../public/images/photoDeProfil/photo_profil'.$id.'.png');
+        move_uploaded_file($_FILES['photoProfil']['tmp_name'], '../../public/images/photoDeProfil/photo_profil'.$id_client.'.png');
     }
 }
 
-$userData = $_SESSION['user_data'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,25 +94,25 @@ $userData = $_SESSION['user_data'];
 
             <section>
                 <article>
-                    <p><?php echo htmlspecialchars($userData['pseudo']); ?></p>
-                    <p><?php echo htmlspecialchars($userData['nom']); ?></p>
-                    <p><?php echo htmlspecialchars($userData['prenom']); ?></p>
-                    <p><?php echo htmlspecialchars($userData['dateNaissance']); ?></p>
+                    <p><?php echo htmlspecialchars($pseudo); ?></p>
+                    <p><?php echo htmlspecialchars($prenom); ?></p>
+                    <p><?php echo htmlspecialchars($nom); ?></p>
+                    <p><?php echo htmlspecialchars($dateNaissance); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($userData['adresse1']); ?></p>
-                    <p><?php echo htmlspecialchars($userData['adresse2']); ?></p>
+                    <p><?php echo htmlspecialchars($adresse1); ?></p>
+                    <p><?php echo htmlspecialchars(" "); ?></p>
                     <div>
-                        <p><?php echo htmlspecialchars($userData['codePostal']); ?></p>
-                        <p><?php echo htmlspecialchars($userData['ville']); ?></p>
+                        <p><?php echo htmlspecialchars($codePostal); ?></p>
+                        <p><?php echo htmlspecialchars($ville); ?></p>
                     </div>
-                    <p><?php echo htmlspecialchars($userData['pays']); ?></p>
+                    <p><?php echo htmlspecialchars($pays); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($userData['telephone']); ?></p>
-                    <p><?php echo htmlspecialchars($userData['email']); ?></p>
+                    <p><?php echo htmlspecialchars($noTelephone); ?></p>
+                    <p><?php echo htmlspecialchars($email); ?></p>
                 </article> 
             </section>
 
@@ -160,7 +177,6 @@ $userData = $_SESSION['user_data'];
                     </section>
                 </main>`;
             document.body.appendChild(overlay);
-
         }
 
         function verifierChamp() {
@@ -171,11 +187,13 @@ $userData = $_SESSION['user_data'];
             for (let i = 0; i < champs.length; i++) {
                 let valeur = champs[i].value.trim();
                 
+                // Le champ adresse2 est optionnel
                 if (i !== 5 && valeur === "") {
                     tousRemplis = false;
                     break;
                 }
 
+                // Validation spécifique pour le numéro de téléphone
                 if (i === 9) { 
                     if (!/^0[67](\s[0-9]{2}){4}$/.test(valeur)) {
                         tousRemplis = false;
@@ -183,6 +201,7 @@ $userData = $_SESSION['user_data'];
                     }
                 }
 
+                // Validation spécifique pour l'email
                 if (i === 10) {
                     if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/.test(valeur)) {
                         tousRemplis = false;
@@ -195,6 +214,8 @@ $userData = $_SESSION['user_data'];
         }
 
         let enModif = false;
+
+        // Création de l'input pour la photo de profil
         let ajoutPhoto = document.createElement("input");
         ajoutPhoto.type = "file";
         ajoutPhoto.id = "photoProfil";
@@ -209,9 +230,12 @@ $userData = $_SESSION['user_data'];
         let bnModifMdp = document.getElementsByClassName("boutonModifierMdp");
 
         function modifierProfil(event) {
+
+            // Empêche le comportement par défaut du bouton
             event.preventDefault();
 
             if (!enModif) {
+                // Remplacer les <p> par des <input> pour modification
                 let elems = document.querySelectorAll("section p");
                 const nomsChamps = [
                     "pseudo", "nom", "prenom", "dateNaissance",
@@ -227,6 +251,7 @@ $userData = $_SESSION['user_data'];
                     input.id = nomsChamps[i];
                     input.autocomplete = nomsChamps[i];
 
+                    // Définir le type d'input approprié
                     if (i === 9) input.type = "tel";
                     else if (i === 10) input.type = "email";
                     else if (i === 3) input.type = "date";
@@ -235,6 +260,7 @@ $userData = $_SESSION['user_data'];
                     elems[i].parentNode.replaceChild(input, elems[i]);
                 }
 
+                // Modifier le bouton "Modifier" en "Enregistrer"
                 bnModifier[0].innerHTML = "Enregistrer";
                 bnModifier[0].style.backgroundColor = "#64a377";
                 bnModifier[0].style.color = "#FFFEFA";
@@ -248,7 +274,10 @@ $userData = $_SESSION['user_data'];
                 document.querySelector("section").addEventListener("input", verifierChamp);
                 verifierChamp();
 
-            } else {
+            } 
+            
+            else {
+                // Soumettre le formulaire pour enregistrer les modifications
                 document.querySelector("form").submit();
             }
         }
