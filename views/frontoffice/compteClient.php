@@ -4,6 +4,7 @@ require_once '../../controllers/pdo.php' ;
 session_start();
 
 $id_client = 1; //$_SESSION['id_client'];
+$idAdresse = 1; //$_SESSION['id_adresse'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -17,28 +18,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adresse1 = $_POST['adresse1'];
     $pays = $_POST['pays'];
     $ville = $_POST['ville'];
-    $region = $_POST['region'];
+    $region = $_POST['region'] ?? '';
 
     $stmt = $pdo->query(
     "UPDATE _client 
-    SET pseudo = $pseudo, 
-    nom = $nom, 
-    prenom = $prenom, 
-    email =  $email, 
-    noTelephone = $telephone, 
-    WHERE id_client = $id_client;");
+    SET pseudo = '$pseudo', 
+    nom = '$nom', 
+    prenom = '$prenom', 
+    email =  '$email', 
+    noTelephone = '$telephone'
+    WHERE idClient = '$id_client';");
 
     $stmt = $pdo->query(
     "UPDATE _adresse 
-    SET adresse = $_POST[adresse1],
-    pays = $_POST[pays],
-    ville = $_POST[ville], 
-    code_postal = $_POST[codePostal],
-    region = $_POST[region]
-    WHERE id_client = $id_client;");
+    SET adresse = '$adresse1',
+    pays = '$pays',
+    ville = '$ville', 
+    codePostal = '$codePostal',
+    region = '$region'
+    WHERE idAdresse = '$idAdresse';");
 
     //on recupère les infos du user pour les afficher
-    $stmt = $pdo->query("SELECT * FROM _client WHERE id_client = $id_client");
+    $stmt = $pdo->query("SELECT * FROM _client WHERE idClient = '$id_client'");
     $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $pseudo = $client['pseudo'];
@@ -46,15 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $client['nom'];
     $dateNaissance = $client['dateNaissance'];
     $email = $client['email'];
-    $noTelephone = $client['telephone'];
+    $noTelephone = $client['noTelephone'];
 
     //on recupère les infos d'adresse du user pour les afficher
-    $stmt = $pdo->query("SELECT * FROM _adresse WHERE id_client = $id_client");
+    $stmt = $pdo->query("SELECT * FROM _adresse WHERE idAdresse = '$idAdresse'");
     $adresse = $stmt->fetch(PDO::FETCH_ASSOC);
 
     $pays = $adresse['pays'];
     $ville = $adresse['ville'];
-    $codePostal = $adresse['code_postal'];
+    $codePostal = $adresse['codePostal'];
     $adresse1 = $adresse['adresse'];
 
     //verification et upload de la nouvelle photo de profil
@@ -94,25 +95,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <section>
                 <article>
-                    <p><?php echo htmlspecialchars($pseudo); ?></p>
-                    <p><?php echo htmlspecialchars($prenom); ?></p>
-                    <p><?php echo htmlspecialchars($nom); ?></p>
-                    <p><?php echo htmlspecialchars($dateNaissance); ?></p>
+                    <p><?php echo htmlspecialchars($pseudo ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($prenom ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($nom ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($adresse1); ?></p>
+                    <p><?php echo htmlspecialchars($adresse1 ?? ''); ?></p>
                     <p><?php echo htmlspecialchars(" "); ?></p>
                     <div>
-                        <p><?php echo htmlspecialchars($codePostal); ?></p>
-                        <p><?php echo htmlspecialchars($ville); ?></p>
+                        <p><?php echo htmlspecialchars($codePostal ?? ''); ?></p>
+                        <p><?php echo htmlspecialchars($ville ?? ''); ?></p>
                     </div>
-                    <p><?php echo htmlspecialchars($pays); ?></p>
+                    <p><?php echo htmlspecialchars($pays ?? ''); ?></p>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($noTelephone); ?></p>
-                    <p><?php echo htmlspecialchars($email); ?></p>
+                    <p><?php echo htmlspecialchars($noTelephone ?? ''); ?></p>
+                    <p><?php echo htmlspecialchars($email ?? ''); ?></p>
                 </article> 
             </section>
 
@@ -189,6 +190,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Le champ adresse2 est optionnel
                 if (i !== 5 && valeur === "") {
+                    if (i === 1) input.placeholder = "Entrez votre pseudo";
+                    else if (i === 2) input.placeholder = "Entrez votre nom";
+                    else if (i === 3) input.placeholder = "Entrez votre prénom";
+                    else if (i === 4) input.placeholder = "Entrez votre date de naissance";
+                    else if (i === 6) input.placeholder = "Entrez votre adresse";
+                    else if (i === 7) input.placeholder = "Entrez votre code postal";
+                    else if (i === 8) input.placeholder = "Entrez votre ville";
+                    else if (i === 9) input.placeholder = "Entrez votre pays";
+                    else if (i === 10) input.placeholder = "Entrez votre numéro de téléphone";
+                    else if (i === 11) input.placeholder = "Entrez votre email";
                     tousRemplis = false;
                     break;
                 }
