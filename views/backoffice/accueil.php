@@ -59,7 +59,6 @@
 
             <section class="stock">
                 <h1>Stocks Faibles</h1>
-
                 <article>
 <?php
     $stock = ($pdo->query("select * from _produit where stock < seuilAlerte"))->fetchAll(PDO::FETCH_ASSOC);
@@ -280,60 +279,32 @@
             <section class="produits">
                 <h1>Produits en Vente</h1>
                 <article>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td colspan=2><img src="/public/images/rilletes.svg"></td>
-                        </tr>
-                        <tr>
-                            <th>Rillettes</th>
-                            <td>29,99€</td>
-                        </tr>
-                    </table>
+<?php
+    $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($produits as $produit => $atr) {
+        $html = "
+        <table>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>" . $atr['nom'] . "</td>
+            </tr>
+            <tr>";
+                $prix = "" . $atr['prix']; 
+                if (explode(',', $prix)[1]) {
+                    if (strlen(explode(',', $prix)[1]) == 1) {
+                        $prix .= "0";
+                    }
+                }
+                $html .= "<td>" . $atr['nom'] . "</td>
+                <td>$prix</td>
+            </tr>
+        </table>
+        ";
+        echo $html;
+    }
+?>
                 </article>
                 <a href="./produits.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
