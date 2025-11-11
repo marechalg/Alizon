@@ -934,4 +934,38 @@ main.acceuilBackoffice section.produits article table tr:last-child td {
   text-align: right;
 }
 
+.produitBackOffice h1 {
+  color: #273469;
+  font-family: "lora";
+  font-size: 40px;
+}
+.produitBackOffice section {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #273469;
+  border-radius: 16px;
+  width: 320px;
+}
+.produitBackOffice .nomEtEvaluation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+.produitBackOffice .evaluation {
+  display: flex;
+  flex-direction: column;
+}
+.produitBackOffice .evaluation p {
+  color: #6e6e6e;
+  font-family: "lora";
+  font-weight: bold;
+  font-style: italic;
+  text-decoration: underline;
+}
+.produitBackOffice .etoiles {
+  display: flex;
+  flex-direction: row;
+}
+
 /*# sourceMappingURL=style.css.map */

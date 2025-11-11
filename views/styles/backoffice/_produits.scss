@@ -1,0 +1,48 @@
+@use '../fonts';
+@use '../colors' as *;
+
+.produitBackOffice{
+    h1 {
+        color: $color-blue;
+        font: {
+            family: 'lora';
+            size: 40px
+        }
+    }
+
+    section{
+        display: flex;
+        flex-direction: column;
+        border: 2px solid $color-blue;
+        border-radius: 16px;
+        width: 320px;
+    }
+
+    .nomEtEvaluation{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .evaluation{
+        display: flex;
+        flex-direction: column;
+        p{
+            color: $color-dark-gray;
+            font: {
+                family: 'lora';
+                weight: bold;
+                style: italic;
+            }
+            text-decoration: underline;
+        }
+    }
+
+    .etoiles{
+        display: flex;
+        flex-direction: row;
+        
+    }
+
+}
