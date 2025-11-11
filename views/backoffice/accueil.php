@@ -1,9 +1,4 @@
-<?php
-
-require_once '../../controllers/pdo.php' ;
-$produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
-
-?>
+<?php require_once '../../controllers/pdo.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +62,8 @@ $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
 
                 <article>
 <?php
-    foreach ($produits as $produit => $atr) {
+    $stock = ($pdo->query("select * from _produit where stock < seuilAlerte"))->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($stock as $produit => $atr) {
         $html = "
         <table>
             <tr>
@@ -79,7 +75,7 @@ $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
             <tr>";
                 $prix = "" . $atr['prix']; 
                 if (explode(',', $prix)[1]) {
-                    if (strlen(split(',', $prix)[1]) == 1) {
+                    if (strlen(explode(',', $prix)[1]) == 1) {
                         $prix .= "0";
                     }
                 }
