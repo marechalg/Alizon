@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     SET adresse = '$adresse1',
     pays = '$pays',
     ville = '$ville', 
-    code_postal = '$codePostal',
+    codePostal = '$codePostal',
     region = '$region'
     WHERE idAdresse = '$idAdresse';");
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pays = $adresse['pays'];
     $ville = $adresse['ville'];
-    $codePostal = $adresse['code_postal'];
+    $codePostal = $adresse['codePostal'];
     $adresse1 = $adresse['adresse'];
 
     //verification et upload de la nouvelle photo de profil
