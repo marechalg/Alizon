@@ -66,7 +66,7 @@
                     <?php
                         foreach ($produits as $produit => $atr) {
                             $idProduit = $produit['idProduit'];
-                            $image = ($pdo->query("select $ from _imageDeProduit where idProduit = $idProduit"))->fetchAll(PDO::FETCH_ASSOC);
+                            $image = ($pdo->query("select * from _imageDeProduit where idProduit = $idProduit"))->fetchAll(PDO::FETCH_ASSOC);
                             echo "<img src=\"$image\">";
                         }
                     ?>
