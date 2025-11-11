@@ -78,7 +78,7 @@ $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
             </tr>
             <tr>";
                 $prix = "" . $atr['prix']; 
-                if (split(',', $prix)[1]) {
+                if (explode(',', $prix)[1]) {
                     if (strlen(split(',', $prix)[1]) == 1) {
                         $prix .= "0";
                     }
