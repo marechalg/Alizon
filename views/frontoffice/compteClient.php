@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 
 if (!isset($_SESSION['user_data'])) {
@@ -18,6 +20,11 @@ if (!isset($_SESSION['user_data'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    //update la BDD avec les nouvelles infos du user
+
+
+
     $_SESSION['user_data'] = [
         'pseudo' => $_POST['pseudo'] ?? '',
         'prenom' => $_POST['prenom'] ?? '',
