@@ -30,7 +30,7 @@
         $html = "
         <table>
             <tr>
-                <td><img src='/images/rillettes.png'></td>
+                <td><img src='/images/cidre.png'></td>
             </tr>
             <tr>
                 <td>" . $atr['nom'] . "</td>
