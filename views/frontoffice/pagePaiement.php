@@ -1,3 +1,43 @@
+<?php
+require_once "../../controllers/pdo.php";
+require_once "paiement-db.php";
+
+// ID utilisateur connecté (à adapter avec votre système de session)
+session_start();
+$idClient = $_SESSION['idClient'] ?? 1; // Remplacer par votre variable de session
+
+$paymentDB = new PaymentDB($idClient);
+$cart = $paymentDB->getCart();
+
+// Récupérer les départements et villes
+$csvPath = __DIR__ . '/../../public/data/departements.csv';
+$departments = [];
+$citiesByCode = [];
+$postals = [];
+
+if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
+    $header = fgetcsv($handle, 0, ';', '"', '\\');
+    while (($row = fgetcsv($handle, 0, ';', '"', '\\')) !== false) {
+        if (count($row) < 4) continue;
+        $code = str_pad(trim($row[0]), 2, '0', STR_PAD_LEFT);
+        $postal = trim($row[1]);
+        $dept = trim($row[2]);
+        $city = trim($row[3]);
+        $departments[$code] = $dept;
+        if (!isset($citiesByCode[$code])) $citiesByCode[$code] = [];
+        if ($city !== '' && !in_array($city, $citiesByCode[$code])) $citiesByCode[$code][] = $city;
+        if ($postal !== '') {
+            if (!isset($postals[$postal])) $postals[$postal] = [];
+            if (!in_array($city, $postals[$postal])) $postals[$postal][] = $city;
+        }
+    }
+    fclose($handle);
+} else {
+    $departments['22'] = "Côtes-d'Armor";
+    $citiesByCode['22'] = ['Saint-Brieuc','Lannion','Dinan'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,43 +51,14 @@
 <body class="pagePaiement">
     <?php include '../../views/frontoffice/partials/headerConnecte.php'; ?>
 
-    <?php
-    $csvPath = __DIR__ . '/../../public/data/departements.csv';
-    $departments = [];
-    $citiesByCode = [];
-    $postals = [];
-    if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
-    $header = fgetcsv($handle, 0, ';', '"', '\\');
-    while (($row = fgetcsv($handle, 0, ';', '"', '\\')) !== false) {
-  
-            if (count($row) < 4) continue;
-            $code = str_pad(trim($row[0]), 2, '0', STR_PAD_LEFT);
-            $postal = trim($row[1]);
-            $dept = trim($row[2]);
-            $city = trim($row[3]);
-            $departments[$code] = $dept;
-            if (!isset($citiesByCode[$code])) $citiesByCode[$code] = [];
-            if ($city !== '' && !in_array($city, $citiesByCode[$code])) $citiesByCode[$code][] = $city;
-            if ($postal !== '') {
-                if (!isset($postals[$postal])) $postals[$postal] = [];
-                if (!in_array($city, $postals[$postal])) $postals[$postal][] = $city;
-            }
-        }
-        fclose($handle);
-    } else {
-        $departments['22'] = "Côtes-d'Armor";
-        $citiesByCode['22'] = ['Saint-Brieuc','Lannion','Dinan'];
-    }
-
-    $cart = [
-        ['id' => 'rillettes', 'title' => 'Lot de rillettes bretonne', 'price' => 29.99, 'qty' => 1, 'img' => '../../public/images/rillettes.png'],
-        ['id' => 'confiture', 'title' => 'Confiture artisanale', 'price' => 6.5, 'qty' => 2, 'img' => '../../public/images/jam.png'],
-    ];
-    ?>
-
     <script>
-    window.__PAYMENT_DATA__ =
-        <?php echo json_encode(['departments' => $departments, 'citiesByCode' => $citiesByCode, 'postals' => $postals, 'cart' => $cart], JSON_UNESCAPED_UNICODE); ?>;
+    window.__PAYMENT_DATA__ = {
+        departments: <?php echo json_encode($locationData['departments'], JSON_UNESCAPED_UNICODE); ?>,
+        citiesByCode: <?php echo json_encode($locationData['citiesByCode'], JSON_UNESCAPED_UNICODE); ?>,
+        postals: <?php echo json_encode($locationData['postals'], JSON_UNESCAPED_UNICODE); ?>,
+        cart: <?php echo json_encode($cart, JSON_UNESCAPED_UNICODE); ?>,
+        idClient: <?php echo $idClient; ?>
+    };
     </script>
 
     <main class="container">
@@ -99,55 +110,56 @@
                 </section>
             </div>
 
-
             <div class="col">
-                <!-- <section class="promotions">
-                    <h3>4 - Appliquer un bon de réduction</h3>
-                    <input type="text" placeholder="Code de réduction" aria-label="Code de réduction">
-                </section> -->
                 <section class="conditions">
-                    <h3>5 - Accepter les conditions générales et mentions légales</h3>
+                    <h3>3 - Accepter les conditions générales et mentions légales</h3>
                     <label>
                         <input type="checkbox">
-                        J’ai lu et j’accepte les
+                        J'ai lu et j'accepte les
                         <a href="#">Conditions Générales de Vente</a> et les
-                        <a href="#">Mentions Légales</a> d’Alizon.
+                        <a href="#">Mentions Légales</a> d'Alizon.
                     </label>
                 </section>
             </div>
 
             <aside class="col recap" id="recap">
+                <?php if (empty($cart)): ?>
+                <div class="empty-cart">Panier vide</div>
+                <?php else: ?>
                 <?php foreach ($cart as $item): ?>
                 <div class="produit" data-id="<?= htmlspecialchars($item['idProduit']) ?>">
-                    <img src="<?= htmlspecialchars($item['img'] ?: '../../public/images/default.png') ?>" alt="">
+                    <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['nom']) ?>">
                     <div class="infos">
                         <p class="titre"><?= htmlspecialchars($item['nom']) ?></p>
-                        <p class="prix"><?= number_format($item['prix'], 2, ',', '') ?>€</p>
+                        <p class="prix"><?= number_format($item['prix'] * $item['qty'], 2, ',', '') ?>€</p>
                         <div class="gestQte">
                             <div class="qte">
                                 <button class="minus" data-id="<?= htmlspecialchars($item['idProduit']) ?>">-</button>
                                 <span class="qty"
-                                    data-id="<?= htmlspecialchars($item['idProduit']) ?>"><?= intval($item['quantiteProduit']) ?></span>
+                                    data-id="<?= htmlspecialchars($item['idProduit']) ?>"><?= intval($item['qty']) ?></span>
                                 <button class="plus" data-id="<?= htmlspecialchars($item['idProduit']) ?>">+</button>
                             </div>
                             <button class="delete" data-id="<?= htmlspecialchars($item['idProduit']) ?>">
-                                <img src="../../public/images/bin.svg" alt="">
+                                <img src="../../public/images/bin.svg" alt="Supprimer">
                             </button>
                         </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
+                <?php endif; ?>
             </aside>
-
         </div>
-        <!-- bouton mobile placé après tous les blocs, visible seulement en mobile -->
+
         <div class="payer-wrapper-mobile">
             <button class="payer payer--mobile">Payer</button>
         </div>
     </main>
 
     <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
-    <script src="../../public/amd-shim.js"></script>
+
+    <script src="../scripts/frontoffice/paiement-ajax.js">
+    < script src = "../../public/amd-shim.js" >
+    </script>
     <script src="../../public/script.js"></script>
 </body>
 

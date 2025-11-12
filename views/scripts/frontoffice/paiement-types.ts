@@ -1,15 +1,13 @@
-// Shared types for the paiement frontoffice scripts
+// ============================================================================
+// TYPES & INTERFACES
+// ============================================================================
+
 export type CartItem = {
   id: string;
   title: string;
   price: number;
   qty: number;
   img?: string;
-};
-
-export type AsideHandle = {
-  update: (cart: CartItem[]) => void;
-  getElement: () => HTMLElement | null;
 };
 
 export type Inputs = {
@@ -28,7 +26,6 @@ export type ValidateAllParams = {
   departments: Map<string, string>;
   postals: Map<string, Set<string>>;
   cart: CartItem[];
-  // wrapper so caller and callee can share/mutate the selected department
   selectedDepartment: { value: string | null };
 };
 
@@ -39,4 +36,8 @@ export type Maps = {
   allCities: Set<string>;
 };
 
-export default {};
+export type AsideHandle = {
+  update: (cart: CartItem[]) => void;
+  getElement: () => HTMLElement | null;
+};
+
