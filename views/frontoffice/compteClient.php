@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $id = 1;
                         $photoPath = '../../public/images/photoDeProfil/photo_profil'.$id.'.png';
                         if (file_exists($photoPath)) {
-                            echo '<img src=".$photoPath." alt="photoProfil" id="imageProfile">';
+                            echo "<img src=".$photoPath." alt=photoProfil id=imageProfile>";
                         } else {
                             echo '<img src="../../public/images/profil.png" alt="photoProfil" id="imageProfile">';
                         }
@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         let imageProfile = document.getElementById("imageProfile");
         let bnModifier = document.getElementsByClassName("boutonModiferProfil");
         let bnModifMdp = document.getElementsByClassName("boutonModifierMdp");
-        let $bnAnnuler = document.getElementsByClassName("boutonAnnuler");
+        let bnAnnuler = document.getElementsByClassName("boutonAnnuler");
 
         function modifierProfil(event) {
 
@@ -325,7 +325,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         function boutonAnnuler(event){
-            $bnAnnuler[0].style.display = "none";
+            bnAnnuler[0].style.display = "none";
             event.preventDefault();
             bnModifier[0].innerHTML = "Modifier";
             bnModifier[0].style.backgroundColor = "#e4d9ff";
