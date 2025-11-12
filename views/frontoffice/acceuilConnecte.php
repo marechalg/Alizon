@@ -122,6 +122,6 @@
         </section>
     </main>
 
-    <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
 </body>
 </html>
