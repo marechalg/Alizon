@@ -40,7 +40,7 @@ require_once '../../controllers/prix.php';
             </tr>
             <tr>";
                 $prix = prix($atr['prix']);
-                $html .= "<td>" . $prix . "€</td>";
+                $html .= "<td>" . $prix . "</td>";
                 $stock = $atr['stock'];
                 $seuil = "";
                 if ($stock == 0) {
@@ -62,111 +62,29 @@ require_once '../../controllers/prix.php';
             <section class="commandes">
                 <h1>Dernières Commandes</h1>
                 <article>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>1
-                                4/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
+<?php
+    $commandes = ($pdo->query("select idProduit, dateCommande, etatLivraison, quantiteProduit, nom, prix, idVendeur, idCommande, idPanier from _produitAuPanier natural join _produit natural join _commande;"))->fetchAll(PDO::FETCH_ASSOC);
+    if (count($commandes == 0)) echo "<h2>Aucune commande</h2>";
+    foreach ($commandes as $commande) {
+        $idProduit = $atr['idProduit'];
+        $image = ($pdo->query("select URL from _imageDeProduit where idProduit = $idProduit"))->fetchAll(PDO::FETCH_ASSOC);
+        $image = $image = !empty($image) ? $image[0]['URL'] : '';
+        $html = "
+        <table>
+            <tr>
+                <td><img src='$image'></td>
+                <th>" . $commande['nom'] . "</th>
+            </tr>
+            <tr>
+                <td>Prix Total : " . prix($commande['prix']) . "</td>
+            </tr>
+            <tr>
+                <td>" . $commande['dateCommande'] . "</td>
+                <th>" . $commande['quantiteProduit'] . "</th>
+        </table>
+        ";
+    }
+?>
                 </article>
                 <a href="./commandes.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
@@ -254,7 +172,7 @@ require_once '../../controllers/prix.php';
             <tr>";
                 $prix = prix($atr['prix']);
                 $html .= "<td>" . $atr['nom'] . "</td>
-                <td>" . $prix . "€</td>
+                <td>" . $prix . "</td>
             </tr>
         </table>
         ";
