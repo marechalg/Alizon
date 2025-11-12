@@ -39,7 +39,7 @@
                         $prix .= "0";
                     }
                 }
-                $html .= "<td>" . $prix . "</td>";
+                $html .= "<td>" . $prix . "€</td>";
                 $stock = $atr['stock'];
                 $seuil = "";
                 if ($stock == 0) {
@@ -240,7 +240,7 @@
                 <h1>Produits en Vente</h1>
                 <article>
 <?php
-    $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
+    $produits = ($pdo->query("select * from _produit where enVente = true"))->fetchAll(PDO::FETCH_ASSOC);
     foreach ($produits as $produit => $atr) {
         $html = "
         <table>
@@ -255,7 +255,7 @@
                     }
                 }
                 $html .= "<td>" . $atr['nom'] . "</td>
-                <td>$prix</td>
+                <td>" . $prix . "€</td>
             </tr>
         </table>
         ";
