@@ -26,7 +26,7 @@
     foreach ($stock as $produit => $atr) {
         $idProduit = $atr['idProduit'];
         $image = ($pdo->query("select URL from _imageDeProduit where idProduit = $idProduit"))->fetchAll(PDO::FETCH_ASSOC);
-        $image = $image = !empty($imageResult) ? $imageResult[0]['URL'] : '';
+        $image = $image = !empty($image) ? $image[0]['URL'] : '';
         $html = "
         <table>
             <tr>
