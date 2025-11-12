@@ -325,15 +325,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             window.close();
         }
 
-        function boutonAnnuler(event){
-            // bnAnnuler[0].style.display = "none";
-            // event.preventDefault();
-            // bnModifier[0].innerHTML = "Modifier";
-            // bnModifier[0].style.backgroundColor = "#e4d9ff";
-            // bnModifier[0].style.color = "#273469";
-            // enModif = false;
+        function boutonAnnuler(event) {
             event.preventDefault();
-            location.reload(); // recharge la page et restaure les <p>
+
+            let inputs = document.querySelectorAll("section input");
+
+            for (let i = 0; i < inputs.length; i++) {
+                let p = document.createElement("p");
+                p.innerText = inputs[i].value;
+                inputs[i].parentNode.replaceChild(p, inputs[i]);
+            }
+
+            if (document.getElementById("photoProfil")) {
+                document.getElementById("photoProfil").remove();
+            }
+
+            enModif = false;
+
+            bnModifier[0].innerHTML = "Modifier";
+            bnModifier[0].style.backgroundColor = "#e4d9ff";
+            bnModifier[0].style.color = "#273469";
+
+            bnAnnuler[0].style.display = "none";
+
+            imageProfile.style.cursor = "default";
+            imageProfile.onclick = null;
         }
     </script>
 </body>
