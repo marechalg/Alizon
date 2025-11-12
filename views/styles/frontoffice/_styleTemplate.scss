@@ -1,0 +1,263 @@
+@use "../colors" as *;
+@use "../fonts" as *;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-white;
+}
+
+/* -------------------------------------------- DEBUT HEADER -------------------------------------------- */
+
+.headerFront {
+  background-color: $color-blue;
+  padding: 20px 0px;
+  position: sticky;
+  top: 0;
+
+  a, p {
+    text-decoration: none;
+    color: $color-pastel-blue;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+
+  h1 {
+    color: $color-pastel-blue;
+    font-family: "berkshire", serif !important;
+    font-weight: lighter !important;
+    font-style: normal !important;
+    font-size: 40px !important; // METTRE A JOUR DANS BRANCH MAIN
+
+    a {
+      b {
+        color: $color-pastel-blue;
+      }
+    }
+  }
+
+  .headerMain {
+    padding: 10px 25px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+    div *, .categorie {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
+
+  .logoNom {
+    display: flex;
+    align-items: end;
+
+    h1 {
+      line-height: 1;
+      margin: 0;
+    }
+  }
+
+  img {
+    width: 40px;
+  }
+
+  .seConnecter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+
+    img {
+      height: 40px;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  .search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    i {
+      position: absolute;
+      right: 15px;
+      color: $color-blue;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    input[type="search"] {
+      padding: 10px 450px 10px 20px;
+      border-radius: 25px;
+      border: none;
+      outline: none;
+      background-color: #fff;
+      color: $color-blue;
+      font-family: "Lora", serif;
+      font-size: 20px;
+      font-weight: bold;
+      font-style: italic;
+
+      &::-webkit-search-cancel-button {
+        display: none;
+      }
+    }
+  }
+
+  .carousel {
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+      display: none;
+      visibility: hidden;
+    }
+
+    .group {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      padding-left: 25px;
+    }
+  }
+
+
+  .categorie {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: $color-pastel-blue;
+    color: $color-blue;
+    border-radius: 30px;
+    font-family: "Lora", serif;
+    font-optical-sizing: auto;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 40px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 1300px) {
+    .search-wrapper input[type="search"] {
+      padding: 10px 0px 10px 10px;
+    }
+
+    .headerMain {
+      justify-content: space-between;
+
+      div * {
+        margin-left: 1.5px;
+        margin-right: 1.5px;
+      }
+    }
+
+    .categorie {
+      padding: 8px 20px;
+    }
+
+    .carousel .group {
+      padding-left: 10px;
+      gap: 8px;
+    }
+  }
+
+  @media (max-width: 638px) {
+    .icons {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  @media (max-width: 500px) {
+    b {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+/* -------------------------------------------- FIN HEADER -------------------------------------------- */
+
+/* -------------------------------------------- DEBUT FOOTER -------------------------------------------- */
+.footerFront {
+  margin-top: 50px;
+}
+.footerFront a, .footerFront p {
+  text-decoration: none;
+  color: $color-pastel-blue;
+  margin: 0;
+  margin-right: 15px;
+}
+.footerFront .footerTel {
+  display: none;
+  visibility: hidden;
+}
+.footerFront div {
+  background-color: $color-blue;
+  color: white;
+  font-style: normal;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-family: "Lora", serif;
+  font-size: 13px;
+  font-weight: bold;
+  align-items: center;
+}
+.footerFront a, .footerFront p {
+  padding: 10px 10px;
+}
+.footerFront .homeDarkBlue,
+.footerFront .searchDarkBlue,
+.footerFront .cartDarkBlue,
+.footerFront .burgerDarkBlue {
+  display: none;
+  visibility: hidden;
+}
+@media (max-width: 1300px) {
+  .footerFront {
+    position: sticky;
+    width: 100%;
+    bottom: 0;
+    padding: 0;
+    justify-content: space-around;
+  }
+  .footerFront .footerPC {
+    display: none;
+    visibility: hidden;
+  }
+  .footerFront .footerTel {
+    display: contents;
+    visibility: visible;
+    /* structure mobile */
+    display: flex;
+    justify-content: space-between;
+  }
+  .footerFront .footerTel img {
+    width: 41px;
+    height: 41px;
+  }
+  .footerFront .footerTel a {
+    padding: 20px;
+  }
+  .footerFront .footerTel a:focus {
+    transition: 0.2s;
+    background-color: $color-pastel-blue;
+  }
+}
+
+/* -------------------------------------------- FIN FOOTER -------------------------------------------- */
