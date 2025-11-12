@@ -1,9 +1,11 @@
-/* Error: expected "{".
+/* Error: There's already a module with namespace "styleCompteClient".
  *    ,
+ * 13 | @use './frontoffice/styleCompteClient';
+ *    | ====================================== original @use
  * 14 | @use './frontoffice/styleCompteClient';
- *    |                                       ^
+ *    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ new @use
  *    '
- *   views\styles\main.scss 14:39  root stylesheet */
+ *   views\styles\main.scss 14:1  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -13,5 +15,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: expected \"{\".\a    \2577 \a 14 \2502  @use './frontoffice/styleCompteClient';\d\a    \2502                                        ^\a    \2575 \a   views\\styles\\main.scss 14:39  root stylesheet";
+  content: "Error: There's already a module with namespace \"styleCompteClient\".\a    \2577 \a 13 \2502  @use './frontoffice/styleCompteClient';\d\a    \2502  \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501 \2501  original @use\a 14 \2502  @use './frontoffice/styleCompteClient';\d\a    \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ new @use\a    \2575 \a   views\\styles\\main.scss 14:1  root stylesheet";
 }
