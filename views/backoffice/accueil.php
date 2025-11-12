@@ -64,7 +64,7 @@ require_once '../../controllers/date.php';
                 <h1>Dernières Commandes</h1>
                 <article>
 <?php
-    $commandes = ($pdo->query(file_get_contents('/queries/backoffice/dernieresCommandes.sql')))->fetchAll(PDO::FETCH_ASSOC);
+    $commandes = ($pdo->query(file_get_contents('../../queries/backoffice/dernieresCommandes.sql')))->fetchAll(PDO::FETCH_ASSOC);
     if (count($commandes) == 0) echo "<h2>Aucune commande</h2>";
     foreach ($commandes as $commande) {
         $idProduit = $commande['idProduit'];
