@@ -305,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 enModif = true;
 
-                $bnAnnuler[0].style.display = "block";
+                bnAnnuler[0].style.display = "block";
 
                 document.querySelector("section").addEventListener("input", verifierChamp);
                 verifierChamp();
