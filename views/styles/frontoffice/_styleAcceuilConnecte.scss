@@ -95,7 +95,7 @@
         min-width: 276px;
         display: flex;
         flex-direction: column;
-        cursor: pointer;
+        justify-content: space-between;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -161,7 +161,7 @@
         font-size: 32px;
         font-family: "Lora", serif;
         font-weight: bold;   
-        font-style: italic;  
+        font-style: normal;  
         margin: 0;
     }
 
@@ -179,5 +179,37 @@
         font-weight: bold;   
         font-style: italic;  
         margin-left: 40px;
+    }
+
+    article:hover {
+        cursor: pointer;
+    }
+
+    .nomProduit {
+        font-weight: normal;
+        margin-bottom: 0px;
+        color: #273469;
+        font-weight: 500;
+        margin-bottom: 0px;
+        margin-top: 10px;
+    }
+
+    .notation {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .notation span {
+        font-family: "Lora", serif;
+        font-weight: bold;   
+        color: #273469;
+        font-size: 13px;
+    }
+
+    .notation img {
+        margin-right: 10px;
+        height: 16px;
     }
 }

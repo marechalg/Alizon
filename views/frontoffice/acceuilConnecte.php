@@ -38,14 +38,14 @@
                     ?>
                     <article onclick="window.location.href='produit.php?id=<?php echo $idProduit; ?>'">
                         <img src="<?php echo htmlspecialchars($image); ?>" class="imgProduit" alt="Image du produit">
-                        <h2><?php echo htmlspecialchars($value['nom']); ?></h2>
+                        <h2 class="nomProduit"><?php echo htmlspecialchars($value['nom']); ?></h2>
                         <div class="notation">
                             <img src="../../public/images/etoile.svg" alt="Note" class="etoile">
                             <span><?php echo number_format($value['note'], 1); ?></span>
                         </div>
                         <div class="infoProd">
                             <div class="prix">
-                                <h2><?php echo formatPrice($value['prix']); ?> €</h2>
+                                <h2><?php echo formatPrice($value['prix']); ?></h2>
                             </div>
                             <div>
                                 <a href="" onclick="event.stopPropagation();"><img src="../../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="infoProd">
                             <div class="prix">
-                                <h2><?php echo formatPrice($value['prix']); ?> €</h2>
+                                <h2><?php echo formatPrice($value['prix']); ?></h2>
                             </div>
                             <div>
                                 <a href="" onclick="event.stopPropagation();"><img src="../../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="infoProd">
                             <div class="prix">
-                                <h2><?php echo formatPrice($value['prix']); ?> €</h2>
+                                <h2><?php echo formatPrice($value['prix']); ?></h2>
                             </div>
                             <div>
                                 <a href="" onclick="event.stopPropagation();"><img src="../../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier"></a>
