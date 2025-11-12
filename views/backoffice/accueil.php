@@ -72,7 +72,7 @@ require_once '../../controllers/prix.php';
         $html = "
         <table>
             <tr>
-                <td><img src='$image'></td>
+                <td rowspan=2><img src='$image'></td>
                 <th>" . $commande['nom'] . "</th>
             </tr>
             <tr>
