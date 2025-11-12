@@ -243,7 +243,8 @@ main.acceuilBackoffice {
 
         &.produits article {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 30%));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px;
             gap: 2em;
             font-size: 20px;
 
