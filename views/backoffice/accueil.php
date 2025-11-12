@@ -83,6 +83,7 @@ require_once '../../controllers/prix.php';
                 <th>" . $commande['quantiteProduit'] . "</th>
         </table>
         ";
+        echo $html;
     }
 ?>
                 </article>
