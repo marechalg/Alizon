@@ -1,6 +1,7 @@
 <?php
 require_once '../../controllers/pdo.php';
 require_once '../../controllers/prix.php';
+require_once '../../controllers/date.php';
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@ require_once '../../controllers/prix.php';
                 <td>" . $atr['nom'] . "</td>
             </tr>
             <tr>";
-                $prix = prix($atr['prix']);
+                $prix = formatPrice($atr['prix']);
                 $html .= "<td>" . $prix . "</td>";
                 $stock = $atr['stock'];
                 $seuil = "";
@@ -63,26 +64,32 @@ require_once '../../controllers/prix.php';
                 <h1>Dernières Commandes</h1>
                 <article>
 <?php
-    $commandes = ($pdo->query("select idProduit, dateCommande, etatLivraison, quantiteProduit, nom, prix, idVendeur, idCommande, idPanier from _produitAuPanier natural join _produit natural join _commande;"))->fetchAll(PDO::FETCH_ASSOC);
-    if (count($commandes == 0)) echo "<h2>Aucune commande</h2>";
+    $commandes = ($pdo->query(file_get_contents('../../queries/backoffice/dernieresCommandes.sql')))->fetchAll(PDO::FETCH_ASSOC);
+    if (count($commandes) == 0) echo "<h2>Aucune commande</h2>";
     foreach ($commandes as $commande) {
-        $idProduit = $atr['idProduit'];
+        $idProduit = $commande['idProduit'];
         $image = ($pdo->query("select URL from _imageDeProduit where idProduit = $idProduit"))->fetchAll(PDO::FETCH_ASSOC);
         $image = $image = !empty($image) ? $image[0]['URL'] : '';
         $html = "
         <table>
             <tr>
-                <td><img src='$image'></td>
+                <td rowspan=2><img src='$image'></td>
                 <th>" . $commande['nom'] . "</th>
             </tr>
             <tr>
-                <td>Prix Total : " . prix($commande['prix']) . "</td>
+                <td>
+                    Prix Unitaire : <strong>" . formatPrice($commande['prix']) . "</strong><br>
+                    Prix Unitaire : <strong>" . formatPrice($commande['prix'] * $commande['quantiteProduit']) . "</strong><br>
+                    Statut : <strong>" . $commande['etatLivraison'] . "</strong>
+                </td>
             </tr>
             <tr>
-                <td>" . $commande['dateCommande'] . "</td>
+                <td>" . formatDate($commande['dateCommande']) . "</td>
                 <th>" . $commande['quantiteProduit'] . "</th>
+            </tr>
         </table>
         ";
+        echo $html;
     }
 ?>
                 </article>
@@ -170,7 +177,7 @@ require_once '../../controllers/prix.php';
                 <td><img src='$image'></td>
             </tr>
             <tr>";
-                $prix = prix($atr['prix']);
+                $prix = formatPrice($atr['prix']);
                 $html .= "<td>" . $atr['nom'] . "</td>
                 <td>" . $prix . "</td>
             </tr>
