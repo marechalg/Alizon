@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
+    $dateNaissance = $_POST['dateNaissance'];
     $telephone = $_POST['telephone'];
     $codePostal = $_POST['codePostal'];
     $adresse1 = $_POST['adresse1'];
