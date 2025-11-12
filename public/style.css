@@ -1439,6 +1439,11 @@ main.acceuilBackoffice section.produits article table {
   border-color: #273469;
   border-radius: 16px;
 }
+main.acceuilBackoffice section.produits article table img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+}
 main.acceuilBackoffice section.produits article table th {
   text-align: left;
 }

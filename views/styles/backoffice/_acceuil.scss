@@ -254,6 +254,11 @@ main.acceuilBackoffice {
                     radius: 16px;
                 }
 
+                img {
+                    height: 100px; width: 100px;
+                    object-fit: cover;
+                }
+
                 th {
                     text-align: left;
                 }
