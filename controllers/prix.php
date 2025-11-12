@@ -7,7 +7,7 @@ function prix($prix) {
             $prix .= "0";
         }
     }
-    return $prix;
+    return $prix . "€";
 }
 
 ?>
