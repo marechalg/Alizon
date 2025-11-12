@@ -103,6 +103,11 @@
         height: 55px;
     }
 
+    .boutonAnnuler{
+        display: none;
+        background-color: $color-red;
+    }
+
     
 }
 
@@ -115,3 +120,4 @@
         justify-content: center;
         z-index: 1000;
     }
+

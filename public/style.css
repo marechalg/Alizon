@@ -1537,6 +1537,10 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   width: 200px;
   height: 55px;
 }
+.mainCompteClient .boutonAnnuler {
+  display: none;
+  background-color: #f14e4e;
+}
 
 .overlayPopUpCompteClient {
   position: fixed;
