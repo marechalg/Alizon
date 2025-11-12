@@ -12,6 +12,46 @@
 <?php include "../../views/frontoffice/partials/headerConnecte.php" ?>
 </header>
 <main>
+
+<?php
+// Connexion simple à la base
+try {
+    $pdo = new PDO("pgsql:host=localhost;dbname=saedb", "username", "password");
+} catch(PDOException $e) {
+    die("Erreur connexion : " . $e->getMessage());
+}
+
+// Récupérer l'ID depuis l'URL
+$productId = intval($_GET['id']) ?? 0;
+
+if($productId == 0) {
+    die("Produit non spécifié");
+}
+
+// REQUÊTE SIMPLE : Récupérer le produit ET le vendeur en une fois
+
+$sql = "SELECT p.*, v.prenom, v.nom 
+        FROM _produit p 
+        JOIN _vendeur v ON p.idVendeur = v.codeVendeur 
+        WHERE p.idProduit = " . $productId;
+
+$result = $pdo->query($sql);
+$produit = $result->fetch(PDO::FETCH_ASSOC);
+
+if(!$produit) {
+    die("Produit non trouvé");
+}
+
+// Récupérer les images
+$sqlImages = "SELECT i.* 
+              FROM _image i
+              JOIN _imageDeProduit ip ON i.URL = ip.URL
+              WHERE ip.idProduit = $productId";
+
+$resultImages = $pdo->query($sqlImages);
+$images = $resultImages->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <section class="infoHautProduit">
     <article class="rectangleProduit">
         <img src="../../public/images/flecheGauche.svg" alt="">
