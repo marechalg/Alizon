@@ -4,7 +4,7 @@ require_once "../../controllers/pdo.php";
 // ID utilisateur connecté (à remplacer par la gestion de session)
 $idClient = 1; 
 
-$stmt = $pdo->query("SELECT idPanier FROM distribill_sae03._panier WHERE idClient = 1 ORDER BY idPanier DESC LIMIT 1");
+$stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = 1 ORDER BY idPanier DESC LIMIT 1");
 $panier = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $cart = [];
@@ -15,9 +15,9 @@ if ($panier) {
     // Méthode avec query() seulement
     $stmt = $pdo->query("
         SELECT p.idProduit, p.nom, p.prix, pa.quantiteProduit as qty, i.URL as img
-        FROM distribill_sae03._produitAuPanier pa
-        JOIN distribill_sae03._produit p ON pa.idProduit = p.idProduit
-        LEFT JOIN distribill_sae03._imageDeProduit i ON p.idProduit = i.idProduit
+        FROM _produitAuPanier pa
+        JOIN _produit p ON pa.idProduit = p.idProduit
+        LEFT JOIN _imageDeProduit i ON p.idProduit = i.idProduit
         WHERE pa.idPanier = $idPanier
     ");
     $cart = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -28,9 +28,9 @@ if ($panier) {
 
 function updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta) {
     // Récupérer la quantité actuelle
-    $sql = "SELECT quantiteProduit FROM distribill_sae03._produitAuPanier 
+    $sql = "SELECT quantiteProduit FROM _produitAuPanier 
             WHERE idProduit = ? AND idPanier IN (
-                SELECT idPanier FROM distribill_sae03._panier WHERE idClient = ?
+                SELECT idPanier FROM _panier WHERE idClient = ?
             )";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$idProduit, $idClient]);
@@ -41,9 +41,9 @@ function updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta) {
         
         if ($newQty > 0) {
             // Mettre à jour la quantité
-            $sql = "UPDATE distribill_sae03._produitAuPanier SET quantiteProduit = ? 
+            $sql = "UPDATE _produitAuPanier SET quantiteProduit = ? 
                     WHERE idProduit = ? AND idPanier IN (
-                        SELECT idPanier FROM distribill_sae03._panier WHERE idClient = ?
+                        SELECT idPanier FROM _panier WHERE idClient = ?
                     )";
             $stmt = $pdo->prepare($sql);
             $success = $stmt->execute([$newQty, $idProduit, $idClient]);
@@ -58,9 +58,9 @@ function updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta) {
 }
 
 function removeFromCartInDatabase($pdo, $idClient, $idProduit) {
-    $sql = "DELETE FROM distribill_sae03._produitAuPanier 
+    $sql = "DELETE FROM _produitAuPanier 
             WHERE idProduit = ? AND idPanier IN (
-                SELECT idPanier FROM distribill_sae03._panier WHERE idClient = ?
+                SELECT idPanier FROM _panier WHERE idClient = ?
             )";
     $stmt = $pdo->prepare($sql);
     return $stmt->execute([$idProduit, $idClient]);
@@ -71,7 +71,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
         $pdo->beginTransaction();
 
         // Récupérer le panier actuel
-        $sql = "SELECT * FROM distribill_sae03._panier WHERE idClient = ?";
+        $sql = "SELECT * FROM _panier WHERE idClient = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$idClient]);
         $panier = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -82,8 +82,8 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
 
         // Calculer les totaux
         $sqlTotals = "SELECT SUM(p.prix * pap.quantiteProduit) as sousTotal, SUM(pap.quantiteProduit) as nbArticles 
-                     FROM distribill_sae03._produitAuPanier pap
-                     JOIN distribill_sae03._produit p ON pap.idProduit = p.idProduit
+                     FROM _produitAuPanier pap
+                     JOIN _produit p ON pap.idProduit = p.idProduit
                      WHERE pap.idPanier = ?";
         $stmtTotals = $pdo->prepare($sqlTotals);
         $stmtTotals->execute([$panier['idPanier']]);
@@ -94,7 +94,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
 
         // Créer la commande
         $sql = "
-            INSERT INTO distribill_sae03._commande 
+            INSERT INTO _commande 
             (dateCommande, etatLivraison, montantCommandeTTC, montantCommandeHt, 
              quantiteCommande, adresseLivr, villeLivr, regionLivr, numeroCarte, idPanier)
             VALUES (NOW(), 'En attente', ?, ?, ?, ?, ?, ?, ?, ?)
@@ -116,11 +116,11 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
 
         // Copier les produits du panier vers la table contient
         $sql = "
-            INSERT INTO distribill_sae03._contient (idProduit, idCommande, prixProduitHt, tauxTva, quantite)
+            INSERT INTO _contient (idProduit, idCommande, prixProduitHt, tauxTva, quantite)
             SELECT pap.idProduit, ?, p.prix, COALESCE(t.pourcentageTva, 20.0), pap.quantiteProduit
-            FROM distribill_sae03._produitAuPanier pap
-            JOIN distribill_sae03._produit p ON pap.idProduit = p.idProduit
-            LEFT JOIN distribill_sae03._tva t ON p.typeTva = t.typeTva
+            FROM _produitAuPanier pap
+            JOIN _produit p ON pap.idProduit = p.idProduit
+            LEFT JOIN _tva t ON p.typeTva = t.typeTva
             WHERE pap.idPanier = ?
         ";
         
@@ -128,7 +128,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
         $stmt->execute([$idCommande, $panier['idPanier']]);
 
         // Vider le panier après commande
-        $sql = "DELETE FROM distribill_sae03._produitAuPanier WHERE idPanier = ?";
+        $sql = "DELETE FROM _produitAuPanier WHERE idPanier = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$panier['idPanier']]);
 
