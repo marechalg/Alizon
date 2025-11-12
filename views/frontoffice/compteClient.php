@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
+    $dateNaissance = $_POST['dateNaissance'];
     $telephone = $_POST['telephone'];
     $codePostal = $_POST['codePostal'];
     $adresse1 = $_POST['adresse1'];
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     nom = '$nom', 
     prenom = '$prenom', 
     email =  '$email', 
+    dateNaissance = '$dateNaissance'
     noTelephone = '$telephone'
     WHERE idClient = '$id_client';");
 
@@ -51,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prenom = $client['prenom'];
     $nom = $client['nom'];
     $dateNaissance = $client['dateNaissance'];
-    $dateNaissance = date('Y-m-d', strtotime($dateNaissance));
     $email = $client['email'];
     $noTelephone = $client['noTelephone'];
 
