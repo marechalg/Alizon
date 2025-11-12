@@ -76,11 +76,16 @@ require_once '../../controllers/prix.php';
                 <th>" . $commande['nom'] . "</th>
             </tr>
             <tr>
-                <td>Prix Total : " . prix($commande['prix']) . "</td>
+                <td>
+                    Prix Unitaire : <stron>" . prix($commande['prix']) . "</strong>
+                    Prix Unitaire : <strong>" . prix($commande['prix'] * $commande['quantiteProduit']) . "</strong>
+                    Statut : <strong>" . $commande['etatLivraison'] . "</strong>
+                </td>
             </tr>
             <tr>
-                <td>" . $commande['dateCommande'] . "</td>
+                <td>" . str_replace('-', '/', $commande['dateCommande']) . "</td>
                 <th>" . $commande['quantiteProduit'] . "</th>
+            </tr>
         </table>
         ";
         echo $html;
