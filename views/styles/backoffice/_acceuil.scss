@@ -138,9 +138,14 @@ main.acceuilBackoffice {
             display: flex;
             flex-direction: column;
             gap: 1em;
+            font-family: 'open-sans';
             
             table {
                 width: 100%;
+
+                th {
+                    font-weight: bold;
+                }
                 
                 tr:first-child {
                     td:first-child {

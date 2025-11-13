@@ -1418,9 +1418,13 @@ main.acceuilBackoffice section.avis article {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  font-family: "open-sans";
 }
 main.acceuilBackoffice section.avis article table {
   width: 100%;
+}
+main.acceuilBackoffice section.avis article table th {
+  font-weight: bold;
 }
 main.acceuilBackoffice section.avis article table tr:first-child td:first-child {
   display: flex;
