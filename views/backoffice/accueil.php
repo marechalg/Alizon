@@ -133,6 +133,7 @@ require_once '../../controllers/date.php';
             </tr>
         </table>
         ";
+        echo $html;
     }
 ?>
                 </article>
