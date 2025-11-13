@@ -134,26 +134,7 @@ main.acceuilBackoffice {
         }
         
         &.avis article {
-            table {
-                width: 100%;
 
-                tr:first-child {
-                    td:first-child {
-                        figure:first-child {
-                            display: flex;
-                            flex-direction: column;
-
-                            img {
-                                height: 50px; width: 50px;
-                                object-fit: cover;
-                            }
-                        }
-                        figure:last-child {
-                            display: flex;
-                        }
-                    }
-                }
-            }
         }
         
         &.produits article {

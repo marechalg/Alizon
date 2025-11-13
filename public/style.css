@@ -1413,21 +1413,6 @@ main.acceuilBackoffice section.commandes article table tr:nth-child(2) td {
 main.acceuilBackoffice section.commandes article table tr:last-child th {
   text-align: right;
 }
-main.acceuilBackoffice section.avis article table {
-  width: 100%;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child {
-  display: flex;
-  flex-direction: column;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child img {
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:last-child {
-  display: flex;
-}
 main.acceuilBackoffice section.produits article {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
