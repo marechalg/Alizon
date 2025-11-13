@@ -6,7 +6,6 @@ require_once "../../controllers/prix.php";
 require_once "../../controllers/pdo.php";
 ?>
 
-
 <!-- ============================================================================
 DEFINITION DES FONCTIONS ET DU COOKIE
 ============================================================================ -->
@@ -18,7 +17,6 @@ DEFINITION DES FONCTIONS ET DU COOKIE
     // Récupération du cookie existant ou création d'un tableau vide
     if (isset($_COOKIE['produitConsulte']) && !empty($_COOKIE['produitConsulte'])) {
         $tabIDProduitConsulte = unserialize($_COOKIE['produitConsulte']);
-        // Vérification que c'est bien un tableau
         if (!is_array($tabIDProduitConsulte)) {
             $tabIDProduitConsulte = [];
         }
@@ -28,22 +26,18 @@ DEFINITION DES FONCTIONS ET DU COOKIE
 
     // Fonction pour ajouter un produit consulté
     function ajouterProduitConsulter(&$tabIDProduit, $idProduitConsulte) {
-        // Éviter les doublons : si le produit est déjà dans le tableau, on le retire
         $key = array_search($idProduitConsulte, $tabIDProduit);
         if ($key !== false) {
             unset($tabIDProduit[$key]);
             $tabIDProduit = array_values($tabIDProduit);
         }
         
-        // Si le tableau est plein, on retire le plus ancien
         if (count($tabIDProduit) >= PRODUIT_CONSULTE_MAX_SIZE) {
             array_shift($tabIDProduit);
         }
         
-        // Ajouter le nouveau produit à la fin
         $tabIDProduit[] = $idProduitConsulte;
         
-        // Sauvegarder dans le cookie (90 jours)
         setcookie("produitConsulte", serialize($tabIDProduit), time() + (60*60*24*90), "/");
     }
 
@@ -52,7 +46,6 @@ DEFINITION DES FONCTIONS ET DU COOKIE
         $idProduitAjoute = intval($_GET['addRecent']);
         ajouterProduitConsulter($tabIDProduitConsulte, $idProduitAjoute);
         
-        // Redirection vers la page du produit
         if (isset($_GET['id'])) {
             header("Location: produit.php?id=" . intval($_GET['id']));
             exit;
