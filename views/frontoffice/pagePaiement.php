@@ -74,74 +74,82 @@ function removeFromCartInDatabase($pdo, $idClient, $idProduit) {
     $res = $pdo->query($sql);
     return $res !== false;
 }
-
 function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte, $codePostal = '') {
     try {
         $pdo->beginTransaction();
 
         $idClient = intval($idClient);
-        
-        // Récupérer le panier actuel
+
+        // Récupérer le panier du client
         $sql = "SELECT * FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1";
         $stmt = $pdo->query($sql);
         $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
-        
+
         if (!$panier) {
-            throw new Exception("Panier non trouvé");
+            throw new Exception("Panier non trouvé pour le client $idClient");
         }
 
         $idPanier = intval($panier['idPanier']);
 
         // Calculer les totaux
-        $sqlTotals = "SELECT SUM(p.prix * pap.quantiteProduit) as sousTotal, SUM(pap.quantiteProduit) as nbArticles 
-                     FROM _produitAuPanier pap
-                     JOIN _produit p ON pap.idProduit = p.idProduit
-                     WHERE pap.idPanier = $idPanier";
+        $sqlTotals = "
+            SELECT SUM(p.prix * pap.quantiteProduit) AS sousTotal, SUM(pap.quantiteProduit) AS nbArticles
+            FROM _produitAuPanier pap
+            JOIN _produit p ON pap.idProduit = p.idProduit
+            WHERE pap.idPanier = $idPanier
+        ";
         $stmtTotals = $pdo->query($sqlTotals);
         $totals = $stmtTotals ? $stmtTotals->fetch(PDO::FETCH_ASSOC) : [];
 
-        $sousTotal = $totals['sousTotal'] ?? 0;
-        $nbArticles = $totals['nbArticles'] ?? 0;
+        $sousTotal = floatval($totals['sousTotal'] ?? 0);
+        $nbArticles = intval($totals['nbArticles'] ?? 0);
 
-        // 1. Créer l'adresse de livraison dans la table _adresse (sans idClient)
+        // 1. Vérifier si l’adresse existe déjà
         $adresseQ = $pdo->quote($adresseLivraison);
         $villeQ = $pdo->quote($villeLivraison);
         $regionQ = $pdo->quote($regionLivraison);
         $codePostalQ = $pdo->quote($codePostal);
 
-        $sqlAdresse = "INSERT INTO _adresse (adresse, region, codePostal, ville, pays) 
-                      VALUES ($adresseQ, $regionQ, $codePostalQ, $villeQ, 'France')";
-        
-        $resAdresse = $pdo->query($sqlAdresse);
-        if ($resAdresse === false) {
-            throw new Exception("Impossible de créer l'adresse de livraison: " . implode(', ', $pdo->errorInfo()));
+        $sqlCheckAdresse = "
+            SELECT adresse, region, ville FROM _adresse
+            WHERE adresse = $adresseQ AND region = $regionQ AND ville = $villeQ
+        ";
+        $resCheck = $pdo->query($sqlCheckAdresse);
+
+        if ($resCheck->rowCount() === 0) {
+            $sqlAdresse = "
+                INSERT INTO _adresse (adresse, region, codePostal, ville, pays)
+                VALUES ($adresseQ, $regionQ, $codePostalQ, $villeQ, 'France')
+            ";
+            $resAdresse = $pdo->query($sqlAdresse);
+            if ($resAdresse === false) {
+                throw new Exception("Erreur lors de la création de l’adresse : " . implode(', ', $pdo->errorInfo()));
+            }
         }
-        $idAdresseLivr = $pdo->lastInsertId();
 
-        // Utiliser la même adresse pour la facturation
-        $idAdresseFact = $idAdresseLivr;
-
-        // 2. Créer la commande dans _commande
-        $montantTTC = floatval($sousTotal) * 1.20;
-        $montantHT = floatval($sousTotal);
+        // 2. Créer la commande
+        $montantHT = $sousTotal;
+        $montantTTC = $sousTotal * 1.20;
         $carteQ = $pdo->quote($numeroCarte);
 
-        $sql = "
+        $sqlCommande = "
             INSERT INTO _commande 
-            (dateCommande, etatLivraison, montantCommandeTTC, montantCommandeHt, 
-             quantiteCommande, _nomTransporteur, dateExpedition, idAdresseLivr, idAdresseFact, numeroCarte, idPanier)
-            VALUES (NOW(), 'En préparation', $montantTTC, $montantHT, $nbArticles, 'Colissimo', NULL, $idAdresseLivr, $idAdresseFact, $carteQ, $idPanier)
+            (dateCommande, etatLivraison, montantCommandeTTC, montantCommandeHt, quantiteCommande, 
+             nomTransporteur, dateExpedition, adresseLivr, regionLivr, villeLivr, 
+             adresseFacture, regionFacture, villeFacture, numeroCarte, idPanier)
+            VALUES (NOW(), 'En préparation', $montantTTC, $montantHT, $nbArticles, 
+             'Colissimo', NULL, $adresseQ, $regionQ, $villeQ, 
+             $adresseQ, $regionQ, $villeQ, $carteQ, $idPanier)
         ";
-        
-        $res = $pdo->query($sql);
-        if ($res === false) {
-            throw new Exception("Impossible de créer la commande: " . implode(', ', $pdo->errorInfo()));
+        $resCommande = $pdo->query($sqlCommande);
+        if ($resCommande === false) {
+            throw new Exception("Erreur lors de la création de la commande : " . implode(', ', $pdo->errorInfo()));
         }
 
         $idCommande = $pdo->lastInsertId();
 
-        // 3. Copier les produits du panier vers la table _contient
-        $sql = "
+        // 3. Copier les produits dans _contient
+        $sqlContient = "
             INSERT INTO _contient (idProduit, idCommande, prixProduitHt, tauxTva, quantite)
             SELECT pap.idProduit, $idCommande, p.prix, COALESCE(t.pourcentageTva, 20.0), pap.quantiteProduit
             FROM _produitAuPanier pap
@@ -149,16 +157,16 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
             LEFT JOIN _tva t ON p.typeTva = t.typeTva
             WHERE pap.idPanier = $idPanier
         ";
-        $res = $pdo->query($sql);
-        if ($res === false) {
-            throw new Exception("Impossible de copier les produits dans la commande");
+        $resContient = $pdo->query($sqlContient);
+        if ($resContient === false) {
+            throw new Exception("Erreur lors de la copie des produits : " . implode(', ', $pdo->errorInfo()));
         }
 
-        // 4. Vider le panier après commande
-        $sql = "DELETE FROM _produitAuPanier WHERE idPanier = $idPanier";
-        $res = $pdo->query($sql);
-        if ($res === false) {
-            throw new Exception("Impossible de vider le panier");
+        // 4. Vider le panier
+        $sqlDelete = "DELETE FROM _produitAuPanier WHERE idPanier = $idPanier";
+        $resDelete = $pdo->query($sqlDelete);
+        if ($resDelete === false) {
+            throw new Exception("Erreur lors du vidage du panier : " . implode(', ', $pdo->errorInfo()));
         }
 
         $pdo->commit();
