@@ -322,7 +322,7 @@
         </script>
       </main>
 
-    <?php include '../../views/frontoffice/partials/footer.php'; ?>
+    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
 
 </body>
 </html>
