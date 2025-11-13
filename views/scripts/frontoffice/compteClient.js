@@ -57,15 +57,15 @@ function popUpModifierMdp(){
                 </main>`;
     document.body.appendChild(overlay);
 
-    let croixFermerLaPage = document.getElementsByClassName("croixFermerLaPage");
+    let croixFermerLaPage = overlay.getElementsByClassName("croixFermerLaPage");
     croixFermerLaPage = croixFermerLaPage[0];
     croixFermerLaPage.addEventListener("click",fermerPopUp);
 
-    let input = document.querySelectorAll("input");
+    let input = overlay.querySelectorAll("input");
     let ancienMdp = input[0];
     let nouveauMdp = input[1];
     let confirmationMdp = input[2];
-    let button = document.querySelectorAll("button");
+    let button = overlay.querySelectorAll("button");
     let valider = button[0];
     valider.addEventListener("click",fermerPopUp);
 
