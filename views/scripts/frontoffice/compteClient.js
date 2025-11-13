@@ -59,7 +59,7 @@ function popUpModifierMdp(){
 
     let croixFermerLaPage = document.getElementsByClassName("croixFermerLaPage");
     croixFermerLaPage = croixFermerLaPage[0];
-    croixFermerLaPage.addEventListener("click",fermerPopUp(overlay));
+    croixFermerLaPage.addEventListener("click", () => fermerPopUp());
 
     let input = document.querySelectorAll("input");
     let ancienMdp = input[0];
@@ -67,7 +67,8 @@ function popUpModifierMdp(){
     let confirmationMdp = input[2];
     let button = document.querySelectorAll("button");
     let valider = button[0];
-    valider.addEventListener("click",fermerPopUp(overlay));
+    valider.addEventListener("click", () => fermerPopUp());
+
 
     function verifierMdp() {
         const ancienMdpChiffree = vignere(ancienMdp.value, cle, 1);
