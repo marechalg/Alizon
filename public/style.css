@@ -1433,7 +1433,7 @@ main.acceuilBackoffice section.avis article table button {
 }
 main.acceuilBackoffice section.produits article {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
   max-width: 100%;
   gap: 2em;
   font-size: 20px;
