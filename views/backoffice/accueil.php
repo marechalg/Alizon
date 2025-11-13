@@ -103,14 +103,13 @@ require_once '../../controllers/date.php';
     $avis = ($pdo->query(file_get_contents('../../queries/backoffice/derniersAvis.sql')))->fetchAll(PDO::FETCH_ASSOC);
     if (count($avis) == 0) echo "<h2>Aucun avis</h>";
     foreach ($avis as $avi) {
-        $idProduit = $avi['idProduit'];
-        $image = ($pdo->query(str_replace('$idProduit', $idProduit, file_get_contents('../../queries/imagesProduit.sql'))))->fetchAll(PDO::FETCH_ASSOC);
+        $imagesAvis = ($pdo->query(str_replace('$idProduit', $avi['idProduit'], file_get_contents('../../queries/imagesProduit.sql'))))->fetchAll(PDO::FETCH_ASSOC);
         $html = "
         <table>
             <tr>
                 <td rowspan=2>
                     <figure>
-                        <img src='$image'>
+                        <img src='/public/images/pp.png'>
                         <figcaption>" . $avi['nomClient'] . "</figcaption>
                     </figure>
                     <figure>
@@ -118,17 +117,17 @@ require_once '../../controllers/date.php';
                         <img src='/public/images/etoile.svg'>
                     </figure>
                 </td>
-                <td>" . $avi['titre'] . "</td>
+                <td>" . $avi['titreAvis'] . "</td>
                 <td colspan=2>Le " . formatDate($avi['dateAvis']) . "</td>
             </tr>
             <tr>
-                <td colspan=3>" . $avi['contenu'] . "</td>
+                <td colspan=3>" . $avi['contenuAvis'] . "</td>
             </tr>
             <tr>
                 <td></td>
                 <td colspan=3>";
-                    foreach ($image as $img) {
-                        $html .= "<img src='" .$img['URL'] . "'>";
+                    foreach ($imagesAvis as $imgage) {
+                        $html .= "<img src='" . $image['URL'] . "'>";
                     }
                 $html .= "</td>
             </tr>
