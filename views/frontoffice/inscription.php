@@ -4,27 +4,6 @@
     if (isset($_COOKIE[session_name()])) {
         session_start(['read_and_close' => true]);
     }
-    $nom_contact = '';
-    $prenom_contact = '';
-    $email = '';
-    $num_tel = '';
-    $nom_utilisateur = '';
-    $mdp = '';
-    $confimer_mdp = '';
-    $date_naissance = '';
-
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $nom_contact        = htmlspecialchars(trim($_POST['pseudo'] ?? ''));
-        $prenom_contact     = htmlspecialchars(trim($_POST['prenom'] ?? ''));
-        $email              = htmlspecialchars(trim($_POST['email'] ?? ''));
-        $num_tel            = htmlspecialchars(trim($_POST['num_tel'] ?? ''));
-        $nom_utilisateur    = htmlspecialchars(trim($_POST['nom'] ?? ''));
-        $mdp                = $_POST['mdp'] ?? '';
-        $confimer_mdp       = $_POST['confimer_mdp'] ?? '';
-        $date_naissance     = htmlspecialchars(trim($_POST['date_naissance'] ?? ''));
-        
-        $form_is_valid = true;
-    }
 
 ?>
 
@@ -324,9 +303,19 @@
 
             if(validateForm()){
                 <?php
+
+                $pseudo             = $_POST['pseudo'];
+                $prenom             = $_POST['prenom'];
+                $nom                = $_POST['nom'];
+                $email              = $_POST['email'];
+                $num_tel            = $_POST['num_tel'];
+                $mdp                = $_POST['mdp'] ;
+                $date_naissance     = $_POST['date_naissance'];
+
+
                 $nouveauClient = "INSERT INTO _client
                                   (dateNaissance, prenom, nom, email, mdp, noTelephone, pseudo)
-                                  VALUES ($_POST['date_naissance'], $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['mdp'], $_POST['num_tel'], $_POST['pseudo']);"              
+                                  VALUES ($date_naissance, $prenom  , $nom, $email, $mdp , $num_tel, $pseudo ;";            
                 ?>
             }
         </script>
