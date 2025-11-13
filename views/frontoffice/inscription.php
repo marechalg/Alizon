@@ -4,24 +4,21 @@
     if (isset($_COOKIE[session_name()])) {
         session_start(['read_and_close' => true]);
     }
-    $message = "";
-    $data = []; 
     $nom_contact = '';
     $prenom_contact = '';
     $email = '';
     $num_tel = '';
     $nom_utilisateur = '';
-    $num_siren = '';
-    $adresse_entreprise = '';
-    $raison_sociale = '';
+    $mdp = '';
+    $confimer_mdp = '';
     $date_naissance = '';
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $nom_contact        = htmlspecialchars(trim($_POST['nom_contact'] ?? ''));
-        $prenom_contact     = htmlspecialchars(trim($_POST['prenom_contact'] ?? ''));
+        $nom_contact        = htmlspecialchars(trim($_POST['pseudo'] ?? ''));
+        $prenom_contact     = htmlspecialchars(trim($_POST['prenom'] ?? ''));
         $email              = htmlspecialchars(trim($_POST['email'] ?? ''));
         $num_tel            = htmlspecialchars(trim($_POST['num_tel'] ?? ''));
-        $nom_utilisateur    = htmlspecialchars(trim($_POST['nom_utilisateur'] ?? ''));
+        $nom_utilisateur    = htmlspecialchars(trim($_POST['nom'] ?? ''));
         $mdp                = $_POST['mdp'] ?? '';
         $confimer_mdp       = $_POST['confimer_mdp'] ?? '';
         $date_naissance     = htmlspecialchars(trim($_POST['date_naissance'] ?? ''));
@@ -45,7 +42,7 @@
 </head>
 <body class="inscription">
 
-  <?php include './partials/headerDeconnecte.php'; ?>
+  <?php include './partials/headerConnecte.php'; ?>
 
     <h2>Inscription</h2>
   
@@ -101,8 +98,11 @@
         </form> 
         <script>
             // Eléments du DOM
-            const psuedoInput = document.getElementById('pseudo');
+            const pseudoInput = document.getElementById('pseudo');
+            const prenomInput = document.getElementById('prenom');
+            const nomInput = document.getElementById('nom');
             const birthDateInput = document.getElementById('birthdate');
+            const emailInput = document.getElementById('email');
             const phoneNumberInput = document.getElementById('telephone');
             const passwordInput = document.getElementById('mdp');
             const confirmPasswordInput = document.getElementById('cmdp');
@@ -194,6 +194,14 @@
                 submitButton.disabled = !allValid;
                 
                 if(allValid){
+                    $_POST['pseudo'] = $nomInput.value;        
+                    $_POST['prenom'] = $prenomInput.value; 
+                    $_POST['email'] = $emailInput.value;          
+                    $_POST['num_tel'] = $phoneNumberInput.value;          
+                    $_POST['nom'] = $pseudoInput.value;
+                    $_POST['mdp'] = $mdpInput.value;              
+                    $_POST['confimer_mdp'] = $confirmPasswordInput.value       
+                    $_POST['date_naissance'] = $birthDateIput.value;     
                     return true;
                 }
                 return false
@@ -316,8 +324,9 @@
 
             if(validateForm()){
                 <?php
-                $nouveauClient = "INSERT INTO TALBE _client
-                ";
+                $nouveauClient = "INSERT INTO _client
+                                  (dateNaissance, prenom, nom, email, mdp, noTelephone, pseudo)
+                                  VALUES ($_POST['date_naissance'], $_POST['prenom'], $_POST['nom'], $_POST['email'], $_POST['mdp'], $_POST['num_tel'], $_POST['pseudo']);"              
                 ?>
             }
         </script>
