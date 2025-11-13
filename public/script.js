@@ -31,43 +31,41 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
     exports.initAside = initAside;
     function initAside(recapSelector, cart, onCartUpdate) {
         const container = document.querySelector(recapSelector);
+        if (!container) {
+            console.error("Container aside non trouvé:", recapSelector);
+            throw new Error("Container aside non trouvé");
+        }
+        // Debug: afficher les données reçues
+        console.log("Données cart reçues dans aside:", cart);
+        function normalizeCartItem(item) {
+            return {
+                id: String(item.id || item.idProduit || ""),
+                nom: String(item.nom || "Produit sans nom"),
+                prix: Number(item.prix || 0),
+                qty: Number(item.qty || item.quantiteProduit || 0),
+                img: item.img || item.URL || "../../public/images/default.png",
+            };
+        }
+        const normalizedCart = cart.map(normalizeCartItem);
+        console.log("Cart normalisé:", normalizedCart);
         async function updateQty(id, delta) {
             try {
-                console.log("📤 Envoi direct AJAX - Mise à jour quantité:", id, delta);
+                console.log("Mise à jour quantité:", id, delta);
+                const formData = new FormData();
+                formData.append("action", "updateQty");
+                formData.append("idProduit", id);
+                formData.append("delta", delta.toString());
                 const response = await fetch("", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: `action=updateQty&idProduit=${id}&delta=${delta}`,
+                    body: formData,
                 });
-                const result = await response.json();
-                if (result.success) {
-                    console.log("✅ BD mise à jour - Rechargement");
-                    window.location.reload(); // Recharge la page pour voir les changements
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
                 }
-                else {
-                    alert("Erreur: " + (result.error || "Erreur inconnue"));
-                }
-            }
-            catch (error) {
-                console.error("Erreur:", error);
-                alert("Erreur réseau");
-            }
-        }
-        async function removeItem(id) {
-            try {
-                console.log("📤 Envoi direct AJAX - Suppression:", id);
-                const response = await fetch("", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: `action=removeItem&idProduit=${id}`,
-                });
                 const result = await response.json();
+                console.log("Réponse updateQty:", result);
                 if (result.success) {
-                    console.log("✅ Produit supprimé - Rechargement");
+                    console.log("Quantité mise à jour - Rechargement");
                     window.location.reload();
                 }
                 else {
@@ -76,75 +74,119 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
             }
             catch (error) {
                 console.error("Erreur:", error);
-                alert("Erreur réseau");
+                alert("Erreur réseau: " + error.message);
+            }
+        }
+        async function removeItem(id) {
+            try {
+                if (!confirm("Supprimer ce produit du panier ?")) {
+                    return;
+                }
+                console.log("Suppression produit:", id);
+                const formData = new FormData();
+                formData.append("action", "removeItem");
+                formData.append("idProduit", id);
+                const response = await fetch("", {
+                    method: "POST",
+                    body: formData,
+                });
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                const result = await response.json();
+                console.log("Réponse removeItem:", result);
+                if (result.success) {
+                    console.log("Produit supprimé - Rechargement");
+                    window.location.reload();
+                }
+                else {
+                    alert("Erreur: " + (result.error || "Erreur inconnue"));
+                }
+            }
+            catch (error) {
+                console.error("Erreur:", error);
+                alert("Erreur réseau: " + error.message);
             }
         }
         function attachListeners() {
-            if (!container)
-                return;
-            container.querySelectorAll("button.plus").forEach((btn) => {
+            // Boutons +
+            container
+                .querySelectorAll("button.plus")
+                .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
-                    const id = ev.currentTarget.getAttribute("data-id");
-                    updateQty(id, 1);
+                    ev.preventDefault();
+                    const id = btn.getAttribute("data-id");
+                    if (id) {
+                        updateQty(id, 1);
+                    }
                 });
             });
-            container.querySelectorAll("button.minus").forEach((btn) => {
+            // Boutons -
+            container
+                .querySelectorAll("button.minus")
+                .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
-                    const id = ev.currentTarget.getAttribute("data-id");
-                    updateQty(id, -1);
+                    ev.preventDefault();
+                    const id = btn.getAttribute("data-id");
+                    if (id) {
+                        updateQty(id, -1);
+                    }
                 });
             });
-            container.querySelectorAll("button.delete").forEach((btn) => {
+            // Boutons suppression
+            container
+                .querySelectorAll("button.delete")
+                .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
-                    const id = ev.currentTarget.getAttribute("data-id");
-                    if (confirm("Supprimer ce produit du panier ?")) {
+                    ev.preventDefault();
+                    const id = btn.getAttribute("data-id");
+                    if (id) {
                         removeItem(id);
                     }
                 });
             });
         }
         function render() {
-            if (!container)
-                return;
-            container.innerHTML = "";
-            if (cart.length === 0) {
-                const empty = document.createElement("div");
-                empty.className = "empty-cart";
-                empty.textContent = "Panier vide";
-                container.appendChild(empty);
+            console.log("Rendu du aside avec", normalizedCart.length, "produits");
+            if (normalizedCart.length === 0) {
+                container.innerHTML = '<div class="empty-cart">Panier vide</div>';
                 return;
             }
-            cart.forEach((item) => {
-                const row = document.createElement("div");
-                row.className = "produit";
-                row.setAttribute("data-id", item.id);
-                row.innerHTML = `
-        <img src="${item.img || "/images/default.png"}" alt="${item.title}" class="mini" />
-        <div class="infos">
-          <p class="titre">${item.title}</p>
-          <p class="prix">${(item.price * item.qty).toFixed(2)} €</p>
-          <div class="gestQte">
-            <div class="qte">
-              <button class="minus" data-id="${item.id}">-</button>
-              <span class="qty" data-id="${item.id}">${item.qty}</span>
-              <button class="plus" data-id="${item.id}">+</button>
+            let html = "";
+            normalizedCart.forEach((item) => {
+                const total = item.prix * item.qty;
+                html += `
+        <div class="produit" data-id="${item.id}">
+          <img src="${item.img}" alt="${item.nom}" />
+          <div class="infos">
+            <p class="titre">${item.nom}</p>
+            <p class="prix">${total.toFixed(2)}€</p>
+            <div class="gestQte">
+              <div class="qte">
+                <button class="minus" data-id="${item.id}">-</button>
+                <span class="qty" data-id="${item.id}">${item.qty}</span>
+                <button class="plus" data-id="${item.id}">+</button>
+              </div>
+              <button class="delete" data-id="${item.id}">
+                <img src="../../public/images/bin.svg" alt="Supprimer">
+              </button>
             </div>
-            <button class="delete" data-id="${item.id}">
-              <img src="/public/images/bin.svg" alt="Supprimer">
-            </button>
           </div>
         </div>
       `;
-                container.appendChild(row);
             });
+            container.innerHTML = html;
             attachListeners();
         }
+        // Initial render
         render();
         return {
             update(newCart) {
-                console.log("🔄 Mise à jour de l'aside avec nouveau panier");
-                cart = newCart;
+                console.log("Mise à jour aside avec nouveau panier:", newCart);
+                const newNormalizedCart = newCart.map(normalizeCartItem);
+                normalizedCart.splice(0, normalizedCart.length, ...newNormalizedCart);
                 render();
+                onCartUpdate();
             },
             getElement() {
                 return container;
@@ -596,14 +638,14 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
         const adresseInput = document.querySelector("body.pagePaiement .adresse-input");
         const codePostalInput = document.querySelector("body.pagePaiement .code-postal-input");
         const villeInput = document.querySelector("body.pagePaiement .ville-input");
-        // FIX: utiliser le même nom de classe que les autres inputs (num-carte-input)
-        const numCarteInput = document.querySelector("body.pagePaiement .num-carte-input");
+        // CORRECTION : utiliser la bonne classe
+        const numCarteInput = document.querySelector("body.pagePaiement .num-carte");
         const adresse = adresseInput?.value.trim() || "";
         const codePostal = codePostalInput?.value.trim() || "";
         const ville = villeInput?.value.trim() || "";
         const rawNumCarte = numCarteInput?.value.replace(/\s+/g, "") || "";
         const last4 = rawNumCarte.length >= 4 ? rawNumCarte.slice(-4) : rawNumCarte;
-        // Utiliser les données du panier depuis window.__PAYMENT_DATA__
+        // CORRECTION : Utiliser les bonnes propriétés des données PHP
         const preCart = Array.isArray(window.__PAYMENT_DATA__?.cart)
             ? window.__PAYMENT_DATA__.cart
             : [];
@@ -612,10 +654,10 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
             cartItemsHtml = preCart
                 .map((item) => `
       <div class="product">
-        <img src="${item.img || "/images/default.png"}" alt="${item.title}" />
-        <p class="title">${item.title}</p>
+        <img src="${item.img || "/images/default.png"}" alt="${item.nom}" />
+        <p class="title">${item.nom}</p>
         <p><strong>Quantité :</strong> ${item.qty}</p>
-        <p><strong>Prix total :</strong> ${(item.price * item.qty).toFixed(2)} €</p>
+        <p><strong>Prix total :</strong> ${(item.prix * item.qty).toFixed(2)} €</p>
       </div>`)
                 .join("");
         }
@@ -655,7 +697,6 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
             confirmBtn.textContent = "Traitement en cours...";
             try {
                 console.log("Création commande via AJAX direct...");
-                // Envoi au même endpoint (vide = même URL) est possible, mais vérifier la réponse
                 const response = await fetch("", {
                     method: "POST",
                     headers: {
@@ -668,7 +709,7 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
                 }
                 const result = await response.json();
                 if (result && result.success) {
-                    console.log("✅ Commande créée en BD:", result.idCommande);
+                    console.log("Commande créée en BD:", result.idCommande);
                     const popup = overlay.querySelector(".payment-popup");
                     if (!popup) {
                         overlay.remove();
@@ -704,9 +745,10 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
 // ============================================================================
 // MAIN PAIEMENT LOGIC
 // ============================================================================
-define("frontoffice/paiement-main", ["require", "exports", "frontoffice/paiement-validation", "frontoffice/paiement-autocomplete", "frontoffice/paiement-popup", "frontoffice/paiement-aside", "./paiement-cart"], function (require, exports, paiement_validation_2, paiement_autocomplete_1, paiement_popup_1, paiement_aside_1, paiement_cart_1) {
+define("frontoffice/paiement-main", ["require", "exports", "frontoffice/paiement-validation", "frontoffice/paiement-autocomplete", "frontoffice/paiement-popup"], function (require, exports, paiement_validation_2, paiement_autocomplete_1, paiement_popup_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    // aside is rendered server-side now; no client init required
     if (document.body.classList.contains("pagePaiement")) {
         // Éléments
         const adresseInput = document.querySelector("body.pagePaiement .adresse-input");
@@ -743,6 +785,17 @@ define("frontoffice/paiement-main", ["require", "exports", "frontoffice/paiement
                 preloaded.postals[postal].forEach((c) => allCities.add(c));
             });
         }
+        // Initialiser le panier à partir des données injectées côté PHP
+        let cart = [];
+        if (preloaded.cart && Array.isArray(preloaded.cart)) {
+            cart = preloaded.cart.map((it) => ({
+                id: String(it.id ?? it.idProduit ?? ""),
+                nom: String(it.nom ?? "Produit sans nom"),
+                prix: Number(it.prix ?? 0),
+                qty: Number(it.qty ?? it.quantiteProduit ?? 0),
+                img: it.img ?? it.URL ?? "../../public/images/default.png",
+            }));
+        }
         // Setup autocomplete handlers
         (0, paiement_autocomplete_1.setupAutocomplete)({
             codePostalInput,
@@ -750,31 +803,7 @@ define("frontoffice/paiement-main", ["require", "exports", "frontoffice/paiement
             maps: { departments, citiesByCode, postals, allCities },
             selectedDepartment,
         });
-        // Initialiser le panier
-        let cart = (0, paiement_cart_1.getCartFromData)();
-        function handleUpdateQty(id, delta) {
-            cart = (0, paiement_cart_1.updateQty)(cart, id, delta);
-            aside.update(cart);
-            const span = document.querySelector(`.qty[data-id="${id}"]`);
-            const prod = document.querySelector(`.produit[data-id="${id}"]`);
-            const item = cart.find((c) => c.id === id);
-            if (span && item) {
-                span.textContent = String(item.qty);
-            }
-            if (!item && prod && prod.parentElement) {
-                prod.parentElement.removeChild(prod);
-            }
-        }
-        function handleRemoveItem(id) {
-            cart = (0, paiement_cart_1.removeItem)(cart, id);
-            aside.update(cart);
-            const prod = document.querySelector(`.produit[data-id="${id}"]`);
-            if (prod && prod.parentElement)
-                prod.parentElement.removeChild(prod);
-        }
-        // initialiser l'aside (récapitulatif) et synchroniser avec le panier
-        const aside = (0, paiement_aside_1.initAside)("#recap", cart, handleUpdateQty, handleRemoveItem);
-        // attacher les gestionnaires aux boutons du récap rendu côté serveur (PHP) - now handled in initAside
+        // aside is rendered server-side (PHP forms). No client-side init required.
         payerButtons.forEach((btn) => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
