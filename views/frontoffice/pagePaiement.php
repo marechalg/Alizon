@@ -4,30 +4,29 @@ require_once "../../controllers/pdo.php";
 // ID utilisateur connecté (à remplacer par la gestion de session)
 $idClient = 1; 
 
-$stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = 1 ORDER BY idPanier DESC LIMIT 1");
+$stmt = $pdo->prepare("SELECT idPanier FROM _panier WHERE idClient = :idClient ORDER BY idPanier DESC LIMIT 1");
+$stmt->execute([':idClient' => $idClient]);
 $panier = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $cart = [];
 
 if ($panier) {
-    $idPanier = $panier['idPanier'];
+    // Récupération et cast de l'idPanier
+    $idPanier = intval($panier['idPanier']); // protection basique contre l'injection
 
-    $idPanier = intval($idPanier); // protection basique contre l'injection
-    $stmt = $pdo->query("
-        SELECT 
-            p.idProduit,
-            p.nom AS nom,
-            p.nom AS name,
-            p.prix AS prix,
-            p.prix AS price,
-            pa.quantiteProduit AS qty,
-            i.URL AS img
-        FROM _produitAuPanier pa
-        JOIN _produit p ON pa.idProduit = p.idProduit
-        LEFT JOIN _imageDeProduit i ON p.idProduit = i.idProduit
-        WHERE pa.idPanier = $idPanier
+    // Requête préparée pour récupérer les produits du panier
+    $stmt = $pdo->prepare("\
+        SELECT p.idProduit, p.nom, p.prix, pa.quantiteProduit as qty, i.URL as img\
+        FROM _produitAuPanier pa\
+        JOIN _produit p ON pa.idProduit = p.idProduit\
+        LEFT JOIN _imageDeProduit i ON p.idProduit = i.idProduit\
+        WHERE pa.idPanier = :idPanier\
     ");
+    $stmt->execute([':idPanier' => $idPanier]);
     $cart = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+
+    // Ne pas essayer d'accéder à $cart['nom'] puisque $cart est un tableau de lignes.
+    // Les champs nom/img/prix/qty sont lus pour chaque article à l'intérieur du foreach plus bas.
 }
 // ============================================================================
 // FONCTIONS POUR GÉRER LES ACTIONS AJAX
