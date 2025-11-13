@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $email = $_POST['email'];
+    $dateNaissance = $_POST['dateNaissance'];
     $telephone = $_POST['telephone'];
     $codePostal = $_POST['codePostal'];
     $adresse1 = $_POST['adresse1'];
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     nom = '$nom', 
     prenom = '$prenom', 
     email =  '$email', 
+    dateNaissance = '$dateNaissance',
     noTelephone = '$telephone'
     WHERE idClient = '$id_client';");
 
@@ -38,11 +40,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     region = '$region'
     WHERE idAdresse = '$idAdresse';");
 
+}   
+
     //verification et upload de la nouvelle photo de profil
+    $photoPath = '../../public/images/photoDeProfil/photo_profil'.$id_client.'.png';
+    if (file_exists($photoPath)) {
+        unlink($photoPath); // supprime l’ancien fichier
+    }
+
     if (isset($_FILES['photoProfil']) && $_FILES['photoProfil']['tmp_name'] != '') {
         move_uploaded_file($_FILES['photoProfil']['tmp_name'], '../../public/images/photoDeProfil/photo_profil'.$id_client.'.png');
     }
-}   
+
     //on recupère les infos du user pour les afficher
     $stmt = $pdo->query("SELECT * FROM _client WHERE idClient = '$id_client'");
     $client = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -80,10 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="titreCompte">
                 <div class="photo-container">
                     <?php 
-                        $id = 1;
-                        $photoPath = '../../public/images/photoDeProfil/photo_profil'.$id.'.png';
                         if (file_exists($photoPath)) {
-                            echo '<img src="'.$photoPath.'?t='.time().'" alt="photoProfil" id="imageProfile">';
+                            echo "<img src=".$photoPath." alt=photoProfil id=imageProfile>";
                         } else {
                             echo '<img src="../../public/images/profil.png" alt="photoProfil" id="imageProfile">';
                         }
@@ -118,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div id="buttonsCompte">
                 <button type="button" onclick="popUpModifierMdp()" class="boutonModifierMdp">Modifier le mot de passe</button>
-                <button type="button"> </button>
+                <button class="boutonAnnuler" type="button" onclick="boutonAnnuler()">Annuler</button>
                 <button type="button" class="boutonModiferProfil">Modifier</button>
             </div>
         </form>
@@ -187,39 +194,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             for (let i = 0; i < champs.length; i++) {
                 let valeur = champs[i].value.trim();
-
-                switch(champs[i].name) {
-                        case "pseudo":
-                            champs[i].placeholder = "Entrez votre pseudo";
-                            break;
-                        case "nom":
-                            champs[i].placeholder = "Entrez votre nom";
-                            break;
-                        case "prenom":
-                            champs[i].placeholder = "Entrez votre prénom";
-                            break;
-                        case "dateNaissance":
-                            champs[i].placeholder = "Entrez votre date de naissance";
-                            break;
-                        case "adresse1":
-                            champs[i].placeholder = "Entrez votre adresse";
-                            break;
-                        case "codePostal":
-                            champs[i].placeholder = "Entrez votre code postal";
-                            break;
-                        case "ville":
-                            champs[i].placeholder = "Entrez votre ville";
-                            break;
-                        case "pays":
-                            champs[i].placeholder = "Entrez votre pays";
-                            break;
-                        case "telephone":
-                            champs[i].placeholder = "Entrez votre numéro de téléphone";
-                            break;
-                        case "email":
-                            champs[i].placeholder = "Entrez votre email";
-                            break;
-                    }
                 
                 // Le champ adresse2 est optionnel
                 if (i !== 5 && valeur === "") {
@@ -261,6 +235,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         let imageProfile = document.getElementById("imageProfile");
         let bnModifier = document.getElementsByClassName("boutonModiferProfil");
         let bnModifMdp = document.getElementsByClassName("boutonModifierMdp");
+        let bnAnnuler = document.getElementsByClassName("boutonAnnuler");
 
         function modifierProfil(event) {
 
@@ -287,8 +262,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Définir le type d'input approprié
                     if (i === 9) input.type = "tel";
                     else if (i === 10) input.type = "email";
-                    else if (i === 3) input.type = "date";
                     else input.type = "text";
+
+                    switch(i) {
+                        case 0:
+                            input.placeholder = "Entrez votre pseudo";
+                            break;
+                        case 1:
+                            input.placeholder = "Entrez votre nom";
+                            break;
+                        case 2:
+                            input.placeholder = "Entrez votre prénom";
+                            break;
+                        case 3:
+                            input.placeholder = "Entrez votre date de naissance jj/mm/aaaa";
+                            break;
+                        case 4:
+                            input.placeholder = "Entrez votre adresse";
+                            break;
+                        case 6:
+                            input.placeholder = "Entrez votre code postal";
+                            break;
+                        case 7:
+                            input.placeholder = "Entrez votre ville";
+                            break;
+                        case 8:
+                            input.placeholder = "Entrez votre pays";
+                            break;
+                        case 9:
+                            input.placeholder = "Entrez votre numéro de téléphone";
+                            break;
+                        case 10:
+                            input.placeholder = "Entrez votre email";
+                            break;
+                    }
 
                     elems[i].parentNode.replaceChild(input, elems[i]);
                 }
@@ -304,6 +311,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 enModif = true;
 
+                bnAnnuler[0].style.display = "block";
+                bnAnnuler[0].style.color = "white";
+
                 document.querySelector("section").addEventListener("input", verifierChamp);
                 verifierChamp();
 
@@ -318,8 +328,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         bnModifier[0].addEventListener("click", modifierProfil);
 
         function fermerFenetre(){
-                window.close();
+            window.close();
+        }
+
+        const valeursInitiales = Array.from(document.querySelectorAll("section p"))
+
+        function boutonAnnuler() {
+
+            let inputs = document.querySelectorAll("section input");
+
+            for (let i = 0; i < inputs.length; i++) {
+                let p = document.createElement("p");
+                p.innerText = valeursInitiales[i].innerText;
+                inputs[i].parentNode.replaceChild(p, inputs[i]);
             }
+
+            if (document.getElementById("photoProfil")) {
+                document.getElementById("photoProfil").remove();
+            }
+
+            enModif = false;
+
+            bnModifier[0].innerHTML = "Modifier";
+            bnModifier[0].style.backgroundColor = "#e4d9ff";
+            bnModifier[0].style.color = "#273469";
+            bnModifier[0].disabled = false; 
+
+            bnAnnuler[0].style.display = "none";
+
+            imageProfile.style.cursor = "default";
+            imageProfile.onclick = null;
+            
+        }
     </script>
 </body>
 </html>

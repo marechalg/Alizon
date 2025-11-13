@@ -1,4 +1,8 @@
-<?php require_once '../../controllers/pdo.php'; ?>
+<?php
+require_once '../../controllers/pdo.php';
+require_once '../../controllers/prix.php';
+require_once '../../controllers/date.php';
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,75 +21,33 @@
         <?php require_once './partials/aside.php' ?>
 
         <main class="acceuilBackoffice">
-            <!--
-            <section>
-                <h1>Derniers Bilans</h1>
-                <article>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td><button class="bilan here">Journalier</button></td>
-                                <td><button class="bilan">Hebdomadaire</button></td>
-                                <td><button class="bilan">Mensuel</button></td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Nombre de ventes</td>
-                                <td colspan=2>Chiffre d'affaires</td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <figure>
-                                        <img src="/public/images/arrowDestonks.svg">
-                                        <figcaption class="neg">46</figcaption>
-                                    </figure>
-                                </td>
-                                <td>
-                                    <figure colspan=2>
-                                        <img src="/public/images/arrowStonks.svg">
-                                        <figcaption class="pos">1.634,50€</figcaption>
-                                    </figure>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </article>
-                <a href="" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
-            </section>
-            -->
-
             <section class="stock">
                 <h1>Stocks Faibles</h1>
                 <article>
 <?php
-    $stock = ($pdo->query("select * from _produit where stock < seuilAlerte"))->fetchAll(PDO::FETCH_ASSOC);
+    $stock = ($pdo->query(file_get_contents('../../queries/backoffice/stockFaible.sql')))->fetchAll(PDO::FETCH_ASSOC);
     if (count($stock) == 0) echo "<h2>Aucun stock affaibli</h2>";
     foreach ($stock as $produit => $atr) {
+        $idProduit = $atr['idProduit'];
+        $image = ($pdo->query(str_replace('$idProduit', $idProduit, file_get_contents('../../queries/imagesProduit.sql'))))->fetchAll(PDO::FETCH_ASSOC);
+        $image = $image = !empty($image) ? $image[0]['URL'] : '';
         $html = "
         <table>
             <tr>
-                <td></td>
+                <td><img src='$image'></td>
             </tr>
             <tr>
                 <td>" . $atr['nom'] . "</td>
             </tr>
             <tr>";
-                $prix = str_replace('.', ',', (String)$atr['prix']); 
-                if (explode(',', $prix)[1]) {
-                    if (strlen(explode(',', $prix)[1]) == 1) {
-                        $prix .= "0";
-                    }
-                }
+                $prix = formatPrice($atr['prix']);
                 $html .= "<td>" . $prix . "</td>";
                 $stock = $atr['stock'];
                 $seuil = "";
                 if ($stock == 0) {
                     $seuil = "epuise";
                 } else if ($stock <= $atr['seuilAlerte']) {
-                    $seuill = "faible";
+                    $seuil = "faible";
                 }
                 $html .= "<td class=\"$seuil\">$stock</td>
             </tr>
@@ -101,111 +63,35 @@
             <section class="commandes">
                 <h1>Dernières Commandes</h1>
                 <article>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>1
-                                4/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td rowspan=2><img src="/public/images/rilletes.svg"></td>
-                            <th>Rillettes</th>
-                        </tr>
-                        <tr>
-                            <td>29,99€</td>
-                        </tr>
-                        <tr>
-                            <td>14/11/2025</td>
-                            <th>3</th>
-                        </tr>
-                    </table>
+<?php
+    $commandes = ($pdo->query(file_get_contents('../../queries/backoffice/dernieresCommandes.sql')))->fetchAll(PDO::FETCH_ASSOC);
+    if (count($commandes) == 0) echo "<h2>Aucune commande</h2>";
+    foreach ($commandes as $commande) {
+        $idProduit = $commande['idProduit'];
+        $image = ($pdo->query(str_replace('$idProduit', $idProduit, file_get_contents('../../queries/imagesProduit.sql'))))->fetchAll(PDO::FETCH_ASSOC);
+        $image = $image = !empty($image) ? $image[0]['URL'] : '';
+        $html = "
+        <table>
+            <tr>
+                <td rowspan=2><img src='$image'></td>
+                <th>" . $commande['nom'] . "</th>
+            </tr>
+            <tr>
+                <td>
+                    Prix Unitaire : <strong>" . formatPrice($commande['prix']) . "</strong><br>
+                    Prix Total : <strong>" . formatPrice($commande['prix'] * $commande['quantiteProduit']) . "</strong><br>
+                    Statut : <strong>" . $commande['etatLivraison'] . "</strong>
+                </td>
+            </tr>
+            <tr>
+                <td>" . formatDate($commande['dateCommande']) . "</td>
+                <th>" . $commande['quantiteProduit'] . "</th>
+            </tr>
+        </table>
+        ";
+        echo $html;
+    }
+?>
                 </article>
                 <a href="./commandes.php" title="Voir plus"><img src="/public/images/infoDark.svg"></a>
             </section>
@@ -280,22 +166,20 @@
                 <h1>Produits en Vente</h1>
                 <article>
 <?php
-    $produits = ($pdo->query("select * from _produit"))->fetchAll(PDO::FETCH_ASSOC);
+    $produits = ($pdo->query(file_get_contents('../../queries/backoffice/produitsVente.sql')))->fetchAll(PDO::FETCH_ASSOC);
     foreach ($produits as $produit => $atr) {
+        $idProduit = $atr['idProduit'];
+        $image = ($pdo->query(str_replace('$idProduit', $idProduit, file_get_contents('../../queries/imagesProduit.sql'))))->fetchAll(PDO::FETCH_ASSOC);
+        $image = $image = !empty($image) ? $image[0]['URL'] : '';
         $html = "
         <table>
             <tr>
-                <td></td>
+                <td><img src='$image'></td>
             </tr>
             <tr>";
-                $prix = str_replace('.', ',', (String)$atr['prix']); 
-                if (explode(',', $prix)[1]) {
-                    if (strlen(explode(',', $prix)[1]) == 1) {
-                        $prix .= "0";
-                    }
-                }
+                $prix = formatPrice($atr['prix']);
                 $html .= "<td>" . $atr['nom'] . "</td>
-                <td>$prix</td>
+                <td>" . $prix . "</td>
             </tr>
         </table>
         ";

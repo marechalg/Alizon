@@ -8,9 +8,9 @@
 @use "./backoffice/footer";
 @use "./backoffice/aside";
 @use "./backoffice/structure";
+@use "./frontoffice/stylePaiement";
 @use './backoffice/acceuil';
-<<<<<<< HEAD
 @use './frontoffice/styleCompteClient';
-=======
-@use './frontoffice/styleCompteClient';
->>>>>>> main
+@use './frontoffice/styleAcceuilConnecte';
+@use './frontoffice/stylePopUpCompteClient';
+
