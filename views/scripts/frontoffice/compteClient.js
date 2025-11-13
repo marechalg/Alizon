@@ -1,5 +1,3 @@
-import { convert, vignere } from 'Chiffrement.js';
-
 function popUpModifierMdp(){
     const overlay = document.createElement("div");
     overlay.className = "overlayPopUpCompteClient";

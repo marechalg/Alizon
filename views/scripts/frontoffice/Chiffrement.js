@@ -1,4 +1,4 @@
-export function convert (char, cle, sens){
+function convert (char, cle, sens){
     const codeMin = 32;
     const codeMax = 126;
     let nbChars = codeMax - codeMin + 1;
@@ -22,7 +22,7 @@ export function convert (char, cle, sens){
     return String.fromCharCode(newCode);
 }
 
-export function vignere(texte, cle, sens){
+function vignere(texte, cle, sens){
     let result = "";
     let indexCLe = 0;
     for (let i = 0 ; i < texte.length ; i ++){
