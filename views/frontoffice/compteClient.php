@@ -133,6 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <?php include 'partials/footerConnecte.php'; ?>
 
+    <?php 
+        $stmt = $pdo->query("SELECT mdp FROM _client WHERE idClient = '$id_client'");
+        $tabMdp = $stmt->fetch(PDO::FETCH_ASSOC);
+        $mdp = $tabMdp['mdp'];
+    ?>
+    <script src="../scripts/frontoffice/Chiffrement.js"></script>
+    <script>
+        const mdp = "<?php echo $mdp; ?>";
+        const mdpChiffree = vignere(mdp, cle, 1);
+    </script>
     <script src="../scripts/frontoffice/compteClient.js"></script>
 </body>
 </html>
