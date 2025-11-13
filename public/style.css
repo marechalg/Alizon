@@ -1417,7 +1417,7 @@ main.acceuilBackoffice section.avis article {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 2em;
   font-family: "open-sans";
 }
 main.acceuilBackoffice section.avis article table {
@@ -1431,6 +1431,7 @@ main.acceuilBackoffice section.avis article table tr:first-child th:first-child 
   flex-direction: column;
   align-items: center;
   width: 120px;
+  gap: 0;
 }
 main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:first-child {
   display: flex;
@@ -1455,10 +1456,10 @@ main.acceuilBackoffice section.avis article table tr:first-child th:nth-child(2)
 }
 main.acceuilBackoffice section.avis article table tr:last-child td:last-child {
   display: flex;
+  gap: 1em;
 }
 main.acceuilBackoffice section.avis article table tr:last-child td:last-child img {
-  margin-right: 1em;
-  height: 200px;
+  height: 150px;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;

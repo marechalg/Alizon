@@ -137,7 +137,7 @@ main.acceuilBackoffice {
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1em;
+            gap: 2em;
             font-family: 'open-sans';
             
             table {
@@ -153,6 +153,7 @@ main.acceuilBackoffice {
                         flex-direction: column;
                         align-items: center;
                         width: 120px;
+                        gap: 0;
 
                         figure:first-child {
                             display: flex;
@@ -181,10 +182,10 @@ main.acceuilBackoffice {
                 tr:last-child {
                     td:last-child {
                         display: flex;
+                        gap: 1em;
 
                         img {
-                            margin-right: 1em;
-                            height: 200px;
+                            height: 150px;
                         }
                     } 
                 }
