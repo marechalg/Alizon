@@ -23,7 +23,7 @@ define("frontoffice/paiement-types", ["require", "exports"], function (require, 
     Object.defineProperty(exports, "__esModule", { value: true });
 });
 // ============================================================================
-// ASIDE (RECAP) - Version avec base de données
+// ASIDE (RECAP) - Version avec API unifiée
 // ============================================================================
 define("frontoffice/paiement-aside", ["require", "exports"], function (require, exports) {
     "use strict";
@@ -35,7 +35,6 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
             console.error("Container aside non trouvé:", recapSelector);
             throw new Error("Container aside non trouvé");
         }
-        // Debug: afficher les données reçues
         console.log("Données cart reçues dans aside:", cart);
         function normalizeCartItem(item) {
             return {
@@ -46,35 +45,36 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
                 img: item.img || item.URL || "../../public/images/default.png",
             };
         }
-        const normalizedCart = cart.map(normalizeCartItem);
-        console.log("Cart normalisé:", normalizedCart);
+        let normalizedCart = cart.map(normalizeCartItem);
         async function updateQty(id, delta) {
             try {
-                console.log("Mise à jour quantité:", id, delta);
-                const formData = new FormData();
-                formData.append("action", "updateQty");
-                formData.append("idProduit", id);
-                formData.append("delta", delta.toString());
-                const response = await fetch("", {
-                    method: "POST",
-                    body: formData,
-                });
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
+                console.log("Mise à jour quantité via API:", id, delta);
+                if (!window.PaymentAPI) {
+                    throw new Error("PaymentAPI non disponible");
                 }
-                const result = await response.json();
-                console.log("Réponse updateQty:", result);
-                if (result.success) {
-                    console.log("Quantité mise à jour - Rechargement");
-                    window.location.reload();
+                const success = await window.PaymentAPI.updateQuantity(id, delta);
+                if (success) {
+                    console.log("Quantité mise à jour - Mise à jour dynamique");
+                    const itemIndex = normalizedCart.findIndex((item) => item.id === id);
+                    if (itemIndex !== -1) {
+                        const newQty = normalizedCart[itemIndex].qty + delta;
+                        if (newQty <= 0) {
+                            normalizedCart.splice(itemIndex, 1);
+                        }
+                        else {
+                            normalizedCart[itemIndex].qty = newQty;
+                        }
+                        render();
+                        onCartUpdate();
+                    }
                 }
                 else {
-                    alert("Erreur: " + (result.error || "Erreur inconnue"));
+                    alert("Erreur lors de la mise à jour de la quantité");
                 }
             }
             catch (error) {
                 console.error("Erreur:", error);
-                alert("Erreur réseau: " + error.message);
+                alert("Erreur: " + error.message);
             }
         }
         async function removeItem(id) {
@@ -82,67 +82,55 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
                 if (!confirm("Supprimer ce produit du panier ?")) {
                     return;
                 }
-                console.log("Suppression produit:", id);
-                const formData = new FormData();
-                formData.append("action", "removeItem");
-                formData.append("idProduit", id);
-                const response = await fetch("", {
-                    method: "POST",
-                    body: formData,
-                });
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
+                console.log("Suppression produit via API:", id);
+                if (!window.PaymentAPI) {
+                    throw new Error("PaymentAPI non disponible");
                 }
-                const result = await response.json();
-                console.log("Réponse removeItem:", result);
-                if (result.success) {
-                    console.log("Produit supprimé - Rechargement");
-                    window.location.reload();
+                const success = await window.PaymentAPI.removeItem(id);
+                if (success) {
+                    console.log("Produit supprimé - Mise à jour dynamique");
+                    normalizedCart = normalizedCart.filter((item) => item.id !== id);
+                    render();
+                    onCartUpdate();
                 }
                 else {
-                    alert("Erreur: " + (result.error || "Erreur inconnue"));
+                    alert("Erreur lors de la suppression du produit");
                 }
             }
             catch (error) {
                 console.error("Erreur:", error);
-                alert("Erreur réseau: " + error.message);
+                alert("Erreur: " + error.message);
             }
         }
         function attachListeners() {
-            // Boutons +
             container
                 .querySelectorAll("button.plus")
                 .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     const id = btn.getAttribute("data-id");
-                    if (id) {
+                    if (id)
                         updateQty(id, 1);
-                    }
                 });
             });
-            // Boutons -
             container
                 .querySelectorAll("button.minus")
                 .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     const id = btn.getAttribute("data-id");
-                    if (id) {
+                    if (id)
                         updateQty(id, -1);
-                    }
                 });
             });
-            // Boutons suppression
             container
                 .querySelectorAll("button.delete")
                 .forEach((btn) => {
                 btn.addEventListener("click", (ev) => {
                     ev.preventDefault();
                     const id = btn.getAttribute("data-id");
-                    if (id) {
+                    if (id)
                         removeItem(id);
-                    }
                 });
             });
         }
@@ -178,18 +166,19 @@ define("frontoffice/paiement-aside", ["require", "exports"], function (require, 
             container.innerHTML = html;
             attachListeners();
         }
-        // Initial render
         render();
         return {
             update(newCart) {
                 console.log("Mise à jour aside avec nouveau panier:", newCart);
-                const newNormalizedCart = newCart.map(normalizeCartItem);
-                normalizedCart.splice(0, normalizedCart.length, ...newNormalizedCart);
+                normalizedCart = newCart.map(normalizeCartItem);
                 render();
                 onCartUpdate();
             },
             getElement() {
                 return container;
+            },
+            getCart() {
+                return [...normalizedCart];
             },
         };
     }
