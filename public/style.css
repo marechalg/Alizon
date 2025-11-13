@@ -1455,10 +1455,10 @@ main.acceuilBackoffice section.avis article table tr:first-child th:nth-child(2)
 }
 main.acceuilBackoffice section.avis article table tr:last-child td:last-child {
   display: flex;
-  justify-content: space-around;
 }
 main.acceuilBackoffice section.avis article table tr:last-child td:last-child img {
-  height: 100px;
+  margin-right: 1em;
+  height: 200px;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;
