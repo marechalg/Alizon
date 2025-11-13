@@ -40,9 +40,9 @@
                         <img src="<?php echo htmlspecialchars($image); ?>" class="imgProduit" alt="Image du produit">
                         <h2 class="nomProduit"><?php echo htmlspecialchars($value['nom']); ?></h2>
                         <div class="notation">
+                            <span><?php echo number_format($value['note'], 1); ?></span>
                             <?php for ($i=0; $i < number_format($value['note'], 0); $i++) { ?>
-                                <img s
-                                <span><?php echo number_format($value['note'], 1); ?></span>rc="../../public/images/etoile.svg" alt="Note" class="etoile">
+                                <img src="../../public/images/etoile.svg" alt="Note" class="etoile">
                             <?php } ?>
                         </div>
                         <div class="infoProd">
@@ -65,7 +65,7 @@
             </div>
             <div class="listeArticle">
                 <?php 
-                $stmt = $pdo->prepare("select * from _produit where typeProd = charcuterie");
+                $stmt = $pdo->prepare("select * from _produit where typeProd = :charcuteries");
                 $stmt->execute();
                 $produitNouveaute = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -81,9 +81,9 @@
                         <img src="<?php echo htmlspecialchars($image); ?>" class="imgProduit" alt="Image du produit">
                         <h2 class="nomProduit"><?php echo htmlspecialchars($value['nom']); ?></h2>
                         <div class="notation">
+                            <span><?php echo number_format($value['note'], 1); ?></span>
                             <?php for ($i=0; $i < number_format($value['note'], 0); $i++) { ?>
-                                <img s
-                                <span><?php echo number_format($value['note'], 1); ?></span>rc="../../public/images/etoile.svg" alt="Note" class="etoile">
+                                <img src="../../public/images/etoile.svg" alt="Note" class="etoile">
                             <?php } ?>
                         </div>
                         <div class="infoProd">
@@ -106,7 +106,7 @@
             </div>
             <div class="listeArticle">
                 <?php 
-                $stmt = $pdo->prepare("select * from _produit where typeProd = alcools");
+                $stmt = $pdo->prepare("select * from _produit where typeProd = :alcools");
                 $stmt->execute();
                 $produitNouveaute = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -122,9 +122,9 @@
                         <img src="<?php echo htmlspecialchars($image); ?>" class="imgProduit" alt="Image du produit">
                         <h2 class="nomProduit"><?php echo htmlspecialchars($value['nom']); ?></h2>
                         <div class="notation">
+                            <span><?php echo number_format($value['note'], 1); ?></span>
                             <?php for ($i=0; $i < number_format($value['note'], 0); $i++) { ?>
-                                <img s
-                                <span><?php echo number_format($value['note'], 1); ?></span>rc="../../public/images/etoile.svg" alt="Note" class="etoile">
+                                <img src="../../public/images/etoile.svg" alt="Note" class="etoile">
                             <?php } ?>
                         </div>
                         <div class="infoProd">
