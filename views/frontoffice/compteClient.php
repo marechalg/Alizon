@@ -331,7 +331,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             window.close();
         }
 
-        let elems = document.querySelectorAll("section p");
+        const valeursInitiales = Array.from(document.querySelectorAll("section p"))
 
         function boutonAnnuler() {
 
@@ -339,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             for (let i = 0; i < inputs.length; i++) {
                 let p = document.createElement("p");
-                p.innerText = elems[i].value;
+                p.innerText = valeursInitiales[i].innerText;
                 inputs[i].parentNode.replaceChild(p, inputs[i]);
             }
 
@@ -352,6 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             bnModifier[0].innerHTML = "Modifier";
             bnModifier[0].style.backgroundColor = "#e4d9ff";
             bnModifier[0].style.color = "#273469";
+            bnModifier[0].disabled = false; 
 
             bnAnnuler[0].style.display = "none";
 
