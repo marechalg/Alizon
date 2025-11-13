@@ -1,29 +1,37 @@
 <?php
 require_once "../../controllers/pdo.php";
 
+// ============================================================================
+// CONFIGURATION INITIALE
+// ============================================================================
+
 // ID utilisateur connecté (à remplacer par la gestion de session)
 $idClient = 1; 
 
-$stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = " . intval($idClient) . " ORDER BY idPanier DESC LIMIT 1");
-$panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+// ============================================================================
+// FONCTIONS DE GESTION DU PANIER
+// ============================================================================
 
-$cart = [];
+function getCurrentCart($pdo, $idClient) {
+    $stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = " . intval($idClient) . " ORDER BY idPanier DESC LIMIT 1");
+    $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
 
-if ($panier) {
-    $idPanier = intval($panier['idPanier']); 
+    $cart = [];
 
-    $sql = "SELECT p.idProduit, p.nom, p.prix, pa.quantiteProduit as qty, i.URL as img
-        FROM _produitAuPanier pa
-        JOIN _produit p ON pa.idProduit = p.idProduit
-        LEFT JOIN _imageDeProduit i ON p.idProduit = i.idProduit
-        WHERE pa.idPanier = " . intval($idPanier);
-    $stmt = $pdo->query($sql);
-    $cart = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+    if ($panier) {
+        $idPanier = intval($panier['idPanier']); 
 
+        $sql = "SELECT p.idProduit, p.nom, p.prix, pa.quantiteProduit as qty, i.URL as img
+                FROM _produitAuPanier pa
+                JOIN _produit p ON pa.idProduit = p.idProduit
+                LEFT JOIN _imageDeProduit i ON p.idProduit = i.idProduit
+                WHERE pa.idPanier = " . intval($idPanier);
+        $stmt = $pdo->query($sql);
+        $cart = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+    }
+    
+    return $cart;
 }
-// ============================================================================
-// FONCTIONS POUR GÉRER LES ACTIONS AJAX
-// ============================================================================
 
 function updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta) {
     $idProduit = intval($idProduit);
@@ -93,7 +101,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
         $sousTotal = $totals['sousTotal'] ?? 0;
         $nbArticles = $totals['nbArticles'] ?? 0;
 
-        // Créer la commande (utilisation de quote() pour les champs texte)
+        // Créer la commande
         $montantTTC = floatval($sousTotal) * 1.20;
         $montantHT = floatval($sousTotal);
         $adresseQ = $pdo->quote($adresseLivraison);
@@ -145,7 +153,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
 }
 
 // ============================================================================
-// GESTION DES ACTIONS AJAX (EXTENSION)
+// GESTION DES ACTIONS AJAX
 // ============================================================================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
@@ -153,10 +161,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     
     try {
         switch ($_POST['action']) {
-            // ... cases existants (updateQty, removeItem, createOrder) ...
-            
+            case 'updateQty':
+                $idProduit = $_POST['idProduit'] ?? '';
+                $delta = intval($_POST['delta'] ?? 0);
+                if ($idProduit && $delta != 0) {
+                    $success = updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta);
+                    echo json_encode(['success' => $success]);
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'Paramètres invalides']);
+                }
+                break;
+
+            case 'removeItem':
+                $idProduit = $_POST['idProduit'] ?? '';
+                if ($idProduit) {
+                    $success = removeFromCartInDatabase($pdo, $idClient, $idProduit);
+                    echo json_encode(['success' => $success]);
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'ID produit manquant']);
+                }
+                break;
+
+            case 'createOrder':
+                $adresseLivraison = $_POST['adresseLivraison'] ?? '';
+                $villeLivraison = $_POST['villeLivraison'] ?? '';
+                $regionLivraison = $_POST['regionLivraison'] ?? '';
+                $numeroCarte = $_POST['numeroCarte'] ?? '';
+
+                if (empty($adresseLivraison) || empty($villeLivraison) || empty($regionLivraison) || empty($numeroCarte)) {
+                    echo json_encode(['success' => false, 'error' => 'Tous les champs sont obligatoires']);
+                    break;
+                }
+
+                $idCommande = createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte);
+                echo json_encode(['success' => true, 'idCommande' => $idCommande]);
+                break;
+
             case 'getCart':
-                // Retourner le panier actuel (pour rafraîchissement AJAX)
+                $cart = getCurrentCart($pdo, $idClient);
                 echo json_encode($cart);
                 break;
 
@@ -170,9 +212,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 // ============================================================================
-// RÉCUPÉRATION DES DÉPARTEMENTS ET VILLES
+// RÉCUPÉRATION DES DONNÉES POUR LA PAGE
 // ============================================================================
 
+// Récupérer le panier actuel
+$cart = getCurrentCart($pdo, $idClient);
+
+// Récupération des départements et villes
 $csvPath = __DIR__ . '/../../public/data/departements.csv';
 $departments = [];
 $citiesByCode = [];
@@ -196,11 +242,15 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
     }
     fclose($handle);
 } else {
+    // Données par défaut si le fichier CSV n'existe pas
     $departments['22'] = "Côtes-d'Armor";
     $citiesByCode['22'] = ['Saint-Brieuc','Lannion','Dinan'];
 }
-?>
 
+// ============================================================================
+// AFFICHAGE DE LA PAGE
+// ============================================================================
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -220,18 +270,18 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
         citiesByCode: <?php echo json_encode($citiesByCode, JSON_UNESCAPED_UNICODE); ?>,
         postals: <?php echo json_encode($postals, JSON_UNESCAPED_UNICODE); ?>,
         cart: <?php 
-        $formattedCart = [];
-        foreach ($cart as $item) {
-            $formattedCart[] = [
-                'id' => strval($item['idProduit']),
-                'nom' => $item['nom'],
-                'prix' => floatval($item['prix']),
-                'qty' => intval($item['qty']),
-                'img' => $item['img'] ?? '../../public/images/default.png'
-            ];
-        }
-        echo json_encode($formattedCart, JSON_UNESCAPED_UNICODE); 
-    ?>,
+            $formattedCart = [];
+            foreach ($cart as $item) {
+                $formattedCart[] = [
+                    'id' => strval($item['idProduit']),
+                    'nom' => $item['nom'],
+                    'prix' => floatval($item['prix']),
+                    'qty' => intval($item['qty']),
+                    'img' => $item['img'] ?? '../../public/images/default.png'
+                ];
+            }
+            echo json_encode($formattedCart, JSON_UNESCAPED_UNICODE); 
+        ?>,
         idClient: <?php echo $idClient; ?>
     };
     </script>
