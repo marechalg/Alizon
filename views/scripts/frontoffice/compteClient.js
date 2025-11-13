@@ -59,7 +59,7 @@ function popUpModifierMdp(){
 
     let croixFermerLaPage = document.getElementsByClassName("croixFermerLaPage");
     croixFermerLaPage = croixFermerLaPage[0];
-    croixFermerLaPage.addEventListener("click", () => fermerPopUp());
+    croixFermerLaPage.addEventListener("click",fermerPopUp);
 
     let input = document.querySelectorAll("input");
     let ancienMdp = input[0];
@@ -67,7 +67,7 @@ function popUpModifierMdp(){
     let confirmationMdp = input[2];
     let button = document.querySelectorAll("button");
     let valider = button[0];
-    valider.addEventListener("click", () => fermerPopUp());
+    valider.addEventListener("click",fermerPopUp);
 
 
     function verifierMdp() {

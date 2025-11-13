@@ -1826,6 +1826,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   background-color: #fffefa;
   padding: 10px;
   border-radius: 16px;
+  position: relative;
 }
 .mainPopUpCompteClient h1 {
   font-style: normal;
