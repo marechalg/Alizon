@@ -134,7 +134,9 @@ main.acceuilBackoffice {
         }
         
         &.avis article {
-
+            img {
+                height: 50px; width: 50px;
+            }
         }
         
         &.produits article {

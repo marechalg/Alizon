@@ -1413,6 +1413,10 @@ main.acceuilBackoffice section.commandes article table tr:nth-child(2) td {
 main.acceuilBackoffice section.commandes article table tr:last-child th {
   text-align: right;
 }
+main.acceuilBackoffice section.avis article img {
+  height: 50px;
+  width: 50px;
+}
 main.acceuilBackoffice section.produits article {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
