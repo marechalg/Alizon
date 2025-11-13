@@ -1415,58 +1415,18 @@ main.acceuilBackoffice section.commandes article table tr:last-child th {
 }
 main.acceuilBackoffice section.avis article table {
   width: 100%;
-  border-spacing: 1em 0;
-  table-layout: fixed;
-  border-collapse: separate;
-}
-main.acceuilBackoffice section.avis article table tr:first-child {
-  font-weight: bold;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:first-child {
-  width: 120px;
-  justify-items: center;
-  line-height: 0.25em;
 }
 main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child img {
-  border-radius: 100% !important;
-  height: 50px !important;
-  width: 50px !important;
-  object-fit: cover !important;
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
 }
 main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:last-child {
-  color: #FFD000;
   display: flex;
-  align-items: center;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(2) {
-  white-space: nowrap;
-  font-size: 20px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(3) {
-  width: auto;
-  font-weight: normal;
-  font-size: 12px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(4) {
-  width: 120px;
-}
-main.acceuilBackoffice section.avis article table tr:nth-child(2) td {
-  vertical-align: top;
-}
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child {
-  display: flex;
-  gap: 1em;
-  justify-content: flex-start;
-}
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child img {
-  height: 100px;
-  width: auto;
-  object-fit: contain;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;
