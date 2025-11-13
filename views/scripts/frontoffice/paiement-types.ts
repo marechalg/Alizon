@@ -2,15 +2,15 @@
 // TYPES & INTERFACES
 // ============================================================================
 
-export type CartItem = {
+export interface CartItem {
   id: string;
-  title: string;
-  price: number;
+  nom: string;
+  prix: number;
   qty: number;
-  img?: string;
-};
+  img: string;
+}
 
-export type Inputs = {
+export interface Inputs {
   adresseInput: HTMLInputElement | null;
   codePostalInput: HTMLInputElement | null;
   villeInput: HTMLInputElement | null;
@@ -19,25 +19,26 @@ export type Inputs = {
   carteDateInput: HTMLInputElement | null;
   cvvInput: HTMLInputElement | null;
   recapEl: HTMLElement | null;
-};
+}
 
-export type ValidateAllParams = {
+export interface ValidateAllParams {
   inputs: Inputs;
   departments: Map<string, string>;
   postals: Map<string, Set<string>>;
   cart: CartItem[];
   selectedDepartment: { value: string | null };
-};
+}
 
-export type Maps = {
+export interface Maps {
   departments: Map<string, string>;
   citiesByCode: Map<string, Set<string>>;
   postals: Map<string, Set<string>>;
   allCities: Set<string>;
-};
+}
 
-export type AsideHandle = {
-  update: (cart: CartItem[]) => void;
-  getElement: () => HTMLElement | null;
-};
-
+export interface OrderData {
+  adresseLivraison: string;
+  villeLivraison: string;
+  regionLivraison: string;
+  numeroCarte: string;
+}
