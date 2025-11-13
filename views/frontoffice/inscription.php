@@ -45,7 +45,7 @@
 </head>
 <body class="inscription">
 
-  <?php include './partials/header.php'; ?>
+  <?php include './partials/headerDeconnecte.php'; ?>
 
     <h2>Inscription</h2>
   
@@ -314,6 +314,12 @@
 
             validateForm(); 
 
+            if(validateForm()){
+                <?php
+                $nouveauClient = "INSERT INTO TALBE _client
+                ";
+                ?>
+            }
         </script>
       </main>
 
