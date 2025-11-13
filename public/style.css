@@ -1422,23 +1422,23 @@ main.acceuilBackoffice section.avis article table {
 main.acceuilBackoffice section.avis article table tr:first-child {
   font-weight: bold;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) {
+main.acceuilBackoffice section.avis article table tr:first-child td:first-child {
   width: 120px;
   justify-items: center;
   line-height: 0.25em;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:first-child {
+main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:first-child img {
+main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:first-child img {
   border-radius: 100% !important;
   height: 50px !important;
   width: 50px !important;
   object-fit: cover !important;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:last-child {
+main.acceuilBackoffice section.avis article table tr:first-child td:first-child figure:last-child {
   color: #FFD000;
   display: flex;
   align-items: center;
