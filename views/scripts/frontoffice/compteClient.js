@@ -68,11 +68,9 @@ function popUpModifierMdp(){
     let confirmationMdp = input[2];
     let button = overlay.querySelectorAll("button");
     let valider = button[0];
-    valider.addEventListener("click",fermerPopUp);
-
 
     function verifierMdp() {
-        
+
         const ancienMdpChiffree = vignere(ancienMdp.value, cle, 1);
         const nouveauMdpChiffree = vignere(nouveauMdp.value, cle, 1);
         const confirmationMdpChiffree = vignere(confirmationMdp.value, cle, 1);
