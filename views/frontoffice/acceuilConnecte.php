@@ -274,7 +274,6 @@ AFFICHAGE DE LA PAGE
         </section>
     </main>
 
-
     <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
 </body>
 </html>

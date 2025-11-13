@@ -493,52 +493,159 @@ header.backoffice.nonConnecte nav {
   color: #259525;
 }
 
-.inscription {
-  font-family: "lora";
-  font-weight: bold;
-}
-.inscription::before {
-  content: "";
-  position: absolute;
-  left: -200px;
-  top: 50px;
-  width: 900px;
-  height: 900px;
-  background: url("../../public/images/symboleRose.png") no-repeat center center;
-  background-size: contain;
-  transform: rotate(-180deg);
-  opacity: 0.3;
-  z-index: 0;
-  pointer-events: none;
-}
-.inscription form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-}
-.inscription form input {
-  width: 450px;
-  height: 40px;
-  padding: 10px;
-  margin: 16px;
-  color: #6e6e6e;
-  font-size: 16px;
-  border: 2px solid #273469;
-  border-radius: 8px;
-}
-.inscription h2 {
-  color: #273469;
-  font-family: "Lora", serif;
-  font-size: 48px;
-  font-weight: bold;
-  text-align: center;
-  margin: 50px 0px;
+.input-error {
+  border: 2px solid red !important;
+  background-color: #ffe6e6;
+  transition: 0.3s ease;
 }
 
+@media (max-width: 2000px) {
+  .inscription {
+    font-family: "lora";
+    font-weight: bold;
+  }
+  .inscription::before {
+    content: "";
+    position: absolute;
+    left: -200px;
+    top: 50px;
+    width: 600px;
+    height: 600px;
+    background: url("../../public/images/symboleRose.png") no-repeat center center;
+    background-size: contain;
+    transform: rotate(-180deg);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .inscription form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .inscription form input {
+    width: 450px;
+    height: 50px;
+    padding: 10px;
+    margin: 16px;
+    color: #6e6e6e;
+    font-size: 16px;
+    border: 2px solid #273469;
+    border-radius: 8px;
+  }
+  .inscription h2 {
+    color: #273469;
+    font-family: "Lora", serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 50px 0px;
+  }
+}
+@media (max-width: 800px) {
+  .inscription {
+    font-family: "lora";
+    font-weight: bold;
+  }
+  .inscription::before {
+    content: "";
+    position: absolute;
+    left: -200px;
+    top: 50px;
+    width: 400px;
+    height: 600px;
+    background: url("../../public/images/symboleRose.png") no-repeat center center;
+    background-size: contain;
+    transform: rotate(-180deg);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .inscription form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .inscription form input {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin: 16px;
+    color: #6e6e6e;
+    font-size: 16px;
+    border: 2px solid #273469;
+    border-radius: 8px;
+  }
+  .inscription h2 {
+    color: #273469;
+    font-family: "Lora", serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 50px 0px;
+  }
+}
+@media (max-width: 500px) {
+  .inscription {
+    font-family: "lora";
+    font-weight: bold;
+  }
+  .inscription::before {
+    content: "";
+    position: absolute;
+    left: -200px;
+    top: 50px;
+    width: 352.9411764706px 5;
+    height: 600px;
+    background: url("../../public/images/symboleRose.png") no-repeat center center;
+    background-size: contain;
+    transform: rotate(-180deg);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .inscription form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .inscription form input {
+    width: 300px;
+    height: 50px;
+    padding: 10px;
+    margin: 16px;
+    color: #6e6e6e;
+    font-size: 13px;
+    border: 2px solid #273469;
+    border-radius: 8px;
+  }
+  .inscription form #refactor {
+    display: flex;
+  }
+  .inscription form #refactor input {
+    width: 135px;
+  }
+  .inscription h2 {
+    color: #273469;
+    font-family: "Lora", serif;
+    font-size: 48px;
+    font-weight: bold;
+    text-align: center;
+    margin: 30px 0px;
+  }
+}
 #submitButton {
   width: 450px;
   height: 48px;
@@ -1254,6 +1361,9 @@ main.acceuilBackoffice section.stock article table {
   font-family: "open-sans";
   font-size: 20px;
 }
+main.acceuilBackoffice section.stock article table img {
+  height: 100px;
+}
 main.acceuilBackoffice section.stock article table tr:nth-child(3) {
   font-family: "open-sans-bold";
   display: flex;
@@ -1303,93 +1413,53 @@ main.acceuilBackoffice section.commandes article table tr:nth-child(2) td {
 main.acceuilBackoffice section.commandes article table tr:last-child th {
   text-align: right;
 }
+main.acceuilBackoffice section.avis article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  font-family: "open-sans";
+}
 main.acceuilBackoffice section.avis article table {
   width: 100%;
-  border-spacing: 1em 0;
-  table-layout: fixed;
-  border-collapse: separate;
 }
-main.acceuilBackoffice section.avis article table tr:first-child {
+main.acceuilBackoffice section.avis article table th {
   font-weight: bold;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) {
-  width: 120px;
-  justify-items: center;
-  line-height: 0.25em;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:first-child {
-  border-radius: 100%;
-  height: 50px;
-  width: 50px;
-  background-image: url(/public/images/pp.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:last-child {
-  color: #FFD000;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child {
   display: flex;
+  flex-direction: column;
   align-items: center;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(2) {
-  white-space: nowrap;
-  font-size: 20px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(3) {
-  width: auto;
-  font-weight: normal;
-  font-size: 12px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(4) {
   width: 120px;
+  gap: 0;
 }
-main.acceuilBackoffice section.avis article table tr:nth-child(2) td {
-  vertical-align: top;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
 }
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child {
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:first-child img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:last-child {
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+  color: #FFD000;
+}
+main.acceuilBackoffice section.avis article table tr:first-child th:nth-child(2) {
+  text-align: left;
+}
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child {
   display: flex;
   gap: 1em;
-  justify-content: flex-start;
 }
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child img {
-  height: 100px;
-  width: auto;
-  object-fit: contain;
-}
-main.acceuilBackoffice section.avis article table tr:last-child td:nth-child(2) {
-  padding-right: 1em;
-}
-main.acceuilBackoffice section.avis article table tr:last-child td:nth-child(3) {
-  width: auto;
-  text-align: right;
-  white-space: nowrap;
-}
-main.acceuilBackoffice section.avis article table input {
-  border: none;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #273469;
-  border-radius: 4px;
-}
-main.acceuilBackoffice section.avis article table button {
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  font-family: "lora";
-  font-weight: bold;
-  background: none;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #273469;
-  border-radius: 8px;
-  color: #273469;
-  white-space: nowrap;
-  box-sizing: border-box;
-  min-width: fit-content;
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child img {
+  height: 150px;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;
@@ -1714,8 +1784,9 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 
 .mainPopUpCompteClient {
   background-color: #fffefa;
-  padding: 10px;
+  padding: 30px 50px;
   border-radius: 16px;
+  position: relative;
 }
 .mainPopUpCompteClient h1 {
   font-style: normal;
@@ -1787,6 +1858,26 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 .mainPopUpCompteClient .formulaireMdp {
   display: flex;
   flex-direction: column;
+}
+.mainPopUpCompteClient .croixFermerLaPage {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+}
+.mainPopUpCompteClient .croixFermerLaPage div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 3px;
+  background-color: #BABABA;
+}
+.mainPopUpCompteClient .croixFermerLaPage div:first-of-type {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.mainPopUpCompteClient .croixFermerLaPage div:last-of-type {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 /*# sourceMappingURL=style.css.map */
