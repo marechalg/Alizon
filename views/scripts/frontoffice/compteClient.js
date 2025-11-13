@@ -39,7 +39,7 @@ function popUpModifierMdp(){
     overlay.innerHTML = `
                 <main class="mainPopUpCompteClient">
                 <h1>Modification de votre mot de passe</h1>
-                <p>mdp</p>
+                <p>${mdp}</p>
                 <section>
                     <div class="formulaireMdp">
                         <form action="">
