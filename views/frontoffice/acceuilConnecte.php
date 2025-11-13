@@ -65,10 +65,10 @@
             </div>
             <div class="listeArticle">
                 <?php 
-                $stmt = $pdo->prepare("select * from _produit where typeProd = charcuteries");
-                $stmt->execute();
-                $produitNouveaute = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                
+                $stmt = $pdo->prepare("SELECT * FROM _produit WHERE typeProd = :typeProd");
+                $stmt->execute([':typeProd' => 'charcuteries']);
+                $produitAlcool = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
                 foreach ($produitNouveaute as $value) {
                     $idProduit = $value['idProduit'];
                     
@@ -106,9 +106,9 @@
             </div>
             <div class="listeArticle">
                 <?php 
-                $stmt = $pdo->prepare("select * from _produit where typeProd = alcools");
-                $stmt->execute();
-                $produitNouveaute = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $stmt = $pdo->prepare("SELECT * FROM _produit WHERE typeProd = :typeProd");
+                $stmt->execute([':typeProd' => 'alcools']);
+                $produitAlcool = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 foreach ($produitNouveaute as $value) {
                     $idProduit = $value['idProduit'];
