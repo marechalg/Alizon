@@ -1,7 +1,11 @@
 <?php
-// // Connexion simple à la base
+// Connexion simple à la base
 // try {
-//     $pdo = new PDO("pgsql:host=localhost;dbname=saedb", "username", "password");
+//     $pdo = new PDO("mysql:host=localhost;dbname=saedb;charset=utf8mb4", "username", "password", [
+//     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, 
+//     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+// ]);
+
 // } catch(PDOException $e) {
 //     die("Erreur connexion : " . $e->getMessage());
 // }
@@ -31,8 +35,9 @@
 // $result = $pdo->query($sqlProduit);
 // $produit = $result->fetch(PDO::FETCH_ASSOC);
 
-// if(!$produit) {
-//     die("Produit non trouvé");
+// if (!$produit) {
+//     echo "<p>Produit introuvable.</p>";
+//     exit;
 // }
 
 // // Récupérer les images
@@ -110,11 +115,11 @@
     </div>
     <div class="ligneActions">
         <img src="../../../images/emplacement.png" alt="">
-        <p>Livré a <u><b>Clermont-ferrand 63000</b>, 10 place saint-michel</u></p>   
+        <p>Livré a <a href=""><b>Clermont-ferrand 63000</b>, 10 place saint-michel</a></p>   
     </div>
     <div class="ligneActions">
         <img src="../../../images/tec.png" alt="">
-        <p>Consulter les <b><u>conditions générales de vente</u></b></p>
+        <p>Consulter les <b><a href="">conditions générales de vente</a></b></p>
     </div>
     <hr>
     <br>
@@ -135,63 +140,10 @@
     <input type="checkbox" id="activeVoirPlus">
     <div class="conteneurTexte">
         <h2>Plus d'informations sur l'article</h2>
-        <article>
-            <h3>📌 Titre du produit</h3>
-            <p>Cidre brut artisanal – 75 cl – Fermentation naturelle</p>
-        </article>
-        <article>
-            <h3>📝 Description courte</h3>
-            <p>Cidre brut traditionnel, issu de pommes récoltées en Bretagne, fermenté naturellement, goût fruité et légèrement acidulé.</p>
-        </article>
-        <article>
-            <h3>📂 Rubriques de la fiche produit</h3>
-            <div>
-                <h4>Caractéristiques principales :</h4>
-                <ul>
-                    <li><p>Type : Cidre brut</p></li>
-                    <li><p>Contenance : 75 cl</p></li>
-                    <li><p>Alcool : 5 % vol.</p></li>
-                    <li><p>Origine : Bretagne, France</p></li>
-                    <li><p>Fabrication : fermentation naturelle, sans additif chimique</p></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Notes de dégustation :</h4>    
-                <ul>
-                    <li>Robe dorée et pétillante</li>
-                    <li>Arômes fruités de pomme fraîche</li>
-                    <li>Légère acidité équilibrée par une pointe de douceur</li>
-                    <li>Fines bulles, rafraîchissant en bouche</li>
-                </ul>  
-            </div>
-            <div>
-                <h4>Notes de dégustation :</h4>    
-                <ul>
-                    <li>Robe dorée et pétillante</li>
-                    <li>Arômes fruités de pomme fraîche</li>
-                    <li>Légère acidité équilibrée par une pointe de douceur</li>
-                    <li>Fines bulles, rafraîchissant en bouche</li>
-                </ul>  
-            </div>
-            <div>
-                <h4>Notes de dégustation :</h4>    
-                <ul>
-                    <li>Robe dorée et pétillante</li>
-                    <li>Arômes fruités de pomme fraîche</li>
-                    <li>Légère acidité équilibrée par une pointe de douceur</li>
-                    <li>Fines bulles, rafraîchissant en bouche</li>
-                </ul>  
-            </div>
-            <div>
-                <h4>Notes de dégustation :</h4>    
-                <ul>
-                    <li>Robe dorée et pétillante</li>
-                    <li>Arômes fruités de pomme fraîche</li>
-                    <li>Légère acidité équilibrée par une pointe de douceur</li>
-                    <li>Fines bulles, rafraîchissant en bouche</li>
-                </ul>  
-            </div>
-        </article>
+        <?php 
+        $descriptionHtml = $_GET['description'];
+        echo $descriptionHtml;
+        ?>
     </div> 
     <label for="activeVoirPlus" class="voirPlus"> </label> 
 </section>

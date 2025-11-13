@@ -17,7 +17,6 @@
        
     <main class="AjouterProduit"> 
         <div class="product-content">
-            
             <div class="left-section">
                 <div class="ajouterPhoto">
                     <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
