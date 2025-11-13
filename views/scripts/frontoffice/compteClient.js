@@ -71,10 +71,11 @@ function popUpModifierMdp(){
 
     function verifierMdp() {
 
+        const ancienChiffre = vignere(ancienMdp.value, cle, 1);
         const nouveauMdpChiffree = vignere(nouveauMdp.value, cle, 1);
         const confirmationMdpChiffree = vignere(confirmationMdp.value, cle, 1);
 
-        if (ancienMdp === mdpDechiffree && nouveauMdpChiffree === confirmationMdpChiffree && nouveauMdpChiffree != "") {
+        if (ancienMdp.value === mdp && nouveauMdpChiffree === confirmationMdpChiffree && nouveauMdpChiffree != "") {
             valider.disabled = false;
             valider.style.cursor = "pointer";
             valider.onclick = function(e) {

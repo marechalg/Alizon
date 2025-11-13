@@ -141,7 +141,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="../scripts/frontoffice/Chiffrement.js"></script>
     <script>
         const mdp = "<?php echo $mdp; ?>";
-        const mdpDechiffree = vignere(mdp, cle, -1);
     </script>
     <script src="../scripts/frontoffice/compteClient.js"></script>
 </body>
