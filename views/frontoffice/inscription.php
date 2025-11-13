@@ -1,4 +1,6 @@
+<?php //require_once "../../controllers/pdo.php" ?> 
 <?php
+
     if (isset($_COOKIE[session_name()])) {
         session_start(['read_and_close' => true]);
     }
@@ -99,6 +101,7 @@
         </form> 
         <script>
             // Eléments du DOM
+            const psuedoInput = document.getElementById('pseudo');
             const birthDateInput = document.getElementById('birthdate');
             const phoneNumberInput = document.getElementById('telephone');
             const passwordInput = document.getElementById('mdp');
@@ -191,13 +194,9 @@
                 submitButton.disabled = !allValid;
                 
                 if(allValid){
-                    <?php
-                        session_start();
-                        $_SESSION["newsession"]=$value;
-
-                        print_r( $_SESSION["newsession"] );
-                    ?>
+                    return true;
                 }
+                return false
             }
 
 
@@ -314,10 +313,11 @@
             });
 
             validateForm(); 
+
         </script>
       </main>
 
-    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/footer.php'; ?>
 
 </body>
 </html>

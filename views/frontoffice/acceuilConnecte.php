@@ -151,6 +151,6 @@
         </section>
     </main>
 
-    <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
+    <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
 </body>
 </html>
