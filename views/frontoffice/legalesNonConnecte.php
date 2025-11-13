@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../public/style.css">
-  <title>Alizon - CGU & CGV</title>
+  <title>Alizon - CGV & CGU</title>
 </head>
 <body class="cgucgv">
 
-  <?php include "../../views/frontoffice/partials/headerConnecte.php"; ?>
+  <?php include "../../views/frontoffice/partials/headerDeconnecte.php"; ?>
   <main>
     <h1>Conditions générales de ventes</h1>
 
