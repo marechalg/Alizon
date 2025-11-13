@@ -172,10 +172,14 @@ main.acceuilBackoffice {
                     }
                 }
                 tr:last-child {
-                    img {
-                        height: 100px;
-                        margin-right: 1em;
-                    }
+                    td:last-child {
+                        display: flex;
+                        justify-content: space-around;
+
+                        img {
+                            height: 100px;
+                        }
+                    } 
                 }
             }
         }

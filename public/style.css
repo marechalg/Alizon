@@ -1447,9 +1447,12 @@ main.acceuilBackoffice section.avis article table tr:first-child td:first-child 
   color: #FFD000;
   font-weight: bold;
 }
-main.acceuilBackoffice section.avis article table tr:last-child img {
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child {
+  display: flex;
+  justify-content: space-around;
+}
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child img {
   height: 100px;
-  margin-right: 1em;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;

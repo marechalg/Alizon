@@ -118,7 +118,8 @@ require_once '../../controllers/date.php';
                     </figure>
                 </td>
                 <td>" . $avi['nomProduit'] . " - " . $avi['titreAvis'] . "</td>
-                <td colspan=2>Le " . formatDate($avi['dateAvis']) . "</td>
+                <td>Le " . formatDate($avi['dateAvis']) . "</td>
+                <td></td>
             </tr>
             <tr>
                 <td colspan=3>" . $avi['contenuAvis'] . "</td>
