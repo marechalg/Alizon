@@ -6,8 +6,7 @@ import { CartItem, Inputs, Maps } from "./paiement-types";
 import { validateAll } from "./paiement-validation";
 import { setupAutocomplete } from "./paiement-autocomplete";
 import { showPopup } from "./paiement-popup";
-import { initAside } from "./paiement-aside";
-import { updateQty, removeItem, getCartFromData } from "./paiement-cart";
+// aside is rendered server-side now; no client init required
 
 if (document.body.classList.contains("pagePaiement")) {
   // Éléments
@@ -67,6 +66,18 @@ if (document.body.classList.contains("pagePaiement")) {
     });
   }
 
+  // Initialiser le panier à partir des données injectées côté PHP
+  let cart: CartItem[] = [];
+  if (preloaded.cart && Array.isArray(preloaded.cart)) {
+    cart = preloaded.cart.map((it: any) => ({
+      id: String(it.id ?? it.idProduit ?? ""),
+      nom: String(it.nom ?? "Produit sans nom"),
+      prix: Number(it.prix ?? 0),
+      qty: Number(it.qty ?? it.quantiteProduit ?? 0),
+      img: it.img ?? it.URL ?? "../../public/images/default.png",
+    }));
+  }
+
   // Setup autocomplete handlers
   setupAutocomplete({
     codePostalInput,
@@ -75,35 +86,7 @@ if (document.body.classList.contains("pagePaiement")) {
     selectedDepartment,
   });
 
-  // Initialiser le panier
-  let cart: CartItem[] = getCartFromData();
-
-  function handleUpdateQty(id: string, delta: number) {
-    cart = updateQty(cart, id, delta);
-    aside.update(cart);
-
-    const span = document.querySelector(`.qty[data-id="${id}"]`);
-    const prod = document.querySelector(`.produit[data-id="${id}"]`);
-    const item = cart.find((c) => c.id === id);
-    if (span && item) {
-      span.textContent = String(item.qty);
-    }
-    if (!item && prod && prod.parentElement) {
-      prod.parentElement.removeChild(prod);
-    }
-  }
-
-  function handleRemoveItem(id: string) {
-    cart = removeItem(cart, id);
-    aside.update(cart);
-    const prod = document.querySelector(`.produit[data-id="${id}"]`);
-    if (prod && prod.parentElement) prod.parentElement.removeChild(prod);
-  }
-
-  // initialiser l'aside (récapitulatif) et synchroniser avec le panier
-  const aside = initAside("#recap", cart, handleUpdateQty, handleRemoveItem);
-
-  // attacher les gestionnaires aux boutons du récap rendu côté serveur (PHP) - now handled in initAside
+  // aside is rendered server-side (PHP forms). No client-side init required.
 
   payerButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
