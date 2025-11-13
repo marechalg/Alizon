@@ -121,6 +121,7 @@ export function showPopup(message: string) {
         villeLivraison: ville,
         regionLivraison: region,
         numeroCarte: rawNumCarte,
+        codePostal: codePostal,
       };
 
       const result = await window.PaymentAPI.createOrder(orderData);

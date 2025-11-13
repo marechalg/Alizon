@@ -75,12 +75,14 @@ function removeFromCartInDatabase($pdo, $idClient, $idProduit) {
     return $res !== false;
 }
 
-function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte) {
+function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte, $codePostal = '') {
     try {
         $pdo->beginTransaction();
 
         $idClient = intval($idClient);
-        $sql = "SELECT * FROM _panier WHERE idClient = $idClient";
+        
+        // Récupérer le panier actuel
+        $sql = "SELECT * FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1";
         $stmt = $pdo->query($sql);
         $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
         
@@ -101,28 +103,44 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
         $sousTotal = $totals['sousTotal'] ?? 0;
         $nbArticles = $totals['nbArticles'] ?? 0;
 
-        // Créer la commande
-        $montantTTC = floatval($sousTotal) * 1.20;
-        $montantHT = floatval($sousTotal);
+        // 1. Créer l'adresse de livraison dans la table _adresse
         $adresseQ = $pdo->quote($adresseLivraison);
         $villeQ = $pdo->quote($villeLivraison);
         $regionQ = $pdo->quote($regionLivraison);
+        $codePostalQ = $pdo->quote($codePostal);
+
+        $sqlAdresse = "INSERT INTO _adresse (adresse, region, codePostal, ville, pays, idClient) 
+                      VALUES ($adresseQ, $regionQ, $codePostalQ, $villeQ, 'France', $idClient)";
+        
+        $resAdresse = $pdo->query($sqlAdresse);
+        if ($resAdresse === false) {
+            throw new Exception("Impossible de créer l'adresse de livraison: " . implode(', ', $pdo->errorInfo()));
+        }
+        $idAdresseLivr = $pdo->lastInsertId();
+
+        // Utiliser la même adresse pour la facturation
+        $idAdresseFact = $idAdresseLivr;
+
+        // 2. Créer la commande dans _commande
+        $montantTTC = floatval($sousTotal) * 1.20;
+        $montantHT = floatval($sousTotal);
         $carteQ = $pdo->quote($numeroCarte);
 
         $sql = "
             INSERT INTO _commande 
             (dateCommande, etatLivraison, montantCommandeTTC, montantCommandeHt, 
-             quantiteCommande, adresseLivr, villeLivr, regionLivr, numeroCarte, idPanier)
-            VALUES (NOW(), 'En attente', $montantTTC, $montantHT, $nbArticles, $adresseQ, $villeQ, $regionQ, $carteQ, $idPanier)
+             quantiteCommande, _nomTransporteur, dateExpedition, idAdresseLivr, idAdresseFact, numeroCarte, idPanier)
+            VALUES (NOW(), 'En préparation', $montantTTC, $montantHT, $nbArticles, 'Colissimo', NULL, $idAdresseLivr, $idAdresseFact, $carteQ, $idPanier)
         ";
+        
         $res = $pdo->query($sql);
         if ($res === false) {
-            throw new Exception("Impossible de créer la commande");
+            throw new Exception("Impossible de créer la commande: " . implode(', ', $pdo->errorInfo()));
         }
 
         $idCommande = $pdo->lastInsertId();
 
-        // Copier les produits du panier vers la table contient
+        // 3. Copier les produits du panier vers la table _contient
         $sql = "
             INSERT INTO _contient (idProduit, idCommande, prixProduitHt, tauxTva, quantite)
             SELECT pap.idProduit, $idCommande, p.prix, COALESCE(t.pourcentageTva, 20.0), pap.quantiteProduit
@@ -136,7 +154,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
             throw new Exception("Impossible de copier les produits dans la commande");
         }
 
-        // Vider le panier après commande
+        // 4. Vider le panier après commande
         $sql = "DELETE FROM _produitAuPanier WHERE idPanier = $idPanier";
         $res = $pdo->query($sql);
         if ($res === false) {
@@ -182,21 +200,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 }
                 break;
 
-            case 'createOrder':
-                $adresseLivraison = $_POST['adresseLivraison'] ?? '';
-                $villeLivraison = $_POST['villeLivraison'] ?? '';
-                $regionLivraison = $_POST['regionLivraison'] ?? '';
-                $numeroCarte = $_POST['numeroCarte'] ?? '';
+                case 'createOrder':
+                    $adresseLivraison = $_POST['adresseLivraison'] ?? '';
+                    $villeLivraison = $_POST['villeLivraison'] ?? '';
+                    $regionLivraison = $_POST['regionLivraison'] ?? '';
+                    $numeroCarte = $_POST['numeroCarte'] ?? '';
+                    $codePostal = $_POST['codePostal'] ?? '';
 
-                if (empty($adresseLivraison) || empty($villeLivraison) || empty($regionLivraison) || empty($numeroCarte)) {
-                    echo json_encode(['success' => false, 'error' => 'Tous les champs sont obligatoires']);
+                    if (empty($adresseLivraison) || empty($villeLivraison) || empty($regionLivraison) || empty($numeroCarte)) {
+                        echo json_encode(['success' => false, 'error' => 'Tous les champs sont obligatoires']);
+                        break;
+                    }
+
+                    $idCommande = createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte, $codePostal);
+                    echo json_encode(['success' => true, 'idCommande' => $idCommande]);
                     break;
-                }
-
-                $idCommande = createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivraison, $regionLivraison, $numeroCarte);
-                echo json_encode(['success' => true, 'idCommande' => $idCommande]);
-                break;
-
             case 'getCart':
                 $cart = getCurrentCart($pdo, $idClient);
                 echo json_encode($cart);

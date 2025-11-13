@@ -539,6 +539,7 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
                     villeLivraison: ville,
                     regionLivraison: region,
                     numeroCarte: rawNumCarte,
+                    codePostal: codePostal,
                 };
                 const result = await window.PaymentAPI.createOrder(orderData);
                 if (result.success) {
