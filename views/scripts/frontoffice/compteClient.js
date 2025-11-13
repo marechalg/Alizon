@@ -1,11 +1,11 @@
+import { convert, vignere } from 'Chiffrement.js';
+
 function popUpModifierMdp(){
     const overlay = document.createElement("div");
     overlay.className = "overlayPopUpCompteClient";
     overlay.innerHTML = `
                 <main class="mainPopUpCompteClient">
                 <h1>Modification de votre mot de passe</h1>
-                <p>${mdpChiffree}</p>
-                <p>${mdpDechiffree}</p>
                 <section>
                     <div class="formulaireMdp">
                         <form action="">
@@ -50,6 +50,25 @@ function popUpModifierMdp(){
                     </section>
                 </main>`;
     document.body.appendChild(overlay);
+
+    let input = document.querySelectorAll("input");
+    let ancienMdp = input[0];
+    let nouveauMdp = input[1];
+    let confirmationMdp = input[2];
+    let button = document.querySelectorAll("button");
+    let valider = button[0];
+
+    ancienMdpChiffree = vignere(ancienMdp, cle, 1);
+
+    if (ancienMdpChiffree === mdpChiffree && nouveauMdp === confirmationMdp){
+        valider.disabled = false;
+        valider.cursor = "pointer";
+    } else {
+        valider.disabled = true;
+        valider.cursor = "default";
+    }
+
+    
 }
 
 function verifierChamp() {
