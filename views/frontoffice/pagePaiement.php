@@ -159,30 +159,56 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
 // ============================================================================
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
-    header('Content-Type: application/json');
-    
+    // Détecter AJAX via header X-Requested-With (si absent, on considère formulaire classique)
+    $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
     try {
         switch ($_POST['action']) {
             case 'updateQty':
                 $idProduit = $_POST['idProduit'] ?? '';
                 $delta = intval($_POST['delta'] ?? 0);
-                
+
                 if ($idProduit && $delta != 0) {
                     $success = updateQuantityInDatabase($pdo, $idClient, $idProduit, $delta);
-                    echo json_encode(['success' => $success]);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => $success]);
+                        exit;
+                    }
+                    // Pour les formulaires : PRG
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 } else {
-                    echo json_encode(['success' => false, 'error' => 'Paramètres invalides']);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'error' => 'Paramètres invalides']);
+                        exit;
+                    }
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 }
                 break;
 
             case 'removeItem':
                 $idProduit = $_POST['idProduit'] ?? '';
-                
+
                 if ($idProduit) {
                     $success = removeFromCartInDatabase($pdo, $idClient, $idProduit);
-                    echo json_encode(['success' => $success]);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => $success]);
+                        exit;
+                    }
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 } else {
-                    echo json_encode(['success' => false, 'error' => 'ID produit manquant']);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'error' => 'ID produit manquant']);
+                        exit;
+                    }
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 }
                 break;
 
@@ -191,7 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $villeLivraison = $_POST['villeLivraison'] ?? '';
                 $regionLivraison = $_POST['regionLivraison'] ?? '';
                 $numeroCarte = $_POST['numeroCarte'] ?? '';
-                
+
                 if ($adresseLivraison && $villeLivraison && $regionLivraison && $numeroCarte) {
                     $idCommande = createOrderInDatabase(
                         $pdo,
@@ -201,19 +227,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                         $regionLivraison,
                         $numeroCarte
                     );
-                    echo json_encode(['success' => true, 'idCommande' => $idCommande]);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => true, 'idCommande' => $idCommande]);
+                        exit;
+                    }
+                    // Redirect after successful order
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 } else {
-                    echo json_encode(['success' => false, 'error' => 'Données manquantes']);
+                    if ($isAjax) {
+                        header('Content-Type: application/json');
+                        echo json_encode(['success' => false, 'error' => 'Données manquantes']);
+                        exit;
+                    }
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
+                    exit;
                 }
                 break;
 
             default:
-                echo json_encode(['success' => false, 'error' => 'Action non reconnue']);
+                if ($isAjax) {
+                    header('Content-Type: application/json');
+                    echo json_encode(['success' => false, 'error' => 'Action non reconnue']);
+                    exit;
+                }
+                header('Location: ' . $_SERVER['REQUEST_URI']);
+                exit;
         }
     } catch (Exception $e) {
-        echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+        if ($isAjax) {
+            header('Content-Type: application/json');
+            echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+            exit;
+        }
+        // En cas d'erreur serveur pour formulaire : redirection simple (on pourrait afficher un message si besoin)
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
     }
-    exit;
 }
 
 // ============================================================================
@@ -337,26 +388,44 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
                 <div class="empty-cart">Panier vide</div>
                 <?php else: ?>
                 <?php foreach ($cart as $item): 
-                    $nom = $item['nom'] ?? '';
-                    $imgProd = $item['img'] ?? '../../public/images/default.png';
-                    $prix = $item['prix'] ?? 0;
-                    $qty = $item['qty'] ?? 0;
-                ?>
-                <div class="produit" data-id="<?= htmlspecialchars($item['idProduit']) ?>">
+                        $nom = $item['nom'] ?? '';
+                        $imgProd = $item['img'] ?? '../../public/images/default.png';
+                        $prix = $item['prix'] ?? 0;
+                        $qty = $item['qty'] ?? 0;
+                        $id = $item['id'] ?? '';
+                    ?>
+                <div class="produit" data-id="<?= htmlspecialchars($id) ?>">
                     <img src="<?= htmlspecialchars($imgProd) ?>" alt="<?= htmlspecialchars($nom) ?>">
                     <div class="infos">
                         <p class="titre"><?= htmlspecialchars($nom) ?></p>
                         <p class="prix"><?= number_format($prix * $qty, 2, ',', '') ?>€</p>
                         <div class="gestQte">
                             <div class="qte">
-                                <button class="minus" data-id="<?= htmlspecialchars($item['idProduit']) ?>">-</button>
-                                <span class="qty"
-                                    data-id="<?= htmlspecialchars($item['idProduit']) ?>"><?= intval($qty) ?></span>
-                                <button class="plus" data-id="<?= htmlspecialchars($item['idProduit']) ?>">+</button>
+                                <form method="post" style="display:inline">
+                                    <input type="hidden" name="action" value="updateQty">
+                                    <input type="hidden" name="idProduit" value="<?= htmlspecialchars($id) ?>">
+                                    <input type="hidden" name="delta" value="-1">
+                                    <button type="submit" class="minus">-</button>
+                                </form>
+
+                                <span class="qty" data-id="<?= htmlspecialchars($id) ?>"><?= intval($qty) ?></span>
+
+                                <form method="post" style="display:inline">
+                                    <input type="hidden" name="action" value="updateQty">
+                                    <input type="hidden" name="idProduit" value="<?= htmlspecialchars($id) ?>">
+                                    <input type="hidden" name="delta" value="1">
+                                    <button type="submit" class="plus">+</button>
+                                </form>
                             </div>
-                            <button class="delete" data-id="<?= htmlspecialchars($item['idProduit']) ?>">
-                                <img src="../../public/images/bin.svg" alt="Supprimer">
-                            </button>
+
+                            <form method="post" onsubmit="return confirm('Supprimer ce produit du panier ?')"
+                                style="display:inline">
+                                <input type="hidden" name="action" value="removeItem">
+                                <input type="hidden" name="idProduit" value="<?= htmlspecialchars($id) ?>">
+                                <button type="submit" class="delete">
+                                    <img src="../../public/images/bin.svg" alt="Supprimer">
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
