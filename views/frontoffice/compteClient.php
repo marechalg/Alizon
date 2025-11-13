@@ -133,6 +133,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <?php include 'partials/footerConnecte.php'; ?>
 
+    <?php 
+        $stmt = $pdo->query("SELECT mdp FROM _client WHERE idClient = '$id_client'");
+        $tabMdp = $stmt->fetch(PDO::FETCH_ASSOC);
+        $mdp = $tabMdp['mdp'];
+    ?>
+    <script>const mdp = "<?php echo $mdp; ?>";</script>
     <script src="../scripts/frontoffice/compteClient.js"></script>
 </body>
 </html>

@@ -33,20 +33,13 @@ function vignere(texte, cle, sens){
     return result;
 }
 
-
-
 function popUpModifierMdp(){
     const overlay = document.createElement("div");
     overlay.className = "overlayPopUpCompteClient";
     overlay.innerHTML = `
-                <?php 
-                    $stmt = $pdo->query("SELECT mdp FROM _client WHERE idClient = '$id_client'");
-                    $tabMdp = $stmt->fetch(PDO::FETCH_ASSOC);
-                    $mdp = $tabMdp['mdp'];
-                ?>
                 <main class="mainPopUpCompteClient">
                 <h1>Modification de votre mot de passe</h1>
-                <p><?php echo htmlspecialchars($mdp ?? ''); ?></p>
+                <p>${mdp}</p>
                 <section>
                     <div class="formulaireMdp">
                         <form action="">
