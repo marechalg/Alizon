@@ -27,7 +27,7 @@
             </div>
             <div class="listeArticle">
                 <?php 
-                $stmt = $pdo->prepare("SELECT * FROM _produit WHERE dateAjout >= DATE_SUB(NOW(), INTERVAL 1 WEEK)");
+                $stmt = $pdo->prepare("SELECT * FROM _produit WHERE dateAjout >= DATE_SUB(NOW(), INTERVAL 2 WEEK)");
                 $stmt->execute();
                 $produitNouveaute = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
@@ -123,7 +123,7 @@
                 <?php 
                 $stmt = $pdo->prepare("SELECT * FROM _produit WHERE typeProd = :typeProd");
                 $stmt->execute([':typeProd' => 'alcools']);
-                $produitCharcuterie = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $produitAlcool = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
                 if (count($produitAlcool) > 0) {
                     foreach ($produitAlcool as $value) {
