@@ -498,6 +498,9 @@ header.backoffice dialog {
   left: 50%;
   transform: translate(-50%, -50%);
   color: #273469;
+  font-family: "open-sans";
+  display: flex;
+  flex-direction: column;
 }
 header.backoffice dialog::backdrop {
   background: rgba(0, 0, 0, 0.25);
@@ -506,6 +509,7 @@ header.backoffice dialog::backdrop {
 header.backoffice dialog button {
   border: none;
   justify-self: right;
+  align-self: flex-end;
   transition: all 0.2s;
 }
 header.backoffice dialog button:hover img {
