@@ -285,28 +285,47 @@ $cart = getCurrentCart($pdo, $idClient);
             <div class="cardRecap">
                 <article>
                     <?php  
-                        // Recupération du panier actuel
-                        $stmt = $pdo->query("SELECT * FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1");
+                        $stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1");
                         $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
-                        if (!$panier) throw new Exception("Aucun panier trouvé pour ce client.");
+                        
+                        if ($panier) {
+                            $idPanier = intval($panier['idPanier']);
+                            
+                            // Calcul en temps réel
+                            $sqlTotals = "
+                                SELECT 
+                                    SUM(pap.quantiteProduit) AS nbArticles,
+                                    SUM(p.prix * pap.quantiteProduit) AS prixHT,
+                                    SUM(p.prix * pap.quantiteProduit * COALESCE(t.pourcentageTva, 20.0) / 100) AS prixTotalTvaPanier,
+                                    SUM(p.prix * pap.quantiteProduit * (1 + COALESCE(t.pourcentageTva, 20.0) / 100)) AS sousTotal
+                                FROM _produitAuPanier pap
+                                JOIN _produit p ON pap.idProduit = p.idProduit
+                                LEFT JOIN _tva t ON p.typeTva = t.typeTva
+                                WHERE pap.idPanier = $idPanier
+                            ";
+                            
+                            $stmt = $pdo->query($sqlTotals);
+                            $totals = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : [];
+                        }
                     ?>
+
                     <h2><b>Récapitulatif de votre panier</b></h2>
                     <div class="infoCommande">
                         <section>
                             <h2>Nombres d'articles</h2>
-                            <h2 class="val"><?php echo $panier['nbArticles'] ?? 'N/A' ?></h2>
+                            <h2 class="val"><?= $totals['nbArticles'] ?? 0 ?></h2>
                         </section>
                         <section>
                             <h2>Prix HT</h2>
-                            <h2 class="val"><?php echo $panier['prixHT'] ?? 'N/A' ?></h2>
+                            <h2 class="val"><?= number_format($totals['prixHT'] ?? 0, 2) ?>€</h2>
                         </section>
                         <section>
                             <h2>TVA</h2>
-                            <h2 class="val"><?php echo $panier['prixTotalTvaPanier'] ?? 'N/A' ?></h2>
+                            <h2 class="val"><?= number_format($totals['prixTotalTvaPanier'] ?? 0, 2) ?>€</h2>
                         </section>
                         <section>
                             <h2>Total</h2>
-                            <h2 class="val"><?php echo $panier['sousTotal'] ?? 'N/A' ?></h2>
+                            <h2 class="val"><?= number_format($totals['sousTotal'] ?? 0, 2) ?>€</h2>
                         </section>
                     </div>
                 </article>
