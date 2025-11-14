@@ -113,11 +113,11 @@ require_once '../../controllers/date.php';
                         <figcaption>" . $avi['nomClient'] . "</figcaption>
                     </figure>
                     <figure>
-                        <figcaption>" . $avi['note'] . "</figcaption>
+                        <figcaption>" . str_replace('.', ',', $avi['note']) . "</figcaption>
                         <img src='/public/images/etoile.svg'>
                     </figure>
                 </th>
-                <th>" . $avi['titreAvis'] . "</th>
+                <th>" . $avi['nomProduit'] . " - " . $avi['titreAvis'] . "</th>
                 <td>Le" . formatDate($avi['dateAvis']) . "</td>
             </tr>
             <tr>
@@ -127,7 +127,7 @@ require_once '../../controllers/date.php';
                 <td></td>
                 <td colspan='2'>";   
                     foreach ($imagesAvis as $imageAvi) {
-                        $html .= "<img src='" . $imageAvi['URL'] . "'>";
+                        $html .= "<img src='" . $imageAvi['URL'] . "' class='imageAvis'>";
                     }
                 $html .= "</td>
             </tr>
