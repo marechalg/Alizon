@@ -495,15 +495,18 @@ header.backoffice dialog {
   padding-bottom: 1em;
   color: #273469;
   font-family: "open-sans";
+  max-width: 500px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
 }
 header.backoffice dialog::backdrop {
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(1px);
 }
-header.backoffice dialog > * {
-  display: block;
-}
-header.backoffice dialog button {
+header.backoffice dialog button:first-child {
   border: none;
   background: none;
   margin-left: auto;
@@ -511,17 +514,18 @@ header.backoffice dialog button {
   margin-bottom: 1em;
   transition: all 0.2s;
 }
-header.backoffice dialog button:hover {
+header.backoffice dialog button:first-child:hover {
   cursor: pointer;
 }
-header.backoffice dialog button:hover img {
+header.backoffice dialog button:first-child:hover img {
   content: url(../../../public/images/croixRouge.svg);
 }
-header.backoffice dialog button img {
+header.backoffice dialog button:first-child img {
   display: block;
 }
 header.backoffice dialog h1 {
   margin-bottom: 1em;
+  text-align: center;
 }
 header.backoffice dialog nav {
   display: flex;
