@@ -107,7 +107,7 @@ require_once '../../controllers/date.php';
         $html = "
         <table border=2>
             <tr>
-                <th rowspan=3>
+                <th rowspan=2>
                     <figure>
                         <img src='/public/images/pp.png'>
                         <figcaption>" . $avi['nomClient'] . "</figcaption>
@@ -121,7 +121,6 @@ require_once '../../controllers/date.php';
                 <td>Le " . formatDate($avi['dateAvis']) . "</td>
             </tr>
             <tr>
-                <td></td>
                 <td colspan=2>" . $avi['contenuAvis'] . "</td>
             </tr>
             <tr>
