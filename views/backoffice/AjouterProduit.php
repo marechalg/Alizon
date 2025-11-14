@@ -43,7 +43,7 @@
 
             <div class="right-section">
                 <div class="ajouterResume resume-box">
-                    <label for="resume">Résumé du produit (Affiché en haut de page)</label>
+                    <label for="resume">Résumé du produit</label>
                     <textarea name="resume" id="resume" placeholder>Décrivez votre produit en quelques mots</textarea>
                 </div>
             <h2>Plus d'informations</h2>
@@ -78,6 +78,7 @@
 
         const originalImageSrc = imagePreview.src;
 
+        // Gestion upload photo
         ajouterPhotoDiv.addEventListener('click', function() {
             photoUploadInput.click();
         });
@@ -113,8 +114,27 @@
         const sectionTypeSelect = document.getElementById('section-type');
         let sectionCount = 0;
 
-        function createNewSection(){
-            sectionCount ++;
+        function canAddSection() {
+            const lastSection = sectionsContainer.lastElementChild;
+            if (!lastSection) return true;
+
+            const hasTitle = lastSection.querySelector('input[type="text"]');
+            const hasDesc = lastSection.querySelector('textarea');
+
+            // Si titre ET description sont présents, on bloque
+            if (hasTitle && hasDesc) {
+                return false;
+            }
+            return true;
+        }
+
+        function createNewSection() {
+            if (!canAddSection()) {
+                alert("Impossible d'ajouter une nouvelle section : le dernier bloc a déjà Titre + Description.");
+                return;
+            }
+
+            sectionCount++;
             const type = sectionTypeSelect.value;
             const newSection = document.createElement('div');
             newSection.classList.add('new-section-box');
@@ -129,7 +149,7 @@
                 </div>
             `;
 
-            if(type === "both" || type === "title"){
+            if (type === "both" || type === "title") {
                 sectionHTML += `
                     <div class="input-group">
                         <label for="section-title-${sectionCount}">Titre de la section (H3)</label>
@@ -138,7 +158,7 @@
                 `;
             }
 
-            if(type === "both" || type === "desc"){
+            if (type === "both" || type === "desc") {
                 sectionHTML += `
                     <div class="input-group">
                         <label for="section-desc-${sectionCount}">Description (P)</label>
@@ -149,15 +169,19 @@
 
             newSection.innerHTML = sectionHTML;
 
-            newSection.querySelector('.btn-delete-section').addEventListener('click', function(){
+            newSection.querySelector('.btn-delete-section').addEventListener('click', function() {
                 newSection.remove();
             });
 
             sectionsContainer.appendChild(newSection);
+
+            // Scroll automatique vers la nouvelle section si besoin
+            newSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         addSectionBtn.addEventListener('click', createNewSection);
     });
+
     </script>
     <?php require_once "./partials/footer.php"?>
 </body>
