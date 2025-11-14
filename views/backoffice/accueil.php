@@ -117,7 +117,7 @@ require_once '../../controllers/date.php';
                         <img src='/public/images/etoile.svg'>
                     </figure>
                 </th>
-                <th>" . $avi['titreAvis'] . "</th>
+                <th>" . $avi['nomProduit'] . " - " . $avi['titreAvis'] . "</th>
                 <td>Le" . formatDate($avi['dateAvis']) . "</td>
             </tr>
             <tr>
