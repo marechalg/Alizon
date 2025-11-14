@@ -254,22 +254,22 @@ $cart = getCurrentCart($pdo, $idClient);
             <?php foreach ($cart as $item) { ?>
                 <article>
                     <div class="imgProduit">
-                        <img src="<?= htmlspecialchars($item['imgProd']) ?>" alt="<?= htmlspecialchars($item['nom']) ?>">
+                    <img src="<?= htmlspecialchars($item['imgProd'] ?? '../../public/images/404.png') ?>" alt="<?= htmlspecialchars($item['nom'] ?? '') ?>">
                     </div>
                     <div class="infoProduit">
                         <div>
-                            <h2><?= htmlspecialchars($item['nom']) ?></h2>
+                            <h2><?= htmlspecialchars($item['nom'] ?? 'N/A') ?></h2>
                             <h4>En stock</h4>
                         </div>
                         <div class="quantiteProduit">
-                            <img class="minus" data-id="<?= htmlspecialchars($item['idProduit']) ?>" src="../../public/images/minusDarkBlue.svg" alt="Symbole moins" style="cursor: pointer;"> 
+                            <img class="minus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" src="../../public/images/minusDarkBlue.svg" alt="Symbole moins" style="cursor: pointer;"> 
                             <p class="quantite">0</p> 
-                            <img class="plus" data-id="<?= htmlspecialchars($item['idProduit']) ?>" src="../../public/images/plusDarkBlue.svg" alt="Symbole plus" style="cursor: pointer;"> 
+                            <img class="plus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" src="../../public/images/plusDarkBlue.svg" alt="Symbole plus" style="cursor: pointer;"> 
                         </div>
                     </div>
                     <div class="prixOpt">
                         <h2><b><?= number_format($prix * $qty, 2, ',', '') ?>€</b></h2>
-                        <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit']) ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
+                        <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
                     </div>
                 </article> 
             <?php } if ($cart==0) { ?>
@@ -343,5 +343,10 @@ $cart = getCurrentCart($pdo, $idClient);
             });
         });
     </script>
+
+    <script src="../../public/Chiffrement.js"></script>
+    <script src="../scripts/frontoffice/paiement-ajax.js"></script>
+    <script src="../../public/amd-shim.js"></script>
+    <script src="../../public/script.js"></script>
 </body>
 </html>
