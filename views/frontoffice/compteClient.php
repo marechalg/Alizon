@@ -129,6 +129,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="button" class="boutonModiferProfil">Modifier</button>
             </div>
         </form>
+
+        <h1>TIMEO</h1>
     </main>
     
     <?php include 'partials/footerConnecte.php'; ?>
