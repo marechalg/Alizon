@@ -136,6 +136,7 @@ header.backoffice {
         padding: 1em;
         animation: all 0.2s;
         transition: all 0.2s;
+        position: center center;
 
         &::backdrop {
             background: rgba(0, 0, 0, 0.75);
