@@ -102,7 +102,6 @@ function popUpModifierMdp(){
 function setError(element, message) {
   if (!element) return;
   element.classList.add("invalid");
-  element.style.color = "red";
   const container = element.parentElement;
   if (!container) return;
   let err = container.querySelector(".error-message");
