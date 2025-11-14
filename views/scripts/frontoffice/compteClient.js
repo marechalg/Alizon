@@ -90,6 +90,7 @@ function popUpModifierMdp(){
             valider.disabled = true;
             valider.style.cursor = "default";
             valider.onclick = null;
+
         }
     }
 
@@ -102,6 +103,7 @@ function popUpModifierMdp(){
 function setError(element, message) {
   if (!element) return;
   element.classList.add("invalid");
+  element.style.color = "red";
   const container = element.parentElement;
   if (!container) return;
   let err = container.querySelector(".error-message");
@@ -116,7 +118,7 @@ function setError(element, message) {
 function clearError(element) {
   if (!element) return;
   element.classList.remove("invalid");
-  let container = element.closest(".input-contenaire") || element.parentElement;
+  const container = element.parentElement;
   if (!container) return;
   const err = container.querySelector(".error-message");
   if (err) err.textContent = "";
@@ -124,21 +126,20 @@ function clearError(element) {
 
 function verifierChamp() {
     const bouton = document.querySelector(".boutonModiferProfil");
-    const champs = document.querySelectorAll("section .input-contenaire");
+    const champs = document.querySelectorAll("section input");
     let tousRemplis = true;
     
     for (let i = 0; i < champs.length; i++) {
-        const input = contenaires[i].querySelector("input");
-        let valeur = input.value.trim();
+        let valeur = champs[i].value.trim();
         
         // Le champ adresse2 est optionnel
         if (i !== 5 && valeur === "") {
             tousRemplis = false;
             setError(
-                input, "Le champs obligatoire est vide"
+                champs[i], "Le champs obligatoire est vide"
             );
         } else {
-            clearError(input);
+            clearError(champs[i]);
         }
 
         // Validation spécifique pour la date de naissance
@@ -146,10 +147,10 @@ function verifierChamp() {
             if (!/^([0][1-9]||[12][0-9]||[3][01])\/([0][1-9]||[1][012])\/([1][9][0-9][0-9]||[2][0][0-1][0-9]||[2][0][2][0-5])$/.test(valeur)) {
                 tousRemplis = false;
                 setError(
-                    input, "Format attendu : jj/mm/aaaa"
+                    champs[i], "Le champs de la date de naissance doit être sous la forme dd/mm/aaaa"
                 );
             } else {
-                clearError(input);
+                clearError(champs[i]);
             }
         }
         
@@ -158,10 +159,10 @@ function verifierChamp() {
             if (!/^0[67](\s[0-9]{2}){4}$/.test(valeur)) {
                 tousRemplis = false;
                 setError(
-                    input, "Format attendu : 06 01 02 03 04"
+                    champs[i], "Le champs numéro de téléphone doit être sous la forme 06 01 02 03 04"
                 );
             } else {
-                clearError(input);
+                clearError(champs[i]);
             }
         }
         
@@ -170,10 +171,10 @@ function verifierChamp() {
             if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}$/.test(valeur)) {
                 tousRemplis = false;
                 setError(
-                    input, "Email invalide (ex: nom@domaine.fr)"
+                    champs[i], "Le champs email doit contenir un @ et un nom de domaine ex : .fr .com"
                 );
             } else {
-                clearError(input);
+                clearError(champs[i]);
             }
         }            
     }
@@ -217,12 +218,6 @@ function modifierProfil(event) {
             input.name = nomsChamps[i];
             input.id = nomsChamps[i];
             input.autocomplete = nomsChamps[i];
-
-            // Contenaire pour message d'erreur
-            let contenaire = document.createElement("div");
-            contenaire.className = "input-contenaire";
-            contenaire.appendChild(input);
-            elems[i].parentNode.replaceChild(contenaire, elems[i]);
             
             // Définir le type d'input approprié
             if (i === 9) input.type = "tel";
@@ -264,6 +259,8 @@ function modifierProfil(event) {
                 input.placeholder = "Entrez votre email*";
                 break;
             }
+            
+            elems[i].parentNode.replaceChild(input, elems[i]);
         }
         
         // Modifier le bouton "Modifier" en "Enregistrer"
