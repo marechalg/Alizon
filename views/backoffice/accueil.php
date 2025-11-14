@@ -107,7 +107,7 @@ require_once '../../controllers/date.php';
         $html = "
         <table border=2>
             <tr>
-                <th rowspan=3>
+                <th>
                     <figure>
                         <img src='/public/images/pp.png'>
                         <figcaption>" . $avi['nomClient'] . "</figcaption>
