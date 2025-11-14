@@ -1442,6 +1442,7 @@ main.acceuilBackoffice section.avis article table tr:first-child figure:last-chi
   align-items: center;
   gap: 0.25em;
   justify-self: center;
+  color: #FFD000;
 }
 main.acceuilBackoffice section.avis article table tr:first-child figure:last-child img {
   height: 25px;
