@@ -254,7 +254,14 @@ $cart = getCurrentCart($pdo, $idClient);
             <?php foreach ($cart as $item) { ?>
                 <article>
                     <div class="imgProduit">
-                    <img src="<?= htmlspecialchars($item['imgProd'] ?? '../../public/images/404.png') ?>" alt="<?= htmlspecialchars($item['nom'] ?? '') ?>">
+                        <?php 
+                            $idProduit = $item['idProduit'] ?? 0;
+                            $stmtImg = $pdo->prepare("SELECT URL FROM _imageDeProduit WHERE idProduit = :idProduit");
+                            $stmtImg->execute([':idProduit' => $idProduit]);
+                            $imageResult = $stmtImg->fetch(PDO::FETCH_ASSOC);
+                            $image = !empty($imageResult) ? $imageResult['URL'] : '../../public/images/defaultImageProduit.png';    
+                        ?>
+                    <img src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($item['nom'] ?? '') ?>">
                     </div>
                     <div class="infoProduit">
                         <div>
@@ -329,7 +336,7 @@ $cart = getCurrentCart($pdo, $idClient);
                         </section>
                     </div>
                 </article>
-                <a href="../../views/frontoffice/pagePaiement"><p>Passer la commande</p></a>
+                <a href="../../views/frontoffice/pagePaiement.php"><p>Passer la commande</p></a>
             </div>
             <a href="" class="viderPanier">Vider le panier</a>
         </section>
