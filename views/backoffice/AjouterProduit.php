@@ -43,16 +43,23 @@
 
             <div class="right-section">
                 <div class="ajouterResume resume-box">
-                    <label for="resume">Résumé du produit (Affiché en haut de page)</label>
+                    <label for="resume">Résumé du produit</label>
                     <textarea name="resume" id="resume" placeholder>Décrivez votre produit en quelques mots</textarea>
                 </div>
             <h2>Plus d'informations</h2>
 
-            <div id="sections-container"></div> 
+            <div id="sections-container"></div>
+
                 <div class="ajouterSection">
-                    <p>Etoffez la description de votre produit en ajoutant une première section</p>
+                    <p>Etoffez la description de votre produit en ajoutant une section</p>
+                    <select id="section-type">
+                        <option value="both">Titre + Description</option>
+                        <option value="title">Titre seulement</option>
+                        <option value="desc">Description seulement</option>
+                    </select>
                     <button id="add-section-btn" type="button">Ajouter une section</button>
                 </div>
+
             <div class="form-actions">
                 <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
                 <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
@@ -63,91 +70,124 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        //Récupère les éléments
         const photoUploadInput = document.getElementById('photoUpload');
         const ajouterPhotoDiv = document.querySelector('.ajouterPhoto'); 
-        const imagePreview = document.getElementById('imagePreview'); //image
-        const placeholderText = document.getElementById('placeholderText'); //paragraphe
-        const overlayText = document.getElementById('overlayText'); // texte “cliquer pour modifier”
-        
-        // Sauvegarde de l'URL par défaut
+        const imagePreview = document.getElementById('imagePreview');
+        const placeholderText = document.getElementById('placeholderText');
+        const overlayText = document.getElementById('overlayText');
+        const addSectionBtn = document.getElementById('add-section-btn');
+        const sectionsContainer = document.getElementById('sections-container');
+        const sectionTypeSelect = document.getElementById('section-type');
+        const resumeTextarea = document.getElementById('resume');
+
         const originalImageSrc = imagePreview.src;
 
-        //Déclenche le clic sur l'input de fichier
+        // Gestion du clic pour upload d'image
         ajouterPhotoDiv.addEventListener('click', function() {
             photoUploadInput.click();
         });
 
-        //Gére la sélection du fichier et la prévisualisation
         photoUploadInput.addEventListener('change', function() {
             const files = this.files;
-            
             if (files && files.length > 0) {
                 const file = files[0];
-                
                 if (file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    
                     reader.onload = function(e) {
                         imagePreview.src = e.target.result;
                         placeholderText.style.display = 'none';
-                        overlayText.style.display = 'block';
+                        overlayText.style.opacity = '1';
                     };
-
                     reader.readAsDataURL(file);
-
                 } else {
                     imagePreview.src = originalImageSrc;
                     placeholderText.style.display = 'block';
-                    overlayText.style.display = 'none';
+                    overlayText.style.opacity = '0';
                     alert("Votre fichier n'est pas une image, merci de réessayer.");
                 }
             } else {
                 imagePreview.src = originalImageSrc;
                 placeholderText.style.display = 'block';
-                overlayText.style.display = 'none';
+                overlayText.style.opacity = '0';
             }
         });
-        // Gestion des sections
-        const addSectionBtn = document.getElementById('add-section-btn');
-        const sectionsContainer = document.getElementById('sections-container');
-        let sectionCount = 0;
-    
-        // Fonction pour créer une nouvelle section
+
+        // Fonction pour vérifier si le bouton doit disparaître
+        function checkSections() {
+            const allSections = sectionsContainer.querySelectorAll('.new-section-box');
+            let hasTitle = resumeTextarea.value.trim() !== ''; // prend en compte le résumé
+            let hasDesc = resumeTextarea.value.trim() !== ''; // si tu veux le résumé aussi comme description
+
+            allSections.forEach(section => {
+                const titleInput = section.querySelector('input[type="text"]');
+                const descTextarea = section.querySelector('textarea');
+
+                if (titleInput && titleInput.value.trim() !== '') hasTitle = true;
+                if (descTextarea && descTextarea.value.trim() !== '') hasDesc = true;
+            });
+
+            // Si on a à la fois un titre et une description quelque part, on cache le bouton
+            if (hasTitle && hasDesc) {
+                addSectionBtn.style.display = 'none';
+            } else {
+                addSectionBtn.style.display = 'inline-block';
+            }
+        }
+
+        // Créer une nouvelle section
         function createNewSection(){
-            sectionCount ++;
+            const type = sectionTypeSelect.value;
             const newSection = document.createElement('div');
             newSection.classList.add('new-section-box');
-            newSection.dataset.sectionId = sectionCount;
-    
-            newSection.innerHTML = `
-                <div class="section-header">
-                    <h3 class="section-title">Section n°${sectionCount}</h3>
-                    <button type="button" class="btn-delete-section" title="Supprimer la section">
-                        <i class="bi bi-x-circle-fill"></i>
-                    </button>
-                </div>
-    
-                <div class="input-group">
-                    <label for="section-title-${sectionCount}">Titre de la section (H3)</label>
-                    <input type="text" id="section-title-${sectionCount}" name="section_title_${sectionCount}" placeholder="Ex: Ingrédients">
-                </div>
-    
-                <div class="input-group">
-                    <label for="section-desc-${sectionCount}">Description (P)</label>
-                    <textarea id="section-desc-${sectionCount}" name="section_desc_${sectionCount}" placeholder="Détaillez le contenu de cette section."></textarea>
-                </div>
+
+            let sectionHTML = '';
+
+            if(type === "both" || type === "title"){
+                sectionHTML += `
+                    <div class="input-group">
+                        <label>Titre de la section</label>
+                        <input type="text" placeholder="Ex: Ingrédients">
+                    </div>
+                `;
+            }
+
+            if(type === "both" || type === "desc"){
+                sectionHTML += `
+                    <div class="input-group">
+                        <label>Description</label>
+                        <textarea placeholder="Détaillez le contenu de cette section."></textarea>
+                    </div>
+                `;
+            }
+
+            sectionHTML += `
+                <button type="button" class="btn-delete-section" title="Supprimer la section">
+                    <i class="bi bi-x-circle-fill"></i>
+                </button>
             `;
-    
+
+            newSection.innerHTML = sectionHTML;
+
+            // Supprimer une section
             newSection.querySelector('.btn-delete-section').addEventListener('click', function(){
                 newSection.remove();
+                checkSections();
             });
-    
+
             sectionsContainer.appendChild(newSection);
+            checkSections(); // Vérifie après ajout
+
+            // Ajouter un margin-bottom pour séparer les boutons du bas du footer
+            const formActions = document.querySelector('.form-actions');
+            formActions.style.marginBottom = '50px';
         }
-        createNewSection();
-        // Ajout de sections supplémentaires au clic
+
+        // Ajout de sections au clic
         addSectionBtn.addEventListener('click', createNewSection);
+
+        // Vérification au changement du résumé ou des sections
+        resumeTextarea.addEventListener('input', checkSections);
+        sectionsContainer.addEventListener('input', checkSections);
     });
 
 

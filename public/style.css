@@ -485,6 +485,50 @@ header.backoffice.nouveauProduit nav figure:first-child {
 header.backoffice.nonConnecte nav {
   display: none;
 }
+header.backoffice dialog {
+  background-color: #fffefa;
+  border: none;
+  border-radius: 16px;
+  padding-left: 2em;
+  padding-right: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #273469;
+}
+header.backoffice dialog::backdrop {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+}
+header.backoffice dialog button {
+  border: none;
+  justify-self: right;
+  transition: all 0.2s;
+}
+header.backoffice dialog button:hover img {
+  content: url(../../../public/images/croixRouge.svg);
+}
+header.backoffice dialog nav {
+  display: flex;
+  justify-content: space-around;
+}
+header.backoffice dialog nav button {
+  padding: 1em;
+  width: 200px;
+  font-size: 20px;
+  border-radius: 24px;
+}
+header.backoffice dialog nav button:first-child {
+  background-color: #e4d9ff;
+  color: #273469;
+}
+header.backoffice dialog nav button:last-child {
+  background-color: #273469;
+  color: #fffefa;
+}
 
 .status-red {
   color: #f14e4e;
@@ -1539,7 +1583,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 .mainCompteClient article div {
   display: flex;
   flex-direction: row;
-  margin-right: 29px;
+  gap: 29px;
 }
 .mainCompteClient article p, .mainCompteClient input {
   margin-top: 45px;
@@ -2129,6 +2173,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   text-align: center;
   margin-bottom: 20px;
   border-radius: 8px;
+  cursor: pointer;
 }
 .AjouterProduit .ajouterPhoto .placeholder-photo {
   display: flex;
@@ -2161,7 +2206,6 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   padding: 5px 10px;
   border-radius: 5px;
   opacity: 0;
-  display: none;
   transition: opacity 0.3s;
 }
 .AjouterProduit .ajouterPhoto .placeholder-photo:hover .overlay-text {
@@ -2228,7 +2272,6 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   padding-right: 5px;
   padding-left: 0;
   background-color: #fffefa;
-  color: #273469;
   z-index: 50;
 }
 .AjouterProduit .right-section .product-desc-box textarea {
@@ -2253,10 +2296,75 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   color: gray;
   margin-top: 5px;
 }
+.AjouterProduit .right-section #sections-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 15px;
+}
+.AjouterProduit .right-section #sections-container .new-section-box {
+  border: 2px solid #273469;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: white;
+}
+.AjouterProduit .right-section #sections-container .new-section-box .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.AjouterProduit .right-section #sections-container .new-section-box .input-group label {
+  font-weight: bold;
+  color: #273469;
+}
+.AjouterProduit .right-section #sections-container .new-section-box .input-group input[type=text], .AjouterProduit .right-section #sections-container .new-section-box .input-group textarea {
+  border: 2px solid #273469;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 1rem;
+  width: 100%;
+}
+.AjouterProduit .right-section #sections-container .new-section-box .input-group input[type=text]::placeholder, .AjouterProduit .right-section #sections-container .new-section-box .input-group textarea::placeholder {
+  color: #6e6e6e;
+  font-weight: bold;
+}
+.AjouterProduit .right-section #sections-container .new-section-box .input-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+.AjouterProduit .right-section .ajouterSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.AjouterProduit .right-section .ajouterSection select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #273469;
+  font-weight: bold;
+  background-color: #fffefa;
+  color: #273469;
+  cursor: pointer;
+}
+.AjouterProduit .right-section .ajouterSection #add-section-btn {
+  padding: 10px 20px;
+  border-radius: 32px;
+  border: none;
+  background-color: #e4d9ff;
+  color: #273469;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.AjouterProduit .right-section .ajouterSection #add-section-btn:hover {
+  background-color: rgb(209.8815789474, 191.5, 255);
+}
 .AjouterProduit .form-actions {
   display: flex;
   gap: 15px;
   margin-top: 20px;
+  margin-bottom: 50px;
   align-items: center;
 }
 .AjouterProduit .form-actions button {
