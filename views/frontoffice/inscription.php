@@ -6,8 +6,6 @@
 <?php require_once "../../controllers/pdo.php" ?> 
 <?php require_once "../../controllers/prix.php" ?>
 
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
