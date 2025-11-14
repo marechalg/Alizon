@@ -42,21 +42,21 @@
             </div>
 
             <div class="right-section">
-                <div class="right-section">
-                <div class="ajouterResume">
-                    <textarea name="resume" id="resume" placeholder>Décrivez votreproduit en quelques mots (cette partie s'affichera tout en haut de la page)</textarea>
+                <div class="ajouterResume resume-box">
+                    <label for="resume">Résumé du produit (Affiché en haut de page)</label>
+                    <textarea name="resume" id="resume" placeholder>Décrivez votre produit en quelques mots</textarea>
                 </div>
-                <h2>Plus d'informations</h2>
+            <h2>Plus d'informations</h2>
+
+            <div id="sections-container"></div> 
                 <div class="ajouterSection">
                     <p>Etoffez la description de votre produit en ajoutant une première section</p>
-                    <button>Ajouter une section</button>
+                    <button id="add-section-btn" type="button">Ajouter une section</button>
                 </div>
-                <div class="form-actions">
-                    <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
-                    <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
-                    <a href="#"><button type="submit" class="btn-ajouter">Ajouter le produit</button></a>
-                </div>
-            </div>
+            <div class="form-actions">
+                <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
+                <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
+                <a href="#"><button type="submit" class="btn-ajouter">Ajouter le produit</button></a>
             </div>
         </div>
     </main>
@@ -108,7 +108,49 @@
                 overlayText.style.display = 'none';
             }
         });
+        // Gestion des sections
+        const addSectionBtn = document.getElementById('add-section-btn');
+        const sectionsContainer = document.getElementById('sections-container');
+        let sectionCount = 0;
+    
+        // Fonction pour créer une nouvelle section
+        function createNewSection(){
+            sectionCount ++;
+            const newSection = document.createElement('div');
+            newSection.classList.add('new-section-box');
+            newSection.dataset.sectionId = sectionCount;
+    
+            newSection.innerHTML = `
+                <div class="section-header">
+                    <h3 class="section-title">Section n°${sectionCount}</h3>
+                    <button type="button" class="btn-delete-section" title="Supprimer la section">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </button>
+                </div>
+    
+                <div class="input-group">
+                    <label for="section-title-${sectionCount}">Titre de la section (H3)</label>
+                    <input type="text" id="section-title-${sectionCount}" name="section_title_${sectionCount}" placeholder="Ex: Ingrédients">
+                </div>
+    
+                <div class="input-group">
+                    <label for="section-desc-${sectionCount}">Description (P)</label>
+                    <textarea id="section-desc-${sectionCount}" name="section_desc_${sectionCount}" placeholder="Détaillez le contenu de cette section."></textarea>
+                </div>
+            `;
+    
+            newSection.querySelector('.btn-delete-section').addEventListener('click', function(){
+                newSection.remove();
+            });
+    
+            sectionsContainer.appendChild(newSection);
+        }
+        createNewSection();
+        // Ajout de sections supplémentaires au clic
+        addSectionBtn.addEventListener('click', createNewSection);
     });
+
+
     </script>
     <?php require_once "./partials/footer.php"?>
 </body>

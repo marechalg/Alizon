@@ -1425,7 +1425,7 @@ main.acceuilBackoffice section.avis article table {
   border-collapse: collapse;
   width: 100%;
   font-size: 20px;
-  background-color: #e3f2fe;
+  background-color: #e4d9ff;
   border-radius: 16px;
 }
 main.acceuilBackoffice section.avis article table td, main.acceuilBackoffice section.avis article table th {
@@ -1541,10 +1541,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   flex-direction: row;
   gap: 29px;
 }
-.mainCompteClient article div p, .mainCompteClient article div .input-container {
-  width: 185px;
-}
-.mainCompteClient article p, .mainCompteClient .input-container {
+.mainCompteClient article p, .mainCompteClient input {
   margin-top: 45px;
   display: flex;
   align-items: center;
@@ -1597,12 +1594,13 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   margin-top: 2px;
   display: block;
 }
-.mainCompteClient input {
-  font-size: 16px;
-  font-family: "lora";
-  font-weight: bold;
-  font-style: italic;
-  border: 0;
+.mainCompteClient .input-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.mainCompteClient article div p, .mainCompteClient article div .input-container, .mainCompteClient article div input#codePostal, .mainCompteClient article div input#ville {
+  width: 185px;
 }
 
 .overlayPopUpCompteClient {

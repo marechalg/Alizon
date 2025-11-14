@@ -2,15 +2,6 @@
     if (isset($_COOKIE[session_name()])) {
         session_start(['read_and_close' => true]);
     }
-
-    $pseudo = $_POST['pseudo'] ?? null;
-    $prenom = $_POST['prenom'] ?? null;
-    $nom = $_POST['nom'] ?? null;
-    $email = $_POST['email'] ?? null;
-    $num_tel = $_POST['num_tel'] ?? null;
-    $mdp = $_POST['mdp'] ?? null;
-    $date_naissance = $_POST['date_naissance'] ?? null;
-
 ?>
 <?php require_once "../../controllers/pdo.php" ?> 
 <?php require_once "../../controllers/prix.php" ?>
@@ -31,8 +22,6 @@
   <?php include './partials/headerConnecte.php'; ?>
 
     <h2>Inscription</h2>
-  
-
       <main>
         <form id="monForm" action="../backend/session_start.php" method="post" enctype="multipart/form-data">
 
@@ -299,15 +288,27 @@
                     phoneNumberInput.classList.remove('input-error');
                 }
             });
-
+            
             validateForm(); 
 
-            if(validateForm()){
-                <?php
 
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                <?php
+                $pseudo = $_POST['pseudo'] ?? '';
+                $prenom = $_POST['prenom'] ?? '';
+                $nom = $_POST['nom'] ?? '';
+                $email = $_POST['email'] ?? '';
+                $num_tel = $_POST['telephone'] ?? '';
+                $mdp = $_POST['motdepasse'] ?? '';
+                $date_naissance = $_POST['birthdate'] ?? '';
                 
                 $nouveauClient = "INSERT INTO `_client`(`dateNaissance`, `prenom`, `nom`, `email`, `mdp`, `noTelephone`, `pseudo`)
                 VALUES ('$date_naissance', '$prenom', '$nom', '$email', '$mdp', '$num_tel', '$pseudo')";
+
+                if ($pdo->query($nouveauClient) === false) {
+                    throw new Exception("Erreur lors de la création d'un : " . implode(', ', $pdo->errorInfo()));
+                }
                 ?>
             }
         </script>
