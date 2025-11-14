@@ -27,6 +27,4 @@
             <button autofocus>Oui</button>
         </nav>
     </dialog>
-
-    <script src='/views/scripts/backoffice/header.ts'></script>
 </header>
