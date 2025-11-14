@@ -144,41 +144,57 @@ main.acceuilBackoffice {
                 border-collapse: collapse;
                 width: 100%;
                 font-size: 20px;
+
+                td, th {
+                    padding: 0.5em;
+                }
+
+                tr:first-child {
+                    th:first-child {
+                        vertical-align: top;
+                    }
+
+                    figure:first-child {
+                        img {
+                            height: 80px; width: 80px;
+                            object-fit: cover;
+                            border-radius: 100%;
+                        }
+                    }
+                    figure:last-child {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.25em;
+                        justify-self: center;
+                        color: $color-yellow;
+
+                        img {
+                            height: 25px; width: 25px;
+                        }
+                    }
+
+                    th:nth-child(2) {
+                        white-space: nowrap;
+                        text-align: left;
+                    }
+
+                    td {
+                        width: 100%;
+                    }
+                }
+
+                tr:nth-child(2) {
+                    vertical-align: top;
+                }
+
+                tr:last-child {
+                    td:last-child {
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                }
             }
-            table td, table th {
-                padding: 0.5em;
-            }
-            tr:first-child th:first-child {
-                vertical-align: top;
-            }
-            tr:first-child figure:first-child img {
-                height: 80px; width: 80px;
-                object-fit: cover;
-                border-radius: 100%;
-            }
-            tr:first-child figure:last-child {
-                display: flex;
-                align-items: center;
-                gap: 0.25em;
-                justify-self: center;
-            }
-            tr:first-child figure:last-child img {
-                height: 25px; width: 25px;
-            }
-            tr:first-child th:nth-child(2) {
-                white-space: nowrap;
-                text-align: left;
-            }
-            tr:first-child td {
-                width: 100%;
-            }
-            tr:nth-child(2) {
-                vertical-align: top;
-            }
-            tr:last-child td:last-child {
-                display: flex;
-                flex-wrap: wrap;
-            }
+
             img.imageAvis {
                 height: 150px;
             }
