@@ -21,13 +21,13 @@
 
 // $sqlProduit = "SELECT 
 //                 p.idProduit,
-//                 p.nom AS nom_produit,        // ← Alias clair
+//                 p.nom AS nom_produit,
 //                 p.description, 
 //                 p.prix,
 //                 p.note,
 //                 p.stock,
-//                 v.prenom AS prenom_vendeur,  // ← Alias clair  
-//                 v.nom AS nom_vendeur,        // ← Alias clair
+//                 v.prenom AS prenom_vendeur,
+//                 v.nom AS nom_vendeur,
 //                 v.raisonSocial
 //                FROM _produit p 
 //                JOIN _vendeur v ON p.idVendeur = v.codeVendeur 
@@ -49,6 +49,13 @@
 
 // $resultImages = $pdo->query($sqlImages);
 // $images = $resultImages->fetchAll(PDO::FETCH_ASSOC);
+
+// $sqlAvis = "SELECT a.*
+//             FROM _avis 
+//             WHERE a.idProduit = $productId";
+
+// $resultAvis = $pdo->query($sqlAvis);
+// $lesAvis = $resultAvis->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +77,7 @@
         <img src="../../public/images/flecheGauche.svg" alt="">
         <div>
             <img id="imageBouteille"
-            src="../../../images/<?php echo htmlspecialchars($images[0]['url']); ?>"alt="Pas d'image trouvée">
+            src="../../../images/<?php echo htmlspecialchars($images[0]['URL']); ?>"alt="Pas d'image trouvée">
             <div id="lesCercles">
                 <div class="cercleNoir"></div>
                 <div class="cercleNoir"></div>
@@ -147,11 +154,62 @@
     </div> 
     <label for="activeVoirPlus" class="voirPlus"> </label> 
 </section>
-<section class="avis">
+<section class="sectionAvis">
     <h2>Ce qu'en disent nos clients</h2>
     <?php 
     $note = $produit['note'];
     echo htmlspecialchars($note);
+    ?>
+    <button>Ecrire un commentaire</button>
+
+    <?php
+        $html = "
+        <article>
+            <div class=\"horizontal\" id=\"ppClientBox\">
+                <img src=\"../../public/images/pp.png\">
+                <div class=\"vertical\">
+                    <div class=\"horizontal\">
+                        <div class=\"star-rating\">
+                            <div class=\"stars\" style=\"--rating:3.7\"></div>
+                        </div>
+                        <h3> Une fraîcheur authentique " . htmlspecialchars($atr['titreAvis']) . "</h3>
+                    </div>
+                    <h6>Avis déposé le 10/06/24" . htmlspecialchars($atr['dateAvis']) . " par Nathan</h6>
+                </div>
+            </div>
+            <p> Un cidre à la robe dorée, aux fines bulles légères et au nez fruité. En bouche, l’équilibre parfait entre la douceur naturelle de la pomme et une pointe d’amertume apporte fraîcheur et caractère. Idéal à l’apéritif ou pour accompagner des mets traditionnels comme des crêpes ou des fromages." . htmlspecialchars($atr['contenuAvis']) . "</p>
+            <p> Tout va bien</p>
+            <div>
+                <img src=\"\" alt=\"\">
+                <div>
+                    <img src=\"../../../images/pouceHaut.png\" alt=\"\">
+                    <img src=\"../../../images/pouceBas.png\" alt=\"\">
+                    <img src=\"\" alt=\"\">
+                    <a href=\"#\">Signaler</a>
+                </div>
+            </div>
+        </article>
+        <article>
+            <div>
+                <div class=\"star-rating\">
+                    <div class=\"stars\" style=\"--rating:3.5\"></div>
+                </div>
+                <h3> Une fraîcheur authentique " . htmlspecialchars($atr['titreAvis']) . "</h3>
+            </div>
+            <h6>Avis déposé le 10/06/24" . htmlspecialchars($atr['dateAvis']) . " par Nathan</h6>
+            <p> Un cidre à la robe dorée, aux fines bulles légères et au nez fruité. En bouche, l’équilibre parfait entre la douceur naturelle de la pomme et une pointe d’amertume apporte fraîcheur et caractère. Idéal à l’apéritif ou pour accompagner des mets traditionnels comme des crêpes ou des fromages." . htmlspecialchars($atr['contenuAvis']) . "</p>
+            <p> Tout va bien</p>
+            <div>
+                <img src=\"\" alt=\"\">
+                <div>
+                    <img src=\"../../../images/pouceHaut.png\" alt=\"\">
+                    <img src=\"../../../images/pouceBas.png\" alt=\"\">
+                    <img src=\"\" alt=\"\">
+                    <a href=\"#\">Signaler</a>
+                </div>
+            </div>
+        </article>"; 
+        echo $html;
     ?>
 </section>
 <hr>

@@ -619,6 +619,65 @@ body {
 .pageProduit .informations h4 {
   font-weight: 300;
 }
+.pageProduit .sectionAvis {
+  width: 70%;
+  margin-left: 2.5em;
+}
+.pageProduit .sectionAvis button {
+  margin: 2em 0;
+}
+.pageProduit .sectionAvis article {
+  display: flex;
+  flex-direction: column;
+}
+.pageProduit .sectionAvis article * {
+  margin: 0.3em 0;
+}
+.pageProduit .sectionAvis article div {
+  margin: 0 0;
+}
+.pageProduit .sectionAvis article div h3 {
+  padding-top: 0.3em;
+}
+.pageProduit #ppClientBox img {
+  margin-right: 0.5em;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+.pageProduit .horizontal {
+  display: flex;
+  flex-direction: row;
+}
+.pageProduit .vertical {
+  display: flex;
+  flex-direction: column;
+}
+.pageProduit .star-rating {
+  font-size: 32px;
+  position: relative;
+  display: inline-block;
+  padding: 0 0;
+  margin: 0 0;
+}
+.pageProduit .stars::before {
+  content: "★★★★★";
+  color: lightgray;
+  padding: 0 0;
+  margin: 0 0;
+}
+.pageProduit .stars::after {
+  content: "★★★★★";
+  color: gold;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(var(--rating) / 5 * 100%);
+  overflow: hidden;
+  padding: 0 0;
+  margin: 0 0;
+}
 
 /* ---- Header ---- */
 header.backoffice {
