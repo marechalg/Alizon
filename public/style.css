@@ -1413,93 +1413,54 @@ main.acceuilBackoffice section.commandes article table tr:nth-child(2) td {
 main.acceuilBackoffice section.commandes article table tr:last-child th {
   text-align: right;
 }
+main.acceuilBackoffice section.avis article {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  font-family: "open-sans";
+}
 main.acceuilBackoffice section.avis article table {
   width: 100%;
-  border-spacing: 1em 0;
-  table-layout: fixed;
-  border-collapse: separate;
 }
-main.acceuilBackoffice section.avis article table tr:first-child {
+main.acceuilBackoffice section.avis article table th {
   font-weight: bold;
 }
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) {
-  width: 120px;
-  justify-items: center;
-  line-height: 0.25em;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:first-child {
-  border-radius: 100%;
-  height: 50px;
-  width: 50px;
-  background-image: url(/public/images/pp.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(1) figure:last-child {
-  color: #FFD000;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child {
   display: flex;
+  flex-direction: column;
   align-items: center;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(2) {
-  white-space: nowrap;
-  font-size: 20px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(3) {
-  width: auto;
-  font-weight: normal;
-  font-size: 12px;
-}
-main.acceuilBackoffice section.avis article table tr:first-child td:nth-child(4) {
   width: 120px;
-}
-main.acceuilBackoffice section.avis article table tr:nth-child(2) td {
-  vertical-align: top;
-}
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child {
-  display: flex;
-  gap: 1em;
+  line-height: 0.25em;
   justify-content: flex-start;
 }
-main.acceuilBackoffice section.avis article table tr:nth-child(3) td:last-child img {
-  height: 100px;
-  width: auto;
-  object-fit: contain;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em;
 }
-main.acceuilBackoffice section.avis article table tr:last-child td:nth-child(2) {
-  padding-right: 1em;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:first-child img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 100%;
 }
-main.acceuilBackoffice section.avis article table tr:last-child td:nth-child(3) {
-  width: auto;
-  text-align: right;
-  white-space: nowrap;
+main.acceuilBackoffice section.avis article table tr:first-child th:first-child figure:last-child {
+  display: flex;
+  gap: 0.25em;
+  align-items: center;
+  color: #FFD000;
 }
-main.acceuilBackoffice section.avis article table input {
-  border: none;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  outline: none;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #273469;
-  border-radius: 4px;
+main.acceuilBackoffice section.avis article table tr:first-child th:nth-child(2) {
+  text-align: left;
 }
-main.acceuilBackoffice section.avis article table button {
-  padding-left: 1em;
-  padding-right: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  font-family: "lora";
-  font-weight: bold;
-  background: none;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #273469;
-  border-radius: 8px;
-  color: #273469;
-  white-space: nowrap;
-  box-sizing: border-box;
-  min-width: fit-content;
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child {
+  display: flex;
+  gap: 1em;
+}
+main.acceuilBackoffice section.avis article table tr:last-child td:last-child img {
+  height: 150px;
 }
 main.acceuilBackoffice section.produits article {
   display: grid;
@@ -1719,6 +1680,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   margin: 0px 40px;
   padding: 10px;
   min-width: 276px;
+  max-width: 276px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1771,7 +1733,6 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   flex-wrap: nowrap;
   flex-direction: row;
   align-items: center;
-  margin-top: auto;
 }
 .acceuil .prix h2 {
   color: #273469;
