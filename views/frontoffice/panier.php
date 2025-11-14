@@ -6,7 +6,7 @@ require_once "../../controllers/pdo.php";
 // ============================================================================
 
 // ID utilisateur connecté (à remplacer par la gestion de session)
-$idClient = 1; 
+$idClient = 2; 
 
 // ============================================================================
 // FONCTIONS DE GESTION DU PANIER
@@ -272,7 +272,7 @@ $cart = getCurrentCart($pdo, $idClient);
                         <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit']) ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
                     </div>
                 </article> 
-            <?php } if ($i==0) { ?>
+            <?php } if ($cart==0) { ?>
                 <h1 class="aucunProduit">Aucun produit</h1>
             <?php } else { ?>
         </section>
