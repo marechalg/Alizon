@@ -143,6 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         const mdp = "<?php echo $mdp; ?>";
     </script>
-    <script src="/views/scripts/frontoffice/compteClient.js"></script>
+    <script src="../scripts/frontoffice/compteClient.js"></script>
 </body>
 </html>
