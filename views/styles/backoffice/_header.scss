@@ -176,6 +176,7 @@ header.backoffice {
         nav {
             display: flex;
             justify-content: space-around;
+            justify-items: space-around;
             
             button {
                 padding: {
@@ -187,30 +188,16 @@ header.backoffice {
                 border-radius: 24px;
                 border: none;
                 cursor: pointer;
+                width: 100px;
+                height: 50px;
                 
                 &:first-child {
                     background-color: $color-pastel-purple;
                     color: $color-blue;
-
-                    &:hover {
-                        border: {
-                            style: solid;
-                            width: 2px;
-                            color: $color-white;
-                        }
-                    }
                 }
                 &:last-child {
                     background-color: $color-blue;
                     color: $color-white;
-
-                    &:hover {
-                        border: {
-                            style: solid;
-                            width: 2px;
-                            color: $color-blue;
-                        }
-                    }
                 }
             }
         }
