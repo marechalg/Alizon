@@ -7,7 +7,7 @@
     border-radius: 20px;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: nowrap;
     max-width: 800px;
     margin-bottom: 40px;
@@ -22,6 +22,7 @@
   .listeProduit article img {
     max-height: 220px;
     margin: 0px 10px;
+    object-fit: contain;
   }
   .listeProduit article .imgProduit {
     display: flex;
@@ -82,9 +83,6 @@
       background-color: $color-red;
       padding: 15px 40px;
       border-radius: 32px;
-    }
-    .cardRecap article {
-      margin-bottom: 25px;
     }
   }
   .cardRecap {
@@ -195,12 +193,16 @@
         justify-content: center;
     }
   }
-  .aucunProduit {
-    color: $color-dark-gray;
-    font-family: "lora", serif;
-    font-weight: normal;
-    font-style: italic;
-    font-size: 30px;
-    text-align: center;
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .infoProduit h2 {
+    margin-top: 0;
   }
 }

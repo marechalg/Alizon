@@ -2077,7 +2077,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   border-radius: 20px;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: nowrap;
   max-width: 800px;
   margin-bottom: 40px;
@@ -2092,6 +2092,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 .panier .listeProduit article img {
   max-height: 220px;
   margin: 0px 10px;
+  object-fit: contain;
 }
 .panier .listeProduit article .imgProduit {
   display: flex;
@@ -2151,9 +2152,6 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   background-color: #f14e4e;
   padding: 15px 40px;
   border-radius: 32px;
-}
-.panier .recapPanier .cardRecap article {
-  margin-bottom: 25px;
 }
 .panier .cardRecap {
   border: 2px solid #273469;
@@ -2263,13 +2261,17 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
     justify-content: center;
   }
 }
-.panier .aucunProduit {
-  color: #6e6e6e;
-  font-family: "lora", serif;
-  font-weight: normal;
-  font-style: italic;
-  font-size: 30px;
-  text-align: center;
+.panier button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.panier .infoProduit h2 {
+  margin-top: 0;
 }
 
 .AjouterProduit {

@@ -284,27 +284,33 @@ $cart = getCurrentCart($pdo, $idClient);
             <h1>Votre panier</h1>
             <div class="cardRecap">
                 <article>
+                    <?php  
+                        // Recupération du panier actuel
+                        $stmt = $pdo->query("SELECT * FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1");
+                        $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+                        if (!$panier) throw new Exception("Aucun panier trouvé pour ce client.");
+                    ?>
                     <h2><b>Récapitulatif de votre panier</b></h2>
                     <div class="infoCommande">
                         <section>
                             <h2>Nombres d'articles</h2>
-                            <h2 class="val">0</h2>
+                            <h2 class="val"><?php echo $panier['nbArticles'] ?? 'N/A' ?></h2>
                         </section>
                         <section>
                             <h2>Prix HT</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?php echo $panier['prixHT'] ?? 'N/A' ?></h2>
                         </section>
                         <section>
                             <h2>TVA</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?php echo $panier['prixTotalTvaPanier'] ?? 'N/A' ?></h2>
                         </section>
                         <section>
                             <h2>Total</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?php echo $panier['sousTotal'] ?? 'N/A' ?></h2>
                         </section>
                     </div>
                 </article>
-                <a href=""><p>Passer la commande</p></a>
+                <a href="../../views/frontoffice/pagePaiement"><p>Passer la commande</p></a>
             </div>
             <a href="" class="viderPanier">Vider le panier</a>
         </section>
@@ -313,7 +319,6 @@ $cart = getCurrentCart($pdo, $idClient);
 
     <?php include "../../views/frontoffice/partials/footerConnecte.php"; ?>
 
-    <script src="../../public/Chiffrement.js"></script>
     <script src="../scripts/frontoffice/paiement-ajax.js"></script>
     <script src="../../public/amd-shim.js"></script>
     <script src="../../public/script.js"></script>
