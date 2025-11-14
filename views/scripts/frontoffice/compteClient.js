@@ -137,19 +137,15 @@ function verifierChamp() {
             setError(
                 champs[i], "Le champs obligatoire est vide"
             );
-        } else {
-            clearError(champs[i]);
         }
 
         // Validation spécifique pour la date de naissance
         if(i === 3){
-            if (!/^([0][1-9]||[12][0-9]||[3][01])\/([0][1-9]||[1][012])\/([1][9][0-9][0-9]||[2][0][0-1][0-9]||[2][0][2][0-5])$/.test(valeur)) {
+            if (!/^([0][1-9]|[12][0-9]|[3][01])\/([0][1-9]|[1][012])\/([1][9][0-9][0-9]|[2][0][0-1][0-9]|[2][0][2][0-5])$/.test(valeur)) {
                 tousRemplis = false;
                 setError(
                     champs[i], "Format attendu : jj/mm/aaaa"
                 );
-            } else {
-                clearError(champs[i]);
             }
         }
         
@@ -160,8 +156,6 @@ function verifierChamp() {
                 setError(
                     champs[i], "Format attendu : 06 01 02 03 04"
                 );
-            } else {
-                clearError(champs[i]);
             }
         }
         
@@ -172,11 +166,10 @@ function verifierChamp() {
                 setError(
                     champs[i], "Email invalide (ex: nom@domaine.fr)"
                 );
-            } else {
-                clearError(champs[i]);
             }
-        }            
+        }  
     }
+
     bouton.disabled = !tousRemplis;
 }
 let enModif = false;
@@ -259,7 +252,10 @@ function modifierProfil(event) {
                 break;
             }
             
-            elems[i].parentNode.replaceChild(input, elems[i]);
+            let container = document.createElement("div");
+            container.className = "input-container";
+            container.appendChild(input);
+            elems[i].parentNode.replaceChild(container, elems[i]);
         }
         
         // Modifier le bouton "Modifier" en "Enregistrer"
