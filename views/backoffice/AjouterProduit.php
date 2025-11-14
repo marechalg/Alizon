@@ -42,12 +42,13 @@
 
             <div class="right-section">
                 <div class="ajouterResume">
-                    <textarea name="resume" id="resume" placeholder>Décrivez votreproduit
-                    en quelques mots (cette partie s'affichera tout en haut de la page)</textarea>
+                    <textarea name="resume" id="resume" placeholder>Décrivez votreproduit en quelques mots (cette partie s'affichera tout en haut de la page)</textarea>
                 </div>
+                <h2>Plus d'informations</h2>
                 <div class="ajouterSection">
+                    <p>Etoffez la description de votre produit en ajoutant une première section</p>
+                    <button>Ajouter une section</button>
                 </div>
-
                 <div class="form-actions">
                     <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
                     <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
