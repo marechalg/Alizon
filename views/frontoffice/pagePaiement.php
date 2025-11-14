@@ -254,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 $cart = getCurrentCart($pdo, $idClient);
 
 // Récupération des départements et villes
-$csvPath = __DIR__ . '/../../public/data/departements.csv';
+$csvPath = __DIR__ . '../../public/data/departements.csv';
 $departments = [];
 $citiesByCode = [];
 $postals = [];
