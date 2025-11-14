@@ -296,7 +296,7 @@ function boutonAnnuler() {
     
     for (let i = 0; i < inputs.length; i++) {
         let p = document.createElement("p");
-        p.innerText = valeursInitiales[i].innerText; // <<< corrigé ici
+        p.innerText = valeursInitiales[i].innerText; 
         
         let currentParent = inputs[i].parentNode;
         
@@ -304,10 +304,6 @@ function boutonAnnuler() {
         if (currentParent.classList.contains('input-container')) {
             currentParent.parentNode.replaceChild(p, currentParent);
         } 
-        // Si l'input est directement dans un div (code postal/ville), remplacer juste l'input
-        else if (currentParent.tagName === 'DIV') {
-            currentParent.replaceChild(p, inputs[i]);
-        }
         // Sinon, remplacement simple
         else {
             currentParent.replaceChild(p, inputs[i]);
