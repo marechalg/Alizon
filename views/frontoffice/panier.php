@@ -268,7 +268,7 @@ $cart = getCurrentCart($pdo, $idClient);
                         </div>
                     </div>
                     <div class="prixOpt">
-                        <h2><b><?= number_format($prix * $qty, 2, ',', '') ?>€</b></h2>
+                        <h2><b><?= number_format($item['prix'] * $item['quantiteProduit'], 2, ',', '') ?>€</b></h2>
                         <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
                     </div>
                 </article> 
