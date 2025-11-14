@@ -22,7 +22,6 @@
   <?php include './partials/headerConnecte.php'; ?>
 
     <h2>Inscription</h2>
-    <?php echo($date_naissance); ?>
 
       <main>
         <form id="monForm" action="../backend/session_start.php" method="post" enctype="multipart/form-data">
