@@ -42,24 +42,24 @@
             </div>
 
             <div class="right-section">
-                <div class="right-section">
                 <div class="ajouterResume resume-box">
                     <label for="resume">Résumé du produit (Affiché en haut de page)</label>
                     <textarea name="resume" id="resume" placeholder>Décrivez votre produit en quelques mots</textarea>
                 </div>
-                <h2>Plus d'informations</h2>
+            <h2>Plus d'informations</h2>
+
+            <div id="sections-container"></div> 
                 <div class="ajouterSection">
                     <p>Etoffez la description de votre produit en ajoutant une première section</p>
                     <button id="add-section-btn" type="button">Ajouter une section</button>
                 </div>
-                <div class="form-actions">
-                    <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
-                    <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
-                    <a href="#"><button type="submit" class="btn-ajouter">Ajouter le produit</button></a>
-                </div>
-            </div>
+            <div class="form-actions">
+                <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
+                <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
+                <a href="#"><button type="submit" class="btn-ajouter">Ajouter le produit</button></a>
             </div>
         </div>
+    </div>
     </main>
 
     <script>
