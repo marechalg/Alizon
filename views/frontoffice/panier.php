@@ -262,13 +262,17 @@ $cart = getCurrentCart($pdo, $idClient);
                             <h4>En stock</h4>
                         </div>
                         <div class="quantiteProduit">
-                            <img class="minus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" src="../../public/images/minusDarkBlue.svg" alt="Symbole moins" style="cursor: pointer;"> 
-                            <p class="quantite">0</p> 
-                            <img class="plus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" src="../../public/images/plusDarkBlue.svg" alt="Symbole plus" style="cursor: pointer;"> 
+                        <button class="minus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>">
+                            <img src="../../public/images/minusDarkBlue.svg" alt="Symbole moins">
+                        </button>                            
+                        <p class="quantite"><?= htmlspecialchars($item['qty'] ?? 'N/A') ?></p> 
+                        <button class="plus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>">
+                            <img src="../../public/images/plusDarkBlue.svg" alt="Symbole plus">
+                        </button> 
                         </div>
                     </div>
                     <div class="prixOpt">
-                    <?= htmlspecialchars($item['qty'] ?? '0') ?>                        
+                    <?= htmlspecialchars($item['prix'] ?? 'N/A') ?>                        
                     <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
                     </div>
                 </article> 
@@ -308,41 +312,6 @@ $cart = getCurrentCart($pdo, $idClient);
     </main>
 
     <?php include "../../views/frontoffice/partials/footerConnecte.php"; ?>
-
-    <script>
-        const plus = document.querySelectorAll('.plus');
-        const minus = document.querySelectorAll('.minus');
-        const deleteBtns = document.querySelectorAll('.delete');
-
-        plus.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const quantiteElement = this.parentElement.querySelector('.quantite');
-                let quantite = parseInt(quantiteElement.textContent);
-                quantite++;
-                quantiteElement.textContent = quantite;
-            });
-        });
-
-        minus.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const quantiteElement = this.parentElement.querySelector('.quantite');
-                let quantite = parseInt(quantiteElement.textContent);
-                if (quantite > 0) {
-                    quantite--;
-                    quantiteElement.textContent = quantite;
-                }
-            });
-        });
-
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remonter à l'article parent puis chercher la quantité
-                const article = this.closest('article');
-                const quantiteElement = article.querySelector('.quantite');
-                quantiteElement.textContent = '0';
-            });
-        });
-    </script>
 
     <script src="../../public/Chiffrement.js"></script>
     <script src="../scripts/frontoffice/paiement-ajax.js"></script>
