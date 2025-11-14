@@ -90,7 +90,6 @@ function popUpModifierMdp(){
             valider.disabled = true;
             valider.style.cursor = "default";
             valider.onclick = null;
-
         }
     }
 
@@ -218,6 +217,12 @@ function modifierProfil(event) {
             input.name = nomsChamps[i];
             input.id = nomsChamps[i];
             input.autocomplete = nomsChamps[i];
+
+            // Contenaire pour message d'erreur
+            let contenaire = document.createElement("div");
+            contenaire.className = "input-contenaire";
+            contenaire.appendChild(input);
+            elems[i].parentNode.replaceChild(contenaire, elems[i]);
             
             // Définir le type d'input approprié
             if (i === 9) input.type = "tel";
