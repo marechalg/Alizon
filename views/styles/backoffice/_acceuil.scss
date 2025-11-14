@@ -141,7 +141,8 @@ main.acceuilBackoffice {
             font-family: 'open-sans';
 
             div {
-                height: 10px; width: 75%;
+                height: 10px;
+                min-width: 80%;
                 justify-self: center;
                 background-color: $color-pastel-blue;
                 border-radius: 16px;

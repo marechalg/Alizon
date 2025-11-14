@@ -1423,7 +1423,7 @@ main.acceuilBackoffice section.avis article {
 }
 main.acceuilBackoffice section.avis article div {
   height: 10px;
-  width: 75%;
+  min-width: 80%;
   justify-self: center;
   background-color: #e3f2fe;
   border-radius: 16px;
