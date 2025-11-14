@@ -24,6 +24,7 @@
 //                 p.nom AS nom_produit,        // ← Alias clair
 //                 p.description, 
 //                 p.prix,
+//                 p.note,
 //                 p.stock,
 //                 v.prenom AS prenom_vendeur,  // ← Alias clair  
 //                 v.nom AS nom_vendeur,        // ← Alias clair
@@ -86,9 +87,9 @@
         </div>
         <h2>Description de l'article :</h2>
         <p></p>
-        <!-- <p id="descriptionCourte">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus enim iure ratione voluptates
+        <p id="descriptionCourte">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus enim iure ratione voluptates
             eius doloremque obcaecati dignissimos ea porro exercitationem ex omnis reiciendis neque explicabo,
-            libero quidem placeat, accusantium sit.</p> -->
+            libero quidem placeat, accusantium sit.</p>
         <p class="voirPlus">Voir plus sur le produit</p>
         <div class="version">
             <h3>Version :</h3>
@@ -145,6 +146,13 @@
         ?>
     </div> 
     <label for="activeVoirPlus" class="voirPlus"> </label> 
+</section>
+<section class="avis">
+    <h2>Ce qu'en disent nos clients</h2>
+    <?php 
+    $note = $produit['note'];
+    echo htmlspecialchars($note);
+    ?>
 </section>
 <hr>
 </main>
