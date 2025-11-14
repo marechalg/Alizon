@@ -129,4 +129,30 @@ header.backoffice {
             display: none;
         }
     }
+
+    dialog {
+        background-color: $color-white;
+        border-radius: 16px;
+        padding: 1em;
+
+        &::backdrop {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+
+        }
+    }
+    dialog[open] {
+        animation: fadeIn 0.2s ease;
+    }
+    dialog[open]::backdrop {
+        animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 }
