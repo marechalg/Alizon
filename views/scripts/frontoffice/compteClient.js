@@ -176,10 +176,6 @@ function verifierChamp() {
                 clearError(champs[i]);
             }
         }  
-        
-        if (champValide && (i === 5 || valeur !== "")) {
-            clearError(champs[i]);
-        }          
     }
 
     bouton.disabled = !tousRemplis;
