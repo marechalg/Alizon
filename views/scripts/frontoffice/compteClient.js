@@ -321,6 +321,5 @@ function boutonAnnuler() {
     imageProfile.style.cursor = "default";
     imageProfile.onclick = null;
     
-       console.log("Version du script : 2024-11-14");
 }
 
