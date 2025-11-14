@@ -1427,6 +1427,7 @@ main.acceuilBackoffice section.avis article div {
   justify-self: center;
   background-color: #e3f2fe;
   border-radius: 16px;
+  margin: 0 auto;
 }
 main.acceuilBackoffice section.avis article table {
   border-collapse: collapse;
