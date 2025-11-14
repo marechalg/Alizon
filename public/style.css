@@ -509,9 +509,7 @@ header.backoffice dialog::backdrop {
 }
 header.backoffice dialog button {
   border: none;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  align-self: flex-end;
   transition: all 0.2s;
 }
 header.backoffice dialog button:hover img {
