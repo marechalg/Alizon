@@ -50,7 +50,7 @@
     article div{
         display: flex;
         flex-direction: row;
-        gap: 29px;
+        margin-right: 29px;
     }
 
     article p, input{
@@ -124,8 +124,6 @@
     }
 }
     
-
-
 .overlayPopUpCompteClient{
         position: fixed;
         inset: 0;
