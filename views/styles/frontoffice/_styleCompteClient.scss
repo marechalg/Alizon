@@ -46,16 +46,17 @@
         flex-direction: column;
     }
 
-    article div{
-        margin-top: 45px;
-        display: flex;
-        flex-direction: column;
+    article div {
+        position: relative; 
         width: 420px;
         height: 45px;
+        margin-top: 45px;
         padding: 10px;
         border: 2px solid $color-blue;
-        border-radius: 8px ;
-    }
+        border-radius: 8px;
+        display: flex;
+        align-items: center; 
+
 
     article div p, input{
         background-color: transparent;
@@ -109,10 +110,11 @@
     }
 
     .error-message {
-        color: red;
+        position: absolute;
+        bottom: -18px; 
+        left: 0;
         font-size: 0.8rem;
-        margin-top: 30px;
-        display: block;
+        color: red;
     }
 
     article > div.double-champ {
