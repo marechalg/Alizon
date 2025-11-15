@@ -6,7 +6,7 @@ require_once "../../controllers/pdo.php";
 // ============================================================================
 
 // ID utilisateur connecté (à remplacer par la gestion de session)
-$idClient = 1; 
+$idClient = 2; 
 
 // ============================================================================
 // FONCTIONS DE GESTION DU PANIER
@@ -254,25 +254,36 @@ $cart = getCurrentCart($pdo, $idClient);
             <?php foreach ($cart as $item) { ?>
                 <article>
                     <div class="imgProduit">
-                        <img src="<?= htmlspecialchars($item['imgProd']) ?>" alt="<?= htmlspecialchars($item['nom']) ?>">
+                        <?php 
+                            $idProduit = $item['idProduit'] ?? 0;
+                            $stmtImg = $pdo->prepare("SELECT URL FROM _imageDeProduit WHERE idProduit = :idProduit");
+                            $stmtImg->execute([':idProduit' => $idProduit]);
+                            $imageResult = $stmtImg->fetch(PDO::FETCH_ASSOC);
+                            $image = !empty($imageResult) ? $imageResult['URL'] : '../../public/images/defaultImageProduit.png';    
+                        ?>
+                    <img src="<?= htmlspecialchars($image) ?>" alt="<?= htmlspecialchars($item['nom'] ?? '') ?>">
                     </div>
                     <div class="infoProduit">
                         <div>
-                            <h2><?= htmlspecialchars($item['nom']) ?></h2>
+                            <h2><?= htmlspecialchars($item['nom'] ?? 'N/A') ?></h2>
                             <h4>En stock</h4>
                         </div>
                         <div class="quantiteProduit">
-                            <img class="minus" data-id="<?= htmlspecialchars($item['idProduit']) ?>" src="../../public/images/minusDarkBlue.svg" alt="Symbole moins" style="cursor: pointer;"> 
-                            <p class="quantite">0</p> 
-                            <img class="plus" data-id="<?= htmlspecialchars($item['idProduit']) ?>" src="../../public/images/plusDarkBlue.svg" alt="Symbole plus" style="cursor: pointer;"> 
+                        <button class="minus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>">
+                            <img src="../../public/images/minusDarkBlue.svg" alt="Symbole moins">
+                        </button>                            
+                        <p class="quantite"><?= htmlspecialchars($item['qty'] ?? 'N/A') ?></p> 
+                        <button class="plus" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>">
+                            <img src="../../public/images/plusDarkBlue.svg" alt="Symbole plus">
+                        </button> 
                         </div>
                     </div>
                     <div class="prixOpt">
-                        <h2><b><?= number_format($prix * $qty, 2, ',', '') ?>€</b></h2>
-                        <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit']) ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
+                    <?= htmlspecialchars($item['prix'] ?? 'N/A') ?>                        
+                    <img src="../../public/images/binDarkBlue.svg" data-id="<?= htmlspecialchars($item['idProduit'] ?? '') ?>" alt="Enlever produit" class="delete" style="cursor: pointer;">
                     </div>
                 </article> 
-            <?php } if ($i==0) { ?>
+            <?php } if ($cart==0) { ?>
                 <h1 class="aucunProduit">Aucun produit</h1>
             <?php } else { ?>
         </section>
@@ -280,27 +291,52 @@ $cart = getCurrentCart($pdo, $idClient);
             <h1>Votre panier</h1>
             <div class="cardRecap">
                 <article>
+                    <?php  
+                        $stmt = $pdo->query("SELECT idPanier FROM _panier WHERE idClient = $idClient ORDER BY idPanier DESC LIMIT 1");
+                        $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+                        
+                        if ($panier) {
+                            $idPanier = intval($panier['idPanier']);
+                            
+                            // Calcul en temps réel
+                            $sqlTotals = "
+                                SELECT 
+                                    SUM(pap.quantiteProduit) AS nbArticles,
+                                    SUM(p.prix * pap.quantiteProduit) AS prixHT,
+                                    SUM(p.prix * pap.quantiteProduit * COALESCE(t.pourcentageTva, 20.0) / 100) AS prixTotalTvaPanier,
+                                    SUM(p.prix * pap.quantiteProduit * (1 + COALESCE(t.pourcentageTva, 20.0) / 100)) AS sousTotal
+                                FROM _produitAuPanier pap
+                                JOIN _produit p ON pap.idProduit = p.idProduit
+                                LEFT JOIN _tva t ON p.typeTva = t.typeTva
+                                WHERE pap.idPanier = $idPanier
+                            ";
+                            
+                            $stmt = $pdo->query($sqlTotals);
+                            $totals = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : [];
+                        }
+                    ?>
+
                     <h2><b>Récapitulatif de votre panier</b></h2>
                     <div class="infoCommande">
                         <section>
                             <h2>Nombres d'articles</h2>
-                            <h2 class="val">0</h2>
+                            <h2 class="val"><?= $totals['nbArticles'] ?? 0 ?></h2>
                         </section>
                         <section>
                             <h2>Prix HT</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?= number_format($totals['prixHT'] ?? 0, 2) ?>€</h2>
                         </section>
                         <section>
                             <h2>TVA</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?= number_format($totals['prixTotalTvaPanier'] ?? 0, 2) ?>€</h2>
                         </section>
                         <section>
                             <h2>Total</h2>
-                            <h2 class="val">0€</h2>
+                            <h2 class="val"><?= number_format($totals['sousTotal'] ?? 0, 2) ?>€</h2>
                         </section>
                     </div>
                 </article>
-                <a href=""><p>Passer la commande</p></a>
+                <a href="../../views/frontoffice/pagePaiement.php"><p>Passer la commande</p></a>
             </div>
             <a href="" class="viderPanier">Vider le panier</a>
         </section>
@@ -309,39 +345,8 @@ $cart = getCurrentCart($pdo, $idClient);
 
     <?php include "../../views/frontoffice/partials/footerConnecte.php"; ?>
 
-    <script>
-        const plus = document.querySelectorAll('.plus');
-        const minus = document.querySelectorAll('.minus');
-        const deleteBtns = document.querySelectorAll('.delete');
-
-        plus.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const quantiteElement = this.parentElement.querySelector('.quantite');
-                let quantite = parseInt(quantiteElement.textContent);
-                quantite++;
-                quantiteElement.textContent = quantite;
-            });
-        });
-
-        minus.forEach(btn => {
-            btn.addEventListener('click', function() {
-                const quantiteElement = this.parentElement.querySelector('.quantite');
-                let quantite = parseInt(quantiteElement.textContent);
-                if (quantite > 0) {
-                    quantite--;
-                    quantiteElement.textContent = quantite;
-                }
-            });
-        });
-
-        deleteBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remonter à l'article parent puis chercher la quantité
-                const article = this.closest('article');
-                const quantiteElement = article.querySelector('.quantite');
-                quantiteElement.textContent = '0';
-            });
-        });
-    </script>
+    <script src="../scripts/frontoffice/paiement-ajax.js"></script>
+    <script src="../../public/amd-shim.js"></script>
+    <script src="../../public/script.js"></script>
 </body>
 </html>
