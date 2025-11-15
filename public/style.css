@@ -1715,7 +1715,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   margin-top: 45px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
   width: 420px;
   height: 45px;
   padding: 10px;
@@ -1770,7 +1770,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 .mainCompteClient .error-message {
   color: red;
   font-size: 0.8rem;
-  margin-top: 2px;
+  margin-top: 40px;
   display: block;
 }
 .mainCompteClient article > div.double-champ {
