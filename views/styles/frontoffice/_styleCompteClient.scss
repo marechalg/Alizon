@@ -110,11 +110,19 @@
         display: block;
     }
 
-    .input-container{
+    article > div.double-champ {
         display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
     }
+
+
+    article > div.double-champ input,
+    article > div.double-champ p {
+        width: 100%; 
+    }
+
+
 
 }
     

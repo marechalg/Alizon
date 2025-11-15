@@ -1767,9 +1767,13 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   margin-top: 2px;
   display: block;
 }
-.mainCompteClient .input-container {
+.mainCompteClient article > div.double-champ {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.mainCompteClient article > div.double-champ input,
+.mainCompteClient article > div.double-champ p {
   width: 100%;
 }
 
