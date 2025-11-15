@@ -46,7 +46,7 @@
         flex-direction: column;
     }
 
-    article > div{
+    article div{
         margin-top: 45px;
         display: flex;
         align-items: center;
@@ -110,11 +110,23 @@
         display: block;
     }
 
-    .input-container{
+    article > div.double-champ {
         display: flex;
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        justify-content: space-evenly;
+        border: 0;
     }
+
+
+    article > div.double-champ input,
+    article > div.double-champ p {
+        width: 100%; 
+    }
+
+    article > div.double-champ div{
+        width: 185px;
+    }
+
 
 }
     
