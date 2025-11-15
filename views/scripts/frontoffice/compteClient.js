@@ -222,37 +222,37 @@ function modifierProfil(event) {
             
             switch(i) {
                 case 0:
-                input.placeholder = "Entrez votre pseudo*";
+                input.placeholder = "Pseudo*";
                 break;
                 case 1:
-                input.placeholder = "Entrez votre nom*";
+                input.placeholder = "Nom*";
                 break;
                 case 2:
-                input.placeholder = "Entrez votre prénom*";
+                input.placeholder = "Prénom*";
                 break;
                 case 3:
-                input.placeholder = "Entrez votre date de naissance*";
+                input.placeholder = "Date de naissance*";
                 break;
                 case 4:
-                input.placeholder = "Entrez votre adresse*";
+                input.placeholder = "Adresse*";
                 break;
                 case 5:
-                input.placeholder = "Entrez votre complément d'adresse";
+                input.placeholder = "Complément d'adresse";
                 break;
                 case 6:
-                input.placeholder = "Entrez votre code postal*";
+                input.placeholder = "Code postal*";
                 break;
                 case 7:
-                input.placeholder = "Entrez votre ville*";
+                input.placeholder = "Ville*";
                 break;
                 case 8:
-                input.placeholder = "Entrez votre pays*";
+                input.placeholder = "Pays*";
                 break;
                 case 9:
-                input.placeholder = "Entrez votre numéro de téléphone*";
+                input.placeholder = "Numéro de téléphone*";
                 break;
                 case 10:
-                input.placeholder = "Entrez votre email*";
+                input.placeholder = "Email*";
                 break;
             }
             
