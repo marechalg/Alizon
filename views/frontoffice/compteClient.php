@@ -102,9 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <section>
                 <article>
                     <div><p><?php echo htmlspecialchars($pseudo ?? ''); ?></p></div>
-                   <div> <p><?php echo htmlspecialchars($prenom ?? ''); ?></p></div>
-                   <div> <p><?php echo htmlspecialchars($nom ?? ''); ?></p></div>
-                   <div> <p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($prenom ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($nom ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p></div>
                 </article>
 
                 <article>
