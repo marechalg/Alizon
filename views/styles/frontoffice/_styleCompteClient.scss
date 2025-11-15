@@ -56,7 +56,7 @@
         border-radius: 8px;
         display: flex;
         align-items: center; 
-
+    }
 
     article div p, input{
         background-color: transparent;
@@ -149,6 +149,7 @@
     }   
 
 }
+
     
 .overlayPopUpCompteClient{
         position: fixed;
@@ -159,4 +160,3 @@
         justify-content: center;
         z-index: 1000;
     }
-}

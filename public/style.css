@@ -1722,7 +1722,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   display: flex;
   align-items: center;
 }
-.mainCompteClient article div article div p, .mainCompteClient article div input {
+.mainCompteClient article div p, .mainCompteClient input {
   background-color: transparent;
   width: 100%;
   color: #6E6E6E;
@@ -1735,7 +1735,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   display: flex;
   align-items: center;
 }
-.mainCompteClient article div #buttonsCompte {
+.mainCompteClient #buttonsCompte {
   padding-top: 32px;
   padding-right: 20px;
   display: flex;
@@ -1743,7 +1743,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   justify-content: end;
   gap: 20px;
 }
-.mainCompteClient article div button {
+.mainCompteClient button {
   color: #273469;
   background-color: #e4d9ff;
   border-radius: 32px;
@@ -1753,28 +1753,28 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   font-family: "lora";
   cursor: pointer;
 }
-.mainCompteClient article div .boutonModifierMdp {
+.mainCompteClient .boutonModifierMdp {
   width: 250px;
   height: 55px;
 }
-.mainCompteClient article div .boutonModiferProfil {
+.mainCompteClient .boutonModiferProfil {
   width: 200px;
   height: 55px;
 }
-.mainCompteClient article div .boutonAnnuler {
+.mainCompteClient .boutonAnnuler {
   display: none;
   background-color: #f14e4e;
   width: 200px;
   height: 55px;
 }
-.mainCompteClient article div .error-message {
+.mainCompteClient .error-message {
   position: absolute;
   bottom: -18px;
   left: 0;
   font-size: 0.8rem;
   color: red;
 }
-.mainCompteClient article div article > div.double-champ {
+.mainCompteClient article > div.double-champ {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1783,8 +1783,8 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   height: 70px;
   width: 443px;
 }
-.mainCompteClient article div article > div.double-champ input,
-.mainCompteClient article div article > div.double-champ p {
+.mainCompteClient article > div.double-champ input,
+.mainCompteClient article > div.double-champ p {
   background-color: transparent;
   width: 100%;
   border: 0;
@@ -1792,15 +1792,16 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   display: flex;
   align-items: center;
 }
-.mainCompteClient article div article > div.double-champ div {
+.mainCompteClient article > div.double-champ div {
   width: 185px;
   margin-top: 0;
 }
-.mainCompteClient article div input:focus {
+.mainCompteClient input:focus {
   outline: none; /* enlève le contour bleu par défaut */
   border: 0;
 }
-.mainCompteClient .overlayPopUpCompteClient {
+
+.overlayPopUpCompteClient {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
