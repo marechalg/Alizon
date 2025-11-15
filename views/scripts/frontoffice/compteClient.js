@@ -256,10 +256,7 @@ function modifierProfil(event) {
                 break;
             }
             
-            let container = document.createElement("div");
-            container.className = "input-container";
-            container.appendChild(input);
-            elems[i].parentNode.replaceChild(container, elems[i]);
+            elems[i].parentNode.replaceChild(input[i], elems[i]);
         }
         
         // Modifier le bouton "Modifier" en "Enregistrer"
@@ -300,14 +297,7 @@ function boutonAnnuler() {
         
         let currentParent = inputs[i].parentNode;
         
-        // Si l'input est dans un input-container, remplacer le container par le <p>
-        if (currentParent.classList.contains('input-container')) {
-            currentParent.parentNode.replaceChild(p, currentParent);
-        } 
-        // Sinon, remplacement simple
-        else {
-            currentParent.replaceChild(p, inputs[i]);
-        }
+        currentParent.replaceChild(p, inputs[i]);
     }
     
     if (document.getElementById("photoProfil")) {
