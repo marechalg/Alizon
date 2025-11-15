@@ -1730,6 +1730,8 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   font-style: italic;
   border: 0;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 .mainCompteClient #buttonsCompte {
   padding-top: 32px;
