@@ -101,25 +101,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <section>
                 <article>
-                    <p><?php echo htmlspecialchars($pseudo ?? ''); ?></p>
-                    <p><?php echo htmlspecialchars($prenom ?? ''); ?></p>
-                    <p><?php echo htmlspecialchars($nom ?? ''); ?></p>
-                    <p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p>
+                    <div><p><?php echo htmlspecialchars($pseudo ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($prenom ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($nom ?? ''); ?></p></div>
+                   <div><p><?php echo htmlspecialchars($dateNaissance ?? ''); ?></p></div>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($adresse1 ?? ''); ?></p>
-                    <p><?php echo htmlspecialchars(" "); ?></p>
+                    <div><p><?php echo htmlspecialchars($adresse1 ?? ''); ?></p></div>
+                    <div><p><?php echo htmlspecialchars(" "); ?></p></div>
                     <div>
-                        <p><?php echo htmlspecialchars($codePostal ?? ''); ?></p>
-                        <p><?php echo htmlspecialchars($ville ?? ''); ?></p>
+                        <div><p><?php echo htmlspecialchars($codePostal ?? ''); ?></p></div>
+                        <div><p><?php echo htmlspecialchars($ville ?? ''); ?></p></div>
                     </div>
-                    <p><?php echo htmlspecialchars($pays ?? ''); ?></p>
+                    <div><p><?php echo htmlspecialchars($pays ?? ''); ?></p></div>
                 </article>
 
                 <article>
-                    <p><?php echo htmlspecialchars($noTelephone ?? ''); ?></p>
-                    <p><?php echo htmlspecialchars($email ?? ''); ?></p>
+                    <div><p><?php echo htmlspecialchars($noTelephone ?? ''); ?></p></div>
+                    <div><p><?php echo htmlspecialchars($email ?? ''); ?></p></div>
                 </article> 
             </section>
 
