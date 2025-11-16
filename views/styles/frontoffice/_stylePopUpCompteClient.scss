@@ -21,6 +21,7 @@
     }
     
     .input{
+        position: relative; 
         width: 450px;
         height: auto;
         padding: 10px;
@@ -128,6 +129,9 @@
     }
 
     .error-message {
+        position: absolute;
+        bottom: -18px; 
+        left: 0;
         font-size: 0.8rem;
         color: red;
     }
