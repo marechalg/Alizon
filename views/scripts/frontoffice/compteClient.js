@@ -120,9 +120,6 @@ function popUpModifierMdp(){
         const nouveau = vignere(nouveauMdp.value, cle, 1);
         const confirm = vignere(confirmationMdp.value, cle, 1);
         
-        nouveauMdp.value = nouveau;
-        confirmationMdp.value = confirm;
-
         console.log(ancien);
         console.log(ancien);
 
@@ -150,6 +147,8 @@ function popUpModifierMdp(){
         if (!(testAncien && testNouveau && testConfirm)) {
             event.preventDefault();
         } else {
+            nouveauMdp.value = nouveau;
+            confirmationMdp.value = confirm;
             form.submit();
         }
     });
