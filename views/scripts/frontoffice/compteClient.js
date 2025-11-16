@@ -1,3 +1,40 @@
+function setError(element, message) {
+  if (!element) return;
+  element.classList.add("invalid");
+  const container = element.parentElement;
+  if (!container) return;
+  let err = container.querySelector(".error-message");
+  if (!err) {
+    err = document.createElement("small");
+    err.className = "error-message";
+    container.appendChild(err);
+  }
+  err.textContent = message;
+}
+
+function clearError(element) {
+  if (!element) return;
+  element.classList.remove("invalid");
+  const container = element.parentElement;
+  if (!container) return;
+  const err = container.querySelector(".error-message");
+  if (err) err.textContent = "";
+}
+
+function validerMdp(mdp) {
+
+    if (mdp.length >= 12){
+        return false;
+    }
+
+    const contientUneMaj = /[A-Z]/.test(mdp);
+
+    const contientUnCharSpe = /[^a-zA-Z0-9]/.test(mdp);
+
+    return (contientUneMaj && contientUnCharSpe);
+}
+
+
 function fermerPopUp(){
     const overlay = document.querySelector(".overlayPopUpCompteClient");
     if (overlay) overlay.remove();
@@ -66,6 +103,9 @@ function popUpModifierMdp(){
     let ancienMdp = input[0];
     let nouveauMdp = input[1];
     let confirmationMdp = input[2];
+    addEventListener("input", () => validerMdp(ancienMdp));
+    addEventListener("input", () => validerMdp(nouveauMdp));
+    addEventListener("input", () => validerMdp(confirmationMdp));
     let button = overlay.querySelectorAll("button");
     let valider = button[0];
 
@@ -98,29 +138,6 @@ function popUpModifierMdp(){
     nouveauMdp.addEventListener("input", verifierMdp);
     confirmationMdp.addEventListener("input", verifierMdp);
 
-}
-
-function setError(element, message) {
-  if (!element) return;
-  element.classList.add("invalid");
-  const container = element.parentElement;
-  if (!container) return;
-  let err = container.querySelector(".error-message");
-  if (!err) {
-    err = document.createElement("small");
-    err.className = "error-message";
-    container.appendChild(err);
-  }
-  err.textContent = message;
-}
-
-function clearError(element) {
-  if (!element) return;
-  element.classList.remove("invalid");
-  const container = element.parentElement;
-  if (!container) return;
-  const err = container.querySelector(".error-message");
-  if (err) err.textContent = "";
 }
 
 function verifierChamp() {
