@@ -23,15 +23,17 @@ function clearError(element) {
 
 function validerMdp(mdp) {
 
-    if (mdp.length >= 12){
+    if (mdp.length < 12){
         return false;
     }
 
     const contientUneMaj = /[A-Z]/.test(mdp);
 
+    const contientUnChiffre = /[0-9]/.test(mdp);
+
     const contientUnCharSpe = /[^a-zA-Z0-9]/.test(mdp);
 
-    return (contientUneMaj && contientUnCharSpe);
+    return (contientUneMaj && contientUnChiffre && contientUnCharSpe);
 }
 
 
@@ -99,45 +101,60 @@ function popUpModifierMdp(){
     croixFermerLaPage = croixFermerLaPage[0];
     croixFermerLaPage.addEventListener("click",fermerPopUp);
 
+    let button = overlay.querySelectorAll("button");
+    let valider = button[0];
+
     let input = overlay.querySelectorAll("input");
     let ancienMdp = input[0];
     let nouveauMdp = input[1];
     let confirmationMdp = input[2];
-    addEventListener("input", () => validerMdp(ancienMdp));
-    addEventListener("input", () => validerMdp(nouveauMdp));
-    addEventListener("input", () => validerMdp(confirmationMdp));
-    let button = overlay.querySelectorAll("button");
-    let valider = button[0];
 
     function verifierMdp() {
 
-        const ancienMdpChiffree = vignere(ancienMdp.value, cle, 1);
-        const nouveauMdpChiffree = vignere(nouveauMdp.value, cle, 1);
-        const confirmationMdpChiffree = vignere(confirmationMdp.value, cle, 1);
+        const ancien = ancienMdp.value;
+        const nouveau = nouveauMdp.value;
+        const confirm = confirmationMdp.value;
 
-        if (ancienMdpChiffree === mdp && nouveauMdpChiffree === confirmationMdpChiffree && nouveauMdpChiffree != "") {
+        let testAncien = false;
+        let testNouveau = false;
+        let testConfirm = false;
+
+        if (vignere(ancien, cle, 1) !== mdp) {
+            setError(ancienMdp, "L'ancien mot de passe est incorrect");
+        } else {
+            clearError(ancienMdp);
+            testAncien = true;
+        }
+
+        if (nouveau !== "" && !validerMdp(nouveauMdp)) {
+            setError(nouveauMdp, "Mot de passe incorect il doit respecter les conditions si dessous");
+        } else {
+            clearError(nouveauMdp);
+            if (validerMdp(nouveau)){
+                testNouveau = true;
+            }
+        }
+
+        if (nouveau !== confirm) {
+            setError(confirmationMdp, "Les mots de passe ne correspondent pas");
+        } else {
+            clearError(confirmationMdp);
+            if (confirm !== "" && nouveau === confirm){
+                testConfirm = true;
+            }
+        }
+
+        if (testAncien && testNouveau && testConfirm) {
             valider.disabled = false;
             valider.style.cursor = "pointer";
-            valider.onclick = function(e) {
-            e.preventDefault(); 
-            const form = document.getElementById("formMdp");
-            form.ancienMdp.value = vignere(form.ancienMdp.value, cle, 1);
-            form.nouveauMdp.value = vignere(form.nouveauMdp.value, cle, 1);
-            form.confirmationMdp.value = vignere(form.confirmationMdp.value, cle, 1);
-            document.getElementById("formMdp").submit();
-        }
         } else {
             valider.disabled = true;
             valider.style.cursor = "default";
-            valider.onclick = null;
-
         }
     }
-
     ancienMdp.addEventListener("input", verifierMdp);
     nouveauMdp.addEventListener("input", verifierMdp);
-    confirmationMdp.addEventListener("input", verifierMdp);
-
+    confirmationMdp.addEventListener("input", verifierMdp);    
 }
 
 function verifierChamp() {
