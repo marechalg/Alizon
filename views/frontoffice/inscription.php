@@ -313,6 +313,7 @@
                 if ($pdo->query($nouveauClient) === false) {
                     throw new Exception("Erreur lors de la création d'un : " . implode(', ', $pdo->errorInfo()));
                 }
+
                 
             }
             ?>
