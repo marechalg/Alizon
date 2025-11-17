@@ -1444,7 +1444,10 @@ body.backoffice footer {
 
 /* Variables principales */
 /* Placeholder réutilisable pour les champs input */
-.pagePaiement input[type=text] {
+.addr-fact-overlay .addr-fact-content input,
+.addr-fact-overlay .addr-fact-content .adresse-fact-input,
+.addr-fact-overlay .addr-fact-content .code-postal-fact-input,
+.addr-fact-overlay .addr-fact-content .ville-fact-input, .pagePaiement input[type=text] {
   padding: 12px 14px;
   border: 2px solid #252b56;
   border-radius: 8px;
@@ -1996,12 +1999,6 @@ body.backoffice footer {
 .addr-fact-overlay .addr-fact-content .code-postal-fact-input,
 .addr-fact-overlay .addr-fact-content .ville-fact-input {
   width: 100%;
-  padding: 0.75rem;
-  margin-top: 0.25rem;
-  border: 2px solid #273469;
-  border-radius: 4px;
-  font-size: 1rem;
-  box-sizing: border-box;
 }
 .addr-fact-overlay .addr-fact-content label {
   display: block;
