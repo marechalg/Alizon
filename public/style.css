@@ -504,11 +504,6 @@ header.backoffice dialog::backdrop {
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(1px);
 }
-header.backoffice dialog div {
-  margin-left: auto;
-  display: block;
-  margin-bottom: 1em;
-}
 header.backoffice dialog div button {
   border: none;
   background: none;

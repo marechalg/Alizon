@@ -151,25 +151,20 @@ header.backoffice {
             backdrop-filter: blur(1px);
         }
         
-        div {
-            margin-left: auto;
-            display: block;
-            margin-bottom: 1em;
-
-            button {
-                border: none;
-                background: none;
-                transition: all 0.2s;
+        div button {
+            border: none;
+            background: none;
+            transition: all 0.2s;
+            
+            &:hover {
+                cursor: pointer;
                 
-                &:hover {
-                    cursor: pointer;
-                    
-                    img {
-                        content: url(../../../public/images/croixRouge.svg);
-                    }
+                img {
+                    content: url(../../../public/images/croixRouge.svg);
                 }
             }
         }
+        
         
         h1 {
             margin-bottom: 1em;
