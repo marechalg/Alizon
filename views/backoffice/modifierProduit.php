@@ -35,7 +35,7 @@
                         <input type="text" placeholder="Poids" required>
                         <span class="prix-kg-label">Prix au Kg:</span>
                     </div>
-                    <input type="text" placeholder="Mots clés (séparés par des virgules)" id="motclé" required>
+                    <input type="text" class="motclé" placeholder="Mots clés (séparés par des virgules)"  required>
 
                     <!-- <input type="text" class="keywords-input" placeholder="Mots clés (séparés par des virgules)"> -->
                 </div>
@@ -44,7 +44,7 @@
             <div class="right-section">
                 <div class="ajouterResume resume-box">
                     <label for="resume">Résumé du produit</label><br>   
-                    <textarea name="resume" id="resume" placeholder>Décrivez votre produit en quelques mots</textarea>
+                    <textarea name="resume" id="resume" placeholder="Décrivez votre produit en quelques mots"></textarea>
                 </div>
 
 
