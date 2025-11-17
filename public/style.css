@@ -505,11 +505,12 @@ header.backoffice dialog::backdrop {
   backdrop-filter: blur(1px);
 }
 header.backoffice dialog div {
+  width: 100%;
+}
+header.backoffice dialog div button {
   margin-left: auto;
   display: block;
   margin-bottom: 1em;
-}
-header.backoffice dialog div button {
   border: none;
   background: none;
   transition: all 0.2s;
