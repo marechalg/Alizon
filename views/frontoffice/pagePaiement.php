@@ -222,7 +222,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
         $montantHT = $sousTotal;
         $montantTTC = $sousTotal * 1.20;
 
-        $sqlCommande = "
+        $sqlCommande = `
             INSERT INTO _commande (
                 dateCommande, etatLivraison, montantCommandeTTC, montantCommandeHt,
                 quantiteCommande, nomTransporteur, dateExpedition,
@@ -232,7 +232,7 @@ function createOrderInDatabase($pdo, $idClient, $adresseLivraison, $villeLivrais
                 $nbArticles, 'Colissimo', NULL,
                 $idAdresseLivraison, $idAdresseFacturation, $carteQ, $idPanier
             )
-        ";
+        `;
         
         // ... reste du code existant ...
     } catch (Exception $e) {
