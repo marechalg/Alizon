@@ -2786,15 +2786,14 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
 
 button#haut {
   position: sticky;
-  bottom: 1em;
-  right: 1em;
-  width: 80px;
+  bottom: 10px;
+  right: 30px;
   border: none;
   padding: 1em;
-  color: #273469;
+  color: #fffefa;
   font-family: "open-sans";
   font-weight: bold;
-  background-color: #e3f2fe;
+  background-color: #273469;
   border-radius: 16px;
 }
 
