@@ -134,7 +134,10 @@ header.backoffice {
         background-color: $color-white;
         border: none;
         border-radius: 16px;
-        padding: 2em;
+        padding: {
+            left: 2em; right: 2em;
+            top: 1em; bottom: 1em;
+        }
         color: $color-blue;
         font-family: 'open-sans';
         
@@ -142,21 +145,15 @@ header.backoffice {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        min-width: 500px; // Assure une largeur minimale
         
         &::backdrop {
             background: rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(1px);
         }
         
-        // Bouton de fermeture (X) en haut à droite
-        > button {
+        div button {
             border: none;
             background: none;
-            margin-left: auto;
-            display: block;
-            margin-bottom: 1em;
-            padding: 0;
             transition: all 0.2s;
             
             &:hover {
@@ -168,65 +165,41 @@ header.backoffice {
             }
         }
         
+        
         h1 {
-            margin: 0 0 2em 0;
+            margin-bottom: 1em;
             text-align: center;
-            font-size: 28px;
         }
         
-        // Container des boutons d'action
         nav {
             display: flex;
-            gap: 1.5em;
-            justify-content: center;
-            align-items: stretch; // Important pour égaliser les hauteurs
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
             
             button {
-                // Reset de tous les styles précédents
-                all: unset;
-                
-                // Styles des boutons
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                
-                flex: 1; // Même largeur pour les deux boutons
-                min-width: 180px;
-                height: 60px;
-                padding: 1em 2em;
-                
-                font-family: 'open-sans';
+                padding: {
+                    left: 2em; right: 2em;
+                    top: 1em; bottom: 1em;
+                }
+                width: 200px; height: 80px;
                 font-size: 20px;
-                font-weight: 600;
-                text-align: center;
-                
                 border-radius: 24px;
+                border: none;
                 cursor: pointer;
-                transition: all 0.2s ease;
                 
-                // Bouton "Annuler" (gauche)
                 &:first-child {
                     background-color: $color-pastel-purple;
                     color: $color-blue;
-                    border: 2px solid transparent;
-                    
-                    &:hover {
-                        background-color: $color-pastel-blue;
-                        border-color: $color-blue;
-                    }
                 }
-                
-                // Bouton "Oui" (droite)
                 &:last-child {
                     background-color: $color-blue;
                     color: $color-white;
-                    border: 2px solid $color-blue;
-                    
-                    &:hover {
-                        background-color: darken($color-blue, 8%);
-                        border-color: darken($color-blue, 8%);
-                    }
+                }
+                
+                &:hover {
+                    background-color: $color-pastel-blue;
+                    color: $color-blue;
                 }
             }
         }
