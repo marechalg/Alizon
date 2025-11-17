@@ -2784,6 +2784,19 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   margin-bottom: 15px;
 }
 
+button#haut {
+  position: sticky;
+  bottom: 10px;
+  right: 30px;
+  border: none;
+  padding: 1em;
+  color: #fffefa;
+  font-family: "open-sans";
+  font-weight: bold;
+  background-color: #273469;
+  border-radius: 16px;
+}
+
 .status-red {
   color: #f14e4e;
 }
