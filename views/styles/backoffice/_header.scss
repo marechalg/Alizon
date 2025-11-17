@@ -158,8 +158,8 @@ header.backoffice {
         
         nav {
             display: flex;
-            justify-content: space-around;
-            align-items: center;
+            justify-content: center;
+            gap: 2em;
             width: 100%;
             
             button {
@@ -180,10 +180,6 @@ header.backoffice {
                 &:last-child {
                     background-color: $color-blue;
                     color: $color-white;
-
-                    &:focus {
-                        border: $color-white;
-                    }
                 }
                 
                 &:hover {
