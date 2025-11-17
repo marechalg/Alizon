@@ -1953,6 +1953,9 @@ body.backoffice footer {
   }
 }
 
+main.acceuilBackoffice section {
+  overflow-y: hidden;
+}
 main.acceuilBackoffice {
   display: flex;
   flex-direction: column;
