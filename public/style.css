@@ -180,10 +180,13 @@ body {
   .headerFront .listeArticle h1 {
     font-size: 25px;
   }
+<<<<<<< HEAD
   .headerFront #burgerIcon {
     display: none;
     visibility: hidden;
   }
+=======
+>>>>>>> abb389d8fb137d5975b08369d00ee1cbbae200ca
 }
 @media (max-width: 500px) {
   .headerFront b {
@@ -192,6 +195,7 @@ body {
   }
 }
 
+<<<<<<< HEAD
 #burgerIcon {
   display: none;
   flex-direction: column;
@@ -229,6 +233,8 @@ body {
   right: 17px;
 }
 
+=======
+>>>>>>> abb389d8fb137d5975b08369d00ee1cbbae200ca
 /* -------------------------------------------- FIN HEADER -------------------------------------------- */
 /* -------------------------------------------- DEBUT FOOTER -------------------------------------------- */
 .footerFront {
