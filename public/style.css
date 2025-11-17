@@ -504,17 +504,6 @@ header.backoffice dialog::backdrop {
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(1px);
 }
-header.backoffice dialog div button {
-  border: none;
-  background: none;
-  transition: all 0.2s;
-}
-header.backoffice dialog div button:hover {
-  cursor: pointer;
-}
-header.backoffice dialog div button:hover img {
-  content: url(../../../public/images/croixRouge.svg);
-}
 header.backoffice dialog h1 {
   margin-bottom: 1em;
   text-align: center;
