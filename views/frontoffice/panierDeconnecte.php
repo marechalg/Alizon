@@ -83,7 +83,7 @@ require_once "../../controllers/prix.php";
 
     <main>
         <section class="listeProduit">
-            <?php foreach ($tabIDProduitPanier as $item) { 
+            <?php foreach ($tabIDProduitPanier as $idP) { 
 
                 $prix = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idP));
                 $panier = $prix ? $prix->fetch(PDO::FETCH_ASSOC) : false;
@@ -138,18 +138,6 @@ require_once "../../controllers/prix.php";
                         </section>
                         <section>
                             <h2>Prix HT</h2>
-                            
-                            <?php
-                            $prixTotal = 0;
-
-                            foreach ($tabIDProduitPanier as $idP) {
-                                $prix = $pdo->query("SELECT prix FROM _produit WHERE idProduit = " . intval($idP));
-                                $panier = $prix ? $prix->fetch(PDO::FETCH_ASSOC) : false;
-
-                                $prixTotal += $panier['prix'] ?? 0;
-                            }
-                            ?>
-
                             <h2 class="val"><?= number_format($prixTotal, 2) ?>€</h2>
                         </section>
                         <section>
