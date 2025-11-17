@@ -1,27 +1,8 @@
-<<<<<<< HEAD
-/* Error: Can't find stylesheet to import.
- *    ,
- * 12 | @use "./backoffice/ajouterProduit";
- *    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *    '
- *   views/styles/main.scss 12:1  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Can't find stylesheet to import.\a    \2577 \a 12 \2502  @use \"./backoffice/ajouterProduit\";\a    \2502  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   views/styles/main.scss 12:1  root stylesheet";
-=======
 @charset "UTF-8";
 /* Font stack variables for consistent usage across SCSS files */
 @font-face {
   font-family: "lora";
   src: url(../../public/fonts/lora/Lora-VariableFont_wght.ttf);
->>>>>>> abb389d8fb137d5975b08369d00ee1cbbae200ca
 }
 @font-face {
   font-family: "berkshire";
