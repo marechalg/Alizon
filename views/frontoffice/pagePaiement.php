@@ -228,10 +228,15 @@ function saveBillingAddress($pdo, $idClient, $adresse, $codePostal, $ville) {
         if ($stmt && $stmt->rowCount() > 0) {
             // Adresse existe déjà
             $existing = $stmt->fetch(PDO::FETCH_ASSOC);
-            return ['success' => true, 'idAdresse' => $existing['idAdresse'], 'message' => 'Adresse déjà existante'];
+            return [
+                'success' => true, 
+                'idAdresse' => $existing['idAdresse'], 
+                'message' => 'Adresse déjà existante'
+            ];
         }
 
         // Insérer la nouvelle adresse (sans idClient ni typeAdresse)
+        // Note: La région est vide car on ne la connaît pas à ce stade
         $sqlInsert = "
             INSERT INTO _adresse (adresse, codePostal, ville, pays, region, no_appart, lieudit, batiment)
             VALUES (?, ?, ?, 'France', '', NULL, NULL, NULL)
@@ -244,13 +249,20 @@ function saveBillingAddress($pdo, $idClient, $adresse, $codePostal, $ville) {
 
         $idAdresse = $pdo->lastInsertId();
         
-        return ['success' => true, 'idAdresse' => $idAdresse, 'message' => 'Adresse enregistrée avec succès'];
+        return [
+            'success' => true, 
+            'idAdresse' => $idAdresse, 
+            'message' => 'Adresse enregistrée avec succès'
+        ];
 
     } catch (Exception $e) {
-        return ['success' => false, 'error' => $e->getMessage()];
+        error_log("Erreur saveBillingAddress: " . $e->getMessage());
+        return [
+            'success' => false, 
+            'error' => $e->getMessage()
+        ];
     }
 }
-
 // ============================================================================
 // GESTION DES ACTIONS AJAX
 // ============================================================================
