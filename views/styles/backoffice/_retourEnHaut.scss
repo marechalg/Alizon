@@ -3,18 +3,17 @@
 
 button#haut {
     position: sticky;
-    bottom: 1em;
-    right: 1em;
-    width: 80px;
+    bottom: 10px;
+    right: 30px;
     border: none;
     padding: 1em;
-    color: $color-blue;
+    color: $color-white;
     font: {
         family: 'open-sans';
         weight: bold;
     }
     background: {
-        color: $color-pastel-blue;
+        color: $color-blue;
     }
     border-radius: 16px;
 }
