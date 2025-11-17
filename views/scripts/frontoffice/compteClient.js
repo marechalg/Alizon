@@ -161,7 +161,7 @@ function popUpModifierMdp(){
         }
     };
 
-    valider.addEventListener("click", () => verifMdp )
+    valider.addEventListener("click", verifMdp )
 }    
 
 function verifierChamp() {
