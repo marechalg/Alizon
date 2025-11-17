@@ -186,9 +186,6 @@
                 const matchIconClass = passwordsMatch ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
                 const matchStatusClass = passwordsMatch ? 'status-green' : 'status-red';
 
-                reqMatch.className = matchStatusClass;
-                reqMatch.innerHTML = `<i class="bi ${matchIconClass}" style="margin-right: 5px;"></i>Les mots de passe correspondent`;
-                
                 if (!passwordsMatch) {
                     allValid = false;
                 }
