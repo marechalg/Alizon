@@ -2926,6 +2926,8 @@ button#haut:hover {
   opacity: 1;
 }
 .modifierProduit .motclé {
+  width: 525px;
+  margin-top: 20px;
   padding: 8px 10px;
   border: 2px solid #273469;
   border-radius: 8px;
@@ -2955,8 +2957,8 @@ button#haut:hover {
 }
 .modifierProduit textarea {
   font-family: "open-sans";
-  width: 600px;
-  height: 450px;
+  width: 650px;
+  height: 600px;
   padding: 8px 10px;
   border: 2px solid #273469;
   border-radius: 8px;
