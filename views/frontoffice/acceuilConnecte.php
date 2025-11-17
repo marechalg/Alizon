@@ -357,9 +357,9 @@ $cart = getCurrentCart($pdo, $idClient);
                                         <h2><?php echo formatPrice($produitRecent['prix']); ?></h2>
                                     </div>
                                     <div>
-                                        <a href="" onclick="event.stopPropagation();" class="btnAjoutPanier plus" data-id="<?= htmlspecialchars($value['idProduit'] ?? '') ?>">
+                                        <button href="" onclick="event.stopPropagation();" class="btnAjoutPanier plus" data-id="<?= htmlspecialchars($value['idProduit'] ?? '') ?>">
                                             <img src="../../public/images/btnAjoutPanier.svg" alt="Bouton ajout panier">
-                                        </a>
+                                    </button>
                                     </div>
                                 </div>
                             </article>
@@ -382,6 +382,5 @@ $cart = getCurrentCart($pdo, $idClient);
 </html>
 
 <?php
-
 ob_end_flush();
 ?>
