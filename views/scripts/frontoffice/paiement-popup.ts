@@ -16,18 +16,15 @@ declare global {
   }
 }
 
-// Clé de chiffrement (doit correspondre à celle dans Chiffrement.js)
-const CLE_CHIFFREMENT = "?zu6j,xX{N12I]0r6C=v57IoASU~?6_y";
+// Fonction helper pour le chiffrement avec vérification renforcée
+const chiffrerAvecVignere = (texte: string, sens: number): string => {
+  // Utiliser la clé depuis window ou une valeur par défaut
+  const cle = window.CLE_CHIFFREMENT || "?zu6j,xX{N12I]0r6C=v57IoASU~?6_y";
 
-// Fonction helper pour le chiffrement avec vérification
-const chiffrerAvecVignere = (
-  texte: string,
-  cle: string,
-  sens: number
-): string => {
   if (typeof window.vignere === "function" && cle && cle.length > 0) {
     return window.vignere(texte, cle, sens);
   }
+
   console.warn(
     "Fonction vignere non disponible ou clé invalide, retour du texte en clair"
   );
@@ -72,13 +69,9 @@ export function showPopup(
   const dateCarte = carteDateInput?.value.trim() || "";
   const rawCVV = cvvInput?.value.trim() || "";
 
-  // CHIFFREMENT DES DONNÉES SENSIBLES avec la clé locale
-  const numeroCarteChiffre = chiffrerAvecVignere(
-    rawNumCarte,
-    CLE_CHIFFREMENT,
-    1
-  );
-  const cvvChiffre = chiffrerAvecVignere(rawCVV, CLE_CHIFFREMENT, 1);
+  // CHIFFREMENT DES DONNÉES SENSIBLES - version sécurisée
+  const numeroCarteChiffre = chiffrerAvecVignere(rawNumCarte, 1);
+  const cvvChiffre = chiffrerAvecVignere(rawCVV, 1);
 
   const last4 = rawNumCarte.length >= 4 ? rawNumCarte.slice(-4) : rawNumCarte;
 
@@ -145,7 +138,7 @@ export function showPopup(
     ".confirm"
   ) as HTMLButtonElement | null;
 
-  const removeOverlay = () => {
+  let removeOverlay = () => {
     if (document.body.contains(overlay)) {
       document.body.removeChild(overlay);
     }
@@ -161,23 +154,49 @@ export function showPopup(
     if (!popup) return;
 
     // Afficher un indicateur de chargement
+    const originalText = confirmBtn.textContent;
     confirmBtn.textContent = "Traitement en cours...";
     confirmBtn.disabled = true;
 
     try {
+      // Vérifier que le chiffrement a fonctionné
+      if (!window.vignere) {
+        throw new Error("Système de sécurité non disponible");
+      }
+
       // Appeler l'API pour créer la commande
       const orderData = {
         adresseLivraison: adresse,
         villeLivraison: ville,
         regionLivraison: region,
-        numeroCarte: numeroCarteChiffre, // Version chiffrée
-        cvv: cvvChiffre, // Version chiffrée
+        numeroCarte: numeroCarteChiffre,
+        cvv: cvvChiffre,
         nomCarte: nomCarte,
         dateExpiration: dateCarte,
         codePostal: codePostal,
       };
 
-      const result = await window.PaymentAPI.createOrder(orderData);
+      // Utiliser PaymentAPI s'il existe, sinon faire un fetch direct
+      let result;
+      if (
+        window.PaymentAPI &&
+        typeof window.PaymentAPI.createOrder === "function"
+      ) {
+        result = await window.PaymentAPI.createOrder(orderData);
+      } else {
+        // Fallback: appel direct
+        const response = await fetch("", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            action: "createOrder",
+            ...orderData,
+          }),
+        });
+        result = await response.json();
+      }
 
       if (result.success) {
         // Afficher le message de succès
@@ -194,22 +213,22 @@ export function showPopup(
           ".close-popup"
         ) as HTMLButtonElement | null;
         innerClose?.addEventListener("click", () => {
-          // Recharger la page pour vider le panier
           window.location.reload();
         });
       } else {
-        // Afficher l'erreur via alert and keep the popup open for correction
-        alert(
-          "Erreur lors de la création de la commande: " +
-            (result.error || "Erreur inconnue")
+        throw new Error(
+          result.error || "Erreur inconnue lors de la création de la commande"
         );
-        confirmBtn.textContent = "Confirmer ma commande";
-        confirmBtn.disabled = false;
       }
     } catch (error) {
       console.error("Erreur:", error);
-      alert("Erreur réseau lors de la création de la commande");
-      confirmBtn.textContent = "Confirmer ma commande";
+      alert(
+        "Erreur lors de la création de la commande: " +
+          (error instanceof Error ? error.message : String(error))
+      );
+
+      // Réactiver le bouton
+      confirmBtn.textContent = originalText;
       confirmBtn.disabled = false;
     }
   });
@@ -229,4 +248,11 @@ export function showPopup(
     }
   };
   document.addEventListener("keydown", handleEscape);
+
+  // Nettoyer l'écouteur lors de la suppression
+  const originalRemove = removeOverlay;
+  removeOverlay = () => {
+    document.removeEventListener("keydown", handleEscape);
+    originalRemove();
+  };
 }

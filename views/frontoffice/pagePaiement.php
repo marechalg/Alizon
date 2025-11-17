@@ -362,6 +362,9 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
     <?php include '../../views/frontoffice/partials/headerConnecte.php'; ?>
 
     <script>
+    // DÉFINIR LA CLÉ GLOBALEMENT AVANT TOUT
+    window.CLE_CHIFFREMENT = "?zu6j,xX{N12I]0r6C=v57IoASU~?6_y";
+
     window.__PAYMENT_DATA__ = {
         departments: <?php echo json_encode($departments, JSON_UNESCAPED_UNICODE); ?>,
         citiesByCode: <?php echo json_encode($citiesByCode, JSON_UNESCAPED_UNICODE); ?>,
