@@ -2,9 +2,10 @@
 @use "fonts";
 
 button#haut {
-    justify-self: right;
+    position: sticky;
+    bottom: 1em;
+    right: 1em;
     border: none;
-    margin: 1em;
     padding: 1em;
     color: $color-blue;
     font: {
