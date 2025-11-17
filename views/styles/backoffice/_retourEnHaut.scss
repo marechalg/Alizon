@@ -5,6 +5,7 @@ button#haut {
     position: sticky;
     bottom: 1em;
     right: 1em;
+    width: 80px;
     border: none;
     padding: 1em;
     color: $color-blue;
@@ -14,6 +15,6 @@ button#haut {
     }
     background: {
         color: $color-pastel-blue;
-        radius: 16px;
     }
+    border-radius: 16px;
 }

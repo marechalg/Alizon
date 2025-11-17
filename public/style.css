@@ -2788,13 +2788,14 @@ button#haut {
   position: sticky;
   bottom: 1em;
   right: 1em;
+  width: 80px;
   border: none;
   padding: 1em;
   color: #273469;
   font-family: "open-sans";
   font-weight: bold;
   background-color: #e3f2fe;
-  background-radius: 16px;
+  border-radius: 16px;
 }
 
 .status-red {
