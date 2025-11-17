@@ -128,5 +128,3 @@ document.addEventListener("DOMContentLoaded", function () {
 // window.addEventListener("error", function (e) {
 //   console.error("Erreur globale:", e.error);
 // });
-
-console.log("Test");

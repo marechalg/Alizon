@@ -160,8 +160,6 @@
                 submitButton.disabled = !allValid;
                 
                 if(allValid){
-                    const passwordChiffre = vignere(passwordInput.value, cle, 1);
-                    document.getElementById('mdp').value = passwordChiffre;
                     return true;
                 }
                 return false
@@ -171,7 +169,6 @@
             // Valide tous les critères et met à jour le bouton d'inscription.
             function validatePassword() {
                 const password = passwordInput.value;
-                const passwordChiffre = vignere(password, cle, 1);
                 const confirmPassword = confirmPasswordInput.value;
                 let allValid = true;
 
@@ -277,7 +274,11 @@
                     phoneNumberInput.classList.remove('input-error');
                 }
             });
-            
+
+            if (typeof vignere !== 'undefined') {
+                const passwordChiffre = vignere(passwordInput.value, cle, 1);
+                document.getElementById('mdp').value = passwordChiffre;      
+             }
             validateForm(); 
 
 

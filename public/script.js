@@ -15,6 +15,9 @@ Array.from(document.getElementsByClassName('aside-btn')).forEach(asideButton => 
         }
     });
 });
+document.querySelector('button#haut')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 document
     .querySelector("header.backoffice figure:first-child")
     ?.addEventListener("click", () => {
@@ -46,9 +49,6 @@ modal?.addEventListener("click", (e) => {
         modal.close();
     }
 });
-// ============================================================================
-// TYPES & INTERFACES
-// ============================================================================
 define("frontoffice/paiement-types", ["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });

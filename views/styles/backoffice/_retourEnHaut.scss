@@ -1,18 +1,22 @@
-@use "colors" as *;
-@use "fonts";
+@use "../colors" as *;
+@use "../fonts";
 
 button#haut {
+    position: sticky;
     justify-self: right;
+    width: 150px;
+    margin: {
+        top: 1em; bottom: 1em;
+    }
     border: none;
-    margin: 1em;
     padding: 1em;
-    color: $color-blue;
+    color: $color-white;
     font: {
         family: 'open-sans';
         weight: bold;
     }
     background: {
-        color: $color-pastel-blue;
-        radius: 16px;
+        color: $color-blue;
     }
+    border-radius: 16px;
 }
