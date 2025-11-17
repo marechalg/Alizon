@@ -151,7 +151,7 @@ header.backoffice {
             backdrop-filter: blur(1px);
         }
         
-        button:not(nav button) {
+        button:first-of-type {
             border: none;
             background: none;
             margin-left: auto;
