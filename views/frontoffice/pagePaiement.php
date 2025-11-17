@@ -485,7 +485,6 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
     <?php include '../../views/frontoffice/partials/footerConnecte.php'; ?>
 
     <script src="../../public/amd-shim.js"></script>
-
     <script src="../../controllers/Chiffrement.js"></script>
     <script src="../../public/script.js"></script>
     <script src="../scripts/frontoffice/paiement-ajax.js"></script>
