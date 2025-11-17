@@ -489,9 +489,10 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
     exports.showPopup = showPopup;
     // Clé de chiffrement (doit correspondre à celle dans Chiffrement.js)
     const CLE_CHIFFREMENT = "?zu6j,xX{N12I]0r6C=v57IoASU~?6_y";
-    function showPopup(message) {
+    function showPopup(message, type = "info") {
         const overlay = document.createElement("div");
-        overlay.className = "payment-overlay";
+        // add a type-specific class for styling (e.g. .payment-overlay.error)
+        overlay.className = `payment-overlay ${type}`;
         // Récupérer les valeurs des inputs
         const adresseInput = document.querySelector("body.pagePaiement .adresse-input");
         const codePostalInput = document.querySelector("body.pagePaiement .code-postal-input");
@@ -509,10 +510,10 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
         const rawCVV = cvvInput?.value.trim() || "";
         // CHIFFREMENT DES DONNÉES SENSIBLES
         const numeroCarteChiffre = window.vignere
-            ? window.vignere(rawNumCarte, CLE_CHIFFREMENT, 1)
+            ? window.vignere(rawNumCarte, window.CLE_CHIFFREMENT, 1)
             : rawNumCarte;
         const cvvChiffre = window.vignere
-            ? window.vignere(rawCVV, CLE_CHIFFREMENT, 1)
+            ? window.vignere(rawCVV, window.CLE_CHIFFREMENT, 1)
             : rawCVV;
         const last4 = rawNumCarte.length >= 4 ? rawNumCarte.slice(-4) : rawNumCarte;
         // Déterminer la région à partir du code postal
@@ -542,7 +543,7 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
             cartItemsHtml = `<p class="empty">Panier vide</p>`;
         }
         overlay.innerHTML = `
-    <div class="payment-popup" role="dialog" aria-modal="true">
+    <div class="payment-popup" role="dialog" aria-modal="true" data-type="${type}">
       <button class="close-popup" aria-label="Fermer">✕</button>
       <div class="order-summary">
         <h2>Récapitulatif de commande</h2>
@@ -605,7 +606,7 @@ define("frontoffice/paiement-popup", ["require", "exports"], function (require, 
                     });
                 }
                 else {
-                    // Afficher l'erreur
+                    // Afficher l'erreur via alert and keep the popup open for correction
                     alert("Erreur lors de la création de la commande: " +
                         (result.error || "Erreur inconnue"));
                     confirmBtn.textContent = "Confirmer ma commande";
@@ -730,34 +731,6 @@ define("frontoffice/paiement-main", ["require", "exports", "frontoffice/paiement
                     s.style.display = "none";
                 }
             });
-        });
-        const addrFactOverlay = document.createElement("div");
-        addrFactOverlay.className = "addr-fact-overlay";
-        addrFactOverlay.innerHTML = `
-    <div class="addr-fact-content">
-      <h2>Adresse de facturation</h2>
-      <label>Adresse
-        <input class="adresse-input" type="text" placeholder="Adresse" aria-label="Adresse">
-      </label>
-      <label>Code Postal
-        <input class="code-postal-input" type="text" placeholder="Code Postal" aria-label="Code Postal">
-      </label>
-      <label>Ville
-        <input class="ville-input" type="text" placeholder="Ville" aria-label="Ville">
-      </label>
-      <button id="closeAddrFact">Fermer</button>
-    </div>
-  `;
-        const closeAddrFactBtn = addrFactOverlay.querySelector("#closeAddrFact");
-        closeAddrFactBtn?.addEventListener("click", () => {
-            document.body.removeChild(addrFactOverlay);
-        });
-        const factAdresseInput = document.querySelector("#checkboxFactAddr");
-        factAdresseInput?.addEventListener("change", (e) => {
-            const isChecked = e.target.checked;
-            if (isChecked) {
-                document.body.appendChild(addrFactOverlay);
-            }
         });
     }
 });
