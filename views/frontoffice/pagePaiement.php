@@ -446,8 +446,7 @@ if (file_exists($csvPath) && ($handle = fopen($csvPath, 'r')) !== false) {
                         </div>
                     </div>
                     <label>
-                        <input id="checkboxFactAddr" type="checkbox"
-                            <?php echo isset($_POST['checkboxFactAddr']) ? 'checked' : ''; ?>>
+                        <input id="checkboxFactAddr" type="checkbox">
                         Adresse de facturation différente
                     </label>
                 </section>
