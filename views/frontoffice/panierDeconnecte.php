@@ -41,7 +41,7 @@ require_once "../../controllers/prix.php";
 
     function modifierQuantitePanier(&$tabIDProduitPanier, $idProduit, $quantite) {
         if (isset($tabIDProduitPanier[$idProduit])) {
-            if ($quantite <= 0) {
+            if ($quantite == 0) {
                 unset($tabIDProduitPanier[$idProduit]);
             } else {
                 $tabIDProduitPanier[$idProduit] += $quantite;
@@ -50,7 +50,7 @@ require_once "../../controllers/prix.php";
         
         setcookie("produitPanier", serialize($tabIDProduitPanier), time() + (60*60*24*90), "/");
         
-        echo "<script>console.log('Produit modifier : $idProduit avec la quantite : $quantite');</script>";
+        header("Location: panierDeconnecte.php");
         return true;
     }
 
