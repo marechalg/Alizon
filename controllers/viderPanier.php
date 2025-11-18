@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Repondre avec un statut de succes
     http_response_code(200);
-    echo json_encode(['status' => 'success', 'message' => 'Panier vidé avec succès.']);
 }
 
 ?>

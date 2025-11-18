@@ -50,13 +50,13 @@ require_once "../../controllers/prix.php";
         return true;
     }
 
-    if (isset($_POST['addPanier']) && !empty($_POST['addPanier'])) {
-        $idProduitAjoute = intval($_POST['addPanier']);
-        $quantite = isset($_POST['qty']) ? intval($_POST['qty']) : 1;
+    if (isset($_GET['addPanier']) && !empty($_GET['addPanier'])) {
+        $idProduitAjoute = intval($_GET['addPanier']);
+        $quantite = isset($_GET['qty']) ? intval($_GET['qty']) : 1;
         modifierQuantitePanier($tabIDProduitPanier, $idProduitAjoute, $quantite);
         
-        if (isset($_POST['id'])) {
-            header("Location: produit.php?id=" . intval($_POST['id']));
+        if (isset($_GET['id'])) {
+            header("Location: produit.php?id=" . intval($_GET['id']));
             exit;
         }
     }
@@ -168,7 +168,9 @@ require_once "../../controllers/prix.php";
                 </article>
                 <a href="../../views/frontoffice/connexionClient.php"><p>Passer la commande</p></a>
             </div>
-            <a href="" class="viderPanier">Vider le panier</a>
+            <form method="GET" action="../../controllers/viderPanier.php">
+                <button class="viderPanierCookie" name="idUtilisateur" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '') ?>">Vider le panier</button>
+            </form>
         </section>
         <?php } ?>
     </main>
