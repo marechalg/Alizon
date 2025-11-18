@@ -16,7 +16,6 @@ require_once "../../controllers/prix.php";
         }
     } else {
         $tabIDProduitConsulte = [];
-        $tabIDProduitPanier = [];
     }
 
     // Fonction pour ajouter un produit consulte
@@ -61,6 +60,10 @@ require_once "../../controllers/prix.php";
     }
 
     $tabIDProduitPanier = unserialize($_COOKIE['produitPanier']);
+
+    if ($tabIDProduitPanier == NULL) {
+        $tabIDProduitPanier = [];
+    }
 
     // Récupération des informations des produits dans le panier
     $nbProduit = count($tabIDProduitPanier);
