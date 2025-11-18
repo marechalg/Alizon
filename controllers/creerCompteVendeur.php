@@ -3,28 +3,36 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $pseudo = $_POST['pseudo'] ?? '';
-    $prenom = $_POST['prenom'] ?? '';
-    $nom = $_POST['nom'] ?? '';
+    $nom_contact = $_POST['nom_contact'] ?? '';
+    $prenom_contact = $_POST['prenom_contact'] ?? '';
     $email = $_POST['email'] ?? '';
     $num_tel = $_POST['num_tel'] ?? '';
+    $nom_utilisateur = $_POST['nom_utilisateur'] ?? '';
     $mdp = $_POST['mdp'] ?? '';
-    $date_naissance = $_POST['birthdate'] ?? '';
+    $date_naissance = $_POST['date_naissance'] ?? '';
+    $confimer_mdp = $_POST['confimer_mdp'] ?? ''; 
+    $num_siren = $_POST['num_siren'] ?? '';
+    $adresse_entreprise = $_POST['adresse_entreprise'] ?? '';
+    $raison_sociale = $_POST['raison_sociale'] ?? '';
 
-    $sql = "INSERT INTO _client 
-        (dateNaissance, prenom, nom, email, mdp, noTelephone, pseudo)
-        VALUES (:dateNaissance, :prenom, :nom, :email, :mdp, :noTelephone, :pseudo)";
+    $sql = "INSERT INTO _vendeur 
+        (nom, prenom, email, tel, utilisateur, mdp, dateNaissance, confirmMdp, siren, adresse, sociale)
+        VALUES (:nom, :prenom, :email, :tel, :utilisateur, :mdp, :dateNaissance, :confirmMdp, :siren, :adresse, :sociale)";
 
     $stmt = $pdo->prepare($sql);
 
     $stmt->execute([
-        ':dateNaissance' => $date_naissance,
-        ':prenom' => $prenom,
-        ':nom' => $nom,
+        ':nom' => $nom_contact,
+        ':prenom' => $prenom_contact,
         ':email' => $email,
+        ':tel' => $num_tel,
+        ':utilisateur' => $nom_utilisateur,
         ':mdp' => $mdp,
-        ':noTelephone' => $num_tel,
-        ':pseudo' => $pseudo,
+        ':dateNaissance' => $date_naissance,
+        ':confirmMdp' => $confimer_mdp,
+        ':siren' => $num_siren,
+        ':adresse' => $adresse_entreprise,
+        ':sociale' => $raison_sociale,
     ]);
     }
 
