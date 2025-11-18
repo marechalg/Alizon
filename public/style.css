@@ -437,6 +437,7 @@ body {
   margin: 0;
   padding: 0;
   transition: all 0.3s ease;
+  font-family: "lora", serif;
 }
 .pageProduit main {
   display: flex;
@@ -444,7 +445,6 @@ body {
   position: relative;
 }
 .pageProduit h1, .pageProduit h2, .pageProduit h3, .pageProduit h4, .pageProduit p {
-  font-family: "lora", serif;
   color: #273469;
 }
 .pageProduit #descriptionCourte {
@@ -567,6 +567,9 @@ body {
   width: 40px;
   height: 40px;
 }
+.pageProduit .ligneActions p, .pageProduit .ligneActions a {
+  color: #273469;
+}
 .pageProduit .bouton {
   width: 300px;
   height: 60px;
@@ -662,6 +665,9 @@ body {
 .pageProduit #activeVoirPlus {
   display: none;
 }
+.pageProduit .informations {
+  margin: 2em 0;
+}
 .pageProduit .informations label {
   display: inline-block;
   position: relative;
@@ -683,6 +689,7 @@ body {
 .pageProduit .sectionAvis {
   width: 68%;
   margin-left: 2.5em;
+  margin-top: 2em;
 }
 .pageProduit .sectionAvis h6 {
   color: #273469;
@@ -841,6 +848,7 @@ body {
   display: flex !important;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 1em;
   margin-top: 15px;
   position: absolute;
@@ -867,6 +875,13 @@ body {
 .pageProduit .cercleNoir:hover {
   background-color: #273469 !important;
   transform: scale(1.15);
+}
+.pageProduit hr {
+  border: 0;
+  height: 2px;
+  background-color: #e4e4e4;
+  margin: 0 2.5em;
+  width: 70%;
 }
 
 /* ---- Header ---- */
@@ -3819,7 +3834,6 @@ button#haut.visible:hover {
   margin-bottom: 0;
 }
 
-<<<<<<< HEAD
 main.backoffice-stocks h1, main.backoffice-stocks button, main.backoffice-stocks div {
   user-select: none;
 }
@@ -3986,7 +4000,8 @@ main.backoffice-stocks section:nth-child(3) div:not(button.settings div) > ul li
 }
 main.backoffice-stocks {
   margin-bottom: 2em;
-=======
+}
+
 .popUpPromouvoir {
   background-color: #fffefa;
   border-radius: 16px;
@@ -4361,7 +4376,6 @@ main.backoffice-stocks {
   background-color: #e4d9ff;
   padding: 10px;
   border-radius: 16px;
->>>>>>> 02f89082a46e3b183d1f4089a1f4ff2864c17d8c
 }
 
 /*# sourceMappingURL=style.css.map */
