@@ -19,7 +19,7 @@ require_once "../../controllers/prix.php";
 
     $nbProduit = 0;
     foreach ($tabIDProduitPanier as $key => $value) {
-        $nbProduit += $value;
+        $nbProduit = $nbProduit + $value;
     }
 
     // Fonction pour ajouterx un produit consulte
@@ -41,7 +41,7 @@ require_once "../../controllers/prix.php";
 
     function modifierQuantitePanier(&$tabIDProduitPanier, $idProduit, $quantite) {
         if (isset($tabIDProduitPanier[$idProduit])) {
-            if ($quantite == 0) {
+            if ($quantite == 0 || ($tabIDProduitPanier[$idProduit] + $quantite) <= 0) {
                 unset($tabIDProduitPanier[$idProduit]);
             } else {
                 $tabIDProduitPanier[$idProduit] += $quantite;
@@ -106,11 +106,6 @@ require_once "../../controllers/prix.php";
                         </div>
                         <div class="quantiteProduit">
                             <button class="minus" data-id="<?= htmlspecialchars($panier['idProduit'] ?? 'N/A') ?>" onclick="window.location.href='?addPanier=<?php echo $idProduit; ?>&qty=<?php echo -1; ?>'">
-                                <?php 
-                                if ($quantite <= 1) {
-                                    unset($tabIDProduitPanier[$idProduit]);
-                                }
-                                ?>
                             <img src="../../public/images/minusDarkBlue.svg" alt="Symbole moins">
                             </button>                            
                             <p class="quantite"><?= htmlspecialchars($quantite ?? 'N/A') ?></p> 
@@ -126,7 +121,7 @@ require_once "../../controllers/prix.php";
                         </button>
                     </div>
                 </article> 
-            <?php } if ($nbProduit==0) { ?>
+            <?php } if ($nbProduit<=0) { ?>
                 <h1 class="aucunProduit">Aucun produit</h1>
             <?php } else { ?>
         </section>
@@ -139,16 +134,13 @@ require_once "../../controllers/prix.php";
 
                     <?php
                     
-                    $prixTotal = 0;
-
-                    // Calcul des sommes nécéssaires des produits stockés dans le cookie
-                    foreach($tabIDProduitPanier as $idProduit => $quantite) {
-
-                        $stmt = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
-                        $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
-
-                        $prixTotal += $panier['prix'] * $quantite;
-                    }
+                        $prixTotal = 0;
+                        
+                        foreach($tabIDProduitPanier as $idProduit => $quantite) {
+                            $stmt = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
+                            $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+                            $prixTotal += $panier['prix'] * $quantite;
+                        }
 
                     ?>
 
