@@ -31,20 +31,20 @@
                 <div class="row g-3">
                     
                     <div class="col-md-6">
-                        <input type="text" name="nom" placeholder="Nom de contact" required class="form-control" value="<?= $nom_contact ?>">
+                        <input type="text" name="nom" placeholder="Nom de contact" required class="form-control" value="<?= $nom ?>">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" name="prenom" placeholder="Prénom de contact" required class="form-control" value="<?= $prenom_contact ?>">
+                        <input type="text" name="prenom" placeholder="Prénom de contact" required class="form-control" value="<?= $prenom ?>">
                     </div>
                     <div class="col-md-6">
                         <input type="email" name="email" placeholder="Adresse E-Mail" required class="form-control" value="<?= $email ?>">
                     </div>
                     <div class="col-md-6">
-                        <input type="tel" name="noTelephone" placeholder="Numéro de téléphone" required class="form-control" value="<?= $num_tel ?>">
+                        <input type="tel" name="noTelephone" placeholder="Numéro de téléphone" required class="form-control" value="<?= $noTelephone ?>">
                     </div>
                     
                     <div class="col-md-6">
-                        <input type="text" name="pseudo" placeholder="Nom d'utilisateur" required class="form-control" value="<?= $nom_utilisateur ?>">
+                        <input type="text" name="pseudo" placeholder="Nom d'utilisateur" required class="form-control" value="<?= $pseudo ?>">
                     </div>
 
                     <div class="col-md-6">
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="col-md-6">
-                        <input type="date" name="dateNaissance" required class="form-control" value="<?= $date_naissance ?>">
+                        <input type="date" name="dateNaissance" required class="form-control" value="<?= $dateNaissance ?>">
                     </div>
                     
                     <div class="col-md-6">
@@ -71,14 +71,14 @@
                     </div>
                     
                     <div class="col-md-6">
-                        <input type="text" name="noSiren" placeholder="Numéro SIREN" required class="form-control" value="<?= $num_siren ?>">
+                        <input type="text" name="noSiren" placeholder="Numéro SIREN" required class="form-control" value="<?= $noSiren ?>">
                     </div>
                     <div class="col-md-6">
-                        <input type="text" name="idAdresse" placeholder="Adresse de l'entreprise" required class="form-control" value="<?= $adresse_entreprise ?>">
+                        <input type="text" name="idAdresse" placeholder="Adresse de l'entreprise" required class="form-control" value="<?= $idAdresse ?>">
                     </div>
                     
                     <div class="col-md-6">
-                        <input type="text" name="raisonSocial" placeholder="Raison sociale" required class="form-control" value="<?= $raison_sociale ?>">
+                        <input type="text" name="raisonSocial" placeholder="Raison sociale" required class="form-control" value="<?= $raisonSocial ?>">
                     </div>
                     <div class="col-md-6"></div> 
 
