@@ -1,11 +1,6 @@
 <?php
 require_once "../../controllers/pdo.php"; // Connexion à la BDD
 
-// Vérifier que l'ID est présent
-if (!isset($_GET['id'])) {
-    die("Aucun produit sélectionné");
-}
-
 $productId = (int)$_GET['id']; // Sécuriser l'ID
 
 // Préparer la requête
