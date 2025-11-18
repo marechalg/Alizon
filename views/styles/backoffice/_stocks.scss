@@ -126,6 +126,8 @@ main.backoffice-stocks {
                 
                 table {
                     padding-right: 1em;
+                    border-collapse: collapse;
+                    border-spacing: 0;
                     width: 100%;
                     
                     tr:nth-child(2) th {

@@ -4320,6 +4320,8 @@ main.backoffice-stocks section div:not(button.settings div) table table, main.ba
 }
 main.backoffice-stocks section div:not(button.settings div) table table {
   padding-right: 1em;
+  border-collapse: collapse;
+  border-spacing: 0;
   width: 100%;
 }
 main.backoffice-stocks section div:not(button.settings div) table table tr:nth-child(2) th {
