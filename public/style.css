@@ -3092,6 +3092,12 @@ main.backoffice-stocks section article {
   gap: 1em;
 }
 main.backoffice-stocks section div:not(button.settings div) {
+  user-select: all;
+}
+main.backoffice-stocks section div:not(button.settings div) img {
+  user-select: none;
+}
+main.backoffice-stocks section div:not(button.settings div) {
   max-width: max-content;
   padding: 1em;
   padding-bottom: 0;
