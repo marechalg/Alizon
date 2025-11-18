@@ -4233,6 +4233,8 @@ main.backoffice-stocks section article {
   font-family: "open-sans";
 }
 main.backoffice-stocks section img:not(figure img) {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
   height: 200px;
 }
 main.backoffice-stocks section div:not(button.settings div) *:not(img) {

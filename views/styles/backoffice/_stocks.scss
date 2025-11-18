@@ -24,6 +24,8 @@ main.backoffice-stocks {
         }
 
         img:not(figure img) {
+            border-top-left-radius: 16px;
+            border-bottom-left-radius: 16px;
             height: 200px;
         }
         
