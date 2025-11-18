@@ -2,17 +2,10 @@
 require_once "../../controllers/pdo.php";
 require_once "../../controllers/prix.php";
 
-    const PRODUIT_CONSULTE_MAX_SIZE = 4;
-
     const PRODUIT_DANS_PANIER_MAX_SIZE = 10;
 
     // Récupération du cookie existant ou création d'un tableau vide
-    if (((isset($_COOKIE['produitConsulte'])) && (isset($_COOKIE['produitPanier']))) && (!empty($_COOKIE['produitConsulte']) && !empty($_COOKIE['produitPanier']))) {
-        $tabIDProduitConsulte = unserialize($_COOKIE['produitConsulte']);
-        $tabIDProduitPanier = unserialize($_COOKIE['produitPanier']);
-    } else if (!isset($_COOKIE['produitConsulte'])) {
-        $tabIDProduitConsulte = [];
-    } else if (!isset($_COOKIE['produitPanier'])) {
+    if(!isset($_COOKIE["produitPanier"]) || empty($_COOKIE["produitPanier"])) {
         $tabIDProduitPanier = [];
     }
 
