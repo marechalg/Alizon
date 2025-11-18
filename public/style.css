@@ -3091,11 +3091,8 @@ main.backoffice-stocks section article {
   grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
   gap: 1em;
 }
-main.backoffice-stocks section div:not(button.settings div) {
-  user-select: all;
-}
-main.backoffice-stocks section div:not(button.settings div) img {
-  user-select: none;
+main.backoffice-stocks section div:not(button.settings div) *:not(img) {
+  user-select: text;
 }
 main.backoffice-stocks section div:not(button.settings div) {
   max-width: max-content;

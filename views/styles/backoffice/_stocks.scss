@@ -23,9 +23,8 @@ main.backoffice-stocks {
         }
         
         div:not(button.settings div) {
-            user-select: all;
-            img {
-                user-select: none;
+            *:not(img) {
+                user-select: text;
             }
             max-width: max-content;
             padding: 1em;
