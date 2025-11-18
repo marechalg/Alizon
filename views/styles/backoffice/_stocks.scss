@@ -23,8 +23,8 @@ main.backoffice-stocks {
             font-family: 'open-sans';
         }
 
-        img {
-            height: 100px;
+        img:not(figure img) {
+            height: 200px;
         }
         
         div:not(button.settings div) {

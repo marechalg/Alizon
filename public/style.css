@@ -4232,8 +4232,8 @@ main.backoffice-stocks section article {
   gap: 1em;
   font-family: "open-sans";
 }
-main.backoffice-stocks section img {
-  height: 100px;
+main.backoffice-stocks section img:not(figure img) {
+  height: 200px;
 }
 main.backoffice-stocks section div:not(button.settings div) *:not(img) {
   user-select: text;
