@@ -58,23 +58,27 @@ modal?.addEventListener("click", (e) => {
         modal.close();
     }
 });
-const btnSettings = document.getElementById('settings');
-btnSettings?.addEventListener('mouseover', () => {
-    const subDivs = Array.from(btnSettings.children);
-    subDivs.forEach(div => {
-        if (div instanceof HTMLElement && div.firstElementChild instanceof HTMLElement) {
-            const innerDiv = div.firstElementChild;
-            innerDiv.style.left = innerDiv.classList.contains('right') ? '4px' : '14px';
-        }
+const btnSettings = Array.from(document.getElementsByClassName('settings'));
+btnSettings?.forEach(btn => {
+    btn.addEventListener('mouseover', () => {
+        const subDivs = Array.from(btn.children);
+        subDivs.forEach(div => {
+            if (div instanceof HTMLElement && div.firstElementChild instanceof HTMLElement) {
+                const innerDiv = div.firstElementChild;
+                innerDiv.style.left = innerDiv.classList.contains('right') ? '4px' : '14px';
+            }
+        });
     });
 });
-btnSettings?.addEventListener('mouseout', () => {
-    const subDivs = Array.from(btnSettings.children);
-    subDivs.forEach(div => {
-        if (div instanceof HTMLElement && div.firstElementChild instanceof HTMLElement) {
-            const innerDiv = div.firstElementChild;
-            innerDiv.style.left = innerDiv.classList.contains('right') ? '14px' : '4px';
-        }
+btnSettings?.forEach(btn => {
+    btn.addEventListener('mouseout', () => {
+        const subDivs = Array.from(btn.children);
+        subDivs.forEach(div => {
+            if (div instanceof HTMLElement && div.firstElementChild instanceof HTMLElement) {
+                const innerDiv = div.firstElementChild;
+                innerDiv.style.left = innerDiv.classList.contains('right') ? '14px' : '4px';
+            }
+        });
     });
 });
 define("frontoffice/paiement-types", ["require", "exports"], function (require, exports) {
