@@ -4234,7 +4234,9 @@ main.backoffice-stocks section article {
 }
 main.backoffice-stocks section img:not(figure img) {
   height: 200px;
-  margin: 0.5em;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 main.backoffice-stocks section div:not(button.settings div) *:not(img) {
   user-select: text;

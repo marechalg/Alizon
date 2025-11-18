@@ -25,7 +25,11 @@ main.backoffice-stocks {
 
         img:not(figure img) {
             height: 200px;
-            margin: 0.5em;
+            margin: {
+                top: 0.5em;
+                left: 0.5em;
+                right: 0.5em;
+            }
         }
         
         div:not(button.settings div) {
