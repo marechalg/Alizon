@@ -80,8 +80,8 @@ require_once "../../controllers/prix.php";
     <main>
         <section class="listeProduit">
             <?php foreach ($tabIDProduitPanier as $idProduit => $quantite) { 
-                $prix = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
-                $panier = $prix ? $prix->fetch(PDO::FETCH_ASSOC) : false;
+                $stmt = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
+                $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
 
                 ?>
                 <article>
@@ -116,7 +116,7 @@ require_once "../../controllers/prix.php";
                         </div>
                     </div>
                     <div class="prixOpt">
-                        <?= htmlspecialchars($panier['prix'] ?? 'N/A') ?>          
+                        <?= number_format($panier['prix'] ?? 0, 2) ?>          
                         <button class="delete" data-id="<?= htmlspecialchars($panier['idProduit'] ?? 'N/A') ?>" onclick="window.location.href='?addPanier=<?php echo $idProduit; ?>&qty=<?php echo 0; ?>'">
                         <img src="../../public/images/binDarkBlue.svg" alt="Enlever produit">
                         </button>
@@ -132,24 +132,28 @@ require_once "../../controllers/prix.php";
                 <article>
                     <h2><b>Récapitulatif de votre panier</b></h2>
                     <div class="infoCommande">
+
+                    <?php
+                    
+                    $prixTotal = 0;
+
+                    // Calcul des sommes nécéssaires des produits stockés dans le cookie
+                    foreach($tabIDProduitPanier as $idProduit => $quantite) {
+
+                        $stmt = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
+                        $panier = $stmt ? $stmt->fetch(PDO::FETCH_ASSOC) : false;
+
+                        $prixTotal += $panier['prix'];
+                    }
+
+                    ?>
+
                         <section>
                             <h2>Nombres d'articles</h2>
                             <h2 class="val"><?= $nbProduit ?? 0 ?></h2>
                         </section>
                         <section>
                             <h2>Prix HT</h2>
-                            
-                            <?php
-                            $prixTotal = 0;
-
-                            foreach ($tabIDProduitPanier as $idP) {
-                                $prix = $pdo->query("SELECT prix FROM _produit WHERE idProduit = " . intval($idP));
-                                $panier = $prix ? $prix->fetch(PDO::FETCH_ASSOC) : false;
-
-                                $prixTotal += $panier['prix'] ?? 0;
-                            }
-                            ?>
-
                             <h2 class="val"><?= number_format($prixTotal, 2) ?>€</h2>
                         </section>
                         <section>
