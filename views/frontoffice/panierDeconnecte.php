@@ -53,7 +53,7 @@ require_once "../../controllers/prix.php";
     if (isset($_POST['addPanier']) && !empty($_POST['addPanier'])) {
         $idProduitAjoute = intval($_POST['addPanier']);
         $quantite = isset($_POST['qty']) ? intval($_POST['qty']) : 1;
-        ajouterProduitPanier($tabIDProduitPanier, $idProduitAjoute, $quantite);
+        modifierQuantitePanier($tabIDProduitPanier, $idProduitAjoute, $quantite);
         
         if (isset($_POST['id'])) {
             header("Location: produit.php?id=" . intval($_POST['id']));
@@ -75,7 +75,7 @@ require_once "../../controllers/prix.php";
     <title>Alizon - Votre panier</title>
 </head>
 <body class="panier">
-    <?php include "../../views/frontoffice/partials/headerConnecte.php"; ?>
+    <?php include "../../views/frontoffice/partials/headerDeconnecte.php"; ?>
 
     <main>
         <section class="listeProduit">
