@@ -173,7 +173,7 @@ require_once "../../controllers/prix.php";
                 <a href="../../views/frontoffice/connexionClient.php"><p>Passer la commande</p></a>
             </div>
             <form method="GET" action="../../controllers/viderPanier.php">
-                <button class="viderPanierCookie viderPanier" name="idUtilisateur" value="<?= htmlspecialchars($_SESSION['user_id'] ?? '') ?>">Vider le panier</button>
+                <button class="viderPanierCookie viderPanier" name="idUtilisateur">Vider le panier</button>
             </form>
         </section>
         <?php } ?>
