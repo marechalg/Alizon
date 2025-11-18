@@ -72,7 +72,7 @@ require_once "../../controllers/prix.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/style.css">
-    <title>Alizon - Votre panier</title>
+    <title>Alizon - Votre panier TEST</title>
 </head>
 <body class="panier">
     <?php include "../../views/frontoffice/partials/headerDeconnecte.php"; ?>
