@@ -50,13 +50,13 @@ require_once "../../controllers/prix.php";
         return true;
     }
 
-    if (isset($_GET['addPanier']) && !empty($_GET['addPanier'])) {
-        $idProduitAjoute = intval($_GET['addPanier']);
-        $quantite = isset($_GET['qty']) ? intval($_GET['qty']) : 1;
+    if (isset($_POST['addPanier']) && !empty($_POST['addPanier'])) {
+        $idProduitAjoute = intval($_POST['addPanier']);
+        $quantite = isset($_POST['qty']) ? intval($_POST['qty']) : 1;
         ajouterProduitPanier($tabIDProduitPanier, $idProduitAjoute, $quantite);
         
-        if (isset($_GET['id'])) {
-            header("Location: produit.php?id=" . intval($_GET['id']));
+        if (isset($_POST['id'])) {
+            header("Location: produit.php?id=" . intval($_POST['id']));
             exit;
         }
     }
@@ -80,16 +80,14 @@ require_once "../../controllers/prix.php";
     <main>
         <section class="listeProduit">
             <?php foreach ($tabIDProduitPanier as $idProduit => $quantite) { 
-
-                echo 'alert("ID du produit : ' . htmlspecialchars($idP) . '");';
-                $prix = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idP));
+                $prix = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idProduit));
                 $panier = $prix ? $prix->fetch(PDO::FETCH_ASSOC) : false;
 
                 ?>
                 <article>
                     <div class="imgProduit">
                         <?php 
-                            $idProduit = $idP['idProduit'] ?? 0;
+                            
                             $stmtImg = $pdo->prepare("SELECT URL FROM _imageDeProduit WHERE idProduit = :idProduit");
                             $stmtImg->execute([':idProduit' => $idProduit]);
                             $imageResult = $stmtImg->fetch(PDO::FETCH_ASSOC);
@@ -104,9 +102,14 @@ require_once "../../controllers/prix.php";
                         </div>
                         <div class="quantiteProduit">
                             <button class="minus" data-id="<?= htmlspecialchars($panier['idProduit'] ?? 'N/A') ?>" onclick="window.location.href='?addPanier=<?php echo $idProduit; ?>&qty=<?php echo -1; ?>'">
+                                <?php 
+                                if ($quantite <= 1) {
+                                    unset($tabIDProduitPanier[$idProduit]);
+                                }
+                                ?>
                             <img src="../../public/images/minusDarkBlue.svg" alt="Symbole moins">
                             </button>                            
-                            <p class="quantite"><?= htmlspecialchars($panier['qty'] ?? 'N/A') ?></p> 
+                            <p class="quantite"><?= htmlspecialchars($quantite ?? 'N/A') ?></p> 
                             <button class="plus" data-id="<?= htmlspecialchars($panier['idProduit'] ?? 'N/A') ?>" onclick="window.location.href='?addPanier=<?php echo $idProduit; ?>&qty=<?php echo 1; ?>'">
                                 <img src="../../public/images/plusDarkBlue.svg" alt="Symbole plus">
                             </button> 
@@ -168,7 +171,6 @@ require_once "../../controllers/prix.php";
 
     <?php include "../../views/frontoffice/partials/footerConnecte.php"; ?>
 
-    <script src="../scripts/frontoffice/paiement-ajax.js"></script>
     <script src="../../public/amd-shim.js"></script>
     <script src="../../public/script.js"></script>
 </body>
