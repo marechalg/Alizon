@@ -49,8 +49,9 @@ require_once "../../controllers/prix.php";
             }
         }
         
-        echo "<script>console.log('Produit modifier : $idProduit avec la quantite : $quantite');</script>";
         setcookie("produitPanier", serialize($tabIDProduitPanier), time() + (60*60*24*90), "/");
+        
+        echo "<script>console.log('Produit modifier : $idProduit avec la quantite : $quantite');</script>";
         return true;
     }
 
