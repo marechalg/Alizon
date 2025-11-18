@@ -5,12 +5,20 @@ require_once "../../controllers/prix.php";
     const PRODUIT_DANS_PANIER_MAX_SIZE = 10;
 
     // Récupération du cookie existant ou création d'un tableau vide
-    if(!isset($_COOKIE["produitPanier"]) || empty($_COOKIE["produitPanier"])) {
+    if (!isset($_COOKIE["produitPanier"]) || empty($_COOKIE["produitPanier"])) {
         $tabIDProduitPanier = [];
     } else {
-        // Récupération des informations des produits dans le panier
-        $nbProduit = count($tabIDProduitPanier);
+        // On désérialise le cookie pour récupérer le tableau
+        $tabIDProduitPanier = @unserialize($_COOKIE["produitPanier"]);
+        
+        // Sécurisation : si la désérialisation échoue, on remet un tableau vide
+        if (!is_array($tabIDProduitPanier)) {
+            $tabIDProduitPanier = [];
+        }
     }
+
+    $nbProduit = count($tabIDProduitPanier);
+
 
     // Fonction pour ajouter un produit consulte
     function ajouterProduitPanier(&$tabIDProduitPanier, $idProduit, $quantite = 1) {
@@ -71,7 +79,7 @@ require_once "../../controllers/prix.php";
 
     <main>
         <section class="listeProduit">
-            <?php foreach ($tabIDProduitPanier as $idP) { 
+            <?php foreach ($tabIDProduitPanier as $idProduit => $quantite) { 
 
                 echo 'alert("ID du produit : ' . htmlspecialchars($idP) . '");';
                 $prix = $pdo->query("SELECT * FROM _produit WHERE idProduit = " . intval($idP));
@@ -111,7 +119,7 @@ require_once "../../controllers/prix.php";
                         </button>
                     </div>
                 </article> 
-            <?php } if ($nbProduit==0 || $nbProduit == null) { ?>
+            <?php } if ($nbProduit==0) { ?>
                 <h1 class="aucunProduit">Aucun produit</h1>
             <?php } else { ?>
         </section>
