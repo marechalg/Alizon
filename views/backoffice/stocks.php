@@ -20,7 +20,7 @@
             <h1>Produits Épuisés</h1>
             <article>
                 <div>
-                    <button id="settings">
+                    <button class="settings">
                         <div><div></div></div>
                         <div><div class="right"></div></div>
                         <div><div></div></div>
@@ -31,12 +31,14 @@
                             <td rowspan=2>
                                 <table>
                                     <tr>
-                                        <td rowspan=2><img src='/public/images/rillettes.png'></td>
-                                        <th colspan=2>Rillettes de thon</th>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
                                     </tr>
 
                                     <tr>
                                         <th>29,99€</th>
+                                    </tr>
+                                    <tr>
                                         <th>
                                             <figure>
                                                 <figcaption>3,5</figcaption>
@@ -78,6 +80,461 @@
                             </figure>
                         </li>
                         <li>Épuisé le 29 août</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h1>Produits en Alerte</h1>
+            <article>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Réassort prévu le 25/09/2025</figcaption>
+                            </figure>
+                        </li>
+                        <li>14 restants</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <section>
+            <h1>Produits en Stock</h1>
+            <article>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=4><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon caca pipi</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Charcuterie</td>
+                                    </tr>
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
+                    </ul>
+                </div>
+                <div>
+                    <button class="settings">
+                        <div><div></div></div>
+                        <div><div class="right"></div></div>
+                        <div><div></div></div>
+                    </button>
+
+                    <table>
+                        <tr>
+                            <td rowspan=2>
+                                <table>
+                                    <tr>
+                                        <td rowspan=3><img src='/public/images/rillettes.png'></td>
+                                        <th colspan>Rillettes de thon</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>29,99€</th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <figure>
+                                                <figcaption>3,5</figcaption>
+                                                <img src="/public/images/etoile.svg">
+                                            </figure>
+                                        </th>
+                                    </tr>
+                                </table>
+                            </td>
+
+                            <th colspan=2>Dernières commandes</th>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul>
+                                            <li>2</li>
+                                            <li>09/07/2025</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <ul>
+                        <li>
+                            <figure>
+                                <img src="/public/images/infoDark.svg">
+                                <figcaption>Aucun réassort prévu</figcaption>
+                            </figure>
+                        </li>
+                        <li>45 restants</li>
                     </ul>
                 </div>
             </article>
