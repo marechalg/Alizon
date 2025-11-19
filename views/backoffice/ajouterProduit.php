@@ -76,6 +76,11 @@
             photoUploadInput.click();
         });
 
+        descriptionTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCount.textContent = `${currentLength}/${maxLength}`;
+        });
+
         photoUploadInput.addEventListener('change', function() {
             const files = this.files;
             if (files && files.length > 0) {
