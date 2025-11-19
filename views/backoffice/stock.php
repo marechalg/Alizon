@@ -70,12 +70,12 @@
                         <tr>
                             <td>
                                 <ul>";
-                                    if (count($commandes) == 0) echo "<li><h2>Aucune commande</h2><li>";
+                                    if (count($commandes) == 0) $html .= "<li><h2>Aucune commande</h2></li>";
                                     foreach ($commandes as $commande) {
-                                        $html .= "<ul>
+                                        $html .= "<li><ul>
                                             <li>" . $commande['quantiteCommande'] . "</li>
                                             <li>" . formatDate($commande['dateCommande']) . "</li>
-                                        </ul>";
+                                        </ul></li>";
                                     }
                                 $html .= "</ul>
                             </td>
@@ -145,12 +145,12 @@
                         <tr>
                             <td>
                                 <ul>";
-                                    if (count($commandes) == 0) echo "<li><h2>Aucune commande</h2><li>";
+                                    if (count($commandes) == 0) $html .= "<li><h2>Aucune commande</h2></li>";
                                     foreach ($commandes as $commande) {
-                                        $html .= "<ul>
+                                        $html .= "<li><ul>
                                             <li>" . $commande['quantiteCommande'] . "</li>
                                             <li>" . formatDate($commande['dateCommande']) . "</li>
-                                        </ul>";
+                                        </ul></li>";
                                     }
                                 $html .= "</ul>
                             </td>
@@ -220,12 +220,12 @@
                         <tr>
                             <td>
                                 <ul>";
-                                    if (count($commandes) == 0) echo "<li><h2>Aucune commande</h2><li>";
+                                    if (count($commandes) == 0) $html .= "<li><h2>Aucune commande</h2></li>";
                                     foreach ($commandes as $commande) {
-                                        $html .= "<ul>
+                                        $html .= "<li><ul>
                                             <li>" . $commande['quantiteCommande'] . "</li>
                                             <li>" . formatDate($commande['dateCommande']) . "</li>
-                                        </ul>";
+                                        </ul></li>";
                                     }
                                 $html .= "</ul>
                             </td>

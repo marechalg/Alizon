@@ -44,6 +44,13 @@
         border-radius: 4px; 
         cursor: pointer;
         position: relative;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         .placeholder-photo {
             display: flex;
@@ -58,6 +65,22 @@
                 font-style: normal;
                 padding-top: 5px;
             }
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: $color-white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            opacity: 0;
+            pointer-events: none;
         }
     }
 
@@ -79,6 +102,12 @@
         border-radius: 4px;
         font-size: 1rem;
         box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: $color-blue;
+            box-shadow: none; 
+        }
         
         &::placeholder {
             color: gray; 
@@ -158,7 +187,6 @@
 
         button {
             padding: 8px 15px;
-            border: 1px solid $color-blue; 
             border-radius: 32px;
             font-weight: normal;
             cursor: pointer;
