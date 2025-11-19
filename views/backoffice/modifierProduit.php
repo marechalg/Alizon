@@ -14,7 +14,7 @@ $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
 $stmt2 = $pdo->prepare("SELECT * FROM _imageDeProduit WHERE idProduit = :id");
 $stmt2->execute(['id' => $productId]);
-$image = $stmt->fetch(PDO::FETCH_ASSOC);
+$image = $stmt2->fetch(PDO::FETCH_ASSOC);
 
 
 
