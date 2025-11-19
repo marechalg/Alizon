@@ -175,7 +175,7 @@
             <article>
 <?php
     $faibles = ($pdo->query('select * from _produit where stock >= seuilAlerte'))->fetchAll(PDO::FETCH_ASSOC);
-    if (count($faibles) == 0) echo "<h2>Aucun produit en alerte</h2>";
+    if (count($faibles) == 0) echo "<h2>Aucun produit en stock</h2>";
     foreach ($faibles as $faible) {
         $image = ($pdo->query('select * from _imageDeProduit where idProduit = ' . $faible['idProduit']))->fetchAll(PDO::FETCH_ASSOC);
         $image = $image = !empty($image) ? $image[0]['URL'] : '';
