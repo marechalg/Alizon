@@ -29,5 +29,3 @@ function vignere(texte, cle, sens) {
 }
 window.vignere = vignere;
 window.cle = cle;
-
-console.log(vignere("`g_yP-E:qAv!>nI,L",cle,-1));
