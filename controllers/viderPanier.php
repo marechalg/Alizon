@@ -18,8 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     // Repondre avec un statut de succes
     http_response_code(200);
 
-    header("Location: panierDeconnecte.php");
-
     echo "<script>console.log('Debug vider le panier deconnecte');</script>";
 }
 
