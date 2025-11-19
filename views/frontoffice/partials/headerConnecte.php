@@ -25,11 +25,7 @@
             <?php 
                     $categorie = ($pdo->query("SELECT * FROM _categorie"))->fetchAll(PDO::FETCH_ASSOC);
                     foreach ($categorie as $value) { ?>
-<<<<<<< HEAD
-                        <a class="categorie"><?php echo $value['nomcategorie']; ?></a>
-=======
-                       <a class="categorie"><?php echo $value['nomCategorie']; ?></a> 
->>>>>>> 2401e6387257b8e255ae7a8d119177e6ed812a2a
+                        <a class="categorie"><?php echo $value['nomCategorie']; ?></a>
                 <?php } ?>
         </div>
     </div>
