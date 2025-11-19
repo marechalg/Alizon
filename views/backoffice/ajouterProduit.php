@@ -24,8 +24,8 @@
             <div class="left-section">
                 <div class="ajouterPhoto">
                     <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                    <img src="../../../public/images/ajouterPhoto.svg" alt="Ajouter une photo" id="imagePreview">
                     <div class="placeholder-photo">
+                        <img src="../../../public/images/ajouterPhoto.svg" alt="Ajouter une photo" id="imagePreview">
                         <p id="placeholderText">Cliquer pour ajouter une photo</p>
                         <div class="overlay-text" id="overlayText">Cliquer pour modifier</div>
                     </div>
