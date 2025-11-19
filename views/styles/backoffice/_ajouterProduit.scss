@@ -196,6 +196,7 @@
             border-radius: 32px;
             font-weight: normal;
             cursor: pointer;
+            border: none;
         }
 
         .btn-previsualiser, .btn-annuler {
@@ -203,7 +204,7 @@
             color: $color-blue;
 
             &:hover {
-                background-color: lighten($color-blue, 45%);
+                background-color: darken($color-pastel-purple, 10%);
             }
         }
 
