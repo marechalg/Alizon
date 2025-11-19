@@ -189,6 +189,16 @@ function verifierChamp() {
                 );
             }
         }
+
+        // Validation spécifique pour le code postal
+        if(i === 6){
+            if (!/^[0-9]{5}$/.test(valeur)) {
+                tousRemplis = false;
+                setError(
+                    champs[i], "Format attendu : 35500"
+                );
+            }
+        }
         
         // Validation spécifique pour le numéro de téléphone
         if (i === 9) { 
