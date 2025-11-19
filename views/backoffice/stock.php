@@ -53,7 +53,7 @@
                                         <td>" . $epuise['typeProd'] . "</td>
                                     </tr>
                                     <tr>
-                                        <th>" . formatPrix($epuise['prix']) . "</th>
+                                        <th>" . formatPrice($epuise['prix']) . "</th>
                                     </tr>
                                     <tr>
                                         <th>
