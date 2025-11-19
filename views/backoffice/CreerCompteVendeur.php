@@ -113,13 +113,13 @@
         </p>
         
         <script>
-            // Eléments du DOM
+            // Eléments 
             const passwordInput = document.getElementById('mdp');
             const confirmPasswordInput = document.getElementById('confimer_mdp');
             const submitButton = document.getElementById('btn_inscription');
             const passwordRequirementsContainer = document.getElementById('password-requirements-container');
 
-            // Eléments de critères
+            // Critères pour le mdp
             const reqLength = document.getElementById('req-length');
             const reqLowercase = document.getElementById('req-lowercase');
             const reqUppercase = document.getElementById('req-uppercase');
@@ -136,7 +136,7 @@
                 special: { element: reqSpecial, regex: /[^a-zA-Z0-9]/, message: 'Un caractère spécial (@, !, #, ...)' }
             };
 
-            // Gestion de l'état d'erreur visuel
+            // Gestion de l'état d'erreur
             function toggleErrorStyle(inputElement) {
                 if (inputElement.value.trim() === '') {
                     inputElement.classList.add('input-error');
@@ -145,7 +145,7 @@
                 }
             }
 
-            // Mise à jour de l'affichage des critères
+            // Affichage des critères avec les coches et les croix
             function updateRequirement(rule, password) {
                 const isValid = rule.regex.test(password);
                 const iconClass = isValid ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
@@ -156,20 +156,20 @@
                 return isValid;
             }
 
-            // Valide tous les critères et met à jour le bouton d'inscription.
+            // Valide tous les critères et rends le btn inscription ok.
             function validatePassword() {
                 const password = passwordInput.value;
                 const confirmPassword = confirmPasswordInput.value;
                 let allValid = true;
 
-                // Validation de chaque règle
+                // Valide chaque règle
                 for (const key in rules) {
                     if (!updateRequirement(rules[key], password)) {
                         allValid = false;
                     }
                 }
 
-                // Validation de la correspondance des mots de passe
+                // Correspondance entre les mdp
                 const passwordsMatch = password.length > 0 && password === confirmPassword;
                 const matchIconClass = passwordsMatch ? 'bi-check-circle-fill' : 'bi-x-circle-fill';
                 const matchStatusClass = passwordsMatch ? 'status-green' : 'status-red';
@@ -188,7 +188,7 @@
             }
 
             passwordInput.addEventListener('blur', () => {
-                // Masquer les critères si le champ est vide
+                // Masque les critères si le champ est vide
                 if (passwordInput.value.length === 0) {
                     passwordRequirementsContainer.classList.add('hidden');
                 }
@@ -196,14 +196,15 @@
             });
             
             confirmPasswordInput.addEventListener('blur', () => {
-                // Gérer l'état vide/erreur du champ Confirmer MDP
+                // Gère l'état vide du champ Confirmer mdp
                 toggleErrorStyle(confirmPasswordInput);
             });
 
 
             passwordInput.addEventListener('focus', () => {
                 passwordRequirementsContainer.classList.remove('hidden');
-                passwordInput.classList.remove('input-error'); // Enlève l'erreur quand l'utilisateur revient
+                // Enlève l'erreur quand l'utilisateur revient dessus
+                passwordInput.classList.remove('input-error');
                 validatePassword(); 
             });
 
@@ -217,13 +218,12 @@
                 validatePassword(); 
             });
             
-            // Empêcher la soumission si la validation échoue
+            // Empêcher la soumission du formulaire si la validation échoue
             document.querySelector('form').addEventListener('submit', function(e) {
-                // Vérifier si les champs sont vides au moment de la soumission
+                // Vérifier si les champs sont vides au moment de la soumission du form
                 toggleErrorStyle(passwordInput);
                 toggleErrorStyle(confirmPasswordInput);
                 
-                // Si la validation échoue OU si l'un des champs est vide
                 if (!validatePassword() || passwordInput.value.trim() === '' || confirmPasswordInput.value.trim() === '') {
                     e.preventDefault();
                 }
