@@ -2,7 +2,6 @@
 @use "../fonts" as *; 
 
 .AjouterProduit {
-
     font: {
         family: 'lora', 'Serif';
         weight: bold;
@@ -31,77 +30,92 @@
         width: 50%; 
     }
 
+    /* --- REFACTORISATION ZONE PHOTO --- */
     .ajouterPhoto {
-        border: 2px solid $color-blue; 
+        border: 2px dashed $color-blue; // Pointillés pour suggérer le drop
         height: 350px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 20px;
+        width: 100%;
         border-radius: 8px;
         overflow: hidden;
+        position: relative; // Important pour le positionnement absolu
+        cursor: pointer;
+        background-color: #fafafa; // Fond léger
+        transition: background-color 0.3s ease, border-color 0.3s ease;
 
-        .placeholder-photo {
+        &:hover {
+            background-color: #f0f0f0;
+            border-color: darken($color-blue, 10%);
+        }
+
+        // État vide (Placeholder)
+        .etat-vide {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%; 
-            height: 100%;
             justify-content: center;
-            position: relative;
-            padding: 10px; 
+            height: 100%;
+            width: 100%;
+            padding: 20px;
             box-sizing: border-box;
 
-            .image-wrapper {
-                width: 100%;
-                /* CORRECTION : flex: 1 permet de prendre l'espace disponible sans déborder */
-                flex: 1; 
-                min-height: 0; /* Indispensable pour que le flex-item puisse rétrécir */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                margin-bottom: 5px; 
-            }
-
-            img {
-                /* CORRECTION : Force l'image à rester dans le conteneur */
-                width: 100%;
-                height: 100%;
-                object-fit: contain; /* L'image s'adapte sans être coupée */
-                display: block;
-            }
-            
-            p {
-                margin: 8px 0 4px 0;
-                color: $color-blue;
-                font: {
-                    weight: normal;
-                    style: normal;
-                }
+            .icone-wrapper {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
                 
-                &#placeholderText {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    margin: 0;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
                 }
             }
 
-            .overlay-text {
-                margin-top: 4px;
-                background: rgba(255, 255, 255, 0.9);
+            p {
                 color: $color-blue;
-                font-weight: bold;
-                padding: 6px 10px;
-                border-radius: 5px;
-                display: none;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+                margin: 0;
+                font-weight: normal;
             }
         }
+
+        // État Preview (Image chargée)
+        .etat-preview {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: $color-white;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain; // L'image s'adapte SANS être coupée
+                display: block;
+            }
+
+            .overlay-modifier {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.6); // Fond semi-transparent noir
+                color: white;
+                text-align: center;
+                padding: 10px 0;
+                font-size: 0.9rem;
+                font-family: sans-serif;
+                font-style: normal;
+                
+                /* Optionnel : animation au survol */
+                transform: translateY(100%); // Caché par défaut en bas
+                transition: transform 0.3s ease;
+            }
+        }
+
+        // Afficher le bandeau "Modifier" au survol de la zone photo
+        &:hover .etat-preview .overlay-modifier {
+            transform: translateY(0);
+        }
     }
+    /* --- FIN REFACTORISATION --- */
     
     .form-details {
         display: flex;

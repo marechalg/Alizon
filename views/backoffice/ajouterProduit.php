@@ -19,14 +19,21 @@
         <div class="product-content">
             
             <div class="left-section">
-                <div class="ajouterPhoto">
-                    <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
-                    <div class="placeholder-photo">
-                        <div class="image-wrapper">
-                            <img src="../../../public/images/ajouterPhoto.svg" alt="Ajouter une photo" id="imagePreview">
+                <div class="ajouterPhoto" id="zoneUpload">
+                    <input type="file" id="photoUpload" name="photo" accept="image/*" hidden>
+                    
+                    <div class="etat-vide" id="etatVide">
+                        <div class="icone-wrapper">
+                            <img src="../../../public/images/ajouterPhoto.svg" alt="Icône ajout">
                         </div>
-                        <p id="placeholderText">Cliquer pour ajouter une photo</p>
-                        <div class="overlay-text" id="overlayText">Cliquer pour modifier</div>
+                        <p>Cliquer pour ajouter une photo</p>
+                    </div>
+
+                    <div class="etat-preview" id="etatPreview" style="display: none;">
+                        <img src="" alt="Prévisualisation du produit" id="imagePreview">
+                        <div class="overlay-modifier">
+                            <span>Cliquer pour modifier la photo</span>
+                        </div>
                     </div>
                 </div>
 
@@ -61,40 +68,41 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const photoUploadInput = document.getElementById('photoUpload');
-        const ajouterPhotoDiv = document.querySelector('.ajouterPhoto');
+        const zoneUpload = document.getElementById('zoneUpload');
+        const photoInput = document.getElementById('photoUpload');
+        const etatVide = document.getElementById('etatVide');
+        const etatPreview = document.getElementById('etatPreview');
         const imagePreview = document.getElementById('imagePreview');
-        const placeholderText = document.getElementById('placeholderText');
-        const overlayText = document.getElementById('overlayText');
-        // IMPORTANT : Si vous utilisez une icône par défaut (comme ajouterPhoto.svg), assurez-vous qu'elle a un bon ratio ou un fond transparent.
-        const originalImageSrc = imagePreview.src; 
 
-        ajouterPhotoDiv.addEventListener('click', function() {
-            photoUploadInput.click();
+        // Clic sur la zone déclenche l'input file
+        zoneUpload.addEventListener('click', function() {
+            photoInput.click();
         });
 
-        photoUploadInput.addEventListener('change', function() {
-            const files = this.files;
-            if (files && files.length > 0) {
-                const file = files[0];
-                if (file.type && file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        placeholderText.style.display = 'none'; // Masque le texte sous l'image
-                        overlayText.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.src = originalImageSrc;
-                    placeholderText.style.display = 'block';
-                    overlayText.style.display = 'none';
-                    alert("Votre fichier n'est pas une image, merci de réessayer.");
-                }
+        // Changement de fichier
+        photoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    // Basculer l'affichage
+                    etatVide.style.display = 'none';
+                    etatPreview.style.display = 'block';
+                    // Ajouter une classe pour le style si besoin
+                    zoneUpload.classList.add('has-image');
+                };
+                
+                reader.readAsDataURL(file);
             } else {
-                imagePreview.src = originalImageSrc;
-                placeholderText.style.display = 'block';
-                overlayText.style.display = 'none';
+                // Réinitialiser si pas d'image ou annulation (optionnel selon le comportement souhaité sur annulation)
+                // Si on veut garder l'ancienne image en cas d'annulation, ne rien faire ici.
+                // Si on veut tout reset en cas de fichier invalide :
+                if(this.files.length > 0) { // Si un fichier invalide a été choisi
+                    alert("Veuillez sélectionner une image valide.");
+                }
             }
         });
     });
