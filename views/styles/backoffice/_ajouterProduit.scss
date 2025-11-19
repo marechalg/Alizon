@@ -39,25 +39,37 @@
         text-align: center;
         margin-bottom: 20px;
         border-radius: 8px;
+        overflow: hidden;
 
         .placeholder-photo {
-            padding: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%; 
             height: 100%;
-            justify-content: center;
+            justify-content: flex-start;
             position: relative;
+            padding: 10px;
+            box-sizing: border-box;
+
+            .image-wrapper {
+                width: 100%;
+                height: calc(100% - 48px); /* laisse de la place pour textes sous l'image */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+            }
 
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: contain;
+                display: block;
             }
 
             p {
-                margin: 0;
+                margin: 8px 0 4px 0;
                 color: $color-blue;
                 font: {
                     weight: normal;
@@ -66,20 +78,14 @@
             }
 
             .overlay-text {
-                position: absolute;
-                bottom: 10px;
-                background: rgba(255, 255, 255, 0.7);
+                margin-top: 4px;
+                background: rgba(255, 255, 255, 0.9);
                 color: $color-blue;
                 font-weight: bold;
-                padding: 5px 10px;
+                padding: 6px 10px;
                 border-radius: 5px;
-                opacity: 0;
                 display: none;
-                transition: opacity 0.3s;
-            }
-
-            &:hover .overlay-text {
-                opacity: 1;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.06);
             }
         }
     }

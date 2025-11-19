@@ -1,6 +1,6 @@
 <?php require_once "../../controllers/pdo.php" ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,9 @@
                 <div class="ajouterPhoto">
                     <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
                     <div class="placeholder-photo">
-                        <img src="../../../public/images/ajouterPhoto.svg" alt="Ajouter une photo" id="imagePreview">
+                        <div class="image-wrapper">
+                            <img src="../../../public/images/ajouterPhoto.svg" alt="Ajouter une photo" id="imagePreview">
+                        </div>
                         <p id="placeholderText">Cliquer pour ajouter une photo</p>
                         <div class="overlay-text" id="overlayText">Cliquer pour modifier</div>
                     </div>
@@ -59,39 +61,29 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        //Récupère les éléments
         const photoUploadInput = document.getElementById('photoUpload');
-        const ajouterPhotoDiv = document.querySelector('.ajouterPhoto'); 
-        const imagePreview = document.getElementById('imagePreview'); //image
-        const placeholderText = document.getElementById('placeholderText'); //paragraphe
-        const overlayText = document.getElementById('overlayText'); // texte “cliquer pour modifier”
-        
-        // Sauvegarde de l'URL par défaut
+        const ajouterPhotoDiv = document.querySelector('.ajouterPhoto');
+        const imagePreview = document.getElementById('imagePreview');
+        const placeholderText = document.getElementById('placeholderText');
+        const overlayText = document.getElementById('overlayText');
         const originalImageSrc = imagePreview.src;
 
-        //Déclenche le clic sur l'input de fichier
         ajouterPhotoDiv.addEventListener('click', function() {
             photoUploadInput.click();
         });
 
-        //Gére la sélection du fichier et la prévisualisation
         photoUploadInput.addEventListener('change', function() {
             const files = this.files;
-            
             if (files && files.length > 0) {
                 const file = files[0];
-                
-                if (file.type.startsWith('image/')) {
+                if (file.type && file.type.startsWith('image/')) {
                     const reader = new FileReader();
-                    
                     reader.onload = function(e) {
                         imagePreview.src = e.target.result;
                         placeholderText.style.display = 'none';
                         overlayText.style.display = 'block';
                     };
-
                     reader.readAsDataURL(file);
-
                 } else {
                     imagePreview.src = originalImageSrc;
                     placeholderText.style.display = 'block';
