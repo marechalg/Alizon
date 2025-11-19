@@ -19,6 +19,7 @@
     <?php require_once "./partials/aside.php"?>
        
     <main class="AjouterProduit"> 
+
         <form class="product-content" id="monForm" action="../../controllers/updateProduit.php?id=<?php echo($productId)?>" method="post" enctype="multipart/form-data">
             <div class="left-section">
                 <div class="ajouterPhoto">
@@ -82,7 +83,8 @@
         } else {
             // Revenir à l'état initial
             imagePreview.src = imagePreview.getAttribute('data-original-src') || "../../../public/images/ajouterPhoto.svg";
-            placeholderText.style.display = 'block';
+            placeholderText.style.display = 'flex';
+            imagePreview.style.opacity='0.5';
             overlayText.style.opacity = '0';
         }
     }
