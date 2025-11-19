@@ -4,6 +4,11 @@ require_once '../../controllers/pdo.php' ;
     
 
 $id_client = $_SESSION['user_id'];
+if ($_SESSION['user_adress'] == null){
+    $idAdresse = 0;
+} else {
+    $idAdresse = $_SESSION['user_adress'];
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -61,15 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dateNaissance = $client['dateNaissance'] ?? '';
     $email = $client['email'] ?? '';
     $noTelephone = $client['noTelephone'] ?? '';
-
-    //on recupère les infos d'adresse du user pour les afficher
-    $stmt = $pdo->query("SELECT * FROM saedb._adresse WHERE idAdresse = '$idAdresse'");
-    $adresse = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    $pays = $adresse['pays'] ?? '';
-    $ville = $adresse['ville'] ?? '';
-    $codePostal = $adresse['codePostal'] ?? '';
-    $adresse1 = $adresse['adresse'] ?? '';
 
 ?>
 <!DOCTYPE html>
