@@ -12,9 +12,16 @@ $stmt = $pdo->prepare("SELECT * FROM _produit WHERE idProduit = :id");
 $stmt->execute(['id' => $productId]);
 $produit = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->prepare("SELECT * FROM _imageDeProduit WHERE idProduit = :id");
-$stmt->execute(['id' => $productId]);
+$stmt2 = $pdo->prepare("SELECT * FROM _imageDeProduit WHERE idProduit = :id");
+$stmt2->execute(['id' => $productId]);
 $image = $stmt->fetch(PDO::FETCH_ASSOC);
+
+var_dump($image);
+
+$hasImage = ($image && !empty($image['url']));
+$imageUrl = $hasImage 
+    ? '../../public' . $image['url'] 
+    : '../../public/images/ajouterPhoto.svg';
 
 if (!$produit) {
     die("Produit introuvable.");
@@ -43,9 +50,15 @@ if (!$produit) {
                 <div class="ajouterPhoto">
                     <input type="file" id="photoUpload" name="photo" accept="image/*" style="display: none;">
                     <div class="placeholder-photo">
-                        <img src="<?= htmlspecialchars(isset($image['url']) ? '../../../public/' . $image['url'] : '../../../public/images/ajouterPhoto.svg') ?>" id="imagePreview">
-                        <p id="placeholderText" style="<?= $hasImage ? 'display:none;' : '' ?>">
-                        <div class="overlay-text" id="overlayText">Cliquer pour modifier</div>
+                    <img src="<?= htmlspecialchars($imageUrl) ?>" id="imagePreview">
+
+                    <p id="placeholderText" style="<?= $hasImage ? 'display:none;' : '' ?>">
+                        Cliquer pour ajouter une image
+                    </p>
+
+                    <div class="overlay-text" id="overlayText" style="<?= $hasImage ? '' : 'display:none;' ?>">
+                        Cliquer pour modifier
+                    </div>
                     </div>
                 </div>
 
@@ -69,10 +82,8 @@ if (!$produit) {
             <div class="right-section">
                 <div class="ajouterResume resume-box">
                     <label for="resume">Résumé du produit</label><br>   
-                    <textarea name="resume" id="resume" placeholder="Décrivez votre produit en quelques mots" value="<?= htmlspecialchars($produit['description'] ?? '') ?>" ></textarea>
+                    <textarea name="resume" id="resume" placeholder="Décrivez votre produit en quelques mots"><?= htmlspecialchars($produit['description'] ?? '') ?></textarea>
                 </div>
-
-
 
             <div class="form-actions">
                 <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>

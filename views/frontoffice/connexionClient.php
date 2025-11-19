@@ -90,13 +90,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit" class="boutonConnexionClient">Se connecter</button>
             </div>
         </form>
-
-        <!-- Section test temporaire -->
-        <div style="margin-top: 20px; padding: 10px; background: #f0f0f0;">
-            <h3>Test de connexion</h3>
-            <p><strong>Email test:</strong> alice.laurent@outlook.fr</p>
-            <p><strong>Mot de passe:</strong> [utilisez le script test_chiffrement.php pour le trouver]</p>
-        </div>
     </main>
 
     <?php include '../../views/frontoffice/partials/footerDeconnecte.php'; ?>
