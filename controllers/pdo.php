@@ -1,5 +1,5 @@
 <?php
-include '../../config/config.php';
+include '../../../config/config.php';
 $dsn = "$driver:host=$server;dbname=$dbname";
 try {
     $pdo = new PDO($dsn, $user, $pass);
