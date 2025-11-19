@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telephone = $_POST['telephone'];
     $codePostal = $_POST['codePostal'];
     $adresse1 = $_POST['adresse1'];
+    $adresse2 = $_POST['adresse2'];
     $pays = $_POST['pays'];
     $ville = $_POST['ville'];
     $region = $_POST['region'];
@@ -46,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     pays = '$pays',
     ville = '$ville', 
     codePostal = '$codePostal',
-    region = '$region'
+    region = '$region',
+    complementAdresse = '$adresse2'
     WHERE idAdresse = '$idAdresse';");
 
 }   
