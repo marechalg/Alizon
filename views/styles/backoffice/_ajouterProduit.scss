@@ -1,6 +1,7 @@
 @use "../colors" as *; 
 @use "../fonts" as *; 
-.AjouterProduit{
+
+.AjouterProduit {
 
     font: {
         family: 'lora', 'Serif';
@@ -47,26 +48,28 @@
             align-items: center;
             width: 100%; 
             height: 100%;
-            justify-content: center; /* Changement : centrer le contenu verticalement */
+            justify-content: center;
             position: relative;
-            padding: 10px; /* **AJOUT DU PADDING** */
+            padding: 10px; 
             box-sizing: border-box;
 
             .image-wrapper {
                 width: 100%;
-                height: 100%; /* Définit la hauteur maximale DANS le padding */
+                /* CORRECTION : flex: 1 permet de prendre l'espace disponible sans déborder */
+                flex: 1; 
+                min-height: 0; /* Indispensable pour que le flex-item puisse rétrécir */
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 overflow: hidden;
+                margin-bottom: 5px; 
             }
 
             img {
-                max-width: 100%;
-                max-height: 100%;
-                width: auto;
-                height: auto;
-                object-fit: contain; /* **CONSERVE LE RATIO ET REDIMENSIONNE** */
+                /* CORRECTION : Force l'image à rester dans le conteneur */
+                width: 100%;
+                height: 100%;
+                object-fit: contain; /* L'image s'adapte sans être coupée */
                 display: block;
             }
             
@@ -78,7 +81,6 @@
                     style: normal;
                 }
                 
-                /* Optionnel : pour centrer le texte initial même avec le padding */
                 &#placeholderText {
                     position: absolute;
                     top: 50%;
