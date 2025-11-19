@@ -14,7 +14,7 @@
         <?php require_once "./partials/header.php"?>
     </header>
     <?php require_once "./partials/aside.php"?>
-       
+        
     <main class="AjouterProduit"> 
         <div class="product-content">
             
@@ -66,7 +66,8 @@
         const imagePreview = document.getElementById('imagePreview');
         const placeholderText = document.getElementById('placeholderText');
         const overlayText = document.getElementById('overlayText');
-        const originalImageSrc = imagePreview.src;
+        // IMPORTANT : Si vous utilisez une icône par défaut (comme ajouterPhoto.svg), assurez-vous qu'elle a un bon ratio ou un fond transparent.
+        const originalImageSrc = imagePreview.src; 
 
         ajouterPhotoDiv.addEventListener('click', function() {
             photoUploadInput.click();
@@ -80,7 +81,7 @@
                     const reader = new FileReader();
                     reader.onload = function(e) {
                         imagePreview.src = e.target.result;
-                        placeholderText.style.display = 'none';
+                        placeholderText.style.display = 'none'; // Masque le texte sous l'image
                         overlayText.style.display = 'block';
                     };
                     reader.readAsDataURL(file);
