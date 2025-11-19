@@ -10,7 +10,7 @@
 </head>
 <body class="backoffice">
     <header>
-        <?php require_once "./partials/headerMain.php"?>
+        <?php require_once "./partials/header.php"?>
     </header>
     <?php require_once "./partials/aside.php"?>
        
