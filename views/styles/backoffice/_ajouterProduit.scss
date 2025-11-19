@@ -159,14 +159,14 @@
         button {
             padding: 8px 15px;
             border: 1px solid $color-blue; 
-            border-radius: 8px;
+            border-radius: 32px;
             font-weight: normal;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         .btn-previsualiser, .btn-annuler {
-            background-color: $color-white;
+            background-color: $color-pastel-purple;
             color: $color-blue;
 
             &:hover {
@@ -177,7 +177,6 @@
         .btn-ajouter {
             background-color: $color-blue;
             color: $color-white;
-            font-weight: bold;
 
             &:hover {
                 background-color: darken($color-blue, 10%);
