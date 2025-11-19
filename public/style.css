@@ -2741,6 +2741,75 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   justify-content: center;
   align-items: center;
 }
+.acceuil .confirmationAjout {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border: 3px solid #259525;
+  border-radius: 8px;
+  padding: 10px 20px;
+  justify-content: center;
+  max-width: 90vw;
+  z-index: 999;
+}
+.acceuil .confirmationAjout h4 {
+  color: #259525;
+  font-style: bold;
+  font-size: 24px;
+  font-family: "Lora", serif;
+}
+.acceuil .confirmationAjout article {
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+}
+.acceuil .confirmationAjout article img {
+  max-height: 220px;
+  max-width: 150px;
+  margin: 0px 10px;
+  object-fit: contain;
+  display: flex;
+}
+.acceuil .confirmationAjout .prixOpt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+.acceuil .confirmationAjout .listeProduit div {
+  margin: 0px 15px;
+}
+.acceuil .confirmationAjout .quantiteProduit * {
+  margin: 0;
+  padding: 0;
+}
+.acceuil .confirmationAjout .infoProduit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 180px;
+}
+.acceuil .confirmationAjout .infoProduit img {
+  max-width: 16px;
+}
+.acceuil .confirmationAjout .infoProduit p {
+  margin: 0px 30px;
+}
+@media (max-width: 500px) {
+  .acceuil .confirmationAjout {
+    max-width: 95vw;
+    padding: 10px 5px;
+  }
+}
 
 .mainPopUpCompteClient {
   background-color: #fffefa;
@@ -3433,82 +3502,120 @@ button#haut.visible:hover {
 }
 
 .AjouterProduit {
-  box-sizing: border-box;
-  overflow-x: hidden;
   font-family: "lora", "Serif";
   font-weight: bold;
   font-style: italic;
   background-color: #fffefa;
   color: #273469;
   min-height: 100vh;
-  padding: 30px 50px 50px 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-right: 20px;
+  padding-left: 0;
 }
 .AjouterProduit .product-content {
   display: flex;
-  gap: 50px;
+  gap: 30px;
   width: 100%;
-  max-width: 1200px;
 }
 .AjouterProduit .left-section {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 50%;
-  max-width: 500px;
+}
+.AjouterProduit {
+  /* --- ZONE PHOTO CORRIGÉE --- */
 }
 .AjouterProduit .ajouterPhoto {
-  border: 2px solid #273469;
+  border: 2px dashed #273469;
   height: 350px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-  border-radius: 4px;
-  cursor: pointer;
-  position: relative;
+  border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
-.AjouterProduit .ajouterPhoto .ajouterPhoto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.AjouterProduit .ajouterPhoto:hover {
+  background-color: #f0f0f0;
+  border-color: rgb(25.1875, 33.5833333333, 67.8125);
 }
-.AjouterProduit .ajouterPhoto .placeholder-photo {
+.AjouterProduit .ajouterPhoto .etat-vide {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
-.AjouterProduit .ajouterPhoto .placeholder-photo p {
-  margin: 0;
+.AjouterProduit .ajouterPhoto .etat-vide .icone-wrapper {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 15px;
+}
+.AjouterProduit .ajouterPhoto .etat-vide .icone-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.AjouterProduit .ajouterPhoto .etat-vide p {
   color: #273469;
-  font-weight: bold;
+  margin: 0;
+  font-weight: normal;
+}
+.AjouterProduit .ajouterPhoto .etat-preview {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #fffefa;
+}
+.AjouterProduit .ajouterPhoto .etat-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.AjouterProduit .ajouterPhoto .etat-preview .overlay-modifier {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  font-family: sans-serif;
   font-style: normal;
-  padding-top: 5px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.AjouterProduit .ajouterPhoto:hover .etat-preview .overlay-modifier {
+  transform: translateY(0);
+}
+.AjouterProduit {
+  /* --- FIN ZONE PHOTO --- */
 }
 .AjouterProduit .form-details {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-left: 0;
 }
-.AjouterProduit .product-name-input {
-  width: 100%;
-  margin-bottom: 5px;
-}
-.AjouterProduit input[type=text], .AjouterProduit textarea {
+.AjouterProduit input[type=text], .AjouterProduit input[type=number], .AjouterProduit textarea {
   padding: 8px 10px;
-  border: 1px solid #273469;
-  border-radius: 4px;
+  border: 2px solid #273469;
+  border-radius: 8px;
   font-size: 1rem;
+  width: 100%;
   box-sizing: border-box;
 }
-.AjouterProduit input[type=text]::placeholder, .AjouterProduit textarea::placeholder {
-  color: gray;
-  font-weight: normal;
-  font-style: italic;
+.AjouterProduit input[type=text]::placeholder, .AjouterProduit input[type=number]::placeholder, .AjouterProduit textarea::placeholder {
+  color: #6e6e6e;
+  font-weight: bold;
 }
 .AjouterProduit .price-weight-kg {
   display: flex;
@@ -3522,32 +3629,33 @@ button#haut.visible:hover {
   width: 40%;
   font-weight: bold;
   text-align: right;
-  white-space: nowrap;
 }
 .AjouterProduit .right-section {
   width: 50%;
   display: flex;
   flex-direction: column;
-  margin-top: 0;
+  position: relative;
 }
 .AjouterProduit .right-section .product-desc-box {
   border: 2px solid #273469;
-  padding: 10px 15px 5px 15px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  height: 100%;
   position: relative;
-  border-radius: 4px;
+  border-radius: 8px;
+  background-color: #fffefa;
 }
 .AjouterProduit .right-section .product-desc-box label {
+  margin-bottom: 5px;
   color: #273469;
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 10px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
-  background-color: #fffefa;
   padding: 0 5px;
+  background-color: #fffefa;
   z-index: 50;
 }
 .AjouterProduit .right-section .product-desc-box textarea {
@@ -3555,42 +3663,50 @@ button#haut.visible:hover {
   resize: none;
   flex-grow: 1;
   min-height: 250px;
-  padding-top: 15px;
+  background-color: #fffefa;
+  width: 100%;
 }
-.AjouterProduit .right-section .product-desc-box input:focus, .AjouterProduit .right-section .product-desc-box textarea:focus {
-  outline: none !important;
-  box-shadow: none !important;
+.AjouterProduit .right-section .product-desc-box textarea::placeholder {
+  padding-top: 10px;
+  color: #6e6e6e;
+  font-weight: bold;
+}
+.AjouterProduit .right-section .product-desc-box textarea:focus {
+  border: none;
+  outline: none;
 }
 .AjouterProduit .right-section .product-desc-box .char-count {
   text-align: right;
   font-size: 0.8rem;
   color: gray;
   margin-top: 5px;
+  font-style: normal;
 }
 .AjouterProduit .form-actions {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+  gap: 15px;
   margin-top: 20px;
-  margin-bottom: 50px;
   align-items: center;
 }
 .AjouterProduit .form-actions button {
-  padding: 8px 15px;
+  padding: 10px 20px;
+  border: none;
   border-radius: 32px;
-  font-weight: normal;
   cursor: pointer;
+  font-weight: bold;
 }
 .AjouterProduit .form-actions .btn-previsualiser, .AjouterProduit .form-actions .btn-annuler {
   background-color: #e4d9ff;
   color: #273469;
+  width: 200px;
 }
 .AjouterProduit .form-actions .btn-previsualiser:hover, .AjouterProduit .form-actions .btn-annuler:hover {
-  background-color: rgb(155.46875, 167.7916666667, 218.03125);
+  background-color: rgb(191.7631578947, 166, 255);
 }
 .AjouterProduit .form-actions .btn-ajouter {
   background-color: #273469;
   color: #fffefa;
+  width: 200px;
 }
 .AjouterProduit .form-actions .btn-ajouter:hover {
   background-color: rgb(25.1875, 33.5833333333, 67.8125);
