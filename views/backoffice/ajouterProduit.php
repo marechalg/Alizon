@@ -45,7 +45,7 @@
             <div class="right-section">
                 <div class="product-desc-box">
                     <label for="description">Description du produit</label><br>   
-                    <textarea name="description" id="description" placeholder="Décrivez votre produit en quelques mots"></textarea>
+                    <textarea name="description" id="description" placeholder="Décrivez votre produit en quelques mots" maxlength="1000"></textarea>
                     <div class="char-count">0/1000</div>
                 </div>
 
