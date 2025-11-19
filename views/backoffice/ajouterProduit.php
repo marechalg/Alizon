@@ -50,9 +50,9 @@
                 </div>
 
                 <div class="form-actions">
-                    <a href="#"><button type="button" class="btn-previsualiser">Prévisualiser</button></a>
-                    <a href="#"><button type="button" class="btn-annuler">Annuler</button></a>
-                    <a href="#"><button type="submit" class="btn-ajouter">Ajouter le produit</button></a>
+                    <button type="button" class="btn-previsualiser" onclick="location.href='#'">Prévisualiser</button>
+                    <button type="button" class="btn-annuler" onclick="location.href='#'">Annuler</button>
+                    <button type="submit" class="btn-ajouter" onclick="location.href='#'">Ajouter le produit</button>
                 </div>
             </div>
         </form>
