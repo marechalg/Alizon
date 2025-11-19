@@ -145,7 +145,7 @@
                         <tr>
                             <td>
                                 <ul>";
-                                    if (count($commandes) == 0) echo "<h2>Aucune commande</h2>";
+                                    if (count($commandes) == 0) echo "<li><h2>Aucune commande</h2><li>";
                                     foreach ($commandes as $commande) {
                                         $html .= "<ul>
                                             <li>" . $commande['quantiteCommande'] . "</li>
@@ -220,7 +220,7 @@
                         <tr>
                             <td>
                                 <ul>";
-                                    if (count($commandes) == 0) echo "<h2>Aucune commande</h2>";
+                                    if (count($commandes) == 0) echo "<li><h2>Aucune commande</h2><li>";
                                     foreach ($commandes as $commande) {
                                         $html .= "<ul>
                                             <li>" . $commande['quantiteCommande'] . "</li>
