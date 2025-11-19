@@ -2916,6 +2916,7 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   max-height: 660px;
 }
 .panier .recapPanier a {
@@ -2998,6 +2999,9 @@ main.acceuilBackoffice section.produits article table tr:last-child td:last-chil
   }
   .panier .recapPanier * {
     margin-bottom: 20px;
+  }
+  .panier .recapPanier {
+    align-items: stretch;
   }
 }
 @media (max-width: 767px) {
